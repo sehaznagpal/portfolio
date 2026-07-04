@@ -1,0 +1,162 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 150px;
+  top: 29px;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  font-size: 96px;
+  line-height: 0.85;
+  white-space: nowrap;
+}
+
+.titleItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.titleBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  letter-spacing: -5.76px;
+  color: var(--text-cream);
+  margin-left: 12px;
+  font-feature-settings: 'salt' 1;
+}
+
+.tagWrapper {
+  position: absolute;
+  left: 532px;
+  top: 120px;
+}
+
+.body {
+  position: absolute;
+  left: 164px;
+  top: 151px;
+  width: 777px;
+  margin: 0;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.bodyBold {
+  font-weight: var(--author-semibold);
+}
+
+/* Phone mockup (sexpert tabloid screenshot) */
+.phone {
+  position: absolute;
+  left: 222.07px;
+  top: 388.77px;
+  width: 158.143px;
+  height: 319.543px;
+  transform: translate(-50%, -50%);
+  opacity: 0.9;
+}
+
+.phoneScreen {
+  position: absolute;
+  left: 5.25%;
+  top: 2.05%;
+  width: 89.5%;
+  height: 95.9%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.phoneScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.phoneBezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.phoneBezel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Laptop mockup (homepage screenshot) */
+.laptop {
+  position: absolute;
+  left: 285.11px;
+  top: 301.09px;
+  width: 426.564px;
+  height: 246.569px;
+}
+
+.laptopScreen {
+  position: absolute;
+  left: 11.5%;
+  top: 6%;
+  width: 77%;
+  height: 80%;
+  overflow: hidden;
+}
+
+.laptopScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.laptopBezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.laptopBezel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Plush toy cutout */
+.plush {
+  position: absolute;
+  left: 618.86px;
+  top: 206.82px;
+  width: 210.984px;
+  height: 145.33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plushInner {
+  width: 196.089px;
+  height: 118.607px;
+  transform: rotate(8.19deg);
+}
+
+.plushInner img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

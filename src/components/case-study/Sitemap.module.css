@@ -1,0 +1,46 @@
+.container {
+  position: relative;
+  background: var(--card-fill);
+  border-radius: var(--card-radius);
+  padding: 48px;
+  overflow: auto;
+}
+
+.canvas {
+  position: relative;
+}
+
+.node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--text-cream);
+  background: var(--card-fill);
+  white-space: nowrap;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 13px;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.nodeAccent {
+  border-color: var(--sitemap-accent, var(--accent-green));
+  color: var(--sitemap-accent, var(--accent-green));
+}
+
+.edges {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.edge {
+  stroke: rgba(227, 220, 204, 0.35);
+  stroke-width: 1;
+  fill: none;
+}

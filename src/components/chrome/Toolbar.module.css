@@ -1,0 +1,28 @@
+.toolbar {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 192px;
+  height: 48px;
+  background: var(--chrome-bg);
+  border: 1px solid #5a5a5a;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-cream);
+  opacity: 0.85;
+  transition: opacity 150ms ease-out, transform 150ms ease-out;
+}
+
+.iconButton:hover {
+  opacity: 1;
+  transform: scale(1.12);
+}

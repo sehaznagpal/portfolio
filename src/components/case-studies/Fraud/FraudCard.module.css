@@ -1,0 +1,223 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 127px;
+  top: 53px;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 96px;
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+.titleItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  letter-spacing: -7.68px;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.titleBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-light);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  letter-spacing: -0.64px;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.tagWrapper {
+  position: absolute;
+  left: 527.5px;
+  top: 161px;
+}
+
+.body {
+  position: absolute;
+  left: 492px;
+  top: 201px;
+  width: 445px;
+  margin: 0;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.bodyBold {
+  font-weight: var(--author-semibold);
+}
+
+.phonePair {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.phone {
+  position: absolute;
+  width: 304.23px;
+  height: 620.405px;
+  transform-origin: center center;
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backPhone {
+  left: 287.31px;
+  top: 537.61px;
+  transform: translate(-50%, -50%) rotate(-1.71deg);
+  z-index: 1;
+}
+
+.phonePair.hovered .backPhone {
+  transform: translate(-50%, -50%) rotate(-6.71deg);
+}
+
+.frontPhone {
+  left: 333.31px;
+  top: 676.61px;
+  transform: translate(-50%, -50%) rotate(-1.71deg);
+  z-index: 2;
+}
+
+.phonePair.hovered .frontPhone {
+  transform: translate(-50%, -50%) rotate(4.29deg);
+}
+
+.phoneScreen {
+  position: absolute;
+  left: 4.85%;
+  top: 2.15%;
+  width: 90.3%;
+  height: 95.89%;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--fraud-screen-default);
+}
+
+.ctaScreen {
+  transition: background 280ms ease-out;
+}
+
+.phonePair.hovered .ctaScreen {
+  background: var(--fraud-cta-hover-green);
+}
+
+.phoneBezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.phoneBezel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.alertBanner {
+  position: absolute;
+  left: 47.6%;
+  top: 12.2%;
+  width: 74.3%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--fraud-alert-bg);
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+
+.alertIcon {
+  flex-shrink: 0;
+  color: #ff8c00;
+}
+
+.alertText {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 6.5px;
+  line-height: 1.3;
+  color: var(--fraud-alert-text);
+}
+
+.alertTextBold {
+  font-weight: 700;
+}
+
+.ctaButtons {
+  position: absolute;
+  left: 48.1%;
+  top: 73%;
+  width: 79.2%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cancelButton {
+  padding: 5px;
+  border-radius: 20px;
+  background: var(--fraud-cancel-bg);
+  text-align: center;
+  transition: box-shadow 280ms ease-out;
+}
+
+.phonePair.hovered .cancelButton {
+  box-shadow: 0 0 16px 2px rgba(207, 11, 11, 0.55);
+}
+
+.cancelButtonLabel {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 6.7px;
+  color: #f5f5f5;
+}
+
+.continueButton {
+  padding: 5px;
+  border-radius: 20px;
+  background: #f5f5f5;
+  border: 1px solid var(--fraud-continue-border);
+  text-align: center;
+}
+
+.continueButtonLabel {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 6.7px;
+  color: var(--fraud-continue-text);
+}
+
+.speechBubble {
+  position: absolute;
+  left: 28px;
+  top: 363px;
+  z-index: 3;
+  background: var(--chrome-bg);
+  border-radius: 999px;
+  padding: 10px;
+}
+
+.speechBubbleLabel {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  font-size: 32px;
+  line-height: 0.8;
+  letter-spacing: -2.56px;
+  color: var(--text-cream);
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+}

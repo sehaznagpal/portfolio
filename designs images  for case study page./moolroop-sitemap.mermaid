@@ -1,0 +1,28 @@
+flowchart LR
+    W["Welcome Carousel"] --> H["Explore / Home"]
+
+    H --> H1["Search"]
+    H --> H2["Categories"]
+    H --> H3["States"]
+    H --> H4["Popular Products"]
+    H --> H5["Recommended"]
+
+    H2 --> CAT["Category Page"]
+    H3 --> ST["State Page"]
+    ST --> CAT
+    CAT --> PT["Product Type Page"]
+    PT --> P["Product Page"]
+
+    P --> HM["How It's Made"]
+    P --> PV["Provenance Trail"]
+    P --> B["Bag"]
+    P --> WL["Wishlist"]
+
+    H --> WL2["Wishlist"]
+    H --> B2["Bag"]
+    H --> M["Menu"]
+
+    B2 --> CO["Checkout (future scope)"]
+    M --> M1["About"]
+    M --> M2["Help & Support"]
+    M --> M3["Language (future)"]

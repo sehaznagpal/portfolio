@@ -1,0 +1,44 @@
+.tabs {
+  position: absolute;
+  left: 33px;
+  top: 29px;
+  width: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 150ms ease-out, opacity 150ms ease-out;
+}
+
+.tabLabel {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.96px;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.active {
+  border-color: var(--text-cream);
+}
+
+.inactive {
+  opacity: 0.5;
+}
+
+.inactive:hover {
+  opacity: 0.85;
+  border-color: rgba(227, 220, 204, 0.5);
+}

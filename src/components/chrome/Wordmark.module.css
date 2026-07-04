@@ -1,0 +1,18 @@
+.wordmark {
+  position: absolute;
+  top: 41px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text {
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-style: normal;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -1.28px;
+  color: var(--chrome-bg);
+  font-feature-settings: 'salt' 1;
+}

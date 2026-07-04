@@ -1,0 +1,42 @@
+:root {
+  /* Canvas / background — extracted from Figma's grid pattern SVG asset */
+  --bg-canvas: #E3DCCC;
+  --text-cream: #E3DCCC;
+  --grid-line: rgba(18, 18, 18, 0.4);
+  --grid-tile-size: 200px;
+  --grid-line-spacing: 40px;
+
+  /* Card shell */
+  --card-fill: #282828;
+  --card-border: #7B7B7B;
+  --card-border-width: 4px;
+  --card-radius: 16px;
+
+  /* Chrome (loader bg, nav pill, buttons, inactive tab bg) */
+  --chrome-bg: #121212;
+
+  /* Accent */
+  --accent-green: #A4CF4A;
+
+  /* Fraud-card-specific — scoped to FraudCard only, never shared chrome */
+  --fraud-cta-hover-green: #25873A;
+  --fraud-alert-bg: #FFF090;
+  --fraud-alert-text: #7B6A24;
+  --fraud-cancel-bg: #CF0B0B;
+  --fraud-continue-border: #0B57CF;
+  --fraud-continue-text: #0B57CF;
+  --fraud-screen-default: #F5F5F5;
+
+  /* Case-study detail-page accents — sampled from provided screenshots, scoped per project */
+  --moolroop-accent: #BF383C;
+  --drcuterus-purple: #683C92;
+  --drcuterus-yellow: #F9D949;
+
+  /* Layout constants — mirrored in TS (src/lib/layout.ts) for animation math */
+  --frame-w: 1280px;
+  --frame-h: 832px;
+  --hero-card-w: 806px;
+  --hero-card-h: 468px;
+  --case-card-w: 984px;
+  --case-card-h: 554px;
+}

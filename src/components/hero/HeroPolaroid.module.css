@@ -1,0 +1,21 @@
+.wrapper {
+  position: absolute;
+  left: 712px;
+  top: 195px;
+  width: 88px;
+  pointer-events: none;
+}
+
+.polaroid {
+  background: var(--text-cream);
+  border-style: solid;
+  border-width: 10px 10px 20px 10px;
+  box-shadow: 1px 2px 2px 0px rgba(164, 207, 74, 0.5);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 /4;
+  object-fit: cover;
+}

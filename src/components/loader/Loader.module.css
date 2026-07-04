@@ -1,0 +1,19 @@
+.loader {
+  position: absolute;
+  inset: 0;
+  background: var(--chrome-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text {
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-feature-settings: 'salt' 1;
+  font-size: 24px;
+  color: var(--accent-green);
+  white-space: nowrap;
+  min-height: 1em;
+}
