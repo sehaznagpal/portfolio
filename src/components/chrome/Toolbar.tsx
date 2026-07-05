@@ -1,21 +1,79 @@
-import { Star, Pencil, Download, Mail } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Star, Pencil, Mail, Download } from 'lucide-react';
+import { useViewState } from '../../state/ViewStateContext';
 import styles from './Toolbar.module.css';
 
+const CV_URL = 'https://drive.google.com/drive/u/0/folders/1piWk9aM3m2brOJ4pr_IumCHQrA0tu30U';
+const MAIL_SUBJECT = 'Loved your portfolio';
+const MAIL_BODY =
+  "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
+const MAILTO = `mailto:sehaznagpal@gmail.com?subject=${encodeURIComponent(MAIL_SUBJECT)}&body=${encodeURIComponent(MAIL_BODY)}`;
+
+type IconKey = 'home' | 'lab' | 'contact' | 'cv';
+
 export default function Toolbar() {
+  const { isFlipped, goToHero } = useViewState();
+  const [hovered, setHovered] = useState<IconKey | null>(null);
+
+  function slotProps(key: IconKey) {
+    return {
+      className: styles.slot,
+      onMouseEnter: () => setHovered(key),
+      onMouseLeave: () => setHovered(null),
+    };
+  }
+
+  function renderBadge(key: IconKey, label: string) {
+    const active = hovered === key;
+    return (
+      <>
+        {active && <div className={styles.highlight} />}
+        <div className={`${styles.dot} ${active ? styles.dotActive : ''}`} />
+        {active && <div className={styles.label}>{label}</div>}
+      </>
+    );
+  }
+
   return (
     <div className={styles.toolbar}>
-      <button className={styles.iconButton} aria-label="Star">
-        <Star size={18} strokeWidth={1.75} />
-      </button>
-      <button className={styles.iconButton} aria-label="Edit">
-        <Pencil size={18} strokeWidth={1.75} />
-      </button>
-      <button className={styles.iconButton} aria-label="Download resume">
-        <Download size={18} strokeWidth={1.75} />
-      </button>
-      <a className={styles.iconButton} aria-label="Email" href="mailto:sehazwritescopy@gmail.com">
-        <Mail size={18} strokeWidth={1.75} />
-      </a>
+      <div {...slotProps('home')}>
+        <button
+          className={styles.iconButton}
+          aria-label="Home"
+          onClick={() => isFlipped && goToHero()}
+        >
+          <Star size={18} strokeWidth={1.75} />
+        </button>
+        {renderBadge('home', 'Home')}
+      </div>
+
+      <div {...slotProps('lab')}>
+        <Link className={styles.iconButton} aria-label="Experiment Zone" to="/experiment-zone">
+          <Pencil size={18} strokeWidth={1.75} />
+        </Link>
+        {renderBadge('lab', 'Experiment Zone')}
+      </div>
+
+      <div {...slotProps('contact')}>
+        <a className={styles.iconButton} aria-label="Contact" href={MAILTO}>
+          <Mail size={18} strokeWidth={1.75} />
+        </a>
+        {renderBadge('contact', 'Contact')}
+      </div>
+
+      <div {...slotProps('cv')}>
+        <a
+          className={styles.iconButton}
+          aria-label="Download my CV"
+          href={CV_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Download size={18} strokeWidth={1.75} />
+        </a>
+        {renderBadge('cv', 'Download my CV')}
+      </div>
     </div>
   );
 }
