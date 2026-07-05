@@ -78,11 +78,11 @@
 
 .stamp {
   position: absolute;
-  left: 409px;
-  top: 300px;
-  width: 248px;
-  height: 250px;
-  transform: rotate(55.66deg);
+  left: 384px;
+  top: 275px;
+  width: 297.6px;
+  height: 300px;
+  transform: rotate(0deg);
   transition: opacity 300ms ease-out;
 }
 
