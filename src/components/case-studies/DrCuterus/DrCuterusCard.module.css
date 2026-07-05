@@ -6,7 +6,7 @@
 
 .title {
   position: absolute;
-  left: 150px;
+  right: 42px;
   top: 29px;
   margin: 0;
   display: flex;
@@ -37,14 +37,14 @@
 
 .tagWrapper {
   position: absolute;
-  left: 532px;
-  top: 120px;
+  right: 42px;
+  top: 129px;
 }
 
 .body {
   position: absolute;
-  left: 164px;
-  top: 151px;
+  right: 42px;
+  top: 160px;
   width: 777px;
   margin: 0;
   text-align: justify;
@@ -64,8 +64,8 @@
 /* Phone mockup (sexpert tabloid screenshot) */
 .phone {
   position: absolute;
-  left: 222.07px;
-  top: 388.77px;
+  left: 182.07px;
+  top: 398.77px;
   width: 158.143px;
   height: 319.543px;
   transform: translate(-50%, -50%);
@@ -104,8 +104,8 @@
 /* Laptop mockup (homepage screenshot) */
 .laptop {
   position: absolute;
-  left: 285.11px;
-  top: 301.09px;
+  left: 265.55px;
+  top: 300.8px;
   width: 426.564px;
   height: 246.569px;
 }
@@ -141,18 +141,18 @@
 /* Plush toy cutout */
 .plush {
   position: absolute;
-  left: 618.86px;
-  top: 206.82px;
-  width: 210.984px;
-  height: 145.33px;
+  left: 568.86px;
+  top: 260px;
+  width: 316.5px;
+  height: 218px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .plushInner {
-  width: 196.089px;
-  height: 118.607px;
+  width: 294.1px;
+  height: 177.9px;
   transform: rotate(8.19deg);
 }
 
