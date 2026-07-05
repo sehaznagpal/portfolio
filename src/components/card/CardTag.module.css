@@ -1,4 +1,5 @@
 .tag {
+  margin: 0;
   display: inline-flex;
   align-items: center;
   background: var(--accent-green);
