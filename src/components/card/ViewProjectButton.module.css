@@ -1,7 +1,8 @@
 .button {
   position: absolute;
   left: 835.5px;
-  top: 482px;
+  top: 480px;
+  transform: translateX(-50%);
   z-index: 2;
   display: flex;
   align-items: center;
