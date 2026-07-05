@@ -21,7 +21,7 @@
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
   font-style: italic;
-  letter-spacing: -7.68px;
+  letter-spacing: -0.08em;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
 }
@@ -30,7 +30,7 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-light);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  letter-spacing: -0.64px;
+  letter-spacing: -0.04em;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
 }
