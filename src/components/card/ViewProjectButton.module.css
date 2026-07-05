@@ -18,12 +18,6 @@
   opacity: 0.85;
 }
 
-.inline {
-  position: static;
-  left: auto;
-  top: auto;
-}
-
 .label {
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-bold);

@@ -9,12 +9,6 @@
   gap: 8px;
 }
 
-.inline {
-  position: static;
-  left: auto;
-  top: auto;
-}
-
 .tab {
   display: flex;
   align-items: center;

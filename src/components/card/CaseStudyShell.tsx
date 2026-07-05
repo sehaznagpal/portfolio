@@ -10,11 +10,6 @@ import styles from './CaseStudyShell.module.css';
 export interface CaseStudyDef {
   content: ReactNode;
   viewProjectHref: string;
-  /* When true, the card's own content renders its own tabs/about/view-project
-     (positioned via its own layout) instead of the shell's shared fixed-position
-     chrome — used while migrating cards to Figma's new centered auto-layout
-     structure one at a time. */
-  ownsChrome?: boolean;
 }
 
 /* The tab bar, about link, and view-project button are global to the shell and never
@@ -26,13 +21,9 @@ export default function CaseStudyShell({ studies }: { studies: Record<CaseStudyT
 
   return (
     <div className={styles.shell}>
-      {!current.ownsChrome && (
-        <>
-          <NumberedTabs />
-          <AboutLink />
-          <ViewProjectButton to={current.viewProjectHref} />
-        </>
-      )}
+      <NumberedTabs />
+      <AboutLink />
+      <ViewProjectButton to={current.viewProjectHref} />
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}

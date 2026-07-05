@@ -14,7 +14,7 @@ import { ViewStateProvider, useViewState } from '../state/ViewStateContext';
 import type { CaseStudyTab } from '../types';
 
 const caseStudies: Record<CaseStudyTab, CaseStudyDef> = {
-  1: { content: <MoolroopCard />, viewProjectHref: '/case-study/moolroop', ownsChrome: true },
+  1: { content: <MoolroopCard />, viewProjectHref: '/case-study/moolroop' },
   2: { content: <DrCuterusCard />, viewProjectHref: '/case-study/dr-cuterus' },
   3: { content: <FraudCard />, viewProjectHref: '/case-study/designing-against-fraud' },
 };
