@@ -24,6 +24,10 @@ export default function Toolbar() {
     };
   }
 
+  function iconClass(key: IconKey) {
+    return `${styles.iconButton} ${hovered === key ? styles.iconActive : ''}`;
+  }
+
   function renderBadge(key: IconKey, label: string) {
     const active = hovered === key;
     return (
@@ -38,25 +42,21 @@ export default function Toolbar() {
   return (
     <div className={styles.toolbar}>
       <div {...slotProps('home')}>
-        <button
-          className={styles.iconButton}
-          aria-label="Home"
-          onClick={() => isFlipped && goToHero()}
-        >
+        <button className={iconClass('home')} aria-label="Home" onClick={() => isFlipped && goToHero()}>
           <Star size={18} strokeWidth={1.75} />
         </button>
         {renderBadge('home', 'Home')}
       </div>
 
       <div {...slotProps('lab')}>
-        <Link className={styles.iconButton} aria-label="Experiment Zone" to="/experiment-zone">
+        <Link className={iconClass('lab')} aria-label="Experiment Zone" to="/experiment-zone">
           <Pencil size={18} strokeWidth={1.75} />
         </Link>
         {renderBadge('lab', 'Experiment Zone')}
       </div>
 
       <div {...slotProps('contact')}>
-        <a className={styles.iconButton} aria-label="Contact" href={MAILTO}>
+        <a className={iconClass('contact')} aria-label="Contact" href={MAILTO}>
           <Mail size={18} strokeWidth={1.75} />
         </a>
         {renderBadge('contact', 'Contact')}
@@ -64,7 +64,7 @@ export default function Toolbar() {
 
       <div {...slotProps('cv')}>
         <a
-          className={styles.iconButton}
+          className={iconClass('cv')}
           aria-label="Download my CV"
           href={CV_URL}
           target="_blank"
