@@ -11,3 +11,9 @@
   white-space: nowrap;
   font-feature-settings: 'salt' 1;
 }
+
+.fullWidth {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

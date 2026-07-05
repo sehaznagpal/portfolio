@@ -4,13 +4,49 @@
   height: 100%;
 }
 
-.title {
+/* "content without visual" per Figma: tabs/about/title/tag/body/button are one
+   auto-layout group, centered as a whole in the card. The visual (phone/Vs/stamp)
+   stays separately, absolutely positioned, overlapping this group. */
+.content {
   position: absolute;
-  left: 371px;
-  top: 29px;
+  left: 50%;
+  top: calc(50% + 0.5px);
+  transform: translate(-50%, -50%);
+  width: 908px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 330px;
+  width: 55px;
+}
+
+.cardRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 186px;
+  width: 573px;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.title {
   margin: 0;
   display: flex;
   align-items: baseline;
+  width: 100%;
   font-size: 108px;
   line-height: 1;
   white-space: nowrap;
@@ -35,18 +71,9 @@
   font-feature-settings: 'salt' 1;
 }
 
-.tagWrapper {
-  position: absolute;
-  left: 368px;
-  top: 153px;
-}
-
 .body {
-  position: absolute;
-  left: 437px;
-  top: 188px;
-  width: 504px;
   margin: 0;
+  width: 100%;
   text-align: justify;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
@@ -71,7 +98,7 @@
   font-style: italic;
   font-size: 69.677px;
   line-height: 1;
-  letter-spacing: -5.5742px;
+  letter-spacing: -0.08em;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
 }
