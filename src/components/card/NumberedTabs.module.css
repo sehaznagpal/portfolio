@@ -14,10 +14,11 @@
   align-items: center;
   justify-content: center;
   padding: 8px 20px;
-  border-radius: 999px;
+  background: var(--chrome-bg);
+  border-radius: 0;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: border-color 150ms ease-out, opacity 150ms ease-out;
+  transition: border-color 150ms ease-out, border-radius 150ms ease-out;
 }
 
 .tabLabel {
@@ -29,17 +30,22 @@
   letter-spacing: -0.96px;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
+  transition: color 150ms ease-out;
 }
 
 .active {
+  border-radius: 999px;
   border-color: var(--text-cream);
 }
 
-.inactive {
-  opacity: 0.5;
+.inactive .tabLabel {
+  color: rgba(227, 220, 204, 0.5);
 }
 
 .inactive:hover {
-  opacity: 0.85;
   border-color: rgba(227, 220, 204, 0.5);
+}
+
+.inactive:hover .tabLabel {
+  color: var(--text-cream);
 }
