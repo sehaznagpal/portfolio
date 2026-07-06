@@ -23,14 +23,10 @@ export default function FraudCard() {
 
       <p className={styles.body}>
         India&rsquo;s digital <span className={styles.bodyBold}>fraud losses nearly tripled</span>{' '}
-        between 2023 and 2025, and almost every case shares the same root cause: a user authorising
-        their own payment. International fixes for this, <span className={styles.bodyBold}>warning banners</span>,
-        prominent <span className={styles.bodyBold}>cancel buttons</span>, work well in the UK and
-        China, but nobody had tested whether they hold up in India&rsquo;s UPI ecosystem or against
-        India&rsquo;s specific fraud types. I ran a{' '}
-        <span className={styles.bodyBold}>116-participant experiment</span> on a simulated payment
-        user journey I built myself to find out, and the results split sharply by fraud type rather
-        than by any single design. This is a mixed-method dissertation testing exactly that.
+        between 2023 and 2025. <span className={styles.bodyBold}>Warning banners</span> and{' '}
+        <span className={styles.bodyBold}>prominent cancel buttons</span> already work well against
+        it in the UK and China, but do they hold up the same way in India, where both the users and
+        the fraud itself look nothing alike?
       </p>
 
       <div
