@@ -104,18 +104,18 @@
 /* Laptop mockup (homepage screenshot) */
 .laptop {
   position: absolute;
-  left: 265.55px;
-  top: 300.8px;
-  width: 426.564px;
-  height: 246.569px;
+  left: 259.06px;
+  top: 295.34px;
+  width: 454.4px;
+  height: 263.1px;
 }
 
 .laptopScreen {
   position: absolute;
-  left: 11.5%;
-  top: 6%;
-  width: 77%;
-  height: 80%;
+  left: 10.36%;
+  top: 2.19%;
+  width: 79.29%;
+  height: 84.59%;
   overflow: hidden;
 }
 
@@ -141,8 +141,8 @@
 /* Plush toy cutout */
 .plush {
   position: absolute;
-  left: 600px;
-  top: 240px;
+  left: 561.42px;
+  top: 202.42px;
   width: 300px;
   height: 190px;
   display: flex;
