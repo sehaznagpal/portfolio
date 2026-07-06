@@ -32,6 +32,14 @@
   --drcuterus-purple: #683C92;
   --drcuterus-yellow: #F9D949;
 
+  /* Dissertation's three-color system pulled directly from the actual data-viz figures
+     (fig1/fig2 bar charts), sampled pixel-exact rather than reusing the FraudCard tokens,
+     which are close in hue but not real matches (--fraud-alert-bg is a much paler yellow
+     than the chart's orange warning bars). */
+  --dissertation-control: var(--chrome-bg);
+  --dissertation-warning: #FF8C00;
+  --dissertation-cta: #CF0B0B;
+
   /* Layout constants — mirrored in TS (src/lib/layout.ts) for animation math */
   --frame-w: 1280px;
   --frame-h: 832px;
@@ -39,4 +47,22 @@
   --hero-card-h: 468px;
   --case-card-w: 984px;
   --case-card-h: 554px;
+
+  /* Case-study detail pages: two-tier width system. Visual sections use the wide
+     stage so screens can run near full-bleed; captions and reflection prose stay
+     capped at the narrower measure so long-form text doesn't stretch unreadably. */
+  --stage-width: min(1400px, 92vw);
+  --measure-width: 680px;
+
+  /* ScreenshotFrame theming — light-page defaults. Dissertation runs a dark page
+     canvas (see .case-study-dark below), where these need to flip. */
+  --frame-border: rgba(18, 18, 18, 0.15);
+  --frame-shadow: rgba(18, 18, 18, 0.08);
+  --frame-caption: rgba(18, 18, 18, 0.6);
+}
+
+.case-study-dark {
+  --frame-border: rgba(227, 220, 204, 0.2);
+  --frame-shadow: rgba(0, 0, 0, 0.4);
+  --frame-caption: rgba(227, 220, 204, 0.65);
 }

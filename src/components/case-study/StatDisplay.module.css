@@ -1,0 +1,46 @@
+.stat {
+  text-align: center;
+}
+
+.value {
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  font-size: clamp(40px, 7vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--case-accent, var(--accent-green));
+}
+
+.label {
+  margin: 12px 0 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.comparison {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 56px);
+  flex-wrap: wrap;
+}
+
+.arrow {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .comparison {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .arrow {
+    transform: rotate(90deg);
+  }
+}

@@ -182,3 +182,33 @@ export const dissertationSitemap: SitemapData = {
     { from: 'confidence', to: 'next' },
   ],
 };
+
+/* Zoomed detail view: just the group x scenario branching (every participant, regardless
+   of intervention group, faces all three fraud scenarios), isolated from the full flow so
+   the 3x3 design reads clearly on its own instead of getting lost in the larger diagram. */
+export const dissertationBranchingSitemap: SitemapData = {
+  nodes: [
+    { id: 'b-random', label: 'Random Assignment', x: 0, y: 300, variant: 'accent' },
+
+    { id: 'b-control', label: 'Control Group', x: 300, y: 100 },
+    { id: 'b-warning', label: 'Warning Group', x: 300, y: 300 },
+    { id: 'b-cta', label: 'CTA Group', x: 300, y: 500 },
+
+    { id: 'b-scenarios', label: 'Every Participant Sees All 3', x: 620, y: 300, variant: 'accent' },
+
+    { id: 'b-authority', label: 'Authority: Traffic Police Fine', x: 940, y: 100 },
+    { id: 'b-urgency', label: "Urgency: Friend's Compromised Number", x: 940, y: 300 },
+    { id: 'b-social', label: 'Social Proof: Instagram Marketplace', x: 940, y: 500 },
+  ],
+  edges: [
+    { from: 'b-random', to: 'b-control' },
+    { from: 'b-random', to: 'b-warning' },
+    { from: 'b-random', to: 'b-cta' },
+    { from: 'b-control', to: 'b-scenarios' },
+    { from: 'b-warning', to: 'b-scenarios' },
+    { from: 'b-cta', to: 'b-scenarios' },
+    { from: 'b-scenarios', to: 'b-authority' },
+    { from: 'b-scenarios', to: 'b-urgency' },
+    { from: 'b-scenarios', to: 'b-social' },
+  ],
+};

@@ -1,0 +1,23 @@
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1.5px dashed rgba(18, 18, 18, 0.3);
+  border-radius: 8px;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(18, 18, 18, 0.04) 0 10px,
+    transparent 10px 20px
+  );
+  text-align: center;
+  padding: 16px;
+}
+
+.label {
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(18, 18, 18, 0.45);
+}

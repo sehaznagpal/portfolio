@@ -1,0 +1,24 @@
+.brandGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+.brandCrop {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.brandCrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+@media (max-width: 640px) {
+  .brandGrid {
+    grid-template-columns: 1fr;
+  }
+}

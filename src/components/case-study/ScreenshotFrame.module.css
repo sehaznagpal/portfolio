@@ -7,8 +7,8 @@
 .frame img {
   width: 100%;
   border-radius: 8px;
-  border: 1px solid rgba(18, 18, 18, 0.15);
-  box-shadow: 0 8px 20px rgba(18, 18, 18, 0.08);
+  border: 1px solid var(--frame-border);
+  box-shadow: 0 8px 20px var(--frame-shadow);
 }
 
 .caption {
@@ -16,6 +16,6 @@
   font-weight: var(--author-regular);
   font-style: normal;
   font-size: 13px;
-  color: rgba(18, 18, 18, 0.6);
+  color: var(--frame-caption);
   text-align: center;
 }

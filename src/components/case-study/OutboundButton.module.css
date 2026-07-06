@@ -1,0 +1,33 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  transition:
+    opacity 150ms ease-out,
+    transform 150ms ease-out;
+}
+
+.button.hero {
+  padding: 12px 22px;
+  font-size: 16px;
+}
+
+.button.footer {
+  padding: 14px 26px;
+  font-size: 18px;
+}
+
+.button:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+
+.label {
+  white-space: nowrap;
+}
