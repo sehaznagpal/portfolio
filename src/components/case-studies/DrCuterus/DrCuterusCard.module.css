@@ -143,10 +143,10 @@
 /* Plush toy cutout */
 .plush {
   position: absolute;
-  left: 501.1px;
-  top: 204.8px;
-  width: 243px;
-  height: 153.9px;
+  left: 525.4px;
+  top: 220.19px;
+  width: 194.4px;
+  height: 123.12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,8 +154,8 @@
 }
 
 .plushInner {
-  width: 238.14px;
-  height: 148.635px;
+  width: 190.512px;
+  height: 118.908px;
   transform: rotate(8.19deg);
 }
 
