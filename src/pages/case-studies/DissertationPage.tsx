@@ -26,7 +26,7 @@ import fig1 from '../../assets/images/case-studies/dissertation/fig1-treatment-c
 import fig2 from '../../assets/images/case-studies/dissertation/fig2-treatment-bias.png';
 
 const ACCENT = '#CF0B0B';
-const DRIVE_URL = 'https://drive.google.com/file/d/1D8gnEofN4sp29NxSCHbM-e_iPvJtrti-/view?usp=sharing';
+const DRIVE_URL = 'https://drive.google.com/file/d/1T56QgmpiWvsrGIZ_S_NUWQY2uyhiHzYm/view?usp=sharing';
 
 const RAIL = [
   { id: 'overview', label: 'Overview' },
