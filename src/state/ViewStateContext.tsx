@@ -5,7 +5,7 @@ const LOADER_SEEN_KEY = 'portfolio:loader-seen';
 
 function hasSeenLoader(): boolean {
   try {
-    return localStorage.getItem(LOADER_SEEN_KEY) === '1';
+    return sessionStorage.getItem(LOADER_SEEN_KEY) === '1';
   } catch {
     return false;
   }
@@ -13,9 +13,9 @@ function hasSeenLoader(): boolean {
 
 function markLoaderSeen(): void {
   try {
-    localStorage.setItem(LOADER_SEEN_KEY, '1');
+    sessionStorage.setItem(LOADER_SEEN_KEY, '1');
   } catch {
-    // localStorage unavailable (e.g. private browsing) — loader will just replay next visit
+    // sessionStorage unavailable (e.g. private browsing) — loader will just replay next visit
   }
 }
 
