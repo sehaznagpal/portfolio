@@ -31,7 +31,7 @@ export default function CaseStudyLayout({
       style={accentColor ? ({ '--case-accent': accentColor } as CSSProperties) : undefined}
     >
       <Link className={styles.backLink} to="/">
-        ← back to portfolio
+        ← back to home
       </Link>
       {children}
     </div>

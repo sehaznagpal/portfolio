@@ -18,6 +18,16 @@
   color: var(--chrome-bg);
 }
 
+.subtitle {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 18px;
+  color: var(--chrome-bg);
+  opacity: 0.75;
+}
+
 .link {
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);

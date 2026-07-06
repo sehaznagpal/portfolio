@@ -9,9 +9,10 @@ export default function ExperimentZonePage() {
 
   return (
     <div className={styles.page}>
-      <p className={styles.title}>Under construction.</p>
+      <p className={styles.title}>Still Experimenting.</p>
+      <p className={styles.subtitle}>Will get ready soon.</p>
       <Link className={styles.link} to="/">
-        ← back to portfolio
+        ← back to home
       </Link>
     </div>
   );
