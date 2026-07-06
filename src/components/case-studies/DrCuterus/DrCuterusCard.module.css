@@ -70,6 +70,7 @@
   height: 319.543px;
   transform: translate(-50%, -50%);
   opacity: 0.9;
+  z-index: 0;
 }
 
 .phoneScreen {
@@ -104,10 +105,11 @@
 /* Laptop mockup (homepage screenshot) */
 .laptop {
   position: absolute;
-  left: 259.06px;
-  top: 295.34px;
-  width: 454.4px;
-  height: 263.1px;
+  left: 200.6px;
+  top: 278px;
+  width: 468.1px;
+  height: 271.2px;
+  z-index: 1;
 }
 
 .laptopScreen {
@@ -141,18 +143,19 @@
 /* Plush toy cutout */
 .plush {
   position: absolute;
-  left: 561.42px;
-  top: 202.42px;
-  width: 300px;
-  height: 190px;
+  left: 487.6px;
+  top: 196.25px;
+  width: 270px;
+  height: 171px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .plushInner {
-  width: 294px;
-  height: 183.5px;
+  width: 264.6px;
+  height: 165.15px;
   transform: rotate(8.19deg);
 }
 
