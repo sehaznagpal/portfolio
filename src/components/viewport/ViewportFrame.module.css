@@ -11,6 +11,11 @@
     repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px var(--grid-line-spacing));
 }
 
+.outerDark {
+  background-color: var(--chrome-bg);
+  background-image: none;
+}
+
 .stage {
   width: var(--frame-w);
   height: var(--frame-h);

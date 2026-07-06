@@ -23,7 +23,7 @@ function IndexContent() {
   const { view, finishLoading } = useViewState();
 
   return (
-    <ViewportFrame>
+    <ViewportFrame dark={view === 'loading'}>
       <AnimatePresence>
         {view === 'loading' && (
           <motion.div
