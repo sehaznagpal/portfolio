@@ -41,7 +41,7 @@ export default function FraudCard() {
         <div className={`${styles.phone} ${styles.backPhone}`}>
           <div className={styles.phoneScreen}>
             <div className={styles.alertBanner}>
-              <TriangleAlert className={styles.alertIcon} size={10} strokeWidth={2.5} />
+              <TriangleAlert className={styles.alertIcon} size={16.468} strokeWidth={2.5} />
               <span className={styles.alertText}>
                 Fraudsters may impersonate trusted sources. Please{' '}
                 <span className={styles.alertTextBold}>verify</span> before making the payment.
