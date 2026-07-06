@@ -1,6 +1,24 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 import type { CaseStudyTab, ViewState } from '../types';
 
+const LOADER_SEEN_KEY = 'portfolio:loader-seen';
+
+function hasSeenLoader(): boolean {
+  try {
+    return localStorage.getItem(LOADER_SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markLoaderSeen(): void {
+  try {
+    localStorage.setItem(LOADER_SEEN_KEY, '1');
+  } catch {
+    // localStorage unavailable (e.g. private browsing) — loader will just replay next visit
+  }
+}
+
 interface ViewStateContextValue {
   view: ViewState;
   activeTab: CaseStudyTab;
@@ -15,7 +33,7 @@ interface ViewStateContextValue {
 const ViewStateContext = createContext<ViewStateContextValue | null>(null);
 
 export function ViewStateProvider({ children }: { children: ReactNode }) {
-  const [view, setView] = useState<ViewState>('loading');
+  const [view, setView] = useState<ViewState>(() => (hasSeenLoader() ? 'hero' : 'loading'));
   const [activeTab, setActiveTab] = useState<CaseStudyTab>(1);
   const [flipDirection, setFlipDirection] = useState<1 | -1>(1);
 
@@ -25,7 +43,10 @@ export function ViewStateProvider({ children }: { children: ReactNode }) {
       activeTab,
       isFlipped: view === 'case-study',
       flipDirection,
-      finishLoading: () => setView('hero'),
+      finishLoading: () => {
+        markLoaderSeen();
+        setView('hero');
+      },
       goToCaseStudy: (tab: CaseStudyTab) => {
         setFlipDirection(1);
         setActiveTab(tab);
