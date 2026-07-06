@@ -52,7 +52,7 @@
   font-weight: var(--author-regular);
   font-style: normal;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
 }
