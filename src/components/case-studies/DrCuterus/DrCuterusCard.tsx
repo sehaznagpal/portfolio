@@ -21,13 +21,11 @@ export default function DrCuterusCard() {
 
       <p className={styles.body}>
         A creator with almost <span className={styles.bodyBold}>two million followers</span> had
-        no site of her own to send patients, brands, or her own DMs to. One site needed to do
-        three jobs at once: patient trust, corporate credibility, and a place to redirect the
-        questions she couldn&rsquo;t keep answering individually. I led the{' '}
-        <span className={styles.bodyBold}>design</span> and helped{' '}
-        <span className={styles.bodyBold}>build it in code</span>, working inside a strict
-        no-gendered-colors constraint to build a purple-and-yellow system that&rsquo;s hers going
-        forward.
+        no site of her own to send patients, brands, or her own DMs to. One site needed to do{' '}
+        <span className={styles.bodyBold}>three jobs at once</span>: patient trust, corporate
+        credibility, and a place to redirect the questions she couldn&rsquo;t keep answering
+        individually, all while still looking professional, approachable, and{' '}
+        <span className={styles.bodyBold}>unmistakably her</span>.
       </p>
 
       <div className={styles.phone}>
