@@ -5,6 +5,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: var(--bg-canvas);
+  background-image:
+    repeating-linear-gradient(to right, var(--grid-line) 0 1px, transparent 1px var(--grid-line-spacing)),
+    repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px var(--grid-line-spacing));
 }
 
 .stage {

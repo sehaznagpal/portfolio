@@ -24,8 +24,6 @@ function IndexContent() {
 
   return (
     <ViewportFrame>
-      <div className="grid-background" style={{ position: 'absolute', inset: 0 }} />
-
       <AnimatePresence>
         {view === 'loading' && (
           <motion.div
