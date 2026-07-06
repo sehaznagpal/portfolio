@@ -4,7 +4,8 @@ import { Star, Pencil, Mail, Download } from 'lucide-react';
 import { useViewState } from '../../state/ViewStateContext';
 import styles from './Toolbar.module.css';
 
-const CV_URL = 'https://drive.google.com/drive/u/0/folders/1piWk9aM3m2brOJ4pr_IumCHQrA0tu30U';
+const CV_FILE_ID = '1gXuFS_Bxz3kQadNMiNT-ZB-RFydL0MF7';
+const CV_URL = `https://drive.google.com/uc?export=download&id=${CV_FILE_ID}`;
 const MAIL_SUBJECT = 'Loved your portfolio';
 const MAIL_BODY =
   "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
@@ -67,6 +68,7 @@ export default function Toolbar() {
           className={iconClass('cv')}
           aria-label="Download my CV"
           href={CV_URL}
+          download
           target="_blank"
           rel="noopener noreferrer"
         >
