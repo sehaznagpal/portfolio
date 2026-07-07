@@ -24,17 +24,16 @@ function IndexContent() {
 
   return (
     <ViewportFrame dark={view === 'loading'}>
-      {/* Loader exits as a curtain lift (transform-only, GPU-cheap) rather than a plain
-          fade, and the hero begins its own reveal underneath before the curtain finishes
-          clearing, so the two motions overlap into one continuous gesture instead of a
-          sequential cut. Both share the same "expo-out" curve for a unified, premium feel. */}
+      {/* Expand & dissolve: the loader scales up a touch while fading out, the hero
+          fades in beneath it at the same time, so the two blend into one soft crossfade
+          instead of a hard cut. Transform+opacity only, both on the same easing curve. */}
       <AnimatePresence>
         {view === 'loading' && (
           <motion.div
             key="loader"
             style={{ position: 'absolute', inset: 0, zIndex: 50 }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, scale: 1.06 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
             <Loader onDone={finishLoading} />
           </motion.div>
@@ -43,9 +42,9 @@ function IndexContent() {
 
       {view !== 'loading' && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           style={{ position: 'absolute', inset: 0 }}
         >
           <Wordmark />
