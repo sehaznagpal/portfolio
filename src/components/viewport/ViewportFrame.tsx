@@ -12,7 +12,8 @@ export default function ViewportFrame({
   const scale = useScaleToFit();
 
   return (
-    <div className={`${styles.outer} ${dark ? styles.outerDark : ''}`}>
+    <div className={styles.outer}>
+      <div className={`${styles.grid} ${dark ? '' : styles.gridVisible}`} />
       <div className={styles.stage} style={{ transform: `scale(${scale})` }}>
         {children}
       </div>

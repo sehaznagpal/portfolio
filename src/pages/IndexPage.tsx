@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
@@ -19,15 +19,29 @@ const caseStudies: Record<CaseStudyTab, CaseStudyDef> = {
   3: { content: <FraudCard />, viewProjectHref: '/case-study/designing-against-fraud' },
 };
 
+/* Brief hold between the loader clearing and the hero starting, so the two don't read
+   as one abrupt cut. Only applies right after the loader plays; on a normal refresh
+   (loader already seen this session) the hero mounts immediately, same as before. */
+const REVEAL_PAUSE_MS = 400;
+
 function IndexContent() {
   const { view, finishLoading } = useViewState();
+  const cameFromLoader = useRef(view === 'loading').current;
+  const [backgroundVisible, setBackgroundVisible] = useState(!cameFromLoader);
+  const [heroReady, setHeroReady] = useState(!cameFromLoader);
+
+  function handleLoaderExitComplete() {
+    setBackgroundVisible(true);
+    setTimeout(() => setHeroReady(true), REVEAL_PAUSE_MS);
+  }
 
   return (
-    <ViewportFrame dark={view === 'loading'}>
-      {/* Soft dissolve: the loader fades out while the hero fades in beneath it at the
-          same time, blending into one simple crossfade with no motion of its own that
-          could compete with the hero card's entrance. Opacity only, same easing curve. */}
-      <AnimatePresence>
+    <ViewportFrame dark={!backgroundVisible}>
+      {/* Soft dissolve: the loader fades out, then (only on the run right after the
+          loader) a brief pause lets the grid fade in gently before the hero's existing
+          fade-in plays. On a normal refresh backgroundVisible/heroReady already start
+          true, so this collapses back to the plain immediate render from before. */}
+      <AnimatePresence onExitComplete={handleLoaderExitComplete}>
         {view === 'loading' && (
           <motion.div
             key="loader"
@@ -40,7 +54,7 @@ function IndexContent() {
         )}
       </AnimatePresence>
 
-      {view !== 'loading' && (
+      {view !== 'loading' && heroReady && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
