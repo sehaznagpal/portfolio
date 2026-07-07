@@ -24,15 +24,15 @@ function IndexContent() {
 
   return (
     <ViewportFrame dark={view === 'loading'}>
-      {/* Expand & dissolve: the loader scales up a touch while fading out, the hero
-          fades in beneath it at the same time, so the two blend into one soft crossfade
-          instead of a hard cut. Transform+opacity only, both on the same easing curve. */}
+      {/* Soft dissolve: the loader fades out while the hero fades in beneath it at the
+          same time, blending into one simple crossfade with no motion of its own that
+          could compete with the hero card's entrance. Opacity only, same easing curve. */}
       <AnimatePresence>
         {view === 'loading' && (
           <motion.div
             key="loader"
             style={{ position: 'absolute', inset: 0, zIndex: 50 }}
-            exit={{ opacity: 0, scale: 1.06 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
             <Loader onDone={finishLoading} />
