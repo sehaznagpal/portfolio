@@ -28,7 +28,7 @@
 
 .titleBold {
   font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-weight: var(--bricolage-light);
+  font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   letter-spacing: -0.04em;
   color: var(--text-cream);
