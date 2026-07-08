@@ -2,7 +2,7 @@
   /* Canvas / background — extracted from Figma's grid pattern SVG asset */
   --bg-canvas: #E3DCCC;
   --text-cream: #E3DCCC;
-  --grid-line: rgba(18, 18, 18, 0.4);
+  --grid-line: rgba(18, 18, 18, 0.25);
   --grid-tile-size: 200px;
   --grid-line-spacing: 40px;
 
