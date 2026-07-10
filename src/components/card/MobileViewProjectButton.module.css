@@ -1,0 +1,30 @@
+.button {
+  position: absolute;
+  left: 165px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: var(--chrome-bg);
+  border: 1px solid var(--text-cream);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 150ms ease-out;
+}
+
+.button:hover {
+  opacity: 0.85;
+}
+
+.label {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: 600;
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-cream);
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+}

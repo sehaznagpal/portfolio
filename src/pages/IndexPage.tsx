@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useIsMobile } from '../lib/useIsMobile';
+import MobileIndexContent from './MobileIndexContent';
 import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
 import Wordmark from '../components/chrome/Wordmark';
@@ -71,6 +73,8 @@ function IndexContent() {
 }
 
 export default function IndexPage() {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
     document.body.classList.add('no-scroll');
     return () => document.body.classList.remove('no-scroll');
@@ -78,7 +82,7 @@ export default function IndexPage() {
 
   return (
     <ViewStateProvider>
-      <IndexContent />
+      {isMobile ? <MobileIndexContent /> : <IndexContent />}
     </ViewStateProvider>
   );
 }

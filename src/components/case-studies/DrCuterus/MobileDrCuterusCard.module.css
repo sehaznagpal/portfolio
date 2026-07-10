@@ -1,0 +1,173 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  top: 43px;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  white-space: nowrap;
+}
+
+.titleItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.titleBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  color: var(--text-cream);
+}
+
+.tag {
+  position: absolute;
+  left: 50%;
+  top: 89px;
+  transform: translateX(-50%);
+  width: 293px;
+  background: var(--accent-green);
+  color: var(--chrome-bg);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 0.8;
+  text-align: center;
+  font-feature-settings: 'salt' 1;
+}
+
+.body {
+  position: absolute;
+  left: 21px;
+  top: 116px;
+  width: 294px;
+  margin: 0;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.bodyBold {
+  font-weight: var(--author-semibold);
+}
+
+.laptop {
+  position: absolute;
+  left: 40px;
+  top: 330px;
+  width: 300px;
+  height: 173px;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.laptopScreen {
+  position: absolute;
+  left: 10.36%;
+  top: 2.19%;
+  width: 79.29%;
+  height: 84.59%;
+  overflow: hidden;
+}
+
+.laptopScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.laptopBezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.laptopBezel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.phone {
+  position: absolute;
+  left: 51px;
+  top: 415px;
+  width: 99px;
+  height: 216px;
+  transform: translate(-50%, -50%);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.phoneScreen {
+  position: absolute;
+  left: 5.25%;
+  top: 2.05%;
+  width: 89.5%;
+  height: 95.9%;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.phoneScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.phoneBezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.phoneBezel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.plush {
+  position: absolute;
+  left: 213px;
+  top: 278px;
+  width: 149px;
+  height: 102px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.plushInner {
+  width: 100%;
+  height: 100%;
+  transform: rotate(8.19deg);
+}
+
+.plushInner img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

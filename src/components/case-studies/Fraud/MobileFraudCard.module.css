@@ -1,0 +1,233 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  top: 54px;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  white-space: nowrap;
+}
+
+.titleItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.titleBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  color: var(--text-cream);
+}
+
+.tag {
+  position: absolute;
+  left: 50%;
+  top: 99px;
+  transform: translateX(-50%);
+  width: 293px;
+  background: var(--accent-green);
+  color: var(--chrome-bg);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.1;
+  text-align: center;
+  font-feature-settings: 'salt' 1;
+}
+
+.body {
+  position: absolute;
+  left: 21px;
+  top: 133px;
+  width: 294px;
+  margin: 0;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.bodyBold {
+  font-weight: var(--author-semibold);
+}
+
+.phonePair {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+
+.phone {
+  position: absolute;
+  width: 168px;
+  height: 342px;
+  transform-origin: center center;
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backPhone {
+  left: 155px;
+  top: 455px;
+  transform: translate(-50%, -50%) rotate(-1.71deg);
+  z-index: 1;
+}
+
+.phonePair.active .backPhone {
+  transform: translate(-50%, -50%) rotate(-6.71deg);
+}
+
+.frontPhone {
+  left: 185px;
+  top: 525px;
+  transform: translate(-50%, -50%) rotate(-1.71deg);
+  z-index: 2;
+}
+
+.phonePair.active .frontPhone {
+  transform: translate(-50%, -50%) rotate(4.29deg);
+}
+
+.phoneScreen {
+  position: absolute;
+  left: 4.85%;
+  top: 2.15%;
+  width: 90.3%;
+  height: 95.89%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--fraud-screen-default);
+}
+
+.ctaScreen {
+  transition: background 280ms ease-out;
+}
+
+.phonePair.active .ctaScreen {
+  background: var(--fraud-cta-hover-green);
+}
+
+.phoneBezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.phoneBezel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.alertBanner {
+  position: absolute;
+  left: 8.925%;
+  top: 10.46%;
+  width: 82.15%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--fraud-alert-bg);
+  border-radius: 2px;
+  padding: 4px;
+}
+
+.alertIcon {
+  flex-shrink: 0;
+  color: #ff8c00;
+}
+
+.alertText {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 6.5px;
+  line-height: 1.15;
+  color: var(--fraud-alert-text);
+}
+
+.alertTextBold {
+  font-weight: 700;
+}
+
+.ctaButtons {
+  position: absolute;
+  left: 6.1%;
+  top: 13%;
+  width: 87.8%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cancelButton {
+  padding: 5px;
+  border-radius: 30px;
+  background: var(--fraud-cancel-bg);
+  text-align: center;
+  transition: box-shadow 280ms ease-out;
+}
+
+.phonePair.active .cancelButton {
+  box-shadow: 0 0 12px 1.5px rgba(207, 11, 11, 0.55);
+}
+
+.cancelButtonLabel {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 6.7px;
+  color: #f5f5f5;
+}
+
+.continueButton {
+  padding: 5px;
+  border-radius: 30px;
+  background: #f5f5f5;
+  border: 1px solid var(--fraud-continue-border);
+  text-align: center;
+}
+
+.continueButtonLabel {
+  font-family: Roboto, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 6.7px;
+  color: var(--fraud-continue-text);
+}
+
+.speechBubble {
+  position: absolute;
+  left: 9px;
+  top: 420px;
+  z-index: 3;
+  background: var(--chrome-bg);
+  border-radius: 999px;
+  padding: 7px;
+}
+
+.speechBubbleLabel {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 0.8;
+  letter-spacing: -0.08em;
+  color: var(--text-cream);
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+}

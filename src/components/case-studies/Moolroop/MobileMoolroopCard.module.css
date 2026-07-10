@@ -1,0 +1,107 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  top: 43px;
+  transform: translateX(-50%);
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  white-space: nowrap;
+}
+
+.titleItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.titleBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.tag {
+  position: absolute;
+  left: 50%;
+  top: 89px;
+  transform: translateX(-50%);
+  width: 293px;
+  background: var(--accent-green);
+  color: var(--chrome-bg);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 0.8;
+  text-align: center;
+  font-feature-settings: 'salt' 1;
+}
+
+.body {
+  position: absolute;
+  left: 21px;
+  top: 125px;
+  width: 294px;
+  margin: 0;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.bodyBold {
+  font-weight: var(--author-semibold);
+}
+
+.vs {
+  position: absolute;
+  left: 164px;
+  top: 348px;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.stamp {
+  position: absolute;
+  left: 260px;
+  top: 470px;
+  width: 163px;
+  height: 164px;
+  transform: translate(-50%, -50%) rotate(55.66deg);
+  transition: opacity 300ms ease-out;
+}
+
+.stampDimmed {
+  opacity: 0.25;
+}
+
+.stamp img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

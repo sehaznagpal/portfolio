@@ -1,0 +1,102 @@
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 48px 32px;
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-size: 48px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.titleItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  letter-spacing: -0.08em;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.titleBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  letter-spacing: -0.04em;
+  color: var(--text-cream);
+  margin-left: 8px;
+  font-feature-settings: 'salt' 1;
+}
+
+.paragraph {
+  margin: 0;
+  width: 294px;
+  max-width: 100%;
+  text-align: center;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1.35;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.question {
+  font-weight: var(--author-semibold);
+  font-style: italic;
+}
+
+.highlight {
+  background: var(--accent-green);
+  color: var(--chrome-bg);
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: var(--chrome-bg);
+  border: 1px solid var(--text-cream);
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.buttonClicked {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+}
+
+.buttonLabel {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+  transition: color 150ms ease-out;
+}
+
+.buttonLabelClicked {
+  color: var(--chrome-bg);
+}
