@@ -10,7 +10,7 @@ const THEME_KEY = 'portfolio:experiment-theme';
 export const THEME_OPTIONS: { id: ThemeName; label: string; swatchFill: string; swatchStroke: string }[] = [
   { id: 'pina-colada', label: 'Piña Colada', swatchFill: '#F8FFD1', swatchStroke: '#C2F2E4' },
   { id: 'seaglass', label: 'Seaglass', swatchFill: '#DDECF1', swatchStroke: '#AED9C6' },
-  { id: 'blush', label: 'Blush', swatchFill: '#C84F6B', swatchStroke: '#DDECF1' },
+  { id: 'blush', label: 'Blush', swatchFill: '#C84F6B', swatchStroke: '#D1798E' },
   { id: 'wakanda', label: 'Wakanda', swatchFill: '#121212', swatchStroke: '#1E1E1E' },
 ];
 
