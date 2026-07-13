@@ -6,6 +6,7 @@ import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
 import Wordmark from '../components/chrome/Wordmark';
 import Toolbar from '../components/chrome/Toolbar';
+import TopRight from '../components/chrome/TopRight';
 import Hero from '../components/hero/Hero';
 import CardShell from '../components/card/CardShell';
 import CaseStudyShell, { type CaseStudyDef } from '../components/card/CaseStudyShell';
@@ -65,6 +66,7 @@ function IndexContent() {
         >
           <Wordmark />
           <Toolbar />
+          <TopRight />
           <CardShell front={<Hero />} back={<CaseStudyShell studies={caseStudies} />} />
         </motion.div>
       )}
