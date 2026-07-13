@@ -1,0 +1,120 @@
+.viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--bg-canvas);
+  touch-action: none;
+  user-select: none;
+}
+
+/* Scoped theme overrides — data-theme only ever lives on this element, so
+   these can never cascade to :root/html and leak onto other pages. */
+.viewport[data-theme='pina-colada'] {
+  --bg-canvas: #F8FFD1;
+  --grid-line: #C2F2E4;
+}
+
+.viewport[data-theme='seaglass'] {
+  --bg-canvas: #DDECF1;
+  --grid-line: #AED9C6;
+}
+
+.viewport[data-theme='blush'] {
+  --bg-canvas: #C84F6B;
+  --grid-line: #DDECF1;
+}
+
+.viewport[data-theme='wakanda'] {
+  --bg-canvas: #121212;
+  --grid-line: #1E1E1E;
+}
+
+.panLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.zoomLayer {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+}
+
+.gridLayer {
+  position: absolute;
+  left: -100vw;
+  top: -100vh;
+  width: 300vw;
+  height: 300vh;
+}
+
+.anchor {
+  position: absolute;
+  inset: 0;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 501px;
+  height: 313px;
+  background: #fefefe;
+  border: 1px solid #046b56;
+  padding: 30px 32px 0;
+  box-sizing: border-box;
+}
+
+.corner {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: #c2f2e4;
+  border: 1px solid #046b56;
+}
+
+.cornerTL {
+  top: -7px;
+  left: -7px;
+}
+
+.cornerTR {
+  top: -7px;
+  right: -7px;
+}
+
+.cornerBL {
+  bottom: -7px;
+  left: -7px;
+}
+
+.cornerBR {
+  bottom: -7px;
+  right: -7px;
+}
+
+.cardText {
+  margin: 0;
+  text-align: center;
+  font-size: 56px;
+  line-height: 1.1;
+}
+
+.cardTextItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-style: italic;
+  letter-spacing: -0.023em;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+}
+
+.cardTextBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  letter-spacing: -0.011em;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+}

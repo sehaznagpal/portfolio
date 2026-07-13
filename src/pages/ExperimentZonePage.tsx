@@ -1,19 +1,16 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import styles from './ExperimentZonePage.module.css';
+import { ThemeProvider } from '../state/ThemeContext';
+import ExperimentCanvas from '../components/experiment/ExperimentCanvas';
 
 export default function ExperimentZonePage() {
   useEffect(() => {
-    document.body.classList.remove('no-scroll');
+    document.body.classList.add('no-scroll');
+    return () => document.body.classList.remove('no-scroll');
   }, []);
 
   return (
-    <div className={styles.page}>
-      <p className={styles.title}>Still Experimenting.</p>
-      <p className={styles.subtitle}>Will get ready soon.</p>
-      <Link className={styles.link} to="/">
-        ← back to home
-      </Link>
-    </div>
+    <ThemeProvider>
+      <ExperimentCanvas />
+    </ThemeProvider>
   );
 }
