@@ -3,22 +3,28 @@ import { useTheme, THEME_OPTIONS } from '../../state/ThemeContext';
 import avatar from '../../assets/images/chrome/avatar.jpg';
 import styles from './TopRight.module.css';
 
+type ShareState = 'idle' | 'copied' | 'manual';
+
 export default function TopRight() {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [shareState, setShareState] = useState<ShareState>('idle');
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open && shareState !== 'manual') return;
 
     function handlePointerDown(event: PointerEvent) {
       if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
         setOpen(false);
+        setShareState('idle');
       }
     }
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        setOpen(false);
+        setShareState('idle');
+      }
     }
 
     document.addEventListener('pointerdown', handlePointerDown);
@@ -27,15 +33,48 @@ export default function TopRight() {
       document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [open]);
+  }, [open, shareState]);
+
+  function fallbackCopy(text: string): boolean {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    let succeeded = false;
+    try {
+      succeeded = document.execCommand('copy');
+    } catch {
+      succeeded = false;
+    }
+    document.body.removeChild(textarea);
+    return succeeded;
+  }
 
   async function handleShare() {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      // clipboard unavailable — silently no-op
+    const url = window.location.href;
+    let succeeded = false;
+
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(url);
+        succeeded = true;
+      } catch {
+        succeeded = fallbackCopy(url);
+      }
+    } else {
+      succeeded = fallbackCopy(url);
+    }
+
+    if (succeeded) {
+      setShareState('copied');
+      setTimeout(() => setShareState('idle'), 1500);
+    } else {
+      // Clipboard access blocked (permissions/insecure context) — fall back to
+      // a manually-selectable link so "Share" always leaves the user with a
+      // copyable URL, never a silent no-op.
+      setShareState('manual');
     }
   }
 
@@ -46,7 +85,7 @@ export default function TopRight() {
           <img src={avatar} alt="Sehaz Nagpal" className={styles.avatarImg} />
         </div>
         <button type="button" className={styles.share} onClick={handleShare}>
-          {copied ? 'Copied!' : 'Share'}
+          {shareState === 'copied' ? 'Copied!' : 'Share'}
         </button>
         <button
           type="button"
@@ -88,6 +127,20 @@ export default function TopRight() {
               />
             </button>
           ))}
+        </div>
+      )}
+
+      {shareState === 'manual' && (
+        <div className={styles.manualCopy} role="dialog" aria-label="Copy link">
+          <p className={styles.manualCopyLabel}>Copy this link:</p>
+          <input
+            type="text"
+            readOnly
+            className={styles.manualCopyInput}
+            value={window.location.href}
+            ref={(el) => el?.select()}
+            onFocus={(event) => event.currentTarget.select()}
+          />
         </div>
       )}
     </div>

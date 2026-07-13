@@ -3,6 +3,11 @@
   inset: 0;
   overflow: hidden;
   background-color: var(--bg-canvas);
+}
+
+.dragSurface {
+  position: absolute;
+  inset: 0;
   touch-action: none;
   user-select: none;
 }

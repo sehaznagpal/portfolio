@@ -51,28 +51,31 @@ export default function ExperimentCanvas() {
   }
 
   return (
-    <div
-      ref={viewportRef}
-      className={styles.viewport}
-      data-theme={theme === 'default' ? undefined : theme}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-    >
-      <div className={styles.panLayer} style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
-        <div className={styles.zoomLayer} style={{ transform: `scale(${zoom})` }}>
-          <div className={`${styles.gridLayer} grid-background`} />
-          <div className={styles.anchor}>
-            <div className={styles.card}>
-              <span className={`${styles.corner} ${styles.cornerTL}`} />
-              <span className={`${styles.corner} ${styles.cornerTR}`} />
-              <span className={`${styles.corner} ${styles.cornerBL}`} />
-              <span className={`${styles.corner} ${styles.cornerBR}`} />
-              <p className={styles.cardText}>
-                <span className={styles.cardTextItalic}>This is my Figma,</span>{' '}
-                <span className={styles.cardTextBold}>basically.</span>
-              </p>
+    <div ref={viewportRef} className={styles.viewport} data-theme={theme === 'default' ? undefined : theme}>
+      {/* Drag/zoom handlers live on this surface only — not on .viewport itself —
+          so pointerdown on the chrome pills below (siblings, not descendants of
+          this element) never gets swallowed into a pan gesture. */}
+      <div
+        className={styles.dragSurface}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+      >
+        <div className={styles.panLayer} style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
+          <div className={styles.zoomLayer} style={{ transform: `scale(${zoom})` }}>
+            <div className={`${styles.gridLayer} grid-background`} />
+            <div className={styles.anchor}>
+              <div className={styles.card}>
+                <span className={`${styles.corner} ${styles.cornerTL}`} />
+                <span className={`${styles.corner} ${styles.cornerTR}`} />
+                <span className={`${styles.corner} ${styles.cornerBL}`} />
+                <span className={`${styles.corner} ${styles.cornerBR}`} />
+                <p className={styles.cardText}>
+                  <span className={styles.cardTextItalic}>This is my Figma,</span>{' '}
+                  <span className={styles.cardTextBold}>basically.</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
