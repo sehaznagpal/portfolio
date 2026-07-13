@@ -3,6 +3,8 @@
   inset: 0;
   overflow: hidden;
   background-color: var(--bg-canvas);
+  /* Denser grid on this page only — 50% of the site-wide 40px spacing. */
+  --grid-line-spacing: 20px;
 }
 
 .interactionSurface {

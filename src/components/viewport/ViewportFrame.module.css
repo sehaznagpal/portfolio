@@ -8,6 +8,9 @@
   /* Dark base layer; the grid sits on top and is toggled via opacity below so it can
      be smoothly cross-faded in, since background-image can't be transitioned directly. */
   background-color: var(--chrome-bg);
+  /* Home page only — 20% lighter than the site-wide default, for differentiation
+     from the Experiments page grid. */
+  --grid-line: rgba(18, 18, 18, 0.2);
 }
 
 .grid {
