@@ -1,0 +1,450 @@
+.positioned {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+/* ---------- Center card: "More from my Drafts" ---------- */
+
+.centerCard {
+  position: relative;
+  width: 569px;
+  height: 356px;
+  background: #fefefe;
+  border: 1px solid #046b56;
+  padding: 36px 32px 0;
+  box-sizing: border-box;
+}
+
+.corner {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #c2f2e4;
+  border: 1px solid #046b56;
+}
+
+.cornerTL {
+  top: -8px;
+  left: -8px;
+}
+
+.cornerTR {
+  top: -8px;
+  right: -8px;
+}
+
+.cornerBL {
+  bottom: -8px;
+  left: -8px;
+}
+
+.cornerBR {
+  bottom: -8px;
+  right: -8px;
+}
+
+.centerHeading {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 56px;
+  line-height: 1.1;
+}
+
+.centerHeadingItalic {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-style: italic;
+  letter-spacing: -0.023em;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+}
+
+.centerHeadingBold {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  letter-spacing: -0.011em;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+}
+
+.centerBody {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 17px;
+  line-height: 1.5;
+  text-align: justify;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+}
+
+.centerBody p {
+  margin: 0 0 14px;
+}
+
+.centerBody p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Chess / Photobooth: static icons, no hover ---------- */
+
+.chess {
+  width: 282px;
+  height: 282px;
+}
+
+.chess img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.photobooth {
+  width: 325px;
+  height: 244px;
+}
+
+.photobooth img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------- SiP Studio branding badge ---------- */
+
+.sipStudio {
+  position: relative;
+  width: 362px;
+  height: 359px;
+}
+
+.sipCloud {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 275px;
+  height: 268px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 320ms ease, transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sipCloud img {
+  width: 100%;
+  height: 100%;
+}
+
+.sipLabel {
+  position: absolute;
+  left: 59px;
+  top: 76px;
+  width: 135px;
+  height: 44px;
+  margin: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-semibold, 600);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 22px;
+  line-height: 0.95;
+  letter-spacing: -0.88px;
+  color: #121212;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 320ms ease 40ms, transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1) 40ms;
+}
+
+.sipBadge {
+  position: absolute;
+  left: 44px;
+  top: 46px;
+  width: 275px;
+  height: 268px;
+  transition: left 380ms cubic-bezier(0.16, 1, 0.3, 1), top 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sipBadge img {
+  width: 100%;
+  height: 100%;
+}
+
+.sipStudio:hover .sipCloud,
+.sipStudio:focus-within .sipCloud {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sipStudio:hover .sipLabel,
+.sipStudio:focus-within .sipLabel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sipStudio:hover .sipBadge,
+.sipStudio:focus-within .sipBadge {
+  left: 87px;
+  top: 91px;
+}
+
+/* ---------- Say hello: radiating photo + contact card ---------- */
+
+.meWrap {
+  position: relative;
+  width: 604px;
+  height: 583px;
+}
+
+.sez {
+  position: absolute;
+  left: 146px;
+  top: 146px;
+  width: 311px;
+  height: 311px;
+  border-radius: 9999px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.sez img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thing {
+  position: absolute;
+  left: calc(50% - (var(--w) / 2));
+  top: calc(50% - (var(--h) / 2));
+  width: var(--w);
+  height: var(--h);
+  opacity: 0;
+  transform: rotate(var(--rot, 0deg)) scale(0.35);
+  transition:
+    left 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    top 560ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 380ms ease-out,
+    transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0ms);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.thing img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.meWrap:hover .thing,
+.meWrap:focus-within .thing {
+  left: var(--tx);
+  top: var(--ty);
+  opacity: 1;
+  transform: rotate(var(--rot, 0deg)) scale(1);
+}
+
+.contactCard {
+  position: relative;
+  width: 332px;
+  height: 159px;
+  background: #a4cf4a;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.contactHeading {
+  position: absolute;
+  left: 50%;
+  top: -6px;
+  width: 311px;
+  margin: 0;
+  text-align: center;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-style: italic;
+  font-size: 88px;
+  line-height: 1;
+  letter-spacing: -7.05px;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+  transform: translateX(-50%) rotate(-5.27deg);
+  white-space: nowrap;
+}
+
+.contactName {
+  position: absolute;
+  left: 17px;
+  top: 127px;
+  margin: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-light);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 20px;
+  letter-spacing: -1.2px;
+  color: #121212;
+}
+
+.contactIcon {
+  position: absolute;
+  top: 117px;
+  width: 30px;
+  height: 30px;
+}
+
+/* ---------- Re-wired website: quick flip on hover ---------- */
+
+.website {
+  width: 302px;
+  height: 302px;
+  perspective: 900px;
+}
+
+.websiteFlip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.website:hover .websiteFlip,
+.website:focus-within .websiteFlip {
+  animation: quickFlip 560ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes quickFlip {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  45% {
+    transform: rotateY(190deg) scale(1.04);
+  }
+  75% {
+    transform: rotateY(345deg) scale(0.98);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1);
+  }
+}
+
+.starImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.websiteLabel {
+  position: absolute;
+  left: 0;
+  top: 122px;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-style: italic;
+  font-size: 38px;
+  line-height: 0.85;
+  letter-spacing: -3px;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+/* ---------- Re-wired motion graphic demo: disc slides in ---------- */
+
+.motionDemo {
+  position: relative;
+  width: 237px;
+  height: 222px;
+}
+
+.disc {
+  position: absolute;
+  left: 17px;
+  top: 12px;
+  width: 204px;
+  height: 198px;
+  transform: translateX(0) rotate(0deg);
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.motionBox {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #fefefe;
+  filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+.motionText {
+  margin: 0;
+  text-align: center;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 42px;
+  line-height: 0.95;
+  letter-spacing: -1.7px;
+  color: #121212;
+}
+
+.motionDemo:hover .disc,
+.motionDemo:focus-within .disc {
+  transform: translateX(140px) rotate(220deg);
+}
+
+/* ---------- Letter: typewriter on scroll into view ---------- */
+
+.letter {
+  width: 487px;
+  height: 526px;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #fefefe;
+  border-radius: 8px;
+  filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.4));
+  transform: rotate(-1.76deg);
+}
+
+.letterText {
+  margin: 0;
+  height: 100%;
+  font-family: 'Crafty Girls', cursive;
+  font-size: 22px;
+  line-height: 1.25;
+  color: #121212;
+  white-space: pre-wrap;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  margin-left: 1px;
+  background: #121212;
+  animation: caretBlink 900ms step-end infinite;
+}
+
+@keyframes caretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
