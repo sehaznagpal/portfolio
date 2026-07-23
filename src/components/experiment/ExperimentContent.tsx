@@ -1,8 +1,15 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
+  type ReactNode,
+} from 'react';
 import styles from './ExperimentContent.module.css';
 
 import chessIcon from '../../assets/images/experiment/chess-icon.png';
-import photoboothIcon from '../../assets/images/experiment/photobooth-icon.png';
+import photoboothPhoto from '../../assets/images/experiment/photobooth-photo.png';
 import sipBadge from '../../assets/images/experiment/sip-badge-hover.svg';
 import sipCloud from '../../assets/images/experiment/sip-bg-hover.svg';
 import sezPhoto from '../../assets/images/experiment/sez-photo.jpg';
@@ -18,6 +25,14 @@ import phoneIcon from '../../assets/images/experiment/phone-icon.svg';
 import mailIcon from '../../assets/images/experiment/mail-icon.svg';
 import starCard from '../../assets/images/experiment/star-card.svg';
 import discImg from '../../assets/images/experiment/disc.png';
+import extrasHeart from '../../assets/images/experiment/extras-heart.svg';
+import extrasCornerTlIcon from '../../assets/images/experiment/extras-corner-tl.svg';
+import extrasCornerBrIcon from '../../assets/images/experiment/extras-corner-br.svg';
+import extrasLettersNone from '../../assets/images/experiment/extras-letters-default.svg';
+import extrasLettersTl from '../../assets/images/experiment/extras-letters-tl.svg';
+import extrasLettersTr from '../../assets/images/experiment/extras-letters-tr.svg';
+import extrasLettersBl from '../../assets/images/experiment/extras-letters-bl.svg';
+import extrasLettersBr from '../../assets/images/experiment/extras-letters-br.svg';
 
 /* Every offset below is the element's centre, read directly off the Figma
    frame (2560x1664) as (centre - frame-centre). Positioning items this way
@@ -96,12 +111,12 @@ type Thing = { src: string; x: number; y: number; w: number; h: number; rot?: nu
 
 const THINGS: Thing[] = [
   { src: meThing1, x: 37, y: 235, w: 159, h: 163, delay: 0 },
-  { src: meThing2, x: 35, y: 342, w: 239, h: 177, delay: 40 },
+  { src: meThing2, x: 35, y: 342, w: 239, h: 165, delay: 40 },
   { src: meThing3, x: 163.8, y: 425, w: 124, h: 124, rot: 10.78, delay: 80 },
   { src: meThing4, x: 248, y: 356, w: 210, h: 212, delay: 20 },
-  { src: meThing5, x: 373, y: 325.4, w: 231, h: 231, rot: -21.55, delay: 60 },
-  { src: meThing6, x: 0, y: 165.3, w: 311, h: 311, rot: -32.32, delay: 100 },
-  { src: meThing7, x: 135, y: 0, w: 218, h: 218, delay: 30 },
+  { src: meThing5, x: 373, y: 325.4, w: 215, h: 238, rot: -21.55, delay: 60 },
+  { src: meThing6, x: -10, y: 10, w: 150, h: 190, rot: -32.32, delay: 100 },
+  { src: meThing7, x: 135, y: 0, w: 218, h: 197, delay: 30 },
 ];
 
 function MeAndContact() {
@@ -146,6 +161,45 @@ function MeAndContact() {
   );
 }
 
+type Quadrant = 'none' | 'tl' | 'tr' | 'bl' | 'br';
+
+const EXTRAS_LETTERS: Record<Quadrant, string> = {
+  none: extrasLettersNone,
+  tl: extrasLettersTl,
+  tr: extrasLettersTr,
+  bl: extrasLettersBl,
+  br: extrasLettersBr,
+};
+
+function ExtrasCard() {
+  const [quadrant, setQuadrant] = useState<Quadrant>('none');
+
+  function handleMove(event: ReactMouseEvent<HTMLDivElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const relX = (event.clientX - rect.left) / rect.width;
+    const relY = (event.clientY - rect.top) / rect.height;
+    setQuadrant(relX < 0.5 ? (relY < 0.5 ? 'tl' : 'bl') : relY < 0.5 ? 'tr' : 'br');
+  }
+
+  return (
+    <div
+      className={styles.extrasCard}
+      data-hover={quadrant !== 'none'}
+      onMouseMove={handleMove}
+      onMouseLeave={() => setQuadrant('none')}
+      tabIndex={0}
+    >
+      <div className={styles.extrasBg} />
+      <p className={styles.extrasCornerTL}>A</p>
+      <img src={extrasCornerTlIcon} alt="" className={styles.extrasIconTL} />
+      <p className={styles.extrasCornerBR}>A</p>
+      <img src={extrasCornerBrIcon} alt="" className={styles.extrasIconBR} />
+      <img src={extrasHeart} alt="" className={styles.extrasHeart} />
+      <img src={EXTRAS_LETTERS[quadrant]} alt="Extras" className={styles.extrasLetters} />
+    </div>
+  );
+}
+
 export default function ExperimentContent() {
   return (
     <>
@@ -179,7 +233,7 @@ export default function ExperimentContent() {
 
       <Positioned dx={-644.61} dy={-142.21}>
         <div className={styles.photobooth}>
-          <img src={photoboothIcon} alt="Photobooth" />
+          <img src={photoboothPhoto} alt="Photobooth" className={styles.photoboothImg} />
         </div>
       </Positioned>
 
@@ -229,6 +283,10 @@ export default function ExperimentContent() {
 
       <Positioned dx={658.36} dy={447.53}>
         <Letter />
+      </Positioned>
+
+      <Positioned dx={566.37} dy={-494.02}>
+        <ExtrasCard />
       </Positioned>
     </>
   );
