@@ -250,7 +250,7 @@ export default function ExperimentContent() {
               Product feels like an interesting place to be right now. Technology keeps getting easier to build with,
               and somehow that makes it harder to build well, because the people using it are changing just as fast
               as the tools are. I don't think you can fully understand any of that from the outside. So I like to
-              keep making small things just to see how they hold up when someone actually uses them.
+              keep making small things just to keep evoling, experimenting and growing.
             </p>
             <p>This page is where a few of those attempts live of how I tried to learn.</p>
           </div>
