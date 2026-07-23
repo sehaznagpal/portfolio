@@ -41,7 +41,7 @@ const CHESS_URL = 'https://chess-portfolio-lime.vercel.app';
 const REWIRED_URL = 'https://www.re-wired.tech';
 const LINKEDIN_URL = 'https://www.linkedin.com/in/sehaznagpal';
 
-const CONTACT_SUBJECT = 'Loved your portfolio';
+const CONTACT_SUBJECT = 'Re-directed from your portfolio';
 const CONTACT_BODY =
   "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
 /* Gmail's web compose URL, not a mailto: link — mailto: hands off to whatever
