@@ -15,7 +15,7 @@ const NORMAL_ZOOM = 1;
    footprint, or the far corners (chess, sip studio) would become unreachable
    by panning. */
 const WORLD_MULTIPLIER = 1.65;
-const CONTENT_WIDTH = 1950;
+const CONTENT_WIDTH = 2300;
 const CONTENT_HEIGHT = 1380;
 /* Map view's zoom is derived from the world size on every resize (see
    updateWorld below) rather than a flat constant, so "zoom out" always frames

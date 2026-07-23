@@ -289,7 +289,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={710.8} dy={369.21}>
+      <Positioned dx={1050} dy={369.21}>
         <Letter />
       </Positioned>
 
