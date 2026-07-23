@@ -8,7 +8,15 @@ import styles from './ExperimentCanvas.module.css';
 
 type Mode = 'normal' | 'map';
 
-const NORMAL_ZOOM = 1;
+/* The whole content tree (every card/icon/text in ExperimentContent) is
+   authored in fixed px sizes and positions tuned to look right at this
+   viewport — a typical Mac-size window. Normal view's baseline zoom is
+   scaled from that reference on every resize (see updateWorld below), so the
+   entire canvas grows or shrinks like one flat image instead of the canvas
+   area expanding while the content stays pinned at its native pixel size
+   (which is what made larger screens look increasingly sparse). */
+const REFERENCE_WIDTH = 1440;
+const REFERENCE_HEIGHT = 900;
 /* World is sized relative to the viewport so there's room to pan around in
    Normal view. Kept modest (rather than a flat 2x) so Normal view doesn't
    read as mostly empty grid — but never smaller than the content's own
@@ -35,6 +43,7 @@ export default function ExperimentCanvas() {
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [animating, setAnimating] = useState(false);
   const [mapZoom, setMapZoom] = useState(0.4);
+  const [baseScale, setBaseScale] = useState(1);
 
   /* Refs mirror the latest state for the native wheel listener below, which
      is attached once and would otherwise close over stale values. */
@@ -42,6 +51,7 @@ export default function ExperimentCanvas() {
   const panRef = useRef(pan);
   const worldRef = useRef({ w: 0, h: 0 });
   const mapZoomRef = useRef(mapZoom);
+  const baseScaleRef = useRef(baseScale);
   const animationTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
@@ -54,6 +64,10 @@ export default function ExperimentCanvas() {
 
   useEffect(() => {
     function updateWorld() {
+      const scale = Math.min(window.innerWidth / REFERENCE_WIDTH, window.innerHeight / REFERENCE_HEIGHT);
+      baseScaleRef.current = scale;
+      setBaseScale(scale);
+
       const w = Math.max(window.innerWidth * WORLD_MULTIPLIER, CONTENT_WIDTH);
       const h = Math.max(window.innerHeight * WORLD_MULTIPLIER, CONTENT_HEIGHT);
       worldRef.current = { w, h };
@@ -83,7 +97,7 @@ export default function ExperimentCanvas() {
   /* Converts a viewport-space point (e.g. cursor or click position) into
      world-space, using whichever mode/pan/zoom is currently active. */
   function focalWorldPoint(clientX: number, clientY: number) {
-    const zoom = modeRef.current === 'map' ? mapZoomRef.current : NORMAL_ZOOM;
+    const zoom = modeRef.current === 'map' ? mapZoomRef.current : baseScaleRef.current;
     const screenX = clientX - window.innerWidth / 2;
     const screenY = clientY - window.innerHeight / 2;
     return {
@@ -101,7 +115,10 @@ export default function ExperimentCanvas() {
 
   function returnToNormal(focal: { x: number; y: number }) {
     if (modeRef.current === 'normal') return;
-    const next = clampPan({ x: -focal.x * NORMAL_ZOOM, y: -focal.y * NORMAL_ZOOM }, NORMAL_ZOOM);
+    const next = clampPan(
+      { x: -focal.x * baseScaleRef.current, y: -focal.y * baseScaleRef.current },
+      baseScaleRef.current,
+    );
     setMode('normal');
     setPan(next);
     triggerAnimation();
@@ -133,7 +150,10 @@ export default function ExperimentCanvas() {
       if (modeRef.current !== 'normal') return;
       const lineFactor = event.deltaMode === 1 ? 16 : 1;
       setPan((prev) =>
-        clampPan({ x: prev.x - event.deltaX * lineFactor, y: prev.y - event.deltaY * lineFactor }, NORMAL_ZOOM),
+        clampPan(
+          { x: prev.x - event.deltaX * lineFactor, y: prev.y - event.deltaY * lineFactor },
+          baseScaleRef.current,
+        ),
       );
     }
 
@@ -146,7 +166,7 @@ export default function ExperimentCanvas() {
     returnToNormal(focalWorldPoint(event.clientX, event.clientY));
   }
 
-  const zoom = mode === 'map' ? mapZoom : NORMAL_ZOOM;
+  const zoom = mode === 'map' ? mapZoom : baseScale;
   const layerClass = animating ? `${styles.animated}` : '';
 
   return (
