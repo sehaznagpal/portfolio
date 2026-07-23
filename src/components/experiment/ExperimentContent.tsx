@@ -114,14 +114,17 @@ function Letter() {
 
 type Thing = { src: string; x: number; y: number; w: number; h: number; rot?: number; delay?: number };
 
+/* Sizes are 85% of their previous scale (a 15% reduction); x/y are shifted by
+   half the size delta so each item's centre — and therefore the ring they
+   form around the photo — stays exactly where it was before the shrink. */
 const THINGS: Thing[] = [
-  { src: meThing1, x: 37, y: 235, w: 159, h: 163, delay: 0 },
-  { src: meThing2, x: 60, y: 367, w: 192, h: 134, delay: 40 },
-  { src: meThing3, x: 163.8, y: 425, w: 124, h: 124, rot: 10.78, delay: 80 },
-  { src: meThing4, x: 248, y: 356, w: 210, h: 212, delay: 20 },
-  { src: meThing5, x: 396, y: 283, w: 185, h: 185, rot: -21.55, delay: 60 },
-  { src: meThing6, x: 75, y: 107, w: 182, h: 198, rot: -32.32, delay: 100 },
-  { src: meThing7, x: 178, y: 38, w: 157, h: 142, delay: 30 },
+  { src: meThing1, x: 48.93, y: 247.23, w: 135.15, h: 138.55, delay: 0 },
+  { src: meThing2, x: 74.4, y: 377.05, w: 163.2, h: 113.9, delay: 40 },
+  { src: meThing3, x: 173.1, y: 434.3, w: 105.4, h: 105.4, rot: 10.78, delay: 80 },
+  { src: meThing4, x: 263.75, y: 371.9, w: 178.5, h: 180.2, delay: 20 },
+  { src: meThing5, x: 409.88, y: 296.88, w: 157.25, h: 157.25, rot: -21.55, delay: 60 },
+  { src: meThing6, x: 88.65, y: 121.85, w: 154.7, h: 168.3, rot: -32.32, delay: 100 },
+  { src: meThing7, x: 189.78, y: 48.65, w: 133.45, h: 120.7, delay: 30 },
 ];
 
 function MeAndContact() {
@@ -236,7 +239,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={-600} dy={-136.81}>
+      <Positioned dx={-744} dy={-136.81}>
         <div className={styles.photobooth}>
           <img src={photoboothPhoto} alt="Photobooth" className={styles.photoboothImg} />
         </div>
@@ -256,7 +259,7 @@ export default function ExperimentContent() {
 
       <MeAndContact />
 
-      <Positioned dx={100} dy={-320.79}>
+      <Positioned dx={200.8} dy={-365.79}>
         <div className={styles.website} tabIndex={0}>
           <div className={styles.websiteFlip}>
             <img src={starCard} alt="" className={styles.starImg} />
@@ -269,7 +272,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={-290} dy={-412.5}>
+      <Positioned dx={-333.2} dy={-439.5}>
         <div className={styles.motionDemo} tabIndex={0}>
           <div className={styles.disc}>
             <img src={discImg} alt="" />
@@ -286,11 +289,11 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={610} dy={369.21}>
+      <Positioned dx={710.8} dy={369.21}>
         <Letter />
       </Positioned>
 
-      <Positioned dx={530} dy={-413.43}>
+      <Positioned dx={674} dy={-413.43}>
         <ExtrasCard />
       </Positioned>
     </>
