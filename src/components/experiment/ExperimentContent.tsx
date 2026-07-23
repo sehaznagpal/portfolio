@@ -8,6 +8,8 @@ import {
   type ReactNode,
 } from 'react';
 import styles from './ExperimentContent.module.css';
+import SipStudioModal from './SipStudioModal';
+import ExtrasModal from './ExtrasModal';
 
 import chessCircle from '../../assets/images/experiment/chess-circle.svg';
 import chessPieces from '../../assets/images/experiment/chess-pieces.svg';
@@ -259,7 +261,7 @@ const EXTRAS_LETTERS: Record<Quadrant, { src: string; className: string }> = {
   br: { src: extrasLettersBr, className: styles.extrasLettersBr },
 };
 
-function ExtrasCard() {
+function ExtrasCard({ onOpen }: { onOpen: () => void }) {
   const [quadrant, setQuadrant] = useState<Quadrant>('none');
   const letters = EXTRAS_LETTERS[quadrant];
 
@@ -276,6 +278,16 @@ function ExtrasCard() {
       onMouseMove={handleMove}
       onMouseLeave={() => setQuadrant('none')}
       tabIndex={0}
+      role="button"
+      aria-haspopup="dialog"
+      aria-label="Extras — a few small illustrations"
+      onClick={onOpen}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onOpen();
+        }
+      }}
     >
       <div className={styles.extrasBg} />
       <img src={extrasALetter} alt="" className={styles.extrasCornerTL} />
@@ -289,6 +301,9 @@ function ExtrasCard() {
 }
 
 export default function ExperimentContent() {
+  const [sipModalOpen, setSipModalOpen] = useState(false);
+  const [extrasModalOpen, setExtrasModalOpen] = useState(false);
+
   return (
     <>
       <Positioned dx={0} dy={0}>
@@ -338,7 +353,20 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={-750} dy={270.69}>
-        <div className={styles.sipStudio} tabIndex={0}>
+        <div
+          className={styles.sipStudio}
+          tabIndex={0}
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="SiP Studio — a branding project"
+          onClick={() => setSipModalOpen(true)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              setSipModalOpen(true);
+            }
+          }}
+        >
           <div className={styles.sipCloud}>
             <img src={sipCloud} alt="" />
           </div>
@@ -348,6 +376,9 @@ export default function ExperimentContent() {
           </div>
         </div>
       </Positioned>
+
+      <SipStudioModal open={sipModalOpen} onClose={() => setSipModalOpen(false)} />
+      <ExtrasModal open={extrasModalOpen} onClose={() => setExtrasModalOpen(false)} />
 
       <MeAndContact />
 
@@ -405,7 +436,7 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={530} dy={-413.43}>
-        <ExtrasCard />
+        <ExtrasCard onOpen={() => setExtrasModalOpen(true)} />
       </Positioned>
     </>
   );
