@@ -52,6 +52,10 @@ function Positioned({ dx, dy, children }: { dx: number; dy: number; children: Re
   );
 }
 
+/* Gated on an actual scroll/pan gesture, not just passive visibility — the
+   canvas can easily load with this element already inside the viewport, and
+   without the scroll gate the reveal would fire immediately on mount instead
+   of when the user actually scrolls it into view. */
 function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
@@ -59,17 +63,37 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    let hasScrolled = false;
+    let isIntersecting = false;
+
+    function reveal() {
+      if (hasScrolled && isIntersecting) {
+        setInView(true);
+        cleanup();
+      }
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
+        isIntersecting = entry.isIntersecting;
+        reveal();
       },
       { threshold },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+
+    function handleScroll() {
+      hasScrolled = true;
+      reveal();
+    }
+    window.addEventListener('wheel', handleScroll, { passive: true });
+
+    function cleanup() {
+      observer.disconnect();
+      window.removeEventListener('wheel', handleScroll);
+    }
+    return cleanup;
   }, [threshold]);
 
   return { ref, inView };
@@ -289,7 +313,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={1050} dy={369.21}>
+      <Positioned dx={710.8} dy={369.21}>
         <Letter />
       </Positioned>
 
