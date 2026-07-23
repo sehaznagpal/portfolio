@@ -8,7 +8,8 @@ import {
 } from 'react';
 import styles from './ExperimentContent.module.css';
 
-import chessIcon from '../../assets/images/experiment/chess-icon.svg';
+import chessCircle from '../../assets/images/experiment/chess-circle.svg';
+import chessPieces from '../../assets/images/experiment/chess-pieces.svg';
 import photoboothPhoto from '../../assets/images/experiment/photobooth-photo.png';
 import sipBadge from '../../assets/images/experiment/sip-badge-hover.svg';
 import sipCloud from '../../assets/images/experiment/sip-bg-hover.svg';
@@ -250,7 +251,7 @@ export default function ExperimentContent() {
               Product feels like an interesting place to be right now. Technology keeps getting easier to build with,
               and somehow that makes it harder to build well, because the people using it are changing just as fast
               as the tools are. I don't think you can fully understand any of that from the outside. So I like to
-              keep making small things just to keep evoling, experimenting and growing.
+              keep making small things just to keep evoling, learning and growing.
             </p>
             <p>This page is where a few of those attempts live of how I tried to learn.</p>
           </div>
@@ -258,18 +259,23 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={800} dy={-76.41}>
-        <div className={styles.chess}>
-          <img src={chessIcon} alt="Chess" />
+        <div className={styles.chess} tabIndex={0}>
+          <div className={styles.chessMask}>
+            <img src={chessCircle} alt="" className={styles.chessCircle} />
+          </div>
+          <img src={chessPieces} alt="" className={styles.chessPieces} />
+          <p className={styles.chessLabel}>Chess</p>
+          <p className={styles.chessBody}>Vibe-Coded Project to understand how server and client</p>
         </div>
       </Positioned>
 
       <Positioned dx={-744} dy={-136.81}>
-        <div className={styles.photobooth}>
+        <div className={styles.photobooth} tabIndex={0}>
           <img src={photoboothPhoto} alt="Photobooth" className={styles.photoboothImg} />
         </div>
       </Positioned>
 
-      <Positioned dx={-750} dy={180.69}>
+      <Positioned dx={-750} dy={270.69}>
         <div className={styles.sipStudio} tabIndex={0}>
           <div className={styles.sipCloud}>
             <img src={sipCloud} alt="" />
@@ -283,15 +289,27 @@ export default function ExperimentContent() {
 
       <MeAndContact />
 
-      <Positioned dx={200.8} dy={-365.79}>
+      <Positioned dx={128.8} dy={-365.79}>
         <div className={styles.website} tabIndex={0}>
           <div className={styles.websiteFlip}>
-            <img src={starCard} alt="" className={styles.starImg} />
-            <p className={styles.websiteLabel}>
-              re-wired
-              <br />
-              website
-            </p>
+            <div className={`${styles.cardFace} ${styles.cardFront}`}>
+              <img src={starCard} alt="" className={styles.starImg} />
+              <p className={styles.websiteLabel}>
+                re-wired
+                <br />
+                website
+              </p>
+            </div>
+            <div className={`${styles.cardFace} ${styles.cardBack}`}>
+              <img src={starCard} alt="" className={styles.starImg} />
+              <p className={styles.websiteBackLabel}>
+                web design
+                <br />
+                project for an
+                <br />
+                agency
+              </p>
+            </div>
           </div>
         </div>
       </Positioned>
@@ -317,7 +335,7 @@ export default function ExperimentContent() {
         <Letter />
       </Positioned>
 
-      <Positioned dx={674} dy={-413.43}>
+      <Positioned dx={602} dy={-413.43}>
         <ExtrasCard />
       </Positioned>
     </>

@@ -88,20 +88,90 @@
   margin-bottom: 0;
 }
 
-/* ---------- Chess / Photobooth: static icons, no hover ---------- */
+/* ---------- Chess: pieces rise + label slides out on hover ---------- */
 
 .chess {
+  position: relative;
   width: 282px;
   height: 282px;
+  filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.4));
+}
+
+.chessMask {
+  position: absolute;
+  inset: 0;
   border-radius: 9999px;
   overflow: hidden;
 }
 
-.chess img {
+.chessCircle {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
+
+.chessPieces {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(0);
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chess:hover .chessPieces,
+.chess:focus-within .chessPieces {
+  transform: translateY(-60px);
+}
+
+.chessLabel {
+  position: absolute;
+  top: 182px;
+  left: 68px;
+  width: 117px;
+  margin: 0;
+  text-align: center;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-style: italic;
+  font-size: 57.8px;
+  line-height: 1;
+  letter-spacing: -4.63px;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+  white-space: nowrap;
+  transition: left 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chess:hover .chessLabel,
+.chess:focus-within .chessLabel {
+  left: -22px;
+}
+
+.chessBody {
+  position: absolute;
+  top: 163px;
+  left: 103px;
+  width: 148px;
+  margin: 0;
+  text-align: center;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 20px;
+  line-height: 0.8;
+  letter-spacing: -0.4px;
+  color: #121212;
+  opacity: 0;
+  transition: opacity 280ms ease 120ms;
+}
+
+.chess:hover .chessBody,
+.chess:focus-within .chessBody {
+  opacity: 1;
+}
+
+/* ---------- Photobooth: quick pop on hover ---------- */
 
 .photobooth {
   width: 325px;
@@ -114,7 +184,27 @@
 .photoboothImg {
   width: 300px;
   height: auto;
-  transform: rotate(-6.84deg);
+  transform: rotate(-6.84deg) scale(1);
+}
+
+.photobooth:hover .photoboothImg,
+.photobooth:focus-within .photoboothImg {
+  animation: photoPop 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes photoPop {
+  0% {
+    transform: rotate(-6.84deg) scale(1);
+  }
+  35% {
+    transform: rotate(-6.84deg) scale(0.94);
+  }
+  65% {
+    transform: rotate(-6.84deg) scale(1.07);
+  }
+  100% {
+    transform: rotate(-6.84deg) scale(1);
+  }
 }
 
 /* ---------- SiP Studio branding badge ---------- */
@@ -298,7 +388,7 @@
   height: 30px;
 }
 
-/* ---------- Re-wired website: quick flip on hover ---------- */
+/* ---------- Re-wired website: flips to a second face, holds, flips back ---------- */
 
 .website {
   width: 302px;
@@ -315,22 +405,40 @@
 
 .website:hover .websiteFlip,
 .website:focus-within .websiteFlip {
-  animation: quickFlip 560ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  animation: flipPause 1600ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
-@keyframes quickFlip {
+/* Quick flip in (~350ms), a full second holding on the back face so the
+   copy there is actually readable, then a quick flip back (~250ms). */
+@keyframes flipPause {
   0% {
     transform: rotateY(0deg) scale(1);
   }
-  45% {
-    transform: rotateY(190deg) scale(1.04);
+  12% {
+    transform: rotateY(95deg) scale(1.05);
   }
-  75% {
-    transform: rotateY(345deg) scale(0.98);
+  21.875% {
+    transform: rotateY(180deg) scale(1);
+  }
+  84.375% {
+    transform: rotateY(180deg) scale(1);
+  }
+  93% {
+    transform: rotateY(280deg) scale(1.05);
   }
   100% {
     transform: rotateY(360deg) scale(1);
   }
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.cardBack {
+  transform: rotateY(180deg);
 }
 
 .starImg {
@@ -355,6 +463,22 @@
   letter-spacing: -3px;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
+}
+
+.websiteBackLabel {
+  position: absolute;
+  top: 128px;
+  left: 80px;
+  width: 141px;
+  margin: 0;
+  text-align: center;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 22px;
+  line-height: 0.85;
+  letter-spacing: -0.88px;
+  color: #fefefe;
 }
 
 /* ---------- Re-wired motion graphic demo: disc slides in ---------- */
