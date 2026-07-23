@@ -335,7 +335,7 @@ export default function ExperimentContent() {
         <Letter />
       </Positioned>
 
-      <Positioned dx={602} dy={-413.43}>
+      <Positioned dx={530} dy={-413.43}>
         <ExtrasCard />
       </Positioned>
     </>
