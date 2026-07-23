@@ -9,10 +9,10 @@
 .centerCard {
   position: relative;
   width: 569px;
-  height: 356px;
+  height: 286px;
   background: #fefefe;
   border: 1px solid #046b56;
-  padding: 36px 32px 0;
+  padding: 36px;
   box-sizing: border-box;
 }
 
@@ -239,7 +239,7 @@
 .thing img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .meWrap:hover .thing,
@@ -263,15 +263,15 @@
   position: absolute;
   left: 50%;
   top: 8px;
-  width: 300px;
+  width: 310px;
   margin: 0;
   text-align: center;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-medium);
   font-style: italic;
-  font-size: 78px;
+  font-size: 94.6px;
   line-height: 1;
-  letter-spacing: -6.24px;
+  letter-spacing: -7.57px;
   color: #121212;
   font-feature-settings: 'salt' 1;
   transform: translateX(-50%) rotate(-5.27deg);
@@ -280,7 +280,7 @@
 
 .contactName {
   position: absolute;
-  left: 17px;
+  right: 129px;
   top: 127px;
   margin: 0;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
@@ -460,11 +460,6 @@
   height: 326px;
   transform: rotate(8.36deg);
   filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.4));
-  transition: filter 200ms ease;
-}
-
-.extrasCard[data-hover='true'] {
-  filter: none;
 }
 
 .extrasBg {
@@ -473,38 +468,23 @@
   background: #121212;
   border: 2px solid #fefefe;
   border-radius: 12px;
-  transition: border-radius 200ms ease;
-}
-
-.extrasCard[data-hover='true'] .extrasBg {
-  border-radius: 15px;
 }
 
 .extrasCornerTL,
 .extrasCornerBR {
   position: absolute;
-  margin: 0;
-  font-family: Georgia, serif;
-  color: #fefefe;
-  font-size: 27px;
-  line-height: 1;
-  text-transform: uppercase;
-  transition: font-size 200ms ease;
-}
-
-.extrasCard[data-hover='true'] .extrasCornerTL,
-.extrasCard[data-hover='true'] .extrasCornerBR {
-  font-size: 34px;
+  width: 13.94%;
+  height: 11.38%;
 }
 
 .extrasCornerTL {
-  top: 4.9%;
-  left: 1.6%;
+  top: 4.92%;
+  left: 1.57%;
 }
 
 .extrasCornerBR {
-  bottom: 4.6%;
-  right: 1.5%;
+  bottom: 4.63%;
+  right: 1.54%;
   transform: rotate(180deg);
 }
 
@@ -534,10 +514,44 @@
   height: 57.7%;
 }
 
+/* Each quadrant's letter artwork keeps its own exact Figma inset — sharing
+   one box across all five caused "T" to spill past the heart's edge for
+   whichever variant wasn't designed for that box. */
 .extrasLetters {
   position: absolute;
-  top: 24.6%;
-  left: 17.1%;
-  width: 61.9%;
-  height: 48.3%;
+}
+
+.extrasLettersNone {
+  top: 24.58%;
+  left: 17.12%;
+  width: 61.89%;
+  height: 48.32%;
+}
+
+.extrasLettersTl {
+  top: 24.58%;
+  left: 16.18%;
+  width: 62.83%;
+  height: 48.32%;
+}
+
+.extrasLettersTr {
+  top: 25.69%;
+  left: 17.12%;
+  width: 62.81%;
+  height: 47.21%;
+}
+
+.extrasLettersBl {
+  top: 24.58%;
+  left: 18.26%;
+  width: 60.75%;
+  height: 48.35%;
+}
+
+.extrasLettersBr {
+  top: 24.58%;
+  left: 17.12%;
+  width: 64%;
+  height: 48.32%;
 }

@@ -8,7 +8,7 @@ import {
 } from 'react';
 import styles from './ExperimentContent.module.css';
 
-import chessIcon from '../../assets/images/experiment/chess-icon.png';
+import chessIcon from '../../assets/images/experiment/chess-icon.svg';
 import photoboothPhoto from '../../assets/images/experiment/photobooth-photo.png';
 import sipBadge from '../../assets/images/experiment/sip-badge-hover.svg';
 import sipCloud from '../../assets/images/experiment/sip-bg-hover.svg';
@@ -26,6 +26,7 @@ import mailIcon from '../../assets/images/experiment/mail-icon.svg';
 import starCard from '../../assets/images/experiment/star-card.svg';
 import discImg from '../../assets/images/experiment/disc.png';
 import extrasHeart from '../../assets/images/experiment/extras-heart.svg';
+import extrasALetter from '../../assets/images/experiment/extras-a-letter.svg';
 import extrasCornerTlIcon from '../../assets/images/experiment/extras-corner-tl.svg';
 import extrasCornerBrIcon from '../../assets/images/experiment/extras-corner-br.svg';
 import extrasLettersNone from '../../assets/images/experiment/extras-letters-default.svg';
@@ -111,12 +112,12 @@ type Thing = { src: string; x: number; y: number; w: number; h: number; rot?: nu
 
 const THINGS: Thing[] = [
   { src: meThing1, x: 37, y: 235, w: 159, h: 163, delay: 0 },
-  { src: meThing2, x: 35, y: 342, w: 239, h: 165, delay: 40 },
+  { src: meThing2, x: 60, y: 367, w: 192, h: 134, delay: 40 },
   { src: meThing3, x: 163.8, y: 425, w: 124, h: 124, rot: 10.78, delay: 80 },
   { src: meThing4, x: 248, y: 356, w: 210, h: 212, delay: 20 },
-  { src: meThing5, x: 373, y: 325.4, w: 215, h: 238, rot: -21.55, delay: 60 },
-  { src: meThing6, x: -10, y: 10, w: 150, h: 190, rot: -32.32, delay: 100 },
-  { src: meThing7, x: 135, y: 0, w: 218, h: 197, delay: 30 },
+  { src: meThing5, x: 396, y: 283, w: 185, h: 185, rot: -21.55, delay: 60 },
+  { src: meThing6, x: 75, y: 107, w: 182, h: 198, rot: -32.32, delay: 100 },
+  { src: meThing7, x: 178, y: 38, w: 157, h: 142, delay: 30 },
 ];
 
 function MeAndContact() {
@@ -163,16 +164,17 @@ function MeAndContact() {
 
 type Quadrant = 'none' | 'tl' | 'tr' | 'bl' | 'br';
 
-const EXTRAS_LETTERS: Record<Quadrant, string> = {
-  none: extrasLettersNone,
-  tl: extrasLettersTl,
-  tr: extrasLettersTr,
-  bl: extrasLettersBl,
-  br: extrasLettersBr,
+const EXTRAS_LETTERS: Record<Quadrant, { src: string; className: string }> = {
+  none: { src: extrasLettersNone, className: styles.extrasLettersNone },
+  tl: { src: extrasLettersTl, className: styles.extrasLettersTl },
+  tr: { src: extrasLettersTr, className: styles.extrasLettersTr },
+  bl: { src: extrasLettersBl, className: styles.extrasLettersBl },
+  br: { src: extrasLettersBr, className: styles.extrasLettersBr },
 };
 
 function ExtrasCard() {
   const [quadrant, setQuadrant] = useState<Quadrant>('none');
+  const letters = EXTRAS_LETTERS[quadrant];
 
   function handleMove(event: ReactMouseEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -184,18 +186,17 @@ function ExtrasCard() {
   return (
     <div
       className={styles.extrasCard}
-      data-hover={quadrant !== 'none'}
       onMouseMove={handleMove}
       onMouseLeave={() => setQuadrant('none')}
       tabIndex={0}
     >
       <div className={styles.extrasBg} />
-      <p className={styles.extrasCornerTL}>A</p>
+      <img src={extrasALetter} alt="" className={styles.extrasCornerTL} />
       <img src={extrasCornerTlIcon} alt="" className={styles.extrasIconTL} />
-      <p className={styles.extrasCornerBR}>A</p>
+      <img src={extrasALetter} alt="" className={styles.extrasCornerBR} />
       <img src={extrasCornerBrIcon} alt="" className={styles.extrasIconBR} />
       <img src={extrasHeart} alt="" className={styles.extrasHeart} />
-      <img src={EXTRAS_LETTERS[quadrant]} alt="Extras" className={styles.extrasLetters} />
+      <img src={letters.src} alt="Extras" className={`${styles.extrasLetters} ${letters.className}`} />
     </div>
   );
 }

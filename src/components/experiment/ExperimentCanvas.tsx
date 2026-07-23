@@ -9,11 +9,19 @@ import styles from './ExperimentCanvas.module.css';
 type Mode = 'normal' | 'map';
 
 const NORMAL_ZOOM = 1;
-const MAP_ZOOM = 0.4;
 /* World is sized relative to the viewport so there's room to pan around in
-   Normal view, while comfortably fitting entirely on-screen at MAP_ZOOM —
-   that's what makes Map view read as a full overview rather than a partial one. */
-const WORLD_MULTIPLIER = 2.2;
+   Normal view. Kept modest (rather than a flat 2x) so Normal view doesn't
+   read as mostly empty grid — but never smaller than the content's own
+   footprint, or the far corners (chess, sip studio) would become unreachable
+   by panning. */
+const WORLD_MULTIPLIER = 1.75;
+const CONTENT_WIDTH = 2100;
+const CONTENT_HEIGHT = 1700;
+/* Map view's zoom is derived from the world size on every resize (see
+   updateWorld below) rather than a flat constant, so "zoom out" always frames
+   the full world with a consistent margin instead of sometimes leaving it
+   mostly empty and sometimes clipping it, depending on viewport size. */
+const MAP_FIT_MARGIN = 0.92;
 const ANIMATION_MS = 400;
 
 function clamp(value: number, min: number, max: number) {
@@ -26,12 +34,14 @@ export default function ExperimentCanvas() {
   const [mode, setMode] = useState<Mode>('normal');
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [animating, setAnimating] = useState(false);
+  const [mapZoom, setMapZoom] = useState(0.4);
 
   /* Refs mirror the latest state for the native wheel listener below, which
      is attached once and would otherwise close over stale values. */
   const modeRef = useRef(mode);
   const panRef = useRef(pan);
   const worldRef = useRef({ w: 0, h: 0 });
+  const mapZoomRef = useRef(mapZoom);
   const animationTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
@@ -44,10 +54,13 @@ export default function ExperimentCanvas() {
 
   useEffect(() => {
     function updateWorld() {
-      worldRef.current = {
-        w: window.innerWidth * WORLD_MULTIPLIER,
-        h: window.innerHeight * WORLD_MULTIPLIER,
-      };
+      const w = Math.max(window.innerWidth * WORLD_MULTIPLIER, CONTENT_WIDTH);
+      const h = Math.max(window.innerHeight * WORLD_MULTIPLIER, CONTENT_HEIGHT);
+      worldRef.current = { w, h };
+
+      const fitZoom = Math.min(window.innerWidth / w, window.innerHeight / h) * MAP_FIT_MARGIN;
+      mapZoomRef.current = fitZoom;
+      setMapZoom(fitZoom);
     }
     updateWorld();
     window.addEventListener('resize', updateWorld);
@@ -70,7 +83,7 @@ export default function ExperimentCanvas() {
   /* Converts a viewport-space point (e.g. cursor or click position) into
      world-space, using whichever mode/pan/zoom is currently active. */
   function focalWorldPoint(clientX: number, clientY: number) {
-    const zoom = modeRef.current === 'map' ? MAP_ZOOM : NORMAL_ZOOM;
+    const zoom = modeRef.current === 'map' ? mapZoomRef.current : NORMAL_ZOOM;
     const screenX = clientX - window.innerWidth / 2;
     const screenY = clientY - window.innerHeight / 2;
     return {
@@ -133,7 +146,7 @@ export default function ExperimentCanvas() {
     returnToNormal(focalWorldPoint(event.clientX, event.clientY));
   }
 
-  const zoom = mode === 'map' ? MAP_ZOOM : NORMAL_ZOOM;
+  const zoom = mode === 'map' ? mapZoom : NORMAL_ZOOM;
   const layerClass = animating ? `${styles.animated}` : '';
 
   return (
