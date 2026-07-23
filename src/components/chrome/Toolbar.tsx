@@ -9,7 +9,10 @@ const CV_URL = `https://drive.google.com/uc?export=download&id=${CV_FILE_ID}`;
 const MAIL_SUBJECT = 'Loved your portfolio';
 const MAIL_BODY =
   "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
-const MAILTO = `mailto:sehaznagpal@gmail.com?subject=${encodeURIComponent(MAIL_SUBJECT)}&body=${encodeURIComponent(MAIL_BODY)}`;
+/* Gmail's web compose URL, not a mailto: link — mailto: hands off to whatever
+   mail client is registered on the OS (often an empty native Mail app), while
+   this always opens the pre-filled draft in Gmail on the web. */
+const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=sehaznagpal@gmail.com&su=${encodeURIComponent(MAIL_SUBJECT)}&body=${encodeURIComponent(MAIL_BODY)}`;
 
 type IconKey = 'home' | 'lab' | 'contact' | 'cv';
 
@@ -57,7 +60,13 @@ export default function Toolbar() {
       </div>
 
       <div {...slotProps('contact')}>
-        <a className={iconClass('contact')} aria-label="Contact" href={MAILTO}>
+        <a
+          className={iconClass('contact')}
+          aria-label="Contact"
+          href={GMAIL_COMPOSE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Mail size={18} strokeWidth={1.75} />
         </a>
         {renderBadge('contact', 'Contact')}

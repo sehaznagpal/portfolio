@@ -95,6 +95,7 @@
   width: 282px;
   height: 282px;
   filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.4));
+  cursor: pointer;
 }
 
 .chessMask {
@@ -388,12 +389,18 @@
   height: 30px;
 }
 
+.contactIcon img {
+  width: 100%;
+  height: 100%;
+}
+
 /* ---------- Re-wired website: flips to a second face, holds, flips back ---------- */
 
 .website {
   width: 302px;
   height: 302px;
   perspective: 900px;
+  cursor: pointer;
 }
 
 .websiteFlip {

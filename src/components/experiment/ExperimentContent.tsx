@@ -3,6 +3,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
 } from 'react';
@@ -35,6 +36,33 @@ import extrasLettersTl from '../../assets/images/experiment/extras-letters-tl.sv
 import extrasLettersTr from '../../assets/images/experiment/extras-letters-tr.svg';
 import extrasLettersBl from '../../assets/images/experiment/extras-letters-bl.svg';
 import extrasLettersBr from '../../assets/images/experiment/extras-letters-br.svg';
+
+const CHESS_URL = 'https://chess-portfolio-lime.vercel.app';
+const REWIRED_URL = 'https://www.re-wired.tech';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/sehaznagpal';
+
+const CONTACT_SUBJECT = 'Loved your portfolio';
+const CONTACT_BODY =
+  "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
+/* Gmail's web compose URL, not a mailto: link — mailto: hands off to whatever
+   mail client is registered on the OS (often an empty native Mail app), while
+   this always opens the pre-filled draft in Gmail on the web. */
+const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=sehaznagpal@gmail.com&su=${encodeURIComponent(CONTACT_SUBJECT)}&body=${encodeURIComponent(CONTACT_BODY)}`;
+const WHATSAPP_URL = `https://wa.me/919971159640?text=${encodeURIComponent(CONTACT_BODY)}`;
+
+/* Chess and the re-wired star are div-based (not <a>) so their existing hover
+   choreography keeps working untouched; click/keyboard just navigates on top
+   of that same element. */
+function openInNewTab(url: string) {
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function handleLinkKeyDown(event: ReactKeyboardEvent, url: string) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    openInNewTab(url);
+  }
+}
 
 /* Every offset below is the element's centre-from-page-centre. Originally
    read off the Figma frame (2560x1664), then pulled in toward the center
@@ -185,9 +213,36 @@ function MeAndContact() {
         <div className={styles.contactCard}>
           <p className={styles.contactHeading}>Say hello!</p>
           <p className={styles.contactName}>Sehaz Nagpal</p>
-          <img src={linkedinIcon} alt="LinkedIn" className={styles.contactIcon} style={{ left: 219 }} />
-          <img src={mailIcon} alt="Email" className={styles.contactIcon} style={{ left: 252 }} />
-          <img src={phoneIcon} alt="Phone" className={styles.contactIcon} style={{ left: 285 }} />
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className={styles.contactIcon}
+            style={{ left: 219 }}
+          >
+            <img src={linkedinIcon} alt="" />
+          </a>
+          <a
+            href={GMAIL_COMPOSE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Email"
+            className={styles.contactIcon}
+            style={{ left: 252 }}
+          >
+            <img src={mailIcon} alt="" />
+          </a>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            className={styles.contactIcon}
+            style={{ left: 285 }}
+          >
+            <img src={phoneIcon} alt="" />
+          </a>
         </div>
       </Positioned>
     </>
@@ -259,7 +314,14 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={800} dy={-76.41}>
-        <div className={styles.chess} tabIndex={0}>
+        <div
+          className={styles.chess}
+          tabIndex={0}
+          role="link"
+          aria-label="Chess — view project"
+          onClick={() => openInNewTab(CHESS_URL)}
+          onKeyDown={(event) => handleLinkKeyDown(event, CHESS_URL)}
+        >
           <div className={styles.chessMask}>
             <img src={chessCircle} alt="" className={styles.chessCircle} />
           </div>
@@ -290,7 +352,14 @@ export default function ExperimentContent() {
       <MeAndContact />
 
       <Positioned dx={128.8} dy={-365.79}>
-        <div className={styles.website} tabIndex={0}>
+        <div
+          className={styles.website}
+          tabIndex={0}
+          role="link"
+          aria-label="Re-wired website — view project"
+          onClick={() => openInNewTab(REWIRED_URL)}
+          onKeyDown={(event) => handleLinkKeyDown(event, REWIRED_URL)}
+        >
           <div className={styles.websiteFlip}>
             <div className={`${styles.cardFace} ${styles.cardFront}`}>
               <img src={starCard} alt="" className={styles.starImg} />
