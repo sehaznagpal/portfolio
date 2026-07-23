@@ -9,7 +9,20 @@ export default function TopRight() {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [shareState, setShareState] = useState<ShareState>('idle');
+  const [pulsing, setPulsing] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+
+  /* Nudges attention toward the theme toggle every 5s by replaying its hover
+     spin on its own — a separate transient class rather than a permanently
+     running animation, so normal :hover behavior is untouched the rest of
+     the time. */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPulsing(true);
+      setTimeout(() => setPulsing(false), 600);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (!open && shareState !== 'manual') return;
@@ -89,7 +102,7 @@ export default function TopRight() {
         </button>
         <button
           type="button"
-          className={styles.themeToggle}
+          className={`${styles.themeToggle} ${pulsing ? styles.pulse : ''}`}
           aria-label="Change theme"
           aria-haspopup="true"
           aria-expanded={open}
