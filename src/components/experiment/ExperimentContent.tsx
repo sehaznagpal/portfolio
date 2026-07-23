@@ -35,10 +35,14 @@ import extrasLettersTr from '../../assets/images/experiment/extras-letters-tr.sv
 import extrasLettersBl from '../../assets/images/experiment/extras-letters-bl.svg';
 import extrasLettersBr from '../../assets/images/experiment/extras-letters-br.svg';
 
-/* Every offset below is the element's centre, read directly off the Figma
-   frame (2560x1664) as (centre - frame-centre). Positioning items this way
-   means the layout matches the reference pixel-for-pixel regardless of the
-   canvas's own pan/zoom, since the whole tree scales together. */
+/* Every offset below is the element's centre-from-page-centre. Originally
+   read off the Figma frame (2560x1664), then pulled in toward the center
+   card and re-spread horizontally to fill the 1.65x canvas without any
+   two elements overlapping (the "say hello" card and photo cluster are the
+   one deliberate exception — their gap matches the original design exactly).
+   No element's own size changes here, only its position. Positioning items
+   this way means panning/zooming just scales the whole tree together, with
+   no per-element recalculation needed. */
 function Positioned({ dx, dy, children }: { dx: number; dy: number; children: ReactNode }) {
   const style: CSSProperties = { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))` };
   return (
@@ -123,7 +127,7 @@ const THINGS: Thing[] = [
 function MeAndContact() {
   return (
     <>
-      <Positioned dx={-398.03} dy={530.42}>
+      <Positioned dx={-245} dy={437.6}>
         <div className={styles.meWrap}>
           {THINGS.map((thing, i) => (
             <div
@@ -149,7 +153,7 @@ function MeAndContact() {
         </div>
       </Positioned>
 
-      <Positioned dx={-146} dy={406.5}>
+      <Positioned dx={7.03} dy={335.36}>
         <div className={styles.contactCard}>
           <p className={styles.contactHeading}>Say hello!</p>
           <p className={styles.contactName}>Sehaz Nagpal</p>
@@ -226,19 +230,19 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={859} dy={-140}>
+      <Positioned dx={800} dy={-76.41}>
         <div className={styles.chess}>
           <img src={chessIcon} alt="Chess" />
         </div>
       </Positioned>
 
-      <Positioned dx={-644.61} dy={-142.21}>
+      <Positioned dx={-600} dy={-136.81}>
         <div className={styles.photobooth}>
           <img src={photoboothPhoto} alt="Photobooth" className={styles.photoboothImg} />
         </div>
       </Positioned>
 
-      <Positioned dx={-826.12} dy={195.41}>
+      <Positioned dx={-750} dy={180.69}>
         <div className={styles.sipStudio} tabIndex={0}>
           <div className={styles.sipCloud}>
             <img src={sipCloud} alt="" />
@@ -252,7 +256,7 @@ export default function ExperimentContent() {
 
       <MeAndContact />
 
-      <Positioned dx={106.16} dy={-388.84}>
+      <Positioned dx={100} dy={-320.79}>
         <div className={styles.website} tabIndex={0}>
           <div className={styles.websiteFlip}>
             <img src={starCard} alt="" className={styles.starImg} />
@@ -265,7 +269,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={-319.5} dy={-500}>
+      <Positioned dx={-290} dy={-412.5}>
         <div className={styles.motionDemo} tabIndex={0}>
           <div className={styles.disc}>
             <img src={discImg} alt="" />
@@ -282,11 +286,11 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={658.36} dy={447.53}>
+      <Positioned dx={610} dy={369.21}>
         <Letter />
       </Positioned>
 
-      <Positioned dx={566.37} dy={-494.02}>
+      <Positioned dx={530} dy={-413.43}>
         <ExtrasCard />
       </Positioned>
     </>

@@ -14,9 +14,9 @@ const NORMAL_ZOOM = 1;
    read as mostly empty grid — but never smaller than the content's own
    footprint, or the far corners (chess, sip studio) would become unreachable
    by panning. */
-const WORLD_MULTIPLIER = 1.75;
-const CONTENT_WIDTH = 2100;
-const CONTENT_HEIGHT = 1700;
+const WORLD_MULTIPLIER = 1.65;
+const CONTENT_WIDTH = 1950;
+const CONTENT_HEIGHT = 1380;
 /* Map view's zoom is derived from the world size on every resize (see
    updateWorld below) rather than a flat constant, so "zoom out" always frames
    the full world with a consistent margin instead of sometimes leaving it
