@@ -10,6 +10,8 @@ import {
 import styles from './ExperimentContent.module.css';
 import SipStudioModal from './SipStudioModal';
 import ExtrasModal from './ExtrasModal';
+import MotionDemoModal from './MotionDemoModal';
+import PhotoboothModal from './PhotoboothModal';
 
 import chessCircle from '../../assets/images/experiment/chess-circle.svg';
 import chessPieces from '../../assets/images/experiment/chess-pieces.svg';
@@ -303,6 +305,8 @@ function ExtrasCard({ onOpen }: { onOpen: () => void }) {
 export default function ExperimentContent() {
   const [sipModalOpen, setSipModalOpen] = useState(false);
   const [extrasModalOpen, setExtrasModalOpen] = useState(false);
+  const [motionModalOpen, setMotionModalOpen] = useState(false);
+  const [photoboothModalOpen, setPhotoboothModalOpen] = useState(false);
 
   return (
     <>
@@ -347,7 +351,20 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={-744} dy={-136.81}>
-        <div className={styles.photobooth} tabIndex={0}>
+        <div
+          className={styles.photobooth}
+          tabIndex={0}
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Photobooth — open camera"
+          onClick={() => setPhotoboothModalOpen(true)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              setPhotoboothModalOpen(true);
+            }
+          }}
+        >
           <img src={photoboothPhoto} alt="Photobooth" className={styles.photoboothImg} />
         </div>
       </Positioned>
@@ -379,6 +396,8 @@ export default function ExperimentContent() {
 
       <SipStudioModal open={sipModalOpen} onClose={() => setSipModalOpen(false)} />
       <ExtrasModal open={extrasModalOpen} onClose={() => setExtrasModalOpen(false)} />
+      <MotionDemoModal open={motionModalOpen} onClose={() => setMotionModalOpen(false)} />
+      <PhotoboothModal open={photoboothModalOpen} onClose={() => setPhotoboothModalOpen(false)} />
 
       <MeAndContact />
 
@@ -415,7 +434,20 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={-333.2} dy={-439.5}>
-        <div className={styles.motionDemo} tabIndex={0}>
+        <div
+          className={styles.motionDemo}
+          tabIndex={0}
+          role="button"
+          aria-haspopup="dialog"
+          aria-label="Motion Graphic Demo — watch video"
+          onClick={() => setMotionModalOpen(true)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              setMotionModalOpen(true);
+            }
+          }}
+        >
           <div className={styles.disc}>
             <img src={discImg} alt="" />
           </div>

@@ -1,0 +1,94 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 18, 16, 0.4);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+  padding: 4vh 4vw;
+}
+
+.overlayVisible {
+  opacity: 1;
+}
+
+.frame {
+  position: relative;
+  width: min(880px, 92vw);
+  background: #121212;
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transform: scale(0.94) translateY(10px);
+  opacity: 0;
+  transition:
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 220ms ease-out;
+}
+
+.frameVisible {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(243, 241, 237, 0.15);
+  color: #f3f1ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.closeButton:hover {
+  background: rgba(243, 241, 237, 0.28);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.footer {
+  padding: 14px 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tag {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(243, 241, 237, 0.1);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 12px;
+  color: #f3f1ed;
+}
+
+@media (max-width: 640px) {
+  .frame {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .tag {
+    font-size: 11px;
+  }
+}
