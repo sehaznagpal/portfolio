@@ -41,9 +41,9 @@ function buildStrip(frames: Frame[]): HTMLCanvasElement {
   });
 
   ctx.fillStyle = '#121212';
-  ctx.font = `bold ${Math.round(fw * 0.038)}px serif`;
+  ctx.font = `bold ${Math.round(fw * 0.032)}px serif`;
   ctx.textAlign = 'center';
-  ctx.fillText('Smile Please!', strip.width / 2, strip.height - 16);
+  ctx.fillText('@sehaznagpal portfolio', strip.width / 2, strip.height - 16);
 
   return strip;
 }
@@ -103,7 +103,6 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
     if (open) {
       setRendered(true);
       const raf = requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
-      requestCamera();
       return () => cancelAnimationFrame(raf);
     }
     if (rendered) {
@@ -121,6 +120,16 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
+
+  /* Requesting the camera from a `rendered`-gated effect (rather than
+     inline in the `open` effect above) guarantees the <video> element has
+     actually committed to the DOM first — otherwise a fast-resolving
+     getUserMedia call can beat React's render commit and find
+     videoRef.current still null. */
+  useEffect(() => {
+    if (rendered) requestCamera();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rendered]);
 
   useEffect(() => {
     if (!rendered) return;

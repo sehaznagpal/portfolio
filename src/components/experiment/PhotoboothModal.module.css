@@ -71,7 +71,10 @@
   letter-spacing: -0.04em;
   color: #121212;
   font-feature-settings: 'salt' 1;
-  padding-right: 40px;
+  /* Clears the close button (top:16/right:16/36px) sitting in the same
+     corner — a few px short of matching the photos column's edge exactly
+     would put the text under the button. */
+  padding-right: 10px;
 }
 
 .contentGrid {
@@ -243,7 +246,7 @@
 }
 
 .headingSubtitle {
-  margin: 24px 0 0;
+  margin: 4px 0 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-size: 48px;
