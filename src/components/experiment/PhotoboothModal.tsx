@@ -228,61 +228,49 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
 
         <p className={styles.permissionNote}>*ensure you have given camera permission</p>
 
-        <div className={styles.mainRow}>
-          <div className={styles.cameraCol}>
-            <div className={styles.cameraArea}>
-              <video ref={videoRef} className={styles.video} autoPlay playsInline muted />
-              {countdown !== null && <div className={styles.countdownOverlay}>{countdown}</div>}
-              <div className={`${styles.flashOverlay} ${flash ? styles.flashActive : ''}`} />
+        <div className={styles.contentGrid}>
+          <div className={styles.cameraArea}>
+            <video ref={videoRef} className={styles.video} autoPlay playsInline muted />
+            {countdown !== null && <div className={styles.countdownOverlay}>{countdown}</div>}
+            <div className={`${styles.flashOverlay} ${flash ? styles.flashActive : ''}`} />
 
-              <div className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`} />
-              <div className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`} />
+            <div className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`} />
+            <div className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`} />
 
-              {!curtainOpen && (
-                <button
-                  type="button"
-                  className={styles.clickToBegin}
-                  onClick={handleClickToBegin}
-                  aria-label="Click to begin — take 4 photos"
-                >
-                  Click to Begin
-                </button>
-              )}
-            </div>
-
-            <div className={styles.heading}>
-              <p className={styles.headingTitle}>
-                <span className={styles.headingItalic}>Smile</span> Please!
-              </p>
-              <p className={styles.headingSubtitle}>Capture yourself authentically.</p>
-            </div>
+            {!curtainOpen && (
+              <button
+                type="button"
+                className={styles.clickToBegin}
+                onClick={handleClickToBegin}
+                aria-label="Click to begin — take 4 photos"
+              >
+                Click to Begin
+              </button>
+            )}
           </div>
 
-          <div className={styles.sideCol}>
-            <div className={styles.thumbs}>
-              {thumbs.map((src, i) => (
-                <div className={styles.thumb} key={i}>
-                  {src && <img src={src} alt={`Shot ${i + 1}`} />}
-                </div>
-              ))}
-            </div>
+          <div className={styles.thumbs}>
+            {thumbs.map((src, i) => (
+              <div className={styles.thumb} key={i}>
+                {src && <img src={src} alt={`Shot ${i + 1}`} />}
+              </div>
+            ))}
+          </div>
 
-            <button
-              type="button"
-              className={styles.downloadButton}
-              onClick={handleDownload}
-              disabled={!done}
-            >
+          <div className={styles.heading}>
+            <p className={styles.headingTitle}>
+              <span className={styles.headingItalic}>Smile</span> <span className={styles.headingMedium}>Please!</span>
+            </p>
+            <p className={styles.headingSubtitle}>Capture yourself authentically.</p>
+          </div>
+
+          <div className={styles.actions}>
+            <button type="button" className={styles.downloadButton} onClick={handleDownload} disabled={!done}>
               Download
             </button>
-            <button
-              type="button"
-              className={`${styles.tryAgainButton} ${done ? styles.tryAgainVisible : ''}`}
-              onClick={handleTryAgain}
-            >
+            <button type="button" className={styles.tryAgainButton} onClick={handleTryAgain}>
               Try Again
             </button>
-
             <p className={styles.statusMsg}>{statusMsg}</p>
           </div>
         </div>
