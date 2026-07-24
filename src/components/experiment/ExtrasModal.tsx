@@ -39,6 +39,10 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
   const [rendered, setRendered] = useState(open);
   const [visible, setVisible] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
+  /* Remembers where the carousel was scrolled to across closes/reopens —
+     the track's own DOM node (and its scrollLeft) is torn down each time
+     the modal unmounts, so the position has to live outside it. */
+  const scrollPosRef = useRef(0);
 
   useEffect(() => {
     if (open) {
@@ -56,6 +60,24 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
 
   useEffect(() => {
     if (!rendered) return;
+    /* Re-applied across several frames rather than once — the track's
+       scrollWidth isn't reliably final on the very first frame (images are
+       still decoding/laying out), so a single assignment can get silently
+       clamped back to 0 before the real width is known. Runs independently
+       of the fade/scale reveal so the open animation itself stays snappy. */
+    let frame: ReturnType<typeof requestAnimationFrame>;
+    let attempts = 0;
+    function restoreScroll() {
+      if (trackRef.current) trackRef.current.scrollLeft = scrollPosRef.current;
+      attempts += 1;
+      if (attempts < 10) frame = requestAnimationFrame(restoreScroll);
+    }
+    frame = requestAnimationFrame(restoreScroll);
+    return () => cancelAnimationFrame(frame);
+  }, [rendered]);
+
+  useEffect(() => {
+    if (!rendered) return;
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') onClose();
     }
@@ -69,6 +91,10 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
     const el = trackRef.current;
     if (!el) return;
     el.scrollLeft += Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+  }
+
+  function handleScroll() {
+    if (trackRef.current) scrollPosRef.current = trackRef.current.scrollLeft;
   }
 
   function scrollByCard(direction: 1 | -1) {
@@ -109,7 +135,7 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
           <ChevronRight size={20} strokeWidth={1.75} />
         </button>
 
-        <div className={styles.track} ref={trackRef} onWheel={handleWheel}>
+        <div className={styles.track} ref={trackRef} onWheel={handleWheel} onScroll={handleScroll}>
           {CARDS.map((card) => (
             <div key={card.alt} className={styles.card}>
               <img src={card.src} alt={card.alt} />

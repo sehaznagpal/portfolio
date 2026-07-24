@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Pencil, Mail, Download } from 'lucide-react';
 import styles from './ExperimentToolbar.module.css';
@@ -15,7 +15,11 @@ const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=sehazna
 
 type IconKey = 'home' | 'lab' | 'contact' | 'cv';
 
-export default function ExperimentToolbar() {
+/* Fixed viewport chrome — memoized so it never re-renders as
+   ExperimentCanvas's pan/zoom state changes on every wheel tick; it takes
+   no props, so its own hover state is the only thing that should trigger
+   a re-render. */
+function ExperimentToolbar() {
   const [hovered, setHovered] = useState<IconKey | null>(null);
 
   function slotProps(key: IconKey) {
@@ -86,3 +90,5 @@ export default function ExperimentToolbar() {
     </div>
   );
 }
+
+export default memo(ExperimentToolbar);

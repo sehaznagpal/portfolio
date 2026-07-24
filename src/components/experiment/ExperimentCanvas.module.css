@@ -39,12 +39,14 @@
 .panLayer {
   position: absolute;
   inset: 0;
+  will-change: transform;
 }
 
 .zoomLayer {
   position: absolute;
   inset: 0;
   transform-origin: center center;
+  will-change: transform;
 }
 
 .animated {

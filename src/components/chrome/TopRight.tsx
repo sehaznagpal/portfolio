@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { useTheme, THEME_OPTIONS } from '../../state/ThemeContext';
 import avatar from '../../assets/images/chrome/avatar.jpg';
 import styles from './TopRight.module.css';
 
 type ShareState = 'idle' | 'copied' | 'manual';
 
-export default function TopRight() {
+/* Fixed viewport chrome — memoized so it never re-renders as
+   ExperimentCanvas's pan/zoom state changes on every wheel tick; it takes
+   no props, so its own state/context subscriptions are the only things
+   that should trigger a re-render. */
+function TopRight() {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [shareState, setShareState] = useState<ShareState>('idle');
@@ -159,3 +163,5 @@ export default function TopRight() {
     </div>
   );
 }
+
+export default memo(TopRight);
