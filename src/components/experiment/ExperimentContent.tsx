@@ -116,9 +116,15 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
     );
     observer.observe(el);
 
-    function handleScroll() {
-      hasScrolled = true;
-      reveal();
+    function handleScroll(event: WheelEvent) {
+      // Only arms the reveal when the gesture actually heads toward the
+      // letter (bottom-right of the canvas) — a purely leftward/upward
+      // scroll shouldn't trigger it before the user has panned anywhere
+      // near it.
+      if (event.deltaX > 0 || event.deltaY > 0) {
+        hasScrolled = true;
+        reveal();
+      }
     }
     window.addEventListener('wheel', handleScroll, { passive: true });
 
