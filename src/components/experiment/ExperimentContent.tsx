@@ -117,11 +117,14 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
     observer.observe(el);
 
     function handleScroll(event: WheelEvent) {
-      // Only arms the reveal when the gesture actually heads toward the
-      // letter (bottom-right of the canvas) — a purely leftward/upward
-      // scroll shouldn't trigger it before the user has panned anywhere
-      // near it.
-      if (event.deltaX > 0 || event.deltaY > 0) {
+      // Only arms the reveal when the gesture's dominant axis heads toward
+      // the letter (bottom-right of the canvas). Checking either axis in
+      // isolation is too permissive — real trackpad gestures always carry
+      // a bit of cross-axis noise, so a purely leftward swipe still emits
+      // events with a tiny incidental positive deltaY that would otherwise
+      // satisfy the check on its own.
+      const dominant = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (dominant > 0) {
         hasScrolled = true;
         reveal();
       }
