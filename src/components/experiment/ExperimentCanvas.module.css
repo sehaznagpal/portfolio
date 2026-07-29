@@ -61,6 +61,17 @@
   height: 300vh;
 }
 
+/* Mobile's grid is rendered as its own fixed, unscaled layer instead of
+   living inside .zoomLayer (see ExperimentCanvas.tsx) — a repeating pattern
+   is visually identical whether or not it pans with the content (every cell
+   looks the same), so this sidesteps compensating the tile size against a
+   live `scale()` transform, which was producing an uneven/non-square grid
+   from compounding calc()/rasterization rounding on real devices. */
+.mobileGridLayer {
+  position: absolute;
+  inset: 0;
+}
+
 .anchor {
   position: absolute;
   inset: 0;

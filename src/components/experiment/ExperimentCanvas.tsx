@@ -32,12 +32,9 @@ const CONTENT_HEIGHT = 1380;
    mobile's baseline past that fit — desktop is untouched since it's only
    ever applied when isMobile. */
 const MOBILE_ZOOM_BOOST = 1.9;
-/* Grid line spacing is authored in world-space (see .viewport's
-   --grid-line-spacing) and would otherwise shrink right along with mobile's
-   much smaller baseScale, rendering as a dense, cramped mesh instead of the
-   coarser grid the Figma reference shows. Compensating by 1/zoom (mobile
-   only, below) keeps the rendered cell size constant regardless of
-   viewport/zoom. */
+/* Mobile's grid renders in its own fixed, unscaled layer (.mobileGridLayer)
+   rather than inside .zoomLayer like desktop's, so this is a plain screen-px
+   value — no compensation against the live zoom needed. */
 const MOBILE_GRID_SPACING_PX = 40;
 /* Map view's zoom is derived from the world size on every resize (see
    updateWorld below) rather than a flat constant, so "zoom out" always frames
@@ -249,6 +246,12 @@ export default function ExperimentCanvas() {
       {/* Wheel/click handlers live on this surface only — not on .viewport
           itself — so interaction with the chrome pills below (siblings, not
           descendants of this element) is never intercepted. */}
+      {isMobile && (
+        <div
+          className={`${styles.mobileGridLayer} grid-background`}
+          style={{ ['--grid-line-spacing' as string]: `${MOBILE_GRID_SPACING_PX}px` }}
+        />
+      )}
       <div
         ref={surfaceRef}
         className={styles.interactionSurface}
@@ -257,26 +260,19 @@ export default function ExperimentCanvas() {
       >
         <div className={`${styles.panLayer} ${layerClass}`} style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
           <div className={`${styles.zoomLayer} ${layerClass}`} style={{ transform: `scale(${zoom})` }}>
-            <div
-              className={`${styles.gridLayer} grid-background`}
-              style={{
-                /* Sized in world-space so the rendered (post-scale) grid
-                   always covers a constant 300vw/300vh of actual screen —
-                   at low zoom (e.g. mobile's much smaller baseScale) a flat
-                   300vw/300vh here would shrink along with everything else
-                   inside .zoomLayer and leave the plain canvas background
-                   exposed around the edges. */
-                width: `calc(300vw / ${zoom})`,
-                height: `calc(300vh / ${zoom})`,
-                left: `calc(-100vw / ${zoom})`,
-                top: `calc(-100vh / ${zoom})`,
-                /* Mobile-only: keep the grid's rendered cell size constant
-                   (see MOBILE_GRID_SPACING_PX above) instead of shrinking
-                   with baseScale. Left unset on desktop so it falls back to
-                   .viewport's static --grid-line-spacing, unchanged. */
-                ...(isMobile ? { ['--grid-line-spacing' as string]: `calc(${MOBILE_GRID_SPACING_PX}px / ${zoom})` } : {}),
-              }}
-            />
+            {!isMobile && (
+              <div
+                className={`${styles.gridLayer} grid-background`}
+                style={{
+                  /* Sized in world-space so the rendered (post-scale) grid
+                     always covers a constant 300vw/300vh of actual screen. */
+                  width: `calc(300vw / ${zoom})`,
+                  height: `calc(300vh / ${zoom})`,
+                  left: `calc(-100vw / ${zoom})`,
+                  top: `calc(-100vh / ${zoom})`,
+                }}
+              />
+            )}
             <div className={styles.anchor}>
               <ExperimentContent />
             </div>
