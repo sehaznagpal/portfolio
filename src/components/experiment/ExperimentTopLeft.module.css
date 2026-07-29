@@ -12,6 +12,15 @@
   transition: opacity 150ms ease;
 }
 
+/* Mobile drops this pill entirely (matching the Figma mobile reference,
+   which has no back-to-home affordance up top) so Share can take the
+   centered top spot on its own. */
+@media (max-width: 767px) {
+  .pill {
+    display: none;
+  }
+}
+
 .pill:hover {
   opacity: 0.85;
 }

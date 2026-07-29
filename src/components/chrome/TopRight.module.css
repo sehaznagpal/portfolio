@@ -15,6 +15,18 @@
   justify-content: center;
 }
 
+/* This component is only ever used on the Experiment page's canvas, so this
+   is safe to scope here directly rather than via a prop. On mobile the
+   Portfolio pill (top-left) is hidden entirely, so Share moves to the
+   centered top spot the Figma mobile reference shows it in. */
+@media (max-width: 767px) {
+  .pill {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}
+
 .pillOpen {
   width: 175px;
 }

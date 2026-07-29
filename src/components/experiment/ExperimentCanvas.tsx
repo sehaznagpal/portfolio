@@ -26,6 +26,19 @@ const REFERENCE_HEIGHT = 900;
 const WORLD_MULTIPLIER = 1.65;
 const CONTENT_WIDTH = 1950;
 const CONTENT_HEIGHT = 1380;
+/* Mobile's raw fit-to-viewport scale renders everything much smaller than
+   the Figma mobile reference, which shows cards/icons at a deliberately
+   larger, more zoomed-in size than an exact 1440x900 fit gives. This boosts
+   mobile's baseline past that fit — desktop is untouched since it's only
+   ever applied when isMobile. */
+const MOBILE_ZOOM_BOOST = 1.9;
+/* Grid line spacing is authored in world-space (see .viewport's
+   --grid-line-spacing) and would otherwise shrink right along with mobile's
+   much smaller baseScale, rendering as a dense, cramped mesh instead of the
+   coarser grid the Figma reference shows. Compensating by 1/zoom (mobile
+   only, below) keeps the rendered cell size constant regardless of
+   viewport/zoom. */
+const MOBILE_GRID_SPACING_PX = 40;
 /* Map view's zoom is derived from the world size on every resize (see
    updateWorld below) rather than a flat constant, so "zoom out" always frames
    the full world with a consistent margin instead of sometimes leaving it
@@ -71,7 +84,8 @@ export default function ExperimentCanvas() {
 
   useEffect(() => {
     function updateWorld() {
-      const scale = Math.min(window.innerWidth / REFERENCE_WIDTH, window.innerHeight / REFERENCE_HEIGHT);
+      const fitScale = Math.min(window.innerWidth / REFERENCE_WIDTH, window.innerHeight / REFERENCE_HEIGHT);
+      const scale = isMobileRef.current ? fitScale * MOBILE_ZOOM_BOOST : fitScale;
       baseScaleRef.current = scale;
       setBaseScale(scale);
 
@@ -256,6 +270,11 @@ export default function ExperimentCanvas() {
                 height: `calc(300vh / ${zoom})`,
                 left: `calc(-100vw / ${zoom})`,
                 top: `calc(-100vh / ${zoom})`,
+                /* Mobile-only: keep the grid's rendered cell size constant
+                   (see MOBILE_GRID_SPACING_PX above) instead of shrinking
+                   with baseScale. Left unset on desktop so it falls back to
+                   .viewport's static --grid-line-spacing, unchanged. */
+                ...(isMobile ? { ['--grid-line-spacing' as string]: `calc(${MOBILE_GRID_SPACING_PX}px / ${zoom})` } : {}),
               }}
             />
             <div className={styles.anchor}>

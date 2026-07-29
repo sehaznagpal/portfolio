@@ -132,9 +132,53 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
     }
     window.addEventListener('wheel', handleScroll, { passive: true });
 
+    /* Touch has no wheel events at all, so without this the letter could
+       never be revealed on mobile. ExperimentCanvas's touch panning drags
+       content WITH the finger (the opposite convention from wheel's
+       scroll-direction delta), so heading toward the letter here means the
+       finger moves up/left — a negative dominant delta, not positive. */
+    let touchId: number | null = null;
+    let lastX = 0;
+    let lastY = 0;
+
+    function handleTouchStart(event: TouchEvent) {
+      if (event.touches.length !== 1) return;
+      touchId = event.touches[0].identifier;
+      lastX = event.touches[0].clientX;
+      lastY = event.touches[0].clientY;
+    }
+
+    function handleTouchMove(event: TouchEvent) {
+      if (touchId === null) return;
+      const touch = Array.from(event.touches).find((t) => t.identifier === touchId);
+      if (!touch) return;
+      const dx = touch.clientX - lastX;
+      const dy = touch.clientY - lastY;
+      lastX = touch.clientX;
+      lastY = touch.clientY;
+      const dominant = Math.abs(dx) > Math.abs(dy) ? dx : dy;
+      if (dominant < 0) {
+        hasScrolled = true;
+        reveal();
+      }
+    }
+
+    function handleTouchEnd() {
+      touchId = null;
+    }
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+
     function cleanup() {
       observer.disconnect();
       window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchcancel', handleTouchEnd);
     }
     return cleanup;
   }, [threshold]);
