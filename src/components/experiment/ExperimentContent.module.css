@@ -122,7 +122,8 @@
 }
 
 .chess:hover .chessPieces,
-.chess:focus-within .chessPieces {
+.chess:focus-within .chessPieces,
+.chess.autoHover .chessPieces {
   transform: translateY(-60px);
 }
 
@@ -146,7 +147,8 @@
 }
 
 .chess:hover .chessLabel,
-.chess:focus-within .chessLabel {
+.chess:focus-within .chessLabel,
+.chess.autoHover .chessLabel {
   left: -22px;
 }
 
@@ -168,7 +170,8 @@
 }
 
 .chess:hover .chessBody,
-.chess:focus-within .chessBody {
+.chess:focus-within .chessBody,
+.chess.autoHover .chessBody {
   opacity: 1;
 }
 
@@ -189,7 +192,8 @@
 }
 
 .photobooth:hover .photoboothImg,
-.photobooth:focus-within .photoboothImg {
+.photobooth:focus-within .photoboothImg,
+.photobooth.autoHover .photoboothImg {
   animation: photoPop 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -266,19 +270,22 @@
 }
 
 .sipStudio:hover .sipCloud,
-.sipStudio:focus-within .sipCloud {
+.sipStudio:focus-within .sipCloud,
+.sipStudio.autoHover .sipCloud {
   opacity: 1;
   transform: scale(1);
 }
 
 .sipStudio:hover .sipLabel,
-.sipStudio:focus-within .sipLabel {
+.sipStudio:focus-within .sipLabel,
+.sipStudio.autoHover .sipLabel {
   opacity: 1;
   transform: translateY(0);
 }
 
 .sipStudio:hover .sipBadge,
-.sipStudio:focus-within .sipBadge {
+.sipStudio:focus-within .sipBadge,
+.sipStudio.autoHover .sipBadge {
   left: 87px;
   top: 91px;
 }
@@ -334,7 +341,8 @@
 }
 
 .meWrap:hover .thing,
-.meWrap:focus-within .thing {
+.meWrap:focus-within .thing,
+.meWrap.autoHover .thing {
   left: var(--tx);
   top: var(--ty);
   opacity: 1;
@@ -411,7 +419,8 @@
 }
 
 .website:hover .websiteFlip,
-.website:focus-within .websiteFlip {
+.website:focus-within .websiteFlip,
+.website.autoHover .websiteFlip {
   animation: flipPause 1600ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
@@ -539,7 +548,8 @@
 }
 
 .motionDemo:hover .disc,
-.motionDemo:focus-within .disc {
+.motionDemo:focus-within .disc,
+.motionDemo.autoHover .disc {
   transform: translateX(120px) rotate(220deg);
 }
 

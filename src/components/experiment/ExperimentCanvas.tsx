@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from 'react';
 import { useTheme } from '../../state/ThemeContext';
+import { useIsMobile } from '../../lib/useIsMobile';
 import TopRight from '../chrome/TopRight';
 import ExperimentTopLeft from './ExperimentTopLeft';
 import ExperimentToolbar from './ExperimentToolbar';
@@ -38,6 +39,7 @@ function clamp(value: number, min: number, max: number) {
 
 export default function ExperimentCanvas() {
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
   const surfaceRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<Mode>('normal');
   const [pan, setPan] = useState({ x: 0, y: 0 });
@@ -45,13 +47,14 @@ export default function ExperimentCanvas() {
   const [mapZoom, setMapZoom] = useState(0.4);
   const [baseScale, setBaseScale] = useState(1);
 
-  /* Refs mirror the latest state for the native wheel listener below, which
-     is attached once and would otherwise close over stale values. */
+  /* Refs mirror the latest state for the native wheel/touch listeners below,
+     which are attached once and would otherwise close over stale values. */
   const modeRef = useRef(mode);
   const panRef = useRef(pan);
   const worldRef = useRef({ w: 0, h: 0 });
   const mapZoomRef = useRef(mapZoom);
   const baseScaleRef = useRef(baseScale);
+  const isMobileRef = useRef(isMobile);
   const animationTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
@@ -61,6 +64,10 @@ export default function ExperimentCanvas() {
   useEffect(() => {
     panRef.current = pan;
   }, [pan]);
+
+  useEffect(() => {
+    isMobileRef.current = isMobile;
+  }, [isMobile]);
 
   useEffect(() => {
     function updateWorld() {
@@ -136,7 +143,10 @@ export default function ExperimentCanvas() {
     function handleWheel(event: WheelEvent) {
       event.preventDefault();
 
-      const isZoomGesture = event.ctrlKey || event.metaKey;
+      /* Zoom (map view) is a desktop-only affordance — on mobile only plain
+         panning is available, so a pinch/ctrl-scroll gesture is ignored
+         outright rather than ever entering map mode. */
+      const isZoomGesture = (event.ctrlKey || event.metaKey) && !isMobileRef.current;
       if (isZoomGesture) {
         if (event.deltaY > 0) {
           enterMapView();
@@ -161,6 +171,57 @@ export default function ExperimentCanvas() {
     return () => el.removeEventListener('wheel', handleWheel);
   }, []);
 
+  /* Touch panning — a direct drag-to-pan gesture (content follows the
+     finger), the touch equivalent of the plain-scroll branch above. Only
+     ever single-finger: a second touch joining mid-gesture is ignored
+     rather than translated into any pinch/zoom behavior, since map view is
+     intentionally unreachable on mobile (see handleWheel). */
+  useEffect(() => {
+    const el = surfaceRef.current;
+    if (!el) return;
+
+    let touchId: number | null = null;
+    let lastX = 0;
+    let lastY = 0;
+
+    function handleTouchStart(event: TouchEvent) {
+      if (modeRef.current !== 'normal' || touchId !== null || event.touches.length !== 1) return;
+      const touch = event.touches[0];
+      touchId = touch.identifier;
+      lastX = touch.clientX;
+      lastY = touch.clientY;
+    }
+
+    function handleTouchMove(event: TouchEvent) {
+      if (touchId === null) return;
+      const touch = Array.from(event.changedTouches).find((t) => t.identifier === touchId);
+      if (!touch) return;
+      event.preventDefault();
+      const dx = touch.clientX - lastX;
+      const dy = touch.clientY - lastY;
+      lastX = touch.clientX;
+      lastY = touch.clientY;
+      setPan((prev) => clampPan({ x: prev.x + dx, y: prev.y + dy }, baseScaleRef.current));
+    }
+
+    function handleTouchEnd(event: TouchEvent) {
+      if (touchId !== null && !Array.from(event.touches).some((t) => t.identifier === touchId)) {
+        touchId = null;
+      }
+    }
+
+    el.addEventListener('touchstart', handleTouchStart, { passive: true });
+    el.addEventListener('touchmove', handleTouchMove, { passive: false });
+    el.addEventListener('touchend', handleTouchEnd, { passive: true });
+    el.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+    return () => {
+      el.removeEventListener('touchstart', handleTouchStart);
+      el.removeEventListener('touchmove', handleTouchMove);
+      el.removeEventListener('touchend', handleTouchEnd);
+      el.removeEventListener('touchcancel', handleTouchEnd);
+    };
+  }, []);
+
   function handleClick(event: ReactMouseEvent<HTMLDivElement>) {
     if (modeRef.current !== 'map') return;
     returnToNormal(focalWorldPoint(event.clientX, event.clientY));
@@ -182,7 +243,21 @@ export default function ExperimentCanvas() {
       >
         <div className={`${styles.panLayer} ${layerClass}`} style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
           <div className={`${styles.zoomLayer} ${layerClass}`} style={{ transform: `scale(${zoom})` }}>
-            <div className={`${styles.gridLayer} grid-background`} />
+            <div
+              className={`${styles.gridLayer} grid-background`}
+              style={{
+                /* Sized in world-space so the rendered (post-scale) grid
+                   always covers a constant 300vw/300vh of actual screen —
+                   at low zoom (e.g. mobile's much smaller baseScale) a flat
+                   300vw/300vh here would shrink along with everything else
+                   inside .zoomLayer and leave the plain canvas background
+                   exposed around the edges. */
+                width: `calc(300vw / ${zoom})`,
+                height: `calc(300vh / ${zoom})`,
+                left: `calc(-100vw / ${zoom})`,
+                top: `calc(-100vh / ${zoom})`,
+              }}
+            />
             <div className={styles.anchor}>
               <ExperimentContent />
             </div>

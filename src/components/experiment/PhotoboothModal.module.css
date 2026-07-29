@@ -364,6 +364,10 @@
 
   .permissionNote {
     font-size: 13px;
+    /* The frame's own side padding shrinks a lot more than the close
+       button does at this width, so the button needs extra clearance
+       here to keep from overlapping the note's text. */
+    padding-right: 34px;
   }
 
   .downloadButton,

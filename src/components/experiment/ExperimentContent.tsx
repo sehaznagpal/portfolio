@@ -8,6 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import styles from './ExperimentContent.module.css';
+import { useIsMobile } from '../../lib/useIsMobile';
 import SipStudioModal from './SipStudioModal';
 import ExtrasModal from './ExtrasModal';
 import MotionDemoModal from './MotionDemoModal';
@@ -141,6 +142,40 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
   return { ref, inView };
 }
 
+/* Touch devices can't hover, so every hover-only reveal on this page would
+   otherwise never be seen on mobile. Instead, on mobile only, groups of 1-2
+   elements take turns playing their hover animation on a 5s rotation via a
+   shared `.autoHover` class (added alongside the existing :hover/:focus-within
+   selectors in the CSS, never replacing them) — desktop keeps pure :hover,
+   completely untouched. */
+const AUTO_HOVER_GROUPS: string[][] = [
+  ['chess', 'photobooth'],
+  ['sipStudio', 'website'],
+  ['motionDemo', 'meWrap'],
+  ['extras'],
+];
+const AUTO_HOVER_INTERVAL_MS = 5000;
+
+function useAutoHoverCycle(enabled: boolean) {
+  const [active, setActive] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    if (!enabled) {
+      setActive(new Set());
+      return;
+    }
+    let index = 0;
+    setActive(new Set(AUTO_HOVER_GROUPS[0]));
+    const interval = setInterval(() => {
+      index = (index + 1) % AUTO_HOVER_GROUPS.length;
+      setActive(new Set(AUTO_HOVER_GROUPS[index]));
+    }, AUTO_HOVER_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [enabled]);
+
+  return active;
+}
+
 const LETTER_TEXT = `Hey,
 I want to be a product designer who actually gets user experience right. I'm still early in this, and every project I take on is partly about the work and partly about learning something new.
 
@@ -193,11 +228,11 @@ const THINGS: Thing[] = [
   { src: meThing7, x: 189.78, y: 48.65, w: 133.45, h: 120.7, delay: 30 },
 ];
 
-function MeAndContact() {
+function MeAndContact({ meWrapAutoHover }: { meWrapAutoHover?: boolean }) {
   return (
     <>
       <Positioned dx={-245} dy={437.6}>
-        <div className={styles.meWrap}>
+        <div className={`${styles.meWrap} ${meWrapAutoHover ? styles.autoHover : ''}`}>
           {THINGS.map((thing, i) => (
             <div
               key={i}
@@ -272,9 +307,9 @@ const EXTRAS_LETTERS: Record<Quadrant, { src: string; className: string }> = {
   br: { src: extrasLettersBr, className: styles.extrasLettersBr },
 };
 
-function ExtrasCard({ onOpen }: { onOpen: () => void }) {
+function ExtrasCard({ onOpen, forceQuadrant }: { onOpen: () => void; forceQuadrant?: Quadrant }) {
   const [quadrant, setQuadrant] = useState<Quadrant>('none');
-  const letters = EXTRAS_LETTERS[quadrant];
+  const letters = EXTRAS_LETTERS[forceQuadrant ?? quadrant];
 
   function handleMove(event: ReactMouseEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -317,6 +352,10 @@ export default function ExperimentContent() {
   const [motionModalOpen, setMotionModalOpen] = useState(false);
   const [photoboothModalOpen, setPhotoboothModalOpen] = useState(false);
 
+  const isMobile = useIsMobile();
+  const autoHover = useAutoHoverCycle(isMobile);
+  const autoHoverClass = (key: string) => (autoHover.has(key) ? styles.autoHover : '');
+
   return (
     <>
       <Positioned dx={0} dy={0}>
@@ -343,7 +382,7 @@ export default function ExperimentContent() {
 
       <Positioned dx={800} dy={-76.41}>
         <div
-          className={styles.chess}
+          className={`${styles.chess} ${autoHoverClass('chess')}`}
           tabIndex={0}
           role="link"
           aria-label="Chess — view project"
@@ -361,7 +400,7 @@ export default function ExperimentContent() {
 
       <Positioned dx={-744} dy={-136.81}>
         <div
-          className={styles.photobooth}
+          className={`${styles.photobooth} ${autoHoverClass('photobooth')}`}
           tabIndex={0}
           role="button"
           aria-haspopup="dialog"
@@ -380,7 +419,7 @@ export default function ExperimentContent() {
 
       <Positioned dx={-750} dy={270.69}>
         <div
-          className={styles.sipStudio}
+          className={`${styles.sipStudio} ${autoHoverClass('sipStudio')}`}
           tabIndex={0}
           role="button"
           aria-haspopup="dialog"
@@ -408,11 +447,11 @@ export default function ExperimentContent() {
       <MotionDemoModal open={motionModalOpen} onClose={() => setMotionModalOpen(false)} />
       <PhotoboothModal open={photoboothModalOpen} onClose={() => setPhotoboothModalOpen(false)} />
 
-      <MeAndContact />
+      <MeAndContact meWrapAutoHover={autoHover.has('meWrap')} />
 
       <Positioned dx={128.8} dy={-365.79}>
         <div
-          className={styles.website}
+          className={`${styles.website} ${autoHoverClass('website')}`}
           tabIndex={0}
           role="link"
           aria-label="Re-wired website — view project"
@@ -444,7 +483,7 @@ export default function ExperimentContent() {
 
       <Positioned dx={-333.2} dy={-439.5}>
         <div
-          className={styles.motionDemo}
+          className={`${styles.motionDemo} ${autoHoverClass('motionDemo')}`}
           tabIndex={0}
           role="button"
           aria-haspopup="dialog"
@@ -477,7 +516,7 @@ export default function ExperimentContent() {
       </Positioned>
 
       <Positioned dx={530} dy={-413.43}>
-        <ExtrasCard onOpen={() => setExtrasModalOpen(true)} />
+        <ExtrasCard onOpen={() => setExtrasModalOpen(true)} forceQuadrant={autoHover.has('extras') ? 'tr' : undefined} />
       </Positioned>
     </>
   );
