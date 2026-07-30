@@ -195,7 +195,7 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
 const AUTO_HOVER_GROUPS: string[][] = [
   ['chess', 'photobooth'],
   ['sipStudio', 'website'],
-  ['motionDemo', 'meWrap'],
+  ['motionDemo', 'meWrap', 'contactCard'],
   ['extras'],
 ];
 const AUTO_HOVER_INTERVAL_MS = 5000;
@@ -272,7 +272,13 @@ const THINGS: Thing[] = [
   { src: meThing7, x: 189.78, y: 48.65, w: 133.45, h: 120.7, delay: 30 },
 ];
 
-function MeAndContact({ meWrapAutoHover }: { meWrapAutoHover?: boolean }) {
+function MeAndContact({
+  meWrapAutoHover,
+  contactAutoHover,
+}: {
+  meWrapAutoHover?: boolean;
+  contactAutoHover?: boolean;
+}) {
   return (
     <>
       <Positioned dx={-245} dy={437.6}>
@@ -301,40 +307,46 @@ function MeAndContact({ meWrapAutoHover }: { meWrapAutoHover?: boolean }) {
         </div>
       </Positioned>
 
-      <Positioned dx={7.03} dy={335.36}>
-        <div className={styles.contactCard}>
-          <p className={styles.contactHeading}>Say hello!</p>
-          <p className={styles.contactName}>Sehaz Nagpal</p>
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className={styles.contactIcon}
-            style={{ left: 219 }}
-          >
-            <img src={linkedinIcon} alt="" />
-          </a>
-          <a
-            href={GMAIL_COMPOSE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Email"
-            className={styles.contactIcon}
-            style={{ left: 252 }}
-          >
-            <img src={mailIcon} alt="" />
-          </a>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp"
-            className={styles.contactIcon}
-            style={{ left: 285 }}
-          >
-            <img src={phoneIcon} alt="" />
-          </a>
+      <Positioned dx={7.03} dy={299.86}>
+        <div className={`${styles.contactWrap} ${contactAutoHover ? styles.autoHover : ''}`}>
+          <div className={styles.helloTag}>
+            <p>Looking Forward to</p>
+            <p>connect with you!</p>
+          </div>
+          <div className={styles.contactCard}>
+            <p className={styles.contactHeading}>Say hello!</p>
+            <p className={styles.contactName}>Sehaz Nagpal</p>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className={styles.contactIcon}
+              style={{ left: 219 }}
+            >
+              <img src={linkedinIcon} alt="" />
+            </a>
+            <a
+              href={GMAIL_COMPOSE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Email"
+              className={styles.contactIcon}
+              style={{ left: 252 }}
+            >
+              <img src={mailIcon} alt="" />
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className={styles.contactIcon}
+              style={{ left: 285 }}
+            >
+              <img src={phoneIcon} alt="" />
+            </a>
+          </div>
         </div>
       </Positioned>
     </>
@@ -491,7 +503,7 @@ export default function ExperimentContent() {
       <MotionDemoModal open={motionModalOpen} onClose={() => setMotionModalOpen(false)} />
       <PhotoboothModal open={photoboothModalOpen} onClose={() => setPhotoboothModalOpen(false)} />
 
-      <MeAndContact meWrapAutoHover={autoHover.has('meWrap')} />
+      <MeAndContact meWrapAutoHover={autoHover.has('meWrap')} contactAutoHover={autoHover.has('contactCard')} />
 
       <Positioned dx={128.8} dy={-365.79}>
         <div

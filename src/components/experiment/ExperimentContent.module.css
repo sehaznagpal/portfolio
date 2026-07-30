@@ -396,8 +396,60 @@
   transform: rotate(var(--rot, 0deg)) scale(1);
 }
 
-.contactCard {
+/* ---------- Say hello: "looking forward" tag peeks out from behind on hover ---------- */
+
+.contactWrap {
   position: relative;
+  width: 332px;
+  height: 230px;
+}
+
+.helloTag {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #121212;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 28px;
+  line-height: 0.8;
+  color: #fefefe;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px) rotate(3.18deg);
+  transition: opacity 320ms ease, transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.helloTag p {
+  margin: 0;
+  line-height: 0.8;
+}
+
+@media (hover: hover) {
+  .contactWrap:hover .helloTag,
+  .contactWrap:focus-within .helloTag {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) rotate(3.18deg);
+  }
+}
+
+.contactWrap.autoHover .helloTag {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) rotate(3.18deg);
+}
+
+.contactCard {
+  /* Absolute (rather than a margin-top) so the offset can't collapse through
+     .contactWrap's own top margin — .contactWrap has no border/padding to
+     contain a child's margin, so a plain margin-top here would shift the
+     whole wrapper down instead of just reserving space above the card. */
+  position: absolute;
+  left: 0;
+  top: 71px;
   width: 332px;
   height: 159px;
   background: #a4cf4a;
@@ -426,7 +478,7 @@
 
 .contactName {
   position: absolute;
-  right: 129px;
+  left: 24px;
   top: 127px;
   margin: 0;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
