@@ -450,7 +450,7 @@ export default function ExperimentContent() {
           </div>
           <img src={chessPieces} alt="" className={styles.chessPieces} />
           <p className={styles.chessLabel}>Chess</p>
-          <p className={styles.chessBody}>Vibe-Coded Project to understand how server and client</p>
+          <p className={styles.chessBody}>Vibe-Coded Project to understand how server and client can talk in real-time.</p>
         </div>
       </Positioned>
 
