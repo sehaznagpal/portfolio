@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import PhoneBezelFrame from '../PhoneBezelFrame';
 import styles from './ScreensTab.module.css';
 
@@ -81,50 +82,84 @@ const CATEGORIES: Category[] = [
 ];
 
 const AUTO_ADVANCE_MS = 5000;
-const TRANSITION_MS = 380;
+const TRANSITION_MS = 500;
+const SLOT_GAP = 24;
 
 function ScreenStage({ screens }: { screens: Screen[] }) {
   const [index, setIndex] = useState(0);
+  const [slotWidth, setSlotWidth] = useState(0);
+  const [stageWidth, setStageWidth] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const transitioningRef = useRef(false);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const slotRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const stageEl = stageRef.current;
+    const slotEl = slotRef.current;
+    if (!stageEl || !slotEl) return;
+    const measure = () => {
+      setStageWidth(stageEl.getBoundingClientRect().width);
+      setSlotWidth(slotEl.getBoundingClientRect().width);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(stageEl);
+    observer.observe(slotEl);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      advance();
+      goTo((index + 1) % screens.length);
     }, AUTO_ADVANCE_MS);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, screens]);
 
-  function advance() {
-    if (transitioningRef.current) return;
+  function goTo(next: number) {
+    if (transitioningRef.current || next === index) return;
     transitioningRef.current = true;
-    setIndex((i) => (i + 1) % screens.length);
+    setIndex(next);
     setTimeout(() => {
       transitioningRef.current = false;
     }, TRANSITION_MS);
   }
 
-  const prev = screens[(index - 1 + screens.length) % screens.length];
-  const next = screens[(index + 1) % screens.length];
+  const slotSize = slotWidth + SLOT_GAP;
+  // A clone of the last screen is prepended and a clone of the first is appended,
+  // so there's always a real neighbour to peek at on both sides, even when the
+  // active screen is the first or last in the category (wraps around cleanly).
+  const extended = screens.length > 1 ? [screens[screens.length - 1], ...screens, screens[0]] : screens;
+  const trackIndex = screens.length > 1 ? index + 1 : index;
+  const centeredX = stageWidth / 2 - slotWidth / 2 - trackIndex * slotSize;
 
   return (
-    <div className={styles.stage}>
-      {screens.length > 1 && (
-        <div className={`${styles.sidePeek} ${styles.sidePeekLeft}`}>
-          <PhoneBezelFrame src={prev.src} alt="" animated={false} />
-        </div>
-      )}
-      <div className={styles.front}>
-        <PhoneBezelFrame src={screens[index].src} alt={screens[index].alt} onClick={advance} />
-      </div>
-      {screens.length > 1 && (
-        <div className={`${styles.sidePeek} ${styles.sidePeekRight}`}>
-          <PhoneBezelFrame src={next.src} alt="" animated={false} />
-        </div>
-      )}
+    <div className={styles.stage} ref={stageRef}>
+      <motion.div
+        className={styles.track}
+        animate={{ x: centeredX }}
+        transition={{ duration: TRANSITION_MS / 1000, ease: [0.4, 0, 0.2, 1] }}
+      >
+        {extended.map((screen, i) => {
+          const realIndex = screens.length > 1 ? (i - 1 + screens.length) % screens.length : i;
+          const isActive = i === trackIndex;
+          return (
+            <div
+              key={`${screen.alt}-${i}`}
+              ref={i === 0 ? slotRef : undefined}
+              className={styles.slot}
+              data-active={isActive}
+              onClick={() => goTo(isActive ? (index + 1) % screens.length : realIndex)}
+            >
+              <PhoneBezelFrame src={screen.src} alt={screen.alt} />
+            </div>
+          );
+        })}
+      </motion.div>
     </div>
   );
 }
