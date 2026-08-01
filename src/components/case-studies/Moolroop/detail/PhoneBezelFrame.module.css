@@ -7,16 +7,31 @@
   width: auto;
   aspect-ratio: 1736 / 3528;
   flex: 0 0 auto;
+  cursor: pointer;
 }
 
-.screen {
+/* The screenshot runs almost fully edge-to-edge (matching the Figma reference,
+   which insets only ~2% from the top) and extends underneath the notch — the
+   bezel image is layered on top and its opaque notch naturally masks it there.
+   Insetting further down (clearing the notch) was what left a slab of bare
+   bezel-black between the notch and the screenshot. */
+.screenClip {
   position: absolute;
-  top: 7.6%;
-  left: 5.2%;
-  width: 89.5%;
-  height: 90.2%;
-  object-fit: cover;
+  top: 2.2%;
+  left: 5.1%;
+  width: 89.8%;
+  height: 95.6%;
+  overflow: hidden;
   border-radius: 22px;
+}
+
+.screenImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
 
 .bezel {

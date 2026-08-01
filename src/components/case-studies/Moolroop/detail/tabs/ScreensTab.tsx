@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import PhoneBezelFrame from '../PhoneBezelFrame';
 import styles from './ScreensTab.module.css';
 
@@ -81,9 +80,9 @@ const CATEGORIES: Category[] = [
   },
 ];
 
-const AUTO_ADVANCE_MS = 5500;
+const AUTO_ADVANCE_MS = 5000;
 
-function ScreenFilmstrip({ screens }: { screens: Screen[] }) {
+function ScreenStage({ screens }: { screens: Screen[] }) {
   const [index, setIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -101,29 +100,9 @@ function ScreenFilmstrip({ screens }: { screens: Screen[] }) {
     setIndex((i) => (i + 1) % screens.length);
   }
 
-  const next = screens[(index + 1) % screens.length];
-
   return (
     <div className={styles.stage}>
-      {screens.length > 1 && (
-        <div className={styles.peek}>
-          <PhoneBezelFrame src={next.src} alt="" />
-        </div>
-      )}
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={index}
-          className={styles.front}
-          onClick={advance}
-          initial={{ x: 90, opacity: 0.4 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -40, opacity: 0 }}
-          transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
-          style={{ position: 'absolute', inset: 0 }}
-        >
-          <PhoneBezelFrame src={screens[index].src} alt={screens[index].alt} />
-        </motion.div>
-      </AnimatePresence>
+      <PhoneBezelFrame src={screens[index].src} alt={screens[index].alt} onClick={advance} />
     </div>
   );
 }
@@ -153,7 +132,7 @@ export default function ScreensTab() {
       </div>
 
       <div className={styles.right}>
-        <ScreenFilmstrip key={activeId} screens={active.screens} />
+        <ScreenStage key={activeId} screens={active.screens} />
       </div>
     </div>
   );

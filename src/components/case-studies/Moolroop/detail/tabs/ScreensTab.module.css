@@ -3,41 +3,40 @@
   height: 100%;
   overflow: hidden;
   display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 32px 40px 32px 55px;
 }
 
 .left {
-  flex: 0 0 330px;
+  flex: 0 1 350px;
   box-sizing: border-box;
-  height: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 18px;
-  padding: 32px 16px 32px 55px;
+  gap: 22px;
 }
 
 .categoryList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .categoryItem {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .categoryButton {
   text-align: left;
   background: #3a3a3a;
   border: 1px solid rgba(254, 254, 254, 0.8);
-  padding: 7px 12px;
+  padding: 8px 14px;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 16px;
-  letter-spacing: -0.32px;
+  font-size: 20px;
+  letter-spacing: -0.4px;
   color: #fefefe;
   cursor: pointer;
   transition: background 150ms ease-out;
@@ -56,10 +55,9 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.4;
   color: rgba(254, 254, 254, 0.85);
-  max-width: 300px;
 }
 
 .right {
@@ -70,30 +68,11 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 26px 24px 26px 0;
+  justify-content: flex-start;
+  padding-left: 20px;
 }
 
 .stage {
   position: relative;
-  height: 100%;
-  aspect-ratio: 1736 / 3528;
-  flex: 0 0 auto;
-}
-
-.front {
-  z-index: 2;
-  cursor: pointer;
-}
-
-.peek {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  margin-left: 10px;
-  height: 94%;
-  z-index: 1;
-  opacity: 0.9;
-  pointer-events: none;
+  height: 99%;
 }
