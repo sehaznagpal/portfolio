@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import SitemapTree, { type SitemapNode } from '../SitemapTree';
 import styles from './FlowTab.module.css';
-
-interface SitemapNode {
-  label: string;
-  children?: SitemapNode[];
-}
 
 const SITEMAP: SitemapNode = {
   label: 'Welcome Carousel',
@@ -43,7 +39,7 @@ const SITEMAP: SitemapNode = {
           children: [
             {
               label: 'State Page',
-              children: [{ label: '→ Category Page → Product Type Page → Product Page' }],
+              children: [{ label: '(same flow as Categories)' }],
             },
           ],
         },
@@ -59,21 +55,6 @@ const SITEMAP: SitemapNode = {
     },
   ],
 };
-
-function SitemapNodeItem({ node }: { node: SitemapNode }) {
-  return (
-    <li>
-      <span className={styles.node}>{node.label}</span>
-      {node.children && node.children.length > 0 && (
-        <ul>
-          {node.children.map((child) => (
-            <SitemapNodeItem key={child.label} node={child} />
-          ))}
-        </ul>
-      )}
-    </li>
-  );
-}
 
 const TODAY_STEPS = [
   'Browse Product',
@@ -151,9 +132,7 @@ export default function FlowTab() {
               </div>
 
               <div className={styles.treeScroll}>
-                <ul className={styles.tree}>
-                  <SitemapNodeItem node={SITEMAP} />
-                </ul>
+                <SitemapTree root={SITEMAP} />
               </div>
             </motion.div>
           </motion.div>
