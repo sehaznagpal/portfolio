@@ -1,0 +1,92 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px 55px 40px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.scope {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 640px;
+  max-width: 640px;
+}
+
+.giTag {
+  position: relative;
+  display: inline-block;
+  background: var(--moolroop-accent);
+  color: #fefefe;
+  padding: 1px 8px;
+  cursor: default;
+}
+
+.giPopover {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform-origin: top center;
+  translate: -50% 0;
+  width: 210px;
+  padding: 14px;
+  background: #fefefe;
+  border: 3px solid #121212;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  z-index: 5;
+  text-align: center;
+}
+
+.giPopover img {
+  width: 100%;
+  height: auto;
+}
+
+.deemphasis,
+.deemphasisItalic {
+  font-weight: var(--author-medium);
+  opacity: 0.68;
+}
+
+.deemphasisItalic {
+  font-style: italic;
+}
+
+.goalNote {
+  flex: 0 0 260px;
+  padding: 26px 14px 14px;
+  text-align: right;
+}
+
+.goalTitle {
+  margin: 0 0 8px;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-size: 42px;
+  line-height: 0.85;
+  letter-spacing: -1.68px;
+  color: rgba(254, 254, 254, 0.8);
+}
+
+.goalBody {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 28px;
+  line-height: 0.9;
+  letter-spacing: -0.56px;
+  color: #fefefe;
+}

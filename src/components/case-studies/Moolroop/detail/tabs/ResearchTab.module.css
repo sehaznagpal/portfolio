@@ -1,0 +1,42 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px 55px 40px;
+}
+
+.intro,
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.methods {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.pill {
+  background: var(--moolroop-accent);
+  border: 1px solid #fefefe;
+  padding: 10px;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 18px;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.plus {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-semibold, 600);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 32px;
+  color: #fefefe;
+  padding: 0 6px;
+}

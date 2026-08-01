@@ -1,0 +1,22 @@
+.note {
+  position: relative;
+  cursor: default;
+}
+
+.red {
+  background: var(--moolroop-accent);
+}
+
+.white {
+  background: #fefefe;
+}
+
+.clip {
+  position: absolute;
+  top: -34px;
+  left: 14px;
+  width: 26px;
+  height: auto;
+  transform: rotate(8deg);
+  pointer-events: none;
+}

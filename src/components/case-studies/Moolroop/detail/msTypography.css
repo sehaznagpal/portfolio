@@ -1,0 +1,62 @@
+/* Shared type rules for the MoolRoop case-study detail card content.
+   Plain (non-module) CSS, imported once by MoolroopTabShell, so every tab
+   can reuse the same section-heading/body classes without repeating them. */
+
+.ms-heading {
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--moolroop-yellow);
+  font-feature-settings: 'salt' 1;
+}
+
+.ms-body {
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 28px;
+  line-height: 0.95;
+  letter-spacing: -0.56px;
+  color: #fefefe;
+  text-align: justify;
+  font-feature-settings: 'salt' 1;
+}
+
+.ms-body p {
+  margin: 0 0 20px;
+}
+
+.ms-body p:last-child {
+  margin-bottom: 0;
+}
+
+.ms-body a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.ms-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: ms-list;
+}
+
+.ms-list li {
+  position: relative;
+  margin: 0 0 8px;
+  padding-left: 34px;
+  counter-increment: ms-list;
+}
+
+.ms-list li:last-child {
+  margin-bottom: 0;
+}
+
+.ms-list li::before {
+  content: counter(ms-list) '.';
+  position: absolute;
+  left: 0;
+}

@@ -28,7 +28,11 @@
   --fraud-screen-default: #F5F5F5;
 
   /* Case-study detail-page accents — sampled from provided screenshots, scoped per project */
-  --moolroop-accent: #BF383C;
+  --moolroop-accent: #BF393C;
+  --moolroop-yellow: #D9CE6A;
+  --moolroop-detail-card-bg: #1E1E1E;
+  --moolroop-detail-card-border: #121212;
+  --moolroop-cream-80: rgba(254, 254, 254, 0.8);
   --drcuterus-purple: #683C92;
   --drcuterus-yellow: #F9D949;
 

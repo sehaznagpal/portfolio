@@ -1,0 +1,191 @@
+.tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 48px 55px 80px;
+  min-height: 480px;
+}
+
+.columns {
+  display: flex;
+  gap: 90px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.columnLabelToday,
+.columnLabelMoolroop {
+  margin: 0 0 4px;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-semibold, 600);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.columnLabelToday {
+  color: rgba(254, 254, 254, 0.8);
+}
+
+.columnLabelMoolroop {
+  color: #e8e8e8;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stepGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stepToday,
+.stepMoolroop {
+  padding: 8px;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.stepToday {
+  background: rgba(254, 254, 254, 0.8);
+  border: 1px solid #121212;
+  color: #121212;
+}
+
+.stepMoolroop {
+  background: var(--moolroop-accent);
+  border: 1px solid rgba(254, 254, 254, 0.8);
+  color: rgba(254, 254, 254, 0.85);
+}
+
+.arrowToday,
+.arrowMoolroop {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-semibold, 600);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.arrowToday {
+  color: #d1d1d1;
+}
+
+.arrowMoolroop {
+  color: #e8e8e8;
+}
+
+.sitemapButton {
+  position: absolute;
+  right: 55px;
+  bottom: 40px;
+  background: #3a3a3a;
+  border: 1px solid rgba(254, 254, 254, 0.8);
+  padding: 4px 12px;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  color: #fefefe;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.sitemapButton:hover {
+  background: #4a4a4a;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 24px;
+}
+
+.modal {
+  width: min(640px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: var(--moolroop-detail-card-bg);
+  border: 2px solid var(--moolroop-detail-card-border);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modalTitle {
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 30px;
+  color: var(--moolroop-yellow);
+}
+
+.closeButton {
+  font-size: 20px;
+  color: #fefefe;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 150ms ease-out;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.sitemapTree ul {
+  margin: 0;
+  padding-left: 18px;
+  list-style: none;
+  border-left: 1px solid rgba(254, 254, 254, 0.2);
+}
+
+.sitemapTree > ul {
+  border-left: none;
+  padding-left: 0;
+}
+
+.sitemapTree li {
+  position: relative;
+  margin: 7px 0;
+  padding-left: 14px;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 15px;
+  line-height: 1.4;
+  color: rgba(254, 254, 254, 0.85);
+}
+
+.sitemapTree li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 8px;
+  height: 1px;
+  background: rgba(254, 254, 254, 0.3);
+}

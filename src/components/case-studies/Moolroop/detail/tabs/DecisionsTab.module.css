@@ -1,0 +1,158 @@
+.tab {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 55px 40px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.principles {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid #121212;
+}
+
+.principleCard {
+  flex: 1 1 0;
+  padding: 10px;
+  color: #121212;
+}
+
+.principleCard[data-intensity='0'] {
+  background: #d8aba1;
+}
+
+.principleCard[data-intensity='1'] {
+  background: #cd7a76;
+}
+
+.principleCard[data-intensity='2'] {
+  background: var(--moolroop-accent);
+  color: rgba(254, 254, 254, 0.85);
+}
+
+.principleNumber,
+.principleTitle {
+  margin: 0 0 4px;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.principleBody {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.visualNote {
+  flex: 0 0 300px;
+  padding: 26px 16px 16px;
+}
+
+.visualTitle {
+  margin: 0 0 6px;
+  text-align: right;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-size: 38px;
+  line-height: 0.85;
+  letter-spacing: -1.52px;
+  color: #121212;
+}
+
+.visualFonts {
+  margin: 0 0 14px;
+  text-align: right;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 24px;
+  letter-spacing: -0.48px;
+  color: #121212;
+}
+
+.visualColoursLabel {
+  margin: 0 0 8px;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 22px;
+  color: #121212;
+}
+
+.swatchRow {
+  display: flex;
+  gap: 10px;
+}
+
+.swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(18, 18, 18, 0.25);
+}
+
+.structure {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.structureList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.structureItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.structureButton {
+  text-align: left;
+  border: 1px solid rgba(254, 254, 254, 0.8);
+  padding: 6px 14px;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 22px;
+  letter-spacing: -0.44px;
+  color: #fefefe;
+  cursor: pointer;
+  transition: background 150ms ease-out;
+}
+
+.structureButton:hover {
+  background: rgba(254, 254, 254, 0.08);
+}
+
+.tooltip {
+  overflow: hidden;
+}
+
+.tooltip p {
+  margin: 8px 2px 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 16px;
+  line-height: 1.4;
+  color: rgba(254, 254, 254, 0.75);
+}

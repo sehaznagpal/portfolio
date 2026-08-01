@@ -1,0 +1,42 @@
+.wrap {
+  width: min(1010px, 92vw);
+  margin: 40px auto 0;
+  padding-bottom: 56px;
+}
+
+.nav {
+  display: flex;
+  gap: 2px;
+}
+
+.tabButton {
+  padding: 8px 16px;
+  border: 2px solid var(--moolroop-detail-card-border);
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  background: #fefefe;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-light);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 22px;
+  letter-spacing: -0.88px;
+  color: #121212;
+  cursor: pointer;
+  transition: background 150ms ease-out, color 150ms ease-out;
+}
+
+.tabButton:hover:not(.tabActive) {
+  background: #f0ece1;
+}
+
+.tabActive {
+  background: var(--moolroop-detail-card-bg);
+  color: #fefefe;
+}
+
+.card {
+  background: var(--moolroop-detail-card-bg);
+  border: 2px solid var(--moolroop-detail-card-border);
+  border-radius: 0 20px 20px 20px;
+  overflow: hidden;
+}
