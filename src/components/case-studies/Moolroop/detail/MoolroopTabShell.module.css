@@ -1,7 +1,6 @@
 .wrap {
   width: min(1010px, 92vw);
-  margin: 40px auto 0;
-  padding-bottom: 56px;
+  margin: 40px auto 48px;
 }
 
 .nav {
@@ -35,8 +34,17 @@
 }
 
 .card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1010 / 682;
   background: var(--moolroop-detail-card-bg);
   border: 2px solid var(--moolroop-detail-card-border);
   border-radius: 0 20px 20px 20px;
+  overflow: hidden;
+}
+
+.cardContent {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }

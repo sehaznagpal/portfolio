@@ -1,9 +1,16 @@
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import ComparisonTable from '../ComparisonTable';
 import styles from './ResearchTab.module.css';
 
 export default function ResearchTab() {
+  const [showInfographic, setShowInfographic] = useState(false);
+
   return (
-    <div className={styles.tab}>
+    <div
+      className={styles.tab}
+      onMouseLeave={() => setShowInfographic(false)}
+    >
       <div className={styles.intro}>
         <h2 className="ms-heading">Understanding the existing experience</h2>
         <div className="ms-body">
@@ -43,7 +50,17 @@ export default function ResearchTab() {
       </div>
 
       <div className={styles.section}>
-        <h3 className="ms-heading">Competitive landscape</h3>
+        <div className={styles.landscapeRow}>
+          <h3 className="ms-heading">Competitive landscape</h3>
+          <button
+            type="button"
+            className={styles.infographicButton}
+            onMouseEnter={() => setShowInfographic(true)}
+            onClick={() => setShowInfographic((v) => !v)}
+          >
+            Infographic
+          </button>
+        </div>
         <div className="ms-body">
           <p>
             Several platforms already promote Indian handicrafts. Instead of replacing them, I
@@ -51,8 +68,21 @@ export default function ResearchTab() {
             verification directly into the purchase journey.
           </p>
         </div>
-        <ComparisonTable />
       </div>
+
+      <AnimatePresence>
+        {showInfographic && (
+          <motion.div
+            className={styles.overlay}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
+          >
+            <ComparisonTable />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

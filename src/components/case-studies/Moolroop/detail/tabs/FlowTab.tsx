@@ -2,6 +2,79 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './FlowTab.module.css';
 
+interface SitemapNode {
+  label: string;
+  children?: SitemapNode[];
+}
+
+const SITEMAP: SitemapNode = {
+  label: 'Welcome Carousel',
+  children: [
+    {
+      label: 'Explore / Home',
+      children: [
+        { label: 'Search' },
+        {
+          label: 'Categories',
+          children: [
+            {
+              label: 'Category Page',
+              children: [
+                {
+                  label: 'Product Type Page',
+                  children: [
+                    {
+                      label: 'Product Page',
+                      children: [
+                        { label: "How It's Made" },
+                        { label: 'Provenance Trail' },
+                        { label: 'Bag', children: [{ label: 'Checkout (future scope)' }] },
+                        { label: 'Wishlist' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Explore by State',
+          children: [
+            {
+              label: 'State Page',
+              children: [{ label: '→ Category Page → Product Type Page → Product Page' }],
+            },
+          ],
+        },
+        { label: 'Most Popular' },
+        { label: 'Recommended' },
+        { label: 'Wishlist' },
+        { label: 'Bag', children: [{ label: 'Checkout (future scope)' }] },
+        {
+          label: 'Menu',
+          children: [{ label: 'About' }, { label: 'Help & Support' }, { label: 'Language (future)' }],
+        },
+      ],
+    },
+  ],
+};
+
+function SitemapNodeItem({ node }: { node: SitemapNode }) {
+  return (
+    <li>
+      <span className={styles.node}>{node.label}</span>
+      {node.children && node.children.length > 0 && (
+        <ul>
+          {node.children.map((child) => (
+            <SitemapNodeItem key={child.label} node={child} />
+          ))}
+        </ul>
+      )}
+    </li>
+  );
+}
+
 const TODAY_STEPS = [
   'Browse Product',
   'Notice GI Tag',
@@ -77,42 +150,9 @@ export default function FlowTab() {
                 </button>
               </div>
 
-              <div className={styles.sitemapTree}>
-                <ul>
-                  <li>
-                    Welcome Carousel
-                    <ul>
-                      <li>
-                        Explore / Home
-                        <ul>
-                          <li>Search</li>
-                          <li>Categories → Category Page → Product Type Page → Product Page</li>
-                          <li>Explore by State → State Page → Category Page</li>
-                          <li>Most Popular Products</li>
-                          <li>Recommended</li>
-                          <li>Wishlist</li>
-                          <li>Bag → Checkout (future scope)</li>
-                          <li>
-                            Menu
-                            <ul>
-                              <li>About</li>
-                              <li>Help &amp; Support</li>
-                              <li>Language (future)</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    Product Page
-                    <ul>
-                      <li>How It&rsquo;s Made</li>
-                      <li>Provenance Trail</li>
-                      <li>Bag</li>
-                      <li>Wishlist</li>
-                    </ul>
-                  </li>
+              <div className={styles.treeScroll}>
+                <ul className={styles.tree}>
+                  <SitemapNodeItem node={SITEMAP} />
                 </ul>
               </div>
             </motion.div>

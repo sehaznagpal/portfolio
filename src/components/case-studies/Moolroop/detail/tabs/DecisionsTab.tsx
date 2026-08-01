@@ -88,6 +88,7 @@ export default function DecisionsTab() {
                 <button
                   type="button"
                   className={styles.structureButton}
+                  onMouseEnter={() => setOpenIndex(i)}
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 >
                   {i + 1}. {item.title}
@@ -96,10 +97,10 @@ export default function DecisionsTab() {
                   {openIndex === i && (
                     <motion.div
                       className={styles.tooltip}
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                      initial={{ opacity: 0, y: -6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.16, ease: 'easeOut' }}
                     >
                       <p>{item.body}</p>
                     </motion.div>

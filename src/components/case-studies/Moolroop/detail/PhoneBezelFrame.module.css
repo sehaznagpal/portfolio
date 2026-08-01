@@ -1,7 +1,12 @@
+/* Aspect ratio matches the bezel PNG's own dimensions (1736x3528) exactly, so the
+   percentage-based screen inset below lines up with the bezel's real cutout —
+   any mismatch here is what causes the screenshot to bleed past the frame edges. */
 .frame {
   position: relative;
-  width: 100%;
   height: 100%;
+  width: auto;
+  aspect-ratio: 1736 / 3528;
+  flex: 0 0 auto;
 }
 
 .screen {

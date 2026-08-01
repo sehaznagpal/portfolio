@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import PhoneBezelFrame from '../PhoneBezelFrame';
 import styles from './ScreensTab.module.css';
 
@@ -52,9 +52,7 @@ const CATEGORIES: Category[] = [
       'Each product page holds two layers at once: the item for sale and the place it comes from. The origin story lives right beside the price, not behind a separate link a buyer has to go looking for.',
     screens: [
       { src: pashminaProduct, alt: 'Pashmina Kurta product page' },
-      { src: pashminaProduct1, alt: 'Pashmina Kurta product page, alternate scroll state' },
-      { src: provenance1, alt: 'Pashmina provenance trail, part one' },
-      { src: provenance2, alt: 'Pashmina provenance trail, part two' },
+      { src: pashminaProduct1, alt: "Pashmina Kurta origin story — how it's made" },
     ],
   },
   {
@@ -63,8 +61,8 @@ const CATEGORIES: Category[] = [
     description:
       'Each product has two separate information layers. The buyer decides how deep to go, a quick glance at specs, or the full provenance trail.',
     screens: [
-      { src: pashminaProduct, alt: 'Pashmina Kurta specifications and verification panel' },
-      { src: pashminaProduct1, alt: 'Pashmina Kurta specifications, alternate scroll state' },
+      { src: provenance1, alt: 'Verification panel — confirm this seller is authorised' },
+      { src: provenance2, alt: 'Full GI registration and seller verification details' },
     ],
   },
   {
@@ -84,7 +82,6 @@ const CATEGORIES: Category[] = [
 ];
 
 const AUTO_ADVANCE_MS = 5500;
-const STEP = 236;
 
 function ScreenFilmstrip({ screens }: { screens: Screen[] }) {
   const [index, setIndex] = useState(0);
@@ -104,25 +101,29 @@ function ScreenFilmstrip({ screens }: { screens: Screen[] }) {
     setIndex((i) => (i + 1) % screens.length);
   }
 
+  const next = screens[(index + 1) % screens.length];
+
   return (
-    <div className={styles.filmstripViewport}>
-      <motion.div
-        className={styles.filmstripTrack}
-        animate={{ x: -index * STEP }}
-        transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-      >
-        {screens.map((screen, i) => (
-          <div
-            key={screen.alt}
-            className={styles.phoneSlot}
-            onClick={i === index ? advance : undefined}
-            role={i === index ? 'button' : undefined}
-            aria-label={i === index ? 'Show next screen' : undefined}
-          >
-            <PhoneBezelFrame src={screen.src} alt={screen.alt} />
-          </div>
-        ))}
-      </motion.div>
+    <div className={styles.stage}>
+      {screens.length > 1 && (
+        <div className={styles.peek}>
+          <PhoneBezelFrame src={next.src} alt="" />
+        </div>
+      )}
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={index}
+          className={styles.front}
+          onClick={advance}
+          initial={{ x: 90, opacity: 0.4 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -40, opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+          style={{ position: 'absolute', inset: 0 }}
+        >
+          <PhoneBezelFrame src={screens[index].src} alt={screens[index].alt} />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

@@ -1,8 +1,11 @@
 .tab {
+  box-sizing: border-box;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 40px 55px 40px;
+  justify-content: center;
+  gap: 28px;
+  padding: 32px 55px;
 }
 
 .intro {

@@ -1,37 +1,43 @@
 .tab {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
   display: flex;
-  min-height: 600px;
 }
 
 .left {
-  flex: 0 0 380px;
+  flex: 0 0 330px;
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 48px 24px 48px 55px;
+  justify-content: center;
+  gap: 18px;
+  padding: 32px 16px 32px 55px;
 }
 
 .categoryList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .categoryItem {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .categoryButton {
   text-align: left;
   background: #3a3a3a;
   border: 1px solid rgba(254, 254, 254, 0.8);
-  padding: 8px 14px;
+  padding: 7px 12px;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 19px;
-  letter-spacing: -0.38px;
+  font-size: 16px;
+  letter-spacing: -0.32px;
   color: #fefefe;
   cursor: pointer;
   transition: background 150ms ease-out;
@@ -50,38 +56,44 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.4;
   color: rgba(254, 254, 254, 0.85);
-  max-width: 340px;
+  max-width: 300px;
 }
 
 .right {
-  flex: 1 1 auto;
   position: relative;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  height: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding: 26px 24px 26px 0;
 }
 
-.filmstripViewport {
+.stage {
   position: relative;
-  width: 100%;
-  height: 600px;
-  overflow: hidden;
+  height: 100%;
+  aspect-ratio: 1736 / 3528;
+  flex: 0 0 auto;
 }
 
-.filmstripTrack {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  gap: 20px;
-  height: 100%;
-}
-
-.phoneSlot {
-  flex: 0 0 216px;
-  height: 100%;
+.front {
+  z-index: 2;
   cursor: pointer;
+}
+
+.peek {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  margin-left: 10px;
+  height: 94%;
+  z-index: 1;
+  opacity: 0.9;
+  pointer-events: none;
 }

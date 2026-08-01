@@ -43,6 +43,7 @@ export default function MoolroopTabShell() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
+            className={styles.cardContent}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
