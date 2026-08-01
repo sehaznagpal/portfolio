@@ -55,7 +55,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.4;
   color: rgba(254, 254, 254, 0.85);
 }
@@ -68,11 +68,37 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 20px;
+  justify-content: center;
 }
 
 .stage {
   position: relative;
-  height: 99%;
+  height: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.front {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+}
+
+.sidePeek {
+  position: absolute;
+  top: 50%;
+  height: 90%;
+  transform: translateY(-50%);
+  opacity: 0.55;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sidePeekLeft {
+  right: calc(100% + 14px);
+}
+
+.sidePeekRight {
+  left: calc(100% + 14px);
 }

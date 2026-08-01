@@ -81,15 +81,17 @@ const CATEGORIES: Category[] = [
 ];
 
 const AUTO_ADVANCE_MS = 5000;
+const TRANSITION_MS = 380;
 
 function ScreenStage({ screens }: { screens: Screen[] }) {
   const [index, setIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const transitioningRef = useRef(false);
 
   useEffect(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      setIndex((i) => (i + 1) % screens.length);
+      advance();
     }, AUTO_ADVANCE_MS);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -97,12 +99,32 @@ function ScreenStage({ screens }: { screens: Screen[] }) {
   }, [index, screens]);
 
   function advance() {
+    if (transitioningRef.current) return;
+    transitioningRef.current = true;
     setIndex((i) => (i + 1) % screens.length);
+    setTimeout(() => {
+      transitioningRef.current = false;
+    }, TRANSITION_MS);
   }
+
+  const prev = screens[(index - 1 + screens.length) % screens.length];
+  const next = screens[(index + 1) % screens.length];
 
   return (
     <div className={styles.stage}>
-      <PhoneBezelFrame src={screens[index].src} alt={screens[index].alt} onClick={advance} />
+      {screens.length > 1 && (
+        <div className={`${styles.sidePeek} ${styles.sidePeekLeft}`}>
+          <PhoneBezelFrame src={prev.src} alt="" animated={false} />
+        </div>
+      )}
+      <div className={styles.front}>
+        <PhoneBezelFrame src={screens[index].src} alt={screens[index].alt} onClick={advance} />
+      </div>
+      {screens.length > 1 && (
+        <div className={`${styles.sidePeek} ${styles.sidePeekRight}`}>
+          <PhoneBezelFrame src={next.src} alt="" animated={false} />
+        </div>
+      )}
     </div>
   );
 }
