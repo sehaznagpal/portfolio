@@ -1,14 +1,17 @@
 .wrapper {
+  /* flow-root contains the section's own top/bottom margins instead of letting them
+     collapse through, so this box's rendered height exactly matches the section's
+     original footprint (margins included) — the grid background just paints behind
+     that same span at full viewport width, no spacing was added or removed. */
   width: 100%;
-  padding: 40px 0 48px;
-  box-sizing: border-box;
+  display: flow-root;
 }
 
 .section {
   position: relative;
   width: min(1280px, 96vw);
   aspect-ratio: 1280 / 832;
-  margin: 0 auto;
+  margin: 40px auto 48px;
   overflow: hidden;
 }
 
