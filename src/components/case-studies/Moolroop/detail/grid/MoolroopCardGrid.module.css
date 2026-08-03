@@ -1,8 +1,14 @@
+.wrapper {
+  width: 100%;
+  padding: 40px 0 48px;
+  box-sizing: border-box;
+}
+
 .section {
   position: relative;
   width: min(1280px, 96vw);
   aspect-ratio: 1280 / 832;
-  margin: 40px auto 48px;
+  margin: 0 auto;
   overflow: hidden;
 }
 
