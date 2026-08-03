@@ -1,0 +1,44 @@
+.body {
+  position: absolute;
+  left: 50%;
+  top: 21.87%;
+  transform: translateX(-50%);
+  width: 86.67%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 20px;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--moolroop-accent);
+  font-weight: var(--author-regular);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.emphasis {
+  font-weight: var(--author-medium);
+}
+
+.photoStrip {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.photoStrip > * {
+  pointer-events: auto;
+}

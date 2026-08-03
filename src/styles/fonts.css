@@ -57,6 +57,13 @@
   --author-regular: 375;
   --author-medium: 495;
   --author-semibold: 596;
+
+  /* Estimated named-instance weights for the MoolRoop card-grid rebuild — not fontTools-confirmed
+     like the values above, just interpolated against each font's declared weight range. Verify
+     precisely if these ever look visibly off against the Figma reference. */
+  --gambetta-bold: 700;
+  --bricolage-extrabold: 800;
+  --author-light: 300;
 }
 
 .font-gambetta-italic {
