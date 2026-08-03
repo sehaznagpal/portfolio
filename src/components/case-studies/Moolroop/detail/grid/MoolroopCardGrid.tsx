@@ -20,37 +20,35 @@ export default function MoolroopCardGrid() {
   }, [openIndex]);
 
   return (
-    <div className={`${styles.wrapper} grid-background`}>
-      <div className={styles.section}>
-        <AnimatePresence>
-          {openIndex !== null && (
-            <motion.div
-              className={styles.clickCatcher}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setOpenIndex(null)}
-            />
-          )}
-        </AnimatePresence>
-
-        {CARDS.map((card, i) => (
-          <MoolroopCard
-            key={card.id}
-            card={card}
-            index={i}
-            isOpen={openIndex === i}
-            onOpen={() => setOpenIndex(i)}
-            onClose={() => setOpenIndex(null)}
-            onPrev={() => setOpenIndex((i - 1 + CARDS.length) % CARDS.length)}
-            onNext={() => setOpenIndex((i + 1) % CARDS.length)}
+    <div className={`${styles.section} grid-background`}>
+      <AnimatePresence>
+        {openIndex !== null && (
+          <motion.div
+            className={styles.clickCatcher}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setOpenIndex(null)}
           />
-        ))}
+        )}
+      </AnimatePresence>
 
-        <div className={styles.navWrap}>
-          <MoolroopClosingNav />
-        </div>
+      {CARDS.map((card, i) => (
+        <MoolroopCard
+          key={card.id}
+          card={card}
+          index={i}
+          isOpen={openIndex === i}
+          onOpen={() => setOpenIndex(i)}
+          onClose={() => setOpenIndex(null)}
+          onPrev={() => setOpenIndex((i - 1 + CARDS.length) % CARDS.length)}
+          onNext={() => setOpenIndex((i + 1) % CARDS.length)}
+        />
+      ))}
+
+      <div className={styles.navWrap}>
+        <MoolroopClosingNav />
       </div>
     </div>
   );

@@ -1,18 +1,6 @@
-.wrapper {
-  /* flow-root contains the section's own top/bottom margins instead of letting them
-     collapse through, so this box's rendered height exactly matches the section's
-     original footprint (margins included) — the grid background just paints behind
-     that same span at full viewport width, no spacing was added or removed. */
-  width: 100%;
-  display: flow-root;
-}
-
 .section {
   position: relative;
-  /* Constrained by viewport width AND viewport height (converted through the fixed
-     1280:832 aspect ratio) so the section itself is never taller than one screen —
-     it should never need its own scroll to see every card and the closing nav. */
-  width: min(1280px, 96vw, calc(84vh * 1280 / 832));
+  width: min(1280px, 96vw);
   aspect-ratio: 1280 / 832;
   margin: 40px auto 48px;
   overflow: hidden;
