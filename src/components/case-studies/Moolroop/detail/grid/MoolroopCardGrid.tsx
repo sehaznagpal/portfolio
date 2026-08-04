@@ -23,18 +23,18 @@ export default function MoolroopCardGrid() {
   }, [openIndex]);
 
   return (
-    <div className={styles.viewport} style={{ height: CARD_GRID_REFERENCE_HEIGHT * scale }}>
-      <div className={`${styles.frame} grid-background`} style={{ transform: `translateX(-50%) scale(${scale})` }}>
+    <div className={`${styles.viewport} grid-background`} style={{ height: CARD_GRID_REFERENCE_HEIGHT * scale }}>
+      <div className={styles.frame} style={{ transform: `translateX(-50%) scale(${scale})` }}>
         <div className={styles.section}>
           {CARDS.map((card, i) =>
             openIndex === i ? null : (
               <MoolroopCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
             ),
           )}
+        </div>
 
-          <div className={styles.navWrap}>
-            <MoolroopClosingNav />
-          </div>
+        <div className={styles.navWrap}>
+          <MoolroopClosingNav />
         </div>
       </div>
 
