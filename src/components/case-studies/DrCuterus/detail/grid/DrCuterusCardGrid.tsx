@@ -1,0 +1,68 @@
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import DrCuterusCardFace from './DrCuterusCardFace';
+import DrCuterusPanel from './DrCuterusPanel';
+import DrCuterusClosingNav from '../DrCuterusClosingNav';
+import { CARDS } from './cardData';
+import { CARD_GRID_REFERENCE_HEIGHT, useCardGridScale } from './useCardGridScale';
+import styles from './DrCuterusCardGrid.module.css';
+
+export default function DrCuterusCardGrid() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const scale = useCardGridScale();
+
+  useEffect(() => {
+    if (openIndex === null) return;
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpenIndex(null);
+      if (e.key === 'ArrowRight') setOpenIndex((i) => (i === null ? i : (i + 1) % CARDS.length));
+      if (e.key === 'ArrowLeft') setOpenIndex((i) => (i === null ? i : (i - 1 + CARDS.length) % CARDS.length));
+    }
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [openIndex]);
+
+  return (
+    <div className={`${styles.viewport} grid-background`} style={{ height: CARD_GRID_REFERENCE_HEIGHT * scale }}>
+      <div className={styles.frame} style={{ transform: `translateX(-50%) scale(${scale})` }}>
+        <div className={styles.section}>
+          {CARDS.map((card, i) =>
+            openIndex === i ? null : (
+              <DrCuterusCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
+            ),
+          )}
+        </div>
+
+        <div className={styles.navWrap}>
+          <DrCuterusClosingNav />
+        </div>
+      </div>
+
+      {/* Rendered outside the scaled frame: a CSS transform on an ancestor becomes the
+          containing block for position:fixed descendants, which would break the panel's
+          true-viewport centering (and the click-catcher's full-viewport coverage). */}
+      <AnimatePresence>
+        {openIndex !== null && (
+          <motion.div
+            key="click-catcher"
+            className={styles.clickCatcher}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setOpenIndex(null)}
+          />
+        )}
+        {openIndex !== null && (
+          <DrCuterusPanel
+            key={CARDS[openIndex].id}
+            card={CARDS[openIndex]}
+            onClose={() => setOpenIndex(null)}
+            onPrev={() => setOpenIndex((openIndex - 1 + CARDS.length) % CARDS.length)}
+            onNext={() => setOpenIndex((openIndex + 1) % CARDS.length)}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

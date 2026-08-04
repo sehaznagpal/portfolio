@@ -1,0 +1,178 @@
+.card {
+  position: absolute;
+  width: 252px;
+  height: 260px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  border: 1px solid rgba(18, 18, 18, 0.4);
+  box-shadow: 2px 0 12px 1px rgba(18, 18, 18, 0.2);
+  background: var(--bg-canvas);
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 300ms ease-out;
+}
+
+.card:hover {
+  background: var(--drcuterus-detail-card-bg);
+}
+
+.cardFace {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-extrabold);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -1.32px;
+  color: var(--drcuterus-purple);
+  transition: color 300ms ease-out;
+  white-space: nowrap;
+}
+
+.card:hover .title {
+  color: var(--bg-canvas);
+}
+
+.number {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  background: #fefefe;
+  border: 1px solid #121212;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -1.28px;
+  color: #121212;
+  transition: background 300ms ease-out, border-color 300ms ease-out, color 300ms ease-out;
+}
+
+.card:hover .number {
+  background: var(--drcuterus-purple);
+  border-color: var(--drcuterus-purple);
+  color: var(--bg-canvas);
+}
+
+.subtitle {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 20px;
+  letter-spacing: -0.2px;
+  color: #121212;
+  white-space: nowrap;
+  transition: color 300ms ease-out;
+}
+
+.card:hover .subtitle {
+  color: #fefefe;
+}
+
+.panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min(1020px, 88vw);
+  aspect-ratio: 1020 / 663;
+  box-sizing: border-box;
+  border-radius: 28px;
+  border: 2px solid rgba(108, 108, 108, 0.8);
+  background: var(--chrome-bg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  z-index: 50;
+  cursor: default;
+}
+
+.panelInner {
+  position: absolute;
+  inset: 0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 22px;
+  right: 30px;
+  z-index: 2;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #6c6c6c;
+  cursor: pointer;
+  transition: color 150ms ease-out;
+}
+
+.closeButton:hover {
+  color: #fefefe;
+}
+
+.navButtons {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  background: #fefefe;
+  border: 1px solid #121212;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-bold);
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -1.2px;
+  color: #121212;
+  cursor: pointer;
+  transition: opacity 150ms ease-out;
+}
+
+.navButton:hover {
+  opacity: 0.7;
+}
+
+.navButtonNext {
+  transform: scaleX(-1);
+}
+
+.panelHeading {
+  position: absolute;
+  left: 13.82%;
+  top: 12.37%;
+  right: 5.5%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--drcuterus-lavender);
+}

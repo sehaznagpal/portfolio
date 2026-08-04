@@ -33,8 +33,10 @@
   --moolroop-detail-card-bg: #1E1E1E;
   --moolroop-detail-card-border: #121212;
   --moolroop-cream-80: rgba(254, 254, 254, 0.8);
-  --drcuterus-purple: #683C92;
+  --drcuterus-purple: #76359C;
   --drcuterus-yellow: #F9D949;
+  --drcuterus-lavender: #DEC3E9;
+  --drcuterus-detail-card-bg: #1E1E1E;
 
   /* Dissertation's three-color system pulled directly from the actual data-viz figures
      (fig1/fig2 bar charts), sampled pixel-exact rather than reusing the FraudCard tokens,
