@@ -1,0 +1,45 @@
+.viewport {
+  /* Height is set inline (CARD_GRID_REFERENCE_HEIGHT * scale) to always match the
+     frame's true rendered size exactly — normally that equals 100vh, but on the rare
+     viewport where width is the binding constraint (see useCardGridScale), it's
+     intentionally a little less rather than letting the frame overflow and clip cards. */
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.frame {
+  /* Centered via left:50% + translateX(-50%) in the transform (applied from the
+     component), not margin:auto — auto margins clamp to 0 instead of going negative
+     when a child is wider than its container, which left this pinned to the left
+     edge instead of centered on the rare viewport where width is the binding scale
+     constraint (see useCardGridScale). translateX(-50%) centers correctly either way. */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1280px;
+  display: flow-root;
+  transform-origin: top center;
+}
+
+.section {
+  position: relative;
+  width: 1280px;
+  aspect-ratio: 1280 / 832;
+  margin: 40px auto 48px;
+  overflow: hidden;
+}
+
+.clickCatcher {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  cursor: default;
+}
+
+.navWrap {
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+  right: 60px;
+}
