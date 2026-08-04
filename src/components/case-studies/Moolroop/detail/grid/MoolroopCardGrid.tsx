@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import MoolroopCard from './MoolroopCard';
+import MoolroopCardFace from './MoolroopCardFace';
+import MoolroopPanel from './MoolroopPanel';
 import MoolroopClosingNav from '../MoolroopClosingNav';
 import { CARDS } from './cardData';
+import { CARD_GRID_REFERENCE_HEIGHT, useCardGridScale } from './useCardGridScale';
 import styles from './MoolroopCardGrid.module.css';
 
 export default function MoolroopCardGrid() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const scale = useCardGridScale();
 
   useEffect(() => {
     if (openIndex === null) return;
@@ -20,10 +23,28 @@ export default function MoolroopCardGrid() {
   }, [openIndex]);
 
   return (
-    <div className={`${styles.section} grid-background`}>
+    <div className={styles.viewport} style={{ height: CARD_GRID_REFERENCE_HEIGHT * scale }}>
+      <div className={`${styles.frame} grid-background`} style={{ transform: `translateX(-50%) scale(${scale})` }}>
+        <div className={styles.section}>
+          {CARDS.map((card, i) =>
+            openIndex === i ? null : (
+              <MoolroopCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
+            ),
+          )}
+
+          <div className={styles.navWrap}>
+            <MoolroopClosingNav />
+          </div>
+        </div>
+      </div>
+
+      {/* Rendered outside the scaled frame: a CSS transform on an ancestor becomes the
+          containing block for position:fixed descendants, which would break the panel's
+          true-viewport centering (and the click-catcher's full-viewport coverage). */}
       <AnimatePresence>
         {openIndex !== null && (
           <motion.div
+            key="click-catcher"
             className={styles.clickCatcher}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -32,24 +53,16 @@ export default function MoolroopCardGrid() {
             onClick={() => setOpenIndex(null)}
           />
         )}
+        {openIndex !== null && (
+          <MoolroopPanel
+            key={CARDS[openIndex].id}
+            card={CARDS[openIndex]}
+            onClose={() => setOpenIndex(null)}
+            onPrev={() => setOpenIndex((openIndex - 1 + CARDS.length) % CARDS.length)}
+            onNext={() => setOpenIndex((openIndex + 1) % CARDS.length)}
+          />
+        )}
       </AnimatePresence>
-
-      {CARDS.map((card, i) => (
-        <MoolroopCard
-          key={card.id}
-          card={card}
-          index={i}
-          isOpen={openIndex === i}
-          onOpen={() => setOpenIndex(i)}
-          onClose={() => setOpenIndex(null)}
-          onPrev={() => setOpenIndex((i - 1 + CARDS.length) % CARDS.length)}
-          onNext={() => setOpenIndex((i + 1) % CARDS.length)}
-        />
-      ))}
-
-      <div className={styles.navWrap}>
-        <MoolroopClosingNav />
-      </div>
     </div>
   );
 }
