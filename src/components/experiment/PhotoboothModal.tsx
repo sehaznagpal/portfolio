@@ -2,10 +2,23 @@ import { createPortal } from 'react-dom';
 import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import styles from './PhotoboothModal.module.css';
+import curtainLeftImg from '../../assets/images/experiment/photobooth-curtain-left.svg';
+import curtainRightImg from '../../assets/images/experiment/photobooth-curtain-right.svg';
+import sparkle1Img from '../../assets/images/experiment/photobooth-sparkle-1.svg';
+import sparkle2Img from '../../assets/images/experiment/photobooth-sparkle-2.svg';
 
 const EXIT_MS = 200;
 const SHOT_COUNT = 4;
 const CURTAIN_MS = 500;
+/* The 4 top photo frames aren't evenly spaced (each is a hand-placed Figma
+   rect, off by a px or two from a clean grid), so each needs its own
+   left/width rather than a repeatable formula. */
+const PHOTO_FRAME_RECTS = [
+  { left: 58, width: 130 },
+  { left: 200, width: 131 },
+  { left: 342, width: 131 },
+  { left: 485, width: 130 },
+];
 
 type Frame = HTMLCanvasElement;
 
@@ -67,7 +80,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
   const [countdown, setCountdown] = useState<number | null>(null);
   const [flash, setFlash] = useState(false);
   const [thumbs, setThumbs] = useState<(string | null)[]>([null, null, null, null]);
-  const [statusMsg, setStatusMsg] = useState('Smile! 4 shots will be taken.');
+  const [statusMsg, setStatusMsg] = useState('Capture yourself authentically.');
 
   function resetPhotoboothState() {
     framesRef.current = [];
@@ -78,7 +91,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
     setCountdown(null);
     setFlash(false);
     setThumbs([null, null, null, null]);
-    setStatusMsg('Smile! 4 shots will be taken.');
+    setStatusMsg('Capture yourself authentically.');
   }
 
   function stopStream() {
@@ -91,7 +104,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
       streamRef.current = stream;
       if (videoRef.current) videoRef.current.srcObject = stream;
-      setStatusMsg('Smile! 4 shots will be taken.');
+      setStatusMsg('Capture yourself authentically.');
       return true;
     } catch {
       setStatusMsg('Allow camera access to use the booth!');
@@ -194,7 +207,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
     setDone(true);
   }
 
-  async function handleClickToBegin() {
+  async function handleTakePhotos() {
     if (curtainOpen || shooting) return;
     let stream = streamRef.current;
     if (!stream) {
@@ -235,52 +248,58 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
           <X size={20} strokeWidth={1.75} />
         </button>
 
-        <p className={styles.permissionNote}>*ensure you have given camera permission</p>
+        <div className={styles.stage}>
+          <div className={styles.ground} />
 
-        <div className={styles.contentGrid}>
+          <p className={styles.label}>a photobooth</p>
+          <img src={sparkle1Img} alt="" className={styles.sparkle1} />
+          <img src={sparkle2Img} alt="" className={styles.sparkle2} />
+
+          {thumbs.map((src, i) => (
+            <div
+              className={styles.photoFrame}
+              key={i}
+              style={{ left: PHOTO_FRAME_RECTS[i].left, width: PHOTO_FRAME_RECTS[i].width }}
+            >
+              {src && <img src={src} alt={`Shot ${i + 1}`} />}
+            </div>
+          ))}
+
+          <div className={styles.boothTrim} />
           <div className={styles.cameraArea}>
             <video ref={videoRef} className={styles.video} autoPlay playsInline muted />
             {countdown !== null && <div className={styles.countdownOverlay}>{countdown}</div>}
             <div className={`${styles.flashOverlay} ${flash ? styles.flashActive : ''}`} />
-
-            <div className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`} />
-            <div className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`} />
-
-            {!curtainOpen && (
-              <button
-                type="button"
-                className={styles.clickToBegin}
-                onClick={handleClickToBegin}
-                aria-label="Click to begin — take 4 photos"
-              >
-                Click to Begin
-              </button>
-            )}
+          </div>
+          <div className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`}>
+            <img src={curtainLeftImg} alt="" />
+          </div>
+          <div className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`}>
+            <img src={curtainRightImg} alt="" />
           </div>
 
-          <div className={styles.thumbs}>
-            {thumbs.map((src, i) => (
-              <div className={styles.thumb} key={i}>
-                {src && <img src={src} alt={`Shot ${i + 1}`} />}
-              </div>
-            ))}
+          <div className={styles.headingTitle}>
+            <p>SMILE</p>
+            <p>PLEASE</p>
           </div>
-
-          <div className={styles.heading}>
-            <p className={styles.headingTitle}>
-              <span className={styles.headingItalic}>Smile</span> <span className={styles.headingMedium}>Please!</span>
-            </p>
-            <p className={styles.headingSubtitle}>Capture yourself authentically.</p>
-          </div>
+          <p className={styles.subtitle}>{statusMsg}</p>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.downloadButton} onClick={handleDownload} disabled={!done}>
-              Download
-            </button>
-            <button type="button" className={styles.tryAgainButton} onClick={handleTryAgain}>
-              Try Again
-            </button>
-            <p className={styles.statusMsg}>{statusMsg}</p>
+            {!curtainOpen && !done && (
+              <button type="button" className={styles.takePhotosButton} onClick={handleTakePhotos}>
+                Take Photos
+              </button>
+            )}
+            {done && (
+              <>
+                <button type="button" className={styles.downloadButton} onClick={handleDownload}>
+                  Download
+                </button>
+                <button type="button" className={styles.tryAgainButton} onClick={handleTryAgain}>
+                  Try Again
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

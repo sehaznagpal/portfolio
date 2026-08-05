@@ -17,27 +17,40 @@
   opacity: 1;
 }
 
+/* 896x582.4 is the room scene's native (Figma) size — every child below is
+   positioned at its exact Figma px coordinate within that reference frame,
+   then the whole .stage is scaled as one unit to fit .frame's actual
+   rendered width (via container query units, so it works at any viewport
+   with no separate mobile layout needed). */
 .frame {
   position: relative;
-  width: min(994px, 94vw);
-  background: #fefefe;
-  border-radius: 22px;
+  width: min(896px, 94vw);
+  aspect-ratio: 896 / 582.4;
+  background: #726273;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   overflow: hidden;
-  overflow-y: auto;
-  max-height: 92vh;
-  padding: 44px 49px 40px;
   box-sizing: border-box;
   transform: scale(0.94) translateY(10px);
   opacity: 0;
   transition:
     transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
     opacity 220ms ease-out;
+  container-type: inline-size;
 }
 
 .frameVisible {
   transform: scale(1) translateY(0);
   opacity: 1;
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 896px;
+  height: 582.4px;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 896px));
 }
 
 .closeButton {
@@ -49,8 +62,8 @@
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: rgba(18, 18, 18, 0.08);
-  color: #121212;
+  background: rgba(254, 254, 254, 0.16);
+  color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,40 +72,97 @@
 }
 
 .closeButton:hover {
-  background: rgba(18, 18, 18, 0.16);
+  background: rgba(254, 254, 254, 0.28);
 }
 
-.permissionNote {
-  margin: 0 0 20px;
-  text-align: right;
+/* ---------- Floor ---------- */
+
+.ground {
+  position: absolute;
+  left: 0;
+  top: 487px;
+  width: 897px;
+  height: 95px;
+  background-image:
+    repeating-linear-gradient(to right, rgba(18, 18, 18, 0.35) 0 1px, transparent 1px 112px),
+    repeating-linear-gradient(to bottom, rgba(18, 18, 18, 0.35) 0 1px, transparent 1px 48px);
+}
+
+/* ---------- "a photobooth" label + sparkles ---------- */
+
+.label {
+  position: absolute;
+  top: 44px;
+  /* .closeButton isn't part of the scaled .stage (it stays a fixed 36px tap
+     target at every size) — its left edge lands ~844px into the 896px stage
+     at native scale, a few px inside this label's default 46px offset, so a
+     bit of extra clearance here keeps the two from overlapping. */
+  right: 60px;
+  margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-size: 20px;
-  letter-spacing: -0.04em;
-  color: #121212;
-  font-feature-settings: 'salt' 1;
-  /* Clears the close button (top:16/right:16/36px) sitting in the same
-     corner — a few px short of matching the photos column's edge exactly
-     would put the text under the button. */
-  padding-right: 10px;
+  color: #f5f5f5;
+  white-space: nowrap;
 }
 
-.contentGrid {
-  display: grid;
-  grid-template-columns: 1fr 147px;
-  column-gap: 14px;
-  row-gap: 47px;
+.sparkle1 {
+  position: absolute;
+  left: 869.775px;
+  top: 36px;
+  width: 21.376px;
+  height: 21.376px;
+  transform: rotate(12.11deg);
+}
+
+.sparkle2 {
+  position: absolute;
+  left: 855px;
+  top: 51.818px;
+  width: 17.963px;
+  height: 17.963px;
+  transform: rotate(-20.13deg);
+}
+
+/* ---------- Photo strip frames ---------- */
+
+.photoFrame {
+  position: absolute;
+  top: 47px;
+  height: 82px;
+  background: #1c0e1d;
+  border: 4px solid #d9bb7f;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.photoFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scaleX(-1);
+}
+
+/* ---------- Camera booth ---------- */
+
+.boothTrim {
+  position: absolute;
+  left: 68px;
+  top: 150px;
+  width: 539px;
+  height: 337px;
+  border: 1px solid #121212;
 }
 
 .cameraArea {
-  grid-column: 1;
-  grid-row: 1;
-  position: relative;
-  width: 100%;
-  aspect-ratio: 637 / 324;
-  border-radius: 12px;
+  position: absolute;
+  left: 78px;
+  top: 162.625px;
+  width: 519px;
+  height: 324.375px;
+  background: #1c0e1d;
   overflow: hidden;
-  background: #fefefe;
 }
 
 .video {
@@ -101,7 +171,7 @@
   object-fit: cover;
   display: block;
   transform: scaleX(-1);
-  background: #cdd0d4;
+  background: #1c0e1d;
 }
 
 .countdownOverlay {
@@ -146,28 +216,29 @@
 .curtainLeft,
 .curtainRight {
   position: absolute;
-  top: 0;
-  width: 50%;
-  height: 100%;
+  top: 163px;
   z-index: 5;
-  background-image: repeating-linear-gradient(
-    to right,
-    #f7567c 0px,
-    #f7567c 10px,
-    #fa99b0 10px,
-    #fa99b0 20px
-  );
   transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .curtainLeft {
-  left: 0;
-  border-radius: 12px 0 0 12px;
+  left: 78px;
+  width: 250px;
+  height: 332.631px;
 }
 
 .curtainRight {
-  right: 0;
-  border-radius: 0 12px 12px 0;
+  left: 345.5px;
+  top: 162.5px;
+  width: 251.5px;
+  height: 333.131px;
+}
+
+.curtainLeft img,
+.curtainRight img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .curtainLeftOpen {
@@ -178,200 +249,102 @@
   transform: translateX(100%);
 }
 
-.clickToBegin {
+/* ---------- Copy + actions ---------- */
+
+.headingTitle {
   position: absolute;
-  inset: 0;
-  z-index: 8;
-  border: none;
-  background: none;
-  cursor: pointer;
+  left: 634px;
+  top: 170px;
+  width: 252px;
+  margin: 0;
+  text-align: center;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: 600;
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 56px;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: #fefefe;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  font-size: 72px;
+  line-height: 0.76;
+  letter-spacing: -2.88px;
+  color: #d9bb7f;
 }
 
-.thumbs {
-  grid-column: 2;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
-
-.thumb {
-  flex: 1;
-  min-height: 0;
-  border-radius: 9.5px;
-  background: #fa99b0;
-  overflow: hidden;
-}
-
-.thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scaleX(-1);
-}
-
-.heading {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.headingTitle {
+.headingTitle p {
   margin: 0;
-  font-size: 84px;
-  line-height: 64px;
-  letter-spacing: -0.04em;
-  color: #121212;
 }
 
-.headingItalic {
-  font-family: 'Gambetta Variable', serif;
-  font-style: italic;
-  font-weight: var(--gambetta-medium);
-  font-feature-settings: 'salt' 1;
-}
-
-.headingMedium {
-  font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-weight: 500;
-  font-variation-settings: 'opsz' 14, 'wdth' 100;
-}
-
-.headingSubtitle {
-  margin: 4px 0 0;
+.subtitle {
+  position: absolute;
+  left: 643px;
+  top: 291px;
+  width: 234px;
+  margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 48px;
-  letter-spacing: -0.04em;
-  color: #f7567c;
+  font-size: 20px;
+  color: #f5f5f5;
 }
 
 .actions {
-  grid-column: 2;
-  grid-row: 2;
+  position: absolute;
+  left: 643px;
+  top: 355px;
+  width: 234px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
+}
+
+.takePhotosButton {
+  border: none;
+  padding: 8px 12px;
+  background: #d9bb7f;
+  color: #1c0e1d;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 150ms ease;
+}
+
+.takePhotosButton:hover:not(:disabled) {
+  background: #ecd9a8;
+}
+
+.takePhotosButton:disabled {
+  background: #a49a83;
+  cursor: default;
 }
 
 .downloadButton,
 .tryAgainButton {
-  padding: 10px 14px;
-  border-radius: 0;
+  border: none;
+  padding: 8px 12px;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 28px;
-  letter-spacing: -0.04em;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 150ms ease, color 150ms ease;
 }
 
 .downloadButton {
-  border: none;
-  background: #121212;
-  color: #fefefe;
-  transition: background 150ms ease;
+  background: #d9bb7f;
+  color: #1c0e1d;
 }
 
 .downloadButton:hover:not(:disabled) {
-  background: #f7567c;
-}
-
-.downloadButton:disabled {
-  background: #d8d3ce;
-  cursor: not-allowed;
+  background: #ecd9a8;
 }
 
 .tryAgainButton {
-  border: 1px solid #121212;
-  background: #fefefe;
-  color: #121212;
-  transition: background 150ms ease;
+  background: transparent;
+  color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  box-sizing: border-box;
 }
 
 .tryAgainButton:hover {
-  background: rgba(18, 18, 18, 0.06);
-}
-
-.statusMsg {
-  margin: 12px 0 0;
-  font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-regular);
-  font-size: 13px;
-  color: #121212;
-  opacity: 0.55;
-  min-height: 30px;
-}
-
-@media (max-width: 780px) {
-  .frame {
-    width: 100%;
-    padding: 28px 22px 24px;
-    border-radius: 16px;
-  }
-
-  .contentGrid {
-    grid-template-columns: 1fr;
-    row-gap: 20px;
-  }
-
-  .thumbs {
-    grid-column: 1;
-    grid-row: 2;
-    flex-direction: row;
-    aspect-ratio: unset;
-  }
-
-  .thumb {
-    aspect-ratio: 147 / 74;
-  }
-
-  .heading {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .actions {
-    grid-column: 1;
-    grid-row: 4;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .headingTitle {
-    font-size: 44px;
-    line-height: 1;
-  }
-
-  .headingSubtitle {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-
-  .clickToBegin {
-    font-size: 28px;
-  }
-
-  .permissionNote {
-    font-size: 13px;
-    /* The frame's own side padding shrinks a lot more than the close
-       button does at this width, so the button needs extra clearance
-       here to keep from overlapping the note's text. */
-    padding-right: 34px;
-  }
-
-  .downloadButton,
-  .tryAgainButton {
-    font-size: 16px;
-  }
+  background: rgba(245, 245, 245, 0.12);
 }
