@@ -2,7 +2,6 @@ import { useState } from 'react';
 import PhoneMockup from './PhoneMockup';
 import ScreensGallery from './ScreensGallery';
 import SitemapView from './SitemapView';
-import homeScreen from '../../../../../assets/images/moolroop/case-study/screens/home.jpg';
 import styles from './SolutionPanelBody.module.css';
 
 type View = 'solution' | 'screens' | 'sitemap';
@@ -16,7 +15,7 @@ export default function SolutionPanelBody() {
   return (
     <>
       <div className={styles.mockup}>
-        <PhoneMockup src={homeScreen} alt="MoolRoop home screen" />
+        <PhoneMockup screenColor="var(--moolroop-accent)" />
       </div>
 
       <div className={styles.optionButtons}>
