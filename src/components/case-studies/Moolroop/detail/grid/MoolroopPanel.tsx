@@ -1,7 +1,16 @@
+import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import type { CardDef } from './cardData';
 import MotivationPanelBody from './MotivationPanelBody';
+import ProblemPanelBody from './ProblemPanelBody';
+import ResearchPanelBody from './ResearchPanelBody';
 import styles from './MoolroopCard.module.css';
+
+const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
+  motivation: MotivationPanelBody,
+  problem: ProblemPanelBody,
+  research: ResearchPanelBody,
+};
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
 
@@ -43,7 +52,10 @@ export default function MoolroopPanel({
         animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.22 } }}
       >
         <h2 className={styles.panelHeading}>{card.panelHeading}</h2>
-        {card.id === 'motivation' ? <MotivationPanelBody /> : null}
+        {(() => {
+          const Body = PANEL_BODIES[card.id];
+          return Body ? <Body /> : null;
+        })()}
       </motion.div>
     </motion.div>
   );

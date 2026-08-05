@@ -25,14 +25,14 @@ export const CARDS: CardDef[] = [
     number: 2,
     titleLines: ['Problem', 'Statement'],
     subtitle: 'What this project solves?',
-    panelHeading: 'Problem Statement',
+    panelHeading: 'What Problem Does this Project Solves',
   },
   {
     id: 'research',
     number: 3,
     titleLines: ['Research', '& Insights'],
     subtitle: 'What is already there?',
-    panelHeading: 'Research & Insights',
+    panelHeading: 'Research and insights',
   },
   {
     id: 'ideation',

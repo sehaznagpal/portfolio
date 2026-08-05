@@ -165,10 +165,12 @@
 
 .panelHeading {
   position: absolute;
-  left: 13.82%;
+  left: 50%;
   top: 12.37%;
-  right: 5.5%;
+  transform: translateX(-50%);
+  width: 86.67%;
   margin: 0;
+  text-align: center;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
   font-size: 42px;

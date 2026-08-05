@@ -1,0 +1,51 @@
+.body {
+  position: absolute;
+  left: 50%;
+  top: 19.61%;
+  transform: translateX(-50%);
+  width: 86.67%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 20px;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--moolroop-accent);
+  font-weight: var(--author-regular);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.screenshotFrame {
+  position: absolute;
+  left: 50%;
+  top: 49.77%;
+  transform: translateX(-50%);
+  width: 68.63%;
+  height: 63.5%;
+  box-sizing: border-box;
+  border: 4px solid #fefefe;
+  box-shadow: -1px -2px 4px 0 rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+.screenshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
