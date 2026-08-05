@@ -39,7 +39,7 @@ export const CARDS: CardDef[] = [
     number: 4,
     titleLines: ['Ideation &', 'Decisions'],
     subtitle: 'What goes where?',
-    panelHeading: 'Ideation & Decisions',
+    panelHeading: 'Redesigning the path to trust',
   },
   {
     id: 'solution',

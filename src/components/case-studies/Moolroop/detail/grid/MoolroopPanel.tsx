@@ -4,12 +4,14 @@ import type { CardDef } from './cardData';
 import MotivationPanelBody from './MotivationPanelBody';
 import ProblemPanelBody from './ProblemPanelBody';
 import ResearchPanelBody from './ResearchPanelBody';
+import IdeationPanelBody from './IdeationPanelBody';
 import styles from './MoolroopCard.module.css';
 
 const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
   motivation: MotivationPanelBody,
   problem: ProblemPanelBody,
   research: ResearchPanelBody,
+  ideation: IdeationPanelBody,
 };
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
