@@ -1,0 +1,113 @@
+.mockup {
+  position: absolute;
+  left: 23.33%;
+  top: 52.96%;
+  transform: translate(-50%, -50%);
+  width: 25.69%;
+  opacity: 0.9;
+}
+
+.optionButtons {
+  position: absolute;
+  left: 23.33%;
+  top: 46.61%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 1;
+}
+
+.optionButton {
+  padding: 4px 8px;
+  background: none;
+  border: 1px solid #fefefe;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  color: #fefefe;
+  cursor: pointer;
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+  transition: opacity 150ms ease-out;
+}
+
+.optionButton:hover {
+  opacity: 0.7;
+}
+
+.solutionHeading {
+  position: absolute;
+  left: 40.49%;
+  top: 11.16%;
+  width: 53.14%;
+  margin: 0;
+  text-align: center;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--moolroop-yellow);
+}
+
+.solutionText {
+  position: absolute;
+  left: 40.49%;
+  top: 18.25%;
+  width: 53.14%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 20px;
+  line-height: 1;
+  text-align: justify;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.reflectionHeading {
+  position: absolute;
+  left: 40.98%;
+  top: 57.62%;
+  width: 53.14%;
+  margin: 0;
+  text-align: center;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--moolroop-yellow);
+}
+
+.reflectionText {
+  position: absolute;
+  left: 40.98%;
+  top: 64.55%;
+  width: 53.14%;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 20px;
+  line-height: 1;
+  text-align: justify;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.reflectionText p {
+  margin: 0 0 20px;
+}
+
+.reflectionText p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--moolroop-accent);
+  font-weight: var(--author-regular);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

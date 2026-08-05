@@ -5,6 +5,7 @@ import MotivationPanelBody from './MotivationPanelBody';
 import ProblemPanelBody from './ProblemPanelBody';
 import ResearchPanelBody from './ResearchPanelBody';
 import IdeationPanelBody from './IdeationPanelBody';
+import SolutionPanelBody from './SolutionPanelBody';
 import styles from './MoolroopCard.module.css';
 
 const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
@@ -12,7 +13,13 @@ const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
   problem: ProblemPanelBody,
   research: ResearchPanelBody,
   ideation: IdeationPanelBody,
+  solution: SolutionPanelBody,
 };
+
+/* Solution's Figma layout has its own "Solution" + "Reflection" headings
+   positioned beside the phone mockup rather than one shared centered title —
+   SolutionPanelBody renders those itself, so the generic heading is skipped here. */
+const CARDS_WITH_CUSTOM_HEADING = new Set(['solution']);
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
 
@@ -53,7 +60,7 @@ export default function MoolroopPanel({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.22 } }}
       >
-        <h2 className={styles.panelHeading}>{card.panelHeading}</h2>
+        {!CARDS_WITH_CUSTOM_HEADING.has(card.id) && <h2 className={styles.panelHeading}>{card.panelHeading}</h2>}
         {(() => {
           const Body = PANEL_BODIES[card.id];
           return Body ? <Body /> : null;

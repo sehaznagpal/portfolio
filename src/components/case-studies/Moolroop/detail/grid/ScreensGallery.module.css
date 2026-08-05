@@ -1,0 +1,54 @@
+.heading {
+  position: absolute;
+  left: 37.84%;
+  top: 9.65%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--moolroop-yellow);
+  white-space: nowrap;
+}
+
+.goBack {
+  position: absolute;
+  left: 83.33%;
+  top: 12.07%;
+  margin: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 20px;
+  line-height: 1;
+  color: #fefefe;
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+  transition: opacity 150ms ease-out;
+}
+
+.goBack:hover {
+  opacity: 0.7;
+}
+
+.scrollArea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 21%;
+  bottom: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 12px 5.5% 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px 12px;
+}
