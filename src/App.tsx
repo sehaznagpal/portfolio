@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import IndexPage from './pages/IndexPage';
+import { useScrollToTop } from './lib/useScrollToTop';
 
 const CaseStudyMoolroopPage = lazy(() => import('./pages/CaseStudyMoolroopPage'));
 const CaseStudyDrCuterusPage = lazy(() => import('./pages/CaseStudyDrCuterusPage'));
@@ -8,6 +9,8 @@ const CaseStudyFraudPage = lazy(() => import('./pages/CaseStudyFraudPage'));
 const ExperimentZonePage = lazy(() => import('./pages/ExperimentZonePage'));
 
 export default function App() {
+  useScrollToTop();
+
   return (
     <Suspense fallback={null}>
       <Routes>
