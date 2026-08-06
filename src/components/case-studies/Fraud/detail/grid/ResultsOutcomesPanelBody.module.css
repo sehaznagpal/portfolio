@@ -1,0 +1,96 @@
+.heading {
+  position: absolute;
+  left: 25.98%;
+  top: 14.179%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.intro {
+  position: absolute;
+  left: 6.569%;
+  top: 21.419%;
+  width: 86.961%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.highlight {
+  background: var(--dissertation-navy);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.subheading {
+  position: absolute;
+  left: 27.059%;
+  top: 40.573%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.body {
+  position: absolute;
+  left: 8.039%;
+  top: 47.964%;
+  width: 84.02%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 20px;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.button {
+  position: absolute;
+  left: 39.706%;
+  top: 83.86%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid #fefefe;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  color: #fefefe;
+  white-space: nowrap;
+  cursor: pointer;
+  font-feature-settings: 'salt' 1;
+  transition: background 150ms ease-out;
+}
+
+.button:hover {
+  background: rgba(254, 254, 254, 0.12);
+}

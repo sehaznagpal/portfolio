@@ -5,6 +5,7 @@ import TopicPanelBody from './TopicPanelBody';
 import MethodologyPanelBody from './MethodologyPanelBody';
 import ProcessProgressPanelBody from './ProcessProgressPanelBody';
 import ResearchDesignPanelBody from './ResearchDesignPanelBody';
+import ResultsOutcomesPanelBody from './ResultsOutcomesPanelBody';
 import styles from './FraudCard.module.css';
 
 const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
@@ -12,12 +13,14 @@ const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
   methodology: MethodologyPanelBody,
   process: ProcessProgressPanelBody,
   design: ResearchDesignPanelBody,
+  results: ResultsOutcomesPanelBody,
 };
 
-/* Topic, Methodology, Process & Progress, and Research Design have their own
-   Figma-authored headline positioned as part of the body copy rather than the generic
-   centered heading — those render it themselves, so the generic heading is skipped here. */
-const CARDS_WITH_CUSTOM_HEADING = new Set(['topic', 'methodology', 'process', 'design']);
+/* Topic, Methodology, Process & Progress, Research Design, and Results & Outcomes have
+   their own Figma-authored headline positioned as part of the body copy rather than the
+   generic centered heading — those render it themselves, so the generic heading is
+   skipped here. */
+const CARDS_WITH_CUSTOM_HEADING = new Set(['topic', 'methodology', 'process', 'design', 'results']);
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
 
