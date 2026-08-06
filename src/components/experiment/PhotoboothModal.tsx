@@ -244,6 +244,17 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
     resetPhotoboothState();
   }
 
+  // The curtain is a single click target throughout the flow: before a shoot
+  // it starts one, and once the strip is done (curtain closed again) it
+  // restarts the booth — same as the Try Again button.
+  function handleCurtainClick() {
+    if (done) {
+      handleTryAgain();
+    } else {
+      handleTakePhotos();
+    }
+  }
+
   return createPortal(
     <div
       className={`${styles.overlay} ${visible ? styles.overlayVisible : ''}`}
@@ -286,14 +297,14 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
           </div>
           <div
             className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`}
-            onClick={handleTakePhotos}
+            onClick={handleCurtainClick}
             role="button"
             tabIndex={0}
-            aria-label="Take photos"
+            aria-label={done ? 'Try again' : 'Take photos'}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
-                handleTakePhotos();
+                handleCurtainClick();
               }
             }}
           >
@@ -301,14 +312,14 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
           </div>
           <div
             className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`}
-            onClick={handleTakePhotos}
+            onClick={handleCurtainClick}
             role="button"
             tabIndex={0}
-            aria-label="Take photos"
+            aria-label={done ? 'Try again' : 'Take photos'}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
-                handleTakePhotos();
+                handleCurtainClick();
               }
             }}
           >

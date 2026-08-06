@@ -84,7 +84,7 @@
   width: 897px;
   height: 95px;
   background-image:
-    repeating-linear-gradient(to right, rgba(18, 18, 18, 0.35) 0 1px, transparent 1px 112px),
+    repeating-linear-gradient(to right, rgba(18, 18, 18, 0.35) 0 1px, transparent 1px 48px),
     repeating-linear-gradient(to bottom, rgba(18, 18, 18, 0.35) 0 1px, transparent 1px 48px);
 }
 
@@ -213,30 +213,35 @@
   }
 }
 
-/* Sized a few px past .cameraArea's own edges on every side (with a small
-   mutual overlap at the middle seam) so there's no gap the camera can peek
-   through while closed — the two halves' native art isn't quite wide enough
-   for that on its own. Slides to translateX(±500-600px) rather than ±100%
-   when open: at their old size that only cleared their own width, which
-   landed mid-curtain in the copy panel on the right and covered the
-   Download/Try Again actions. */
+/* Closed: the two halves exactly tile .cameraArea's 78-597 span (78-337 and
+   337-597, from the Figma reference) — no gap, no overlap needed. Open: each
+   half stays put at its own outer edge (camera's left/right edge) and just
+   narrows down to a bunched-up strip, rather than sliding out of the frame —
+   it's a real physical curtain gathering at the sides, not exiting the
+   scene. The <img> inside is 100%-of-parent and the source SVG stretches
+   (preserveAspectRatio="none"), so narrowing the container is what actually
+   produces the gathered/squeezed look. */
 .curtainLeft,
 .curtainRight {
   position: absolute;
-  top: 155px;
-  width: 275px;
-  height: 340px;
+  top: 162px;
+  height: 335px;
   z-index: 5;
   cursor: pointer;
-  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  transition:
+    left 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .curtainLeft {
-  left: 70px;
+  left: 78px;
+  width: 259px;
 }
 
 .curtainRight {
-  left: 330px;
+  left: 337px;
+  width: 260px;
   /* A small stagger — reads as two independently-pulled curtain halves
      rather than one mechanically synced panel. */
   transition-delay: 60ms;
@@ -250,11 +255,12 @@
 }
 
 .curtainLeftOpen {
-  transform: translateX(-500px);
+  width: 42px;
 }
 
 .curtainRightOpen {
-  transform: translateX(600px);
+  left: 561px;
+  width: 36px;
 }
 
 /* ---------- Copy + actions ---------- */
