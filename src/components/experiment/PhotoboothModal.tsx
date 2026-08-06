@@ -9,7 +9,7 @@ import sparkle2Img from '../../assets/images/experiment/photobooth-sparkle-2.svg
 
 const EXIT_MS = 200;
 const SHOT_COUNT = 4;
-const CURTAIN_MS = 500;
+const CURTAIN_MS = 380;
 /* The 4 top photo frames aren't evenly spaced (each is a hand-placed Figma
    rect, off by a px or two from a clean grid), so each needs its own
    left/width rather than a repeatable formula. */
@@ -203,12 +203,25 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
 
     stripRef.current = buildStrip(framesRef.current);
     setStatusMsg('All done! Download your strip below ✦');
+
+    // Let the last flash settle, then close the curtain again — the booth's
+    // "show's over" beat — before revealing the download/try-again actions.
+    // `shooting` stays true through this whole beat (rather than clearing it
+    // immediately) purely so the Take Photos button — gated on !shooting —
+    // can't flash back into view while the curtain is mid-close.
+    await sleep(500);
+    setCurtainOpen(false);
+    await sleep(CURTAIN_MS);
     setShooting(false);
     setDone(true);
   }
 
   async function handleTakePhotos() {
-    if (curtainOpen || shooting) return;
+    // The curtain itself is clickable too (see the curtain divs below), so
+    // this guard also has to rule out re-triggering from a stray click while
+    // the done screen (curtain closed again, showing Download/Try Again) is
+    // up — that flow restarts only through the explicit Try Again button.
+    if (curtainOpen || shooting || done) return;
     let stream = streamRef.current;
     if (!stream) {
       const ok = await requestCamera();
@@ -271,10 +284,34 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
             {countdown !== null && <div className={styles.countdownOverlay}>{countdown}</div>}
             <div className={`${styles.flashOverlay} ${flash ? styles.flashActive : ''}`} />
           </div>
-          <div className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`}>
+          <div
+            className={`${styles.curtainLeft} ${curtainOpen ? styles.curtainLeftOpen : ''}`}
+            onClick={handleTakePhotos}
+            role="button"
+            tabIndex={0}
+            aria-label="Take photos"
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleTakePhotos();
+              }
+            }}
+          >
             <img src={curtainLeftImg} alt="" />
           </div>
-          <div className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`}>
+          <div
+            className={`${styles.curtainRight} ${curtainOpen ? styles.curtainRightOpen : ''}`}
+            onClick={handleTakePhotos}
+            role="button"
+            tabIndex={0}
+            aria-label="Take photos"
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleTakePhotos();
+              }
+            }}
+          >
             <img src={curtainRightImg} alt="" />
           </div>
 
@@ -285,7 +322,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
           <p className={styles.subtitle}>{statusMsg}</p>
 
           <div className={styles.actions}>
-            {!curtainOpen && !done && (
+            {!curtainOpen && !shooting && !done && (
               <button type="button" className={styles.takePhotosButton} onClick={handleTakePhotos}>
                 Take Photos
               </button>

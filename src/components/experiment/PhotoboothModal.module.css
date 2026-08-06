@@ -148,10 +148,10 @@
 
 .boothTrim {
   position: absolute;
-  left: 68px;
-  top: 150px;
-  width: 539px;
-  height: 337px;
+  left: 66px;
+  top: 148px;
+  width: 543px;
+  height: 350px;
   border: 1px solid #121212;
 }
 
@@ -213,25 +213,33 @@
   }
 }
 
+/* Sized a few px past .cameraArea's own edges on every side (with a small
+   mutual overlap at the middle seam) so there's no gap the camera can peek
+   through while closed — the two halves' native art isn't quite wide enough
+   for that on its own. Slides to translateX(±500-600px) rather than ±100%
+   when open: at their old size that only cleared their own width, which
+   landed mid-curtain in the copy panel on the right and covered the
+   Download/Try Again actions. */
 .curtainLeft,
 .curtainRight {
   position: absolute;
-  top: 163px;
+  top: 155px;
+  width: 275px;
+  height: 340px;
   z-index: 5;
-  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .curtainLeft {
-  left: 78px;
-  width: 250px;
-  height: 332.631px;
+  left: 70px;
 }
 
 .curtainRight {
-  left: 345.5px;
-  top: 162.5px;
-  width: 251.5px;
-  height: 333.131px;
+  left: 330px;
+  /* A small stagger — reads as two independently-pulled curtain halves
+     rather than one mechanically synced panel. */
+  transition-delay: 60ms;
 }
 
 .curtainLeft img,
@@ -242,11 +250,11 @@
 }
 
 .curtainLeftOpen {
-  transform: translateX(-100%);
+  transform: translateX(-500px);
 }
 
 .curtainRightOpen {
-  transform: translateX(100%);
+  transform: translateX(600px);
 }
 
 /* ---------- Copy + actions ---------- */
