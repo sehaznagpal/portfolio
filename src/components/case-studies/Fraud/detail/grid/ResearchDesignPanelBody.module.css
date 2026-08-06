@@ -1,0 +1,105 @@
+.heading {
+  position: absolute;
+  left: 25.98%;
+  top: 8.748%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.intro {
+  position: absolute;
+  left: 8.725%;
+  top: 15.837%;
+  width: 83.725%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.highlight {
+  background: var(--dissertation-navy);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.subheading {
+  position: absolute;
+  left: 33.137%;
+  top: 41.478%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.body {
+  position: absolute;
+  left: 8.039%;
+  top: 48.869%;
+  width: 84.02%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 20px;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.noteBox {
+  position: absolute;
+  left: 6.569%;
+  top: 75.566%;
+  width: 86.863%;
+  height: 13.876%;
+  box-sizing: border-box;
+  padding: 10px 18px;
+  border: 2px solid #fefefe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noteText {
+  width: 100%;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 20px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.noteTitle {
+  margin: 0 0 4px;
+  font-weight: var(--author-medium);
+}
+
+.noteBody {
+  margin: 0;
+}
