@@ -36,7 +36,7 @@ function captureFrame(video: HTMLVideoElement): Frame {
   return c;
 }
 
-function buildStrip(frames: Frame[]): HTMLCanvasElement {
+async function buildStrip(frames: Frame[]): Promise<HTMLCanvasElement> {
   const fw = frames[0].width;
   const fh = frames[0].height;
   const pad = 24;
@@ -53,10 +53,15 @@ function buildStrip(frames: Frame[]): HTMLCanvasElement {
     ctx.drawImage(frame, pad, pad + i * (fh + gap), fw, fh);
   });
 
+  const font = `${Math.round(fw * 0.032)}px "Gambetta Variable"`;
+  // Canvas text silently falls back to the platform default if the webfont
+  // isn't loaded yet — load() (idempotent, no-op once cached) guarantees
+  // it's actually ready before fillText reads the current ctx.font.
+  await document.fonts.load(font);
   ctx.fillStyle = '#121212';
-  ctx.font = `bold ${Math.round(fw * 0.032)}px serif`;
+  ctx.font = font;
   ctx.textAlign = 'center';
-  ctx.fillText('@sehaznagpal portfolio', strip.width / 2, strip.height - 16);
+  ctx.fillText("From Sehaz's Portfolio <3", strip.width / 2, strip.height - 16);
 
   return strip;
 }
@@ -201,7 +206,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
       await sleep(500);
     }
 
-    stripRef.current = buildStrip(framesRef.current);
+    stripRef.current = await buildStrip(framesRef.current);
     setStatusMsg('All done! Download your strip below ✦');
 
     // Let the last flash settle, then close the curtain again — the booth's
