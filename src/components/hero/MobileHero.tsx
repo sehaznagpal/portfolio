@@ -29,7 +29,9 @@ export default function MobileHero() {
 
       <p className={styles.paragraph}>
         Since I was a kid, I have always been intrigued by the question:{' '}
-        <span className={styles.question}>&ldquo;Why do people do what they do?&rdquo;</span>{' '}
+        <span className={styles.question}>
+          <span className={styles.openQuote}>&ldquo;</span>Why do people do what they do?&rdquo;
+        </span>{' '}
         This question stayed along me as I got through an economics degree, a dissertation, and,
         now, as I design.{' '}
         <span className={styles.highlight} onClick={() => setPhotoVisible((v) => !v)}>

@@ -48,7 +48,7 @@
   font-weight: var(--author-regular);
   font-style: normal;
   font-size: 24px;
-  line-height: 1.35;
+  line-height: 1.215;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
 }
@@ -56,6 +56,10 @@
 .question {
   font-weight: var(--author-semibold);
   font-style: italic;
+}
+
+.openQuote {
+  margin-right: -0.08em;
 }
 
 .highlight {
