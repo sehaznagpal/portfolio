@@ -28,21 +28,11 @@ export default function ProcessProgressPanelBody() {
       </p>
 
       <h2 className={styles.subheading}>The design: 3 groups, 3 scenarios, 116 people</h2>
-      <div className={styles.methodBody}>
-        <p>
-          The experiment ran as a 3×3 mixed factorial. Between subjects: control, warning, or CTA
-          (a redesigned &quot;cancel payment&quot; button made visually prominent), assigned at
-          random on landing. Within subjects: three fraud scenarios, each targeting a different
-          bias.
-        </p>
-        <p>
-          Every participant moved through all three scenarios, saw one intervention type
-          throughout, and rated their confidence after each decision. Since the live experiment
-          collects real data and can&apos;t be replayed, I rebuilt one full scenario, across all
-          three groups, as a standalone prototype so anyone reading this can click through what
-          each group actually saw.
-        </p>
-      </div>
+      <p className={styles.methodIntro}>
+        The experiment ran as a 3×3 mixed factorial. Between subjects: control, warning, or CTA (a
+        redesigned &quot;cancel payment&quot; button made visually prominent), assigned at random
+        on landing. Within subjects: three fraud scenarios, each targeting a different bias.
+      </p>
 
       <ul className={styles.list}>
         <li>
@@ -58,6 +48,14 @@ export default function ProcessProgressPanelBody() {
           glowing comments and a countdown offer
         </li>
       </ul>
+
+      <p className={styles.methodOutro}>
+        Every participant moved through all three scenarios, saw one intervention type
+        throughout, and rated their confidence after each decision. Since the live experiment
+        collects real data and can&apos;t be replayed, I rebuilt one full scenario, across all
+        three groups, as a standalone prototype so anyone reading this can click through what each
+        group actually saw.
+      </p>
 
       <div className={styles.buttons}>
         <button type="button" className={styles.button} onClick={() => setView('flow')}>

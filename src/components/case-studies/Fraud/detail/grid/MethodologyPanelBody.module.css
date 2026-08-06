@@ -62,7 +62,7 @@
   width: 38.431%;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 11px;
 }
 
 .lensItem {
@@ -90,13 +90,13 @@
   display: block;
   margin-top: 2px;
   font-size: 16px;
-  line-height: 1.2;
+  line-height: 0.9;
 }
 
 .casesBox {
   position: absolute;
   left: 56.961%;
-  top: 54.9%;
+  top: 52.489%;
   width: 33.725%;
   height: 32.881%;
   box-sizing: border-box;
