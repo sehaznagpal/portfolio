@@ -1,0 +1,312 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 76px 40px 40px;
+  box-sizing: border-box;
+}
+
+.goBack {
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  z-index: 2;
+  margin: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 20px;
+  line-height: 1;
+  color: #fefefe;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-feature-settings: 'salt' 1;
+  transition: opacity 150ms ease-out;
+}
+
+.goBack:hover {
+  opacity: 0.7;
+}
+
+.title {
+  margin: 0 0 32px;
+  text-align: center;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -1.28px;
+  color: #c6dbff;
+}
+
+.flow {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 560px;
+  margin: 0 auto;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-feature-settings: 'salt' 1;
+}
+
+.node {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 6px;
+  border: 1px solid #666;
+  background: #1a1a1a;
+  color: #fefefe;
+  font-size: 15px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.nodeAccent {
+  border-color: #c9a961;
+  background: #2a2a3e;
+}
+
+.nodeFinal {
+  border-color: #c9a961;
+  background: #c9a961;
+  color: #1a1a1a;
+  font-weight: var(--author-regular);
+}
+
+.connector {
+  width: 2px;
+  height: 28px;
+  background: #666;
+  position: relative;
+}
+
+.connector::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #666;
+}
+
+.branchWrap {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding-top: 24px;
+  box-sizing: border-box;
+}
+
+.branchWrap::before {
+  /* horizontal bar spanning the three column centers */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16.667%;
+  right: 16.667%;
+  height: 2px;
+  background: #666;
+}
+
+.branchStub {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 24px;
+  background: #666;
+  transform: translateX(-50%);
+}
+
+.branchStub::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #666;
+}
+
+.groupNode {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.groupControl {
+  border: 1px solid #666;
+  background: #1a1a1a;
+  color: #fefefe;
+}
+
+.groupWarning {
+  border: 1px solid #e8944a;
+  background: #e8944a;
+  color: #1a1a1a;
+}
+
+.groupCta {
+  border: 1px solid #c0392b;
+  background: #c0392b;
+  color: #fefefe;
+}
+
+.mergeWrap {
+  position: relative;
+  width: 100%;
+  height: 24px;
+}
+
+.mergeWrap::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16.667%;
+  right: 16.667%;
+  height: 2px;
+  background: #666;
+}
+
+.mergeStubUp {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #666;
+  transform: translateX(-50%);
+}
+
+.subgraph {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #c9a961;
+  border-radius: 8px;
+  background: #0f0f0f;
+}
+
+.subgraphLabel {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(254, 254, 254, 0.55);
+}
+
+.scenarioRow {
+  display: flex;
+  gap: 12px;
+}
+
+.scenarioNode {
+  flex: 1 1 0;
+  box-sizing: border-box;
+  padding: 12px 10px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #fefefe;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.loopRegion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.loopLine {
+  position: absolute;
+  top: 0;
+  bottom: 70px;
+  right: -40px;
+  width: 2px;
+  background: #666;
+}
+
+.loopLine::before {
+  /* arrowhead pointing up into the subgraph */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -1px;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #666;
+}
+
+.loopStubTop {
+  position: absolute;
+  top: 0;
+  right: -40px;
+  width: 40px;
+  height: 2px;
+  background: #666;
+}
+
+.loopStubBottom {
+  position: absolute;
+  bottom: 70px;
+  right: -40px;
+  width: 40px;
+  height: 2px;
+  background: #666;
+}
+
+.loopLabel {
+  position: absolute;
+  right: -160px;
+  top: 45%;
+  width: 120px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  line-height: 1.3;
+  color: rgba(254, 254, 254, 0.75);
+}
+
+.diamond {
+  box-sizing: border-box;
+  width: 200px;
+  height: 140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c9a961;
+  background: #2a2a3e;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.diamondText {
+  width: 130px;
+  color: #fefefe;
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.yesLabel {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: rgba(254, 254, 254, 0.75);
+}

@@ -1,0 +1,131 @@
+.heading {
+  position: absolute;
+  left: 19.412%;
+  top: 9.653%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.intro {
+  position: absolute;
+  left: 50%;
+  top: 18.25%;
+  transform: translateX(-50%);
+  width: 86.667%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.highlight {
+  background: var(--dissertation-navy);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.subheading {
+  position: absolute;
+  left: 14.804%;
+  top: 32.126%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.methodBody {
+  position: absolute;
+  left: 50%;
+  top: 39.518%;
+  transform: translateX(-50%);
+  width: 86.667%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.methodBody p {
+  margin: 0 0 20px;
+}
+
+.methodBody p:last-child {
+  margin-bottom: 0;
+}
+
+.list {
+  position: absolute;
+  left: 50%;
+  top: 53.09%;
+  transform: translateX(-50%);
+  width: 86.667%;
+  margin: 0;
+  padding-left: 36px;
+  list-style: disc;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.list li {
+  margin: 0 0 6px;
+}
+
+.list li:last-child {
+  margin-bottom: 0;
+}
+
+.buttons {
+  position: absolute;
+  left: 50%;
+  top: 86.879%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid #fefefe;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  letter-spacing: 0;
+  color: #fefefe;
+  white-space: nowrap;
+  cursor: pointer;
+  font-feature-settings: 'salt' 1;
+  transition: background 150ms ease-out;
+}
+
+.button:hover {
+  background: rgba(254, 254, 254, 0.12);
+}

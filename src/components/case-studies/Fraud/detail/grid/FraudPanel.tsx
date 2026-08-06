@@ -3,17 +3,19 @@ import { motion } from 'framer-motion';
 import type { CardDef } from './cardData';
 import TopicPanelBody from './TopicPanelBody';
 import MethodologyPanelBody from './MethodologyPanelBody';
+import ProcessProgressPanelBody from './ProcessProgressPanelBody';
 import styles from './FraudCard.module.css';
 
 const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
   topic: TopicPanelBody,
   methodology: MethodologyPanelBody,
+  process: ProcessProgressPanelBody,
 };
 
-/* Topic and Methodology have their own Figma-authored headline positioned as part of
-   the body copy rather than the generic centered heading — those two render it themselves,
-   so the generic heading is skipped here. */
-const CARDS_WITH_CUSTOM_HEADING = new Set(['topic', 'methodology']);
+/* Topic, Methodology, and Process & Progress have their own Figma-authored headline
+   positioned as part of the body copy rather than the generic centered heading — those
+   render it themselves, so the generic heading is skipped here. */
+const CARDS_WITH_CUSTOM_HEADING = new Set(['topic', 'methodology', 'process']);
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
 
