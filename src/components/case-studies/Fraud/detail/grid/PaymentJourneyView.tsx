@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import moneyTransferScreen from '../../../../../assets/images/fraud/case-study/payment-journey/money-transfer.jpg';
 import selectAccountScreen from '../../../../../assets/images/fraud/case-study/payment-journey/select-account.jpg';
 import selectAccountCtaScreen from '../../../../../assets/images/fraud/case-study/payment-journey/select-account-cta.jpg';
@@ -11,17 +11,23 @@ import connectorTop from '../../../../../assets/images/fraud/case-study/payment-
 import connectorBottom from '../../../../../assets/images/fraud/case-study/payment-journey/connector-bottom.svg';
 import styles from './PaymentJourneyView.module.css';
 
+const AUTO_ADVANCE_MS = 6500;
+
 const GROUPS = ['Control', 'Warning', 'CTA'] as const;
 
 const PHONE_LEFT = ['3.922%', '22.444%', '40.966%', '59.488%', '78.011%'];
 
 const CONNECTORS: { left: string; variant: 'top' | 'bottom' }[] = [
-  { left: '13.334%', variant: 'top' },
-  { left: '32.374%', variant: 'bottom' },
-  { left: '50.883%', variant: 'top' },
-  { left: '70.414%', variant: 'bottom' },
+  { left: '13.116%', variant: 'top' },
+  { left: '32.165%', variant: 'bottom' },
+  { left: '50.665%', variant: 'top' },
+  { left: '70.204%', variant: 'bottom' },
 ];
 
+/* Three independent 5-step flows (Control / Warning / CTA), not one row with two
+   swappable slots — steps 1, 4, and 5 just happen to share the same screenshot
+   across all three groups, and step 3 (PIN) only diverges for Warning while step 2
+   (account select) only diverges for CTA. */
 function screensForGroup(group: number) {
   return [
     moneyTransferScreen,
@@ -35,6 +41,14 @@ function screensForGroup(group: number) {
 export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
   const [group, setGroup] = useState(0);
   const screens = screensForGroup(group);
+
+  useEffect(() => {
+    const id = setTimeout(() => setGroup((i) => (i + 1) % GROUPS.length), AUTO_ADVANCE_MS);
+    return () => clearTimeout(id);
+  }, [group]);
+
+  const goPrev = () => setGroup((i) => (i - 1 + GROUPS.length) % GROUPS.length);
+  const goNext = () => setGroup((i) => (i + 1) % GROUPS.length);
 
   return (
     <>
@@ -55,6 +69,13 @@ export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
           />
         ))}
       </div>
+
+      <button type="button" className={`${styles.sideButton} ${styles.sideButtonLeft}`} onClick={goPrev} aria-label="Previous group">
+        ‹
+      </button>
+      <button type="button" className={`${styles.sideButton} ${styles.sideButtonRight}`} onClick={goNext} aria-label="Next group">
+        ›
+      </button>
 
       <div className={styles.phones}>
         {screens.map((src, i) => (

@@ -1,7 +1,8 @@
 .heading {
   position: absolute;
-  left: 21.078%;
+  left: 50%;
   top: 10.709%;
+  transform: translateX(-50%);
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
@@ -106,19 +107,57 @@
 }
 
 .connectorTop {
-  top: 27.003%;
+  top: 26.697%;
   width: 17.788%;
   height: 3.713%;
 }
 
 .connectorBottom {
-  top: 91.185%;
+  top: 87.107%;
   width: 17.779%;
   height: 3.775%;
+  /* Figma instances this same arrow asset at the bottom with a vertical flip
+     (-scale-y-100) so the bracket opens upward into the phones from below,
+     mirroring the top connectors that open downward from above. */
+  transform: scaleY(-1);
 }
 
 .connector img {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.sideButton {
+  position: absolute;
+  top: 59.05%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #121212;
+  background: rgba(254, 254, 254, 0.9);
+  color: #121212;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-bold);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 150ms ease-out;
+}
+
+.sideButton:hover {
+  opacity: 0.75;
+}
+
+.sideButtonLeft {
+  left: 6px;
+}
+
+.sideButtonRight {
+  right: 6px;
 }
