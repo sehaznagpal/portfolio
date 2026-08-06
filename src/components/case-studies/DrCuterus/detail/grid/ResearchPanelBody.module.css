@@ -1,0 +1,42 @@
+.heading {
+  position: absolute;
+  left: 23.235%;
+  top: 10.558%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--drcuterus-lavender);
+  white-space: nowrap;
+}
+
+.body {
+  position: absolute;
+  left: 6.765%;
+  top: 19.759%;
+  width: 86.667%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: left;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 20px;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--drcuterus-purple);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

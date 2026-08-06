@@ -1,0 +1,77 @@
+.heading {
+  position: absolute;
+  left: 13.137%;
+  top: 17.496%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--drcuterus-lavender);
+  white-space: nowrap;
+}
+
+.intro {
+  position: absolute;
+  left: 9.902%;
+  top: 25.49%;
+  width: 44.608%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.intro p {
+  margin: 0 0 20px;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--drcuterus-purple);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.phone {
+  position: absolute;
+  left: 63.235%;
+  top: 9.804%;
+  width: 26.541%;
+  height: 83.269%;
+  opacity: 0.9;
+}
+
+.phoneScreen {
+  position: absolute;
+  left: 50%;
+  top: 2.15%;
+  transform: translateX(-50%);
+  width: 90.312%;
+  height: 95.89%;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.phoneScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.bezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

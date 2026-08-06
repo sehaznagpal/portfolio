@@ -1,0 +1,126 @@
+.heading {
+  position: absolute;
+  left: 29.608%;
+  top: 9.653%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--drcuterus-lavender);
+  white-space: nowrap;
+}
+
+.intro {
+  position: absolute;
+  left: 50%;
+  top: 17.345%;
+  transform: translateX(-50%);
+  width: 86.667%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.intro p {
+  margin: 0 0 20px;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--drcuterus-purple);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 150ms ease-out;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.laptop {
+  position: absolute;
+  left: 29.118%;
+  top: 48.416%;
+  width: 57.389%;
+  height: 54.611%;
+}
+
+.laptopBezel {
+  position: absolute;
+  left: -12.76%;
+  top: -1.25%;
+  width: 125.83%;
+  height: 118.69%;
+  max-width: none;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.laptopScreen {
+  position: absolute;
+  left: 3.095%;
+  top: 11.792%;
+  width: 94.325%;
+  height: 88.59%;
+  overflow: hidden;
+}
+
+.laptopScreen img {
+  position: absolute;
+  left: -0.08%;
+  top: -2.6%;
+  width: 99.95%;
+  height: 114.33%;
+  max-width: none;
+  pointer-events: none;
+}
+
+.phone {
+  position: absolute;
+  left: 13.431%;
+  top: 48.416%;
+  width: 17.455%;
+  height: 54.762%;
+}
+
+.phoneScreen {
+  position: absolute;
+  left: 50%;
+  top: 2.15%;
+  transform: translateX(-50%);
+  width: 90.312%;
+  height: 95.89%;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.phoneScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.bezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

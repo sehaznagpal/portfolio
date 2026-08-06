@@ -1,0 +1,75 @@
+.heading {
+  position: absolute;
+  left: 26.667%;
+  top: 9.955%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: var(--drcuterus-lavender);
+  white-space: nowrap;
+}
+
+.intro {
+  position: absolute;
+  left: 50%;
+  top: 19.155%;
+  transform: translateX(-50%);
+  width: 87.549%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.intro p {
+  margin: 0 0 20px;
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+.laptop {
+  position: absolute;
+  left: 13.235%;
+  top: 58.221%;
+  width: 73.627%;
+  height: 70.062%;
+}
+
+.laptopBezel {
+  position: absolute;
+  left: -12.76%;
+  top: -1.25%;
+  width: 125.83%;
+  height: 118.69%;
+  max-width: none;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.laptopScreen {
+  position: absolute;
+  left: 3.095%;
+  top: 11.792%;
+  width: 94.322%;
+  height: 90.905%;
+  overflow: hidden;
+}
+
+.laptopScreen img {
+  position: absolute;
+  left: -0.1%;
+  top: 0.01%;
+  width: 99.95%;
+  height: 111.42%;
+  max-width: none;
+  pointer-events: none;
+}
