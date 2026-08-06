@@ -1,0 +1,43 @@
+.heading {
+  position: absolute;
+  left: 10.588%;
+  top: 17.194%;
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -1.68px;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.body {
+  position: absolute;
+  left: 50%;
+  top: 26.395%;
+  transform: translateX(-50%);
+  width: 86.667%;
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-light);
+  font-size: 24px;
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 20px;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  background: var(--dissertation-navy);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
