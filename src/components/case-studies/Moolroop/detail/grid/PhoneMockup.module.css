@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1736 / 3528;
+  pointer-events: none;
 }
 
 .screen {

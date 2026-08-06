@@ -1,7 +1,8 @@
 .heading {
   position: absolute;
-  left: 37.84%;
+  left: 50%;
   top: 9.65%;
+  transform: translateX(-50%);
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
@@ -36,19 +37,68 @@
   opacity: 0.7;
 }
 
-.scrollArea {
+.dots {
+  position: absolute;
+  left: 50%;
+  top: 18.4%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  z-index: 2;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: #fefefe;
+  cursor: pointer;
+  transition: background 200ms ease-out, transform 150ms ease-out;
+}
+
+.dot:hover {
+  transform: scale(1.15);
+}
+
+.dotActive {
+  background: var(--moolroop-accent);
+}
+
+.edgeZone {
+  position: absolute;
+  top: 23%;
+  bottom: 24px;
+  width: 14%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.edgeLeft {
+  left: 0;
+}
+
+.edgeRight {
+  right: 0;
+}
+
+.row {
   position: absolute;
   left: 0;
   right: 0;
-  top: 21%;
-  bottom: 0;
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding: 12px 5.5% 32px;
+  top: 25.34%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px 12px;
+.mockup {
+  width: 21.87%;
+  flex: 0 0 auto;
 }
