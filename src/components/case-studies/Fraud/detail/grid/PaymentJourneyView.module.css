@@ -128,36 +128,22 @@
   display: block;
 }
 
-.sideButton {
+.edgeZone {
   position: absolute;
-  top: 59.05%;
-  transform: translateY(-50%);
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid #121212;
-  background: rgba(254, 254, 254, 0.9);
-  color: #121212;
-  font-family: 'Gambetta Variable', serif;
-  font-weight: var(--gambetta-bold);
-  font-size: 18px;
-  line-height: 1;
+  top: 23%;
+  bottom: 24px;
+  width: 14%;
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  z-index: 2;
-  transition: opacity 150ms ease-out;
+  z-index: 1;
 }
 
-.sideButton:hover {
-  opacity: 0.75;
+.edgeLeft {
+  left: 0;
 }
 
-.sideButtonLeft {
-  left: 6px;
-}
-
-.sideButtonRight {
-  right: 6px;
+.edgeRight {
+  right: 0;
 }

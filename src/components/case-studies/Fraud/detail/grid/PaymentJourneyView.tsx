@@ -11,7 +11,7 @@ import connectorTop from '../../../../../assets/images/fraud/case-study/payment-
 import connectorBottom from '../../../../../assets/images/fraud/case-study/payment-journey/connector-bottom.svg';
 import styles from './PaymentJourneyView.module.css';
 
-const AUTO_ADVANCE_MS = 6500;
+const AUTO_ADVANCE_MS = 7000;
 
 const GROUPS = ['Control', 'Warning', 'CTA'] as const;
 
@@ -70,13 +70,6 @@ export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
         ))}
       </div>
 
-      <button type="button" className={`${styles.sideButton} ${styles.sideButtonLeft}`} onClick={goPrev} aria-label="Previous group">
-        ‹
-      </button>
-      <button type="button" className={`${styles.sideButton} ${styles.sideButtonRight}`} onClick={goNext} aria-label="Next group">
-        ›
-      </button>
-
       <div className={styles.phones}>
         {screens.map((src, i) => (
           <div className={styles.phone} key={i} style={{ left: PHONE_LEFT[i] }}>
@@ -97,6 +90,9 @@ export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
           </div>
         ))}
       </div>
+
+      <button type="button" className={`${styles.edgeZone} ${styles.edgeLeft}`} onClick={goPrev} aria-label="Previous group" />
+      <button type="button" className={`${styles.edgeZone} ${styles.edgeRight}`} onClick={goNext} aria-label="Next group" />
     </>
   );
 }
