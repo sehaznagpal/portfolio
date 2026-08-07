@@ -1,32 +1,27 @@
 .viewport {
-  /* Height is set inline (CARD_GRID_REFERENCE_HEIGHT * scale) to always match the
-     frame's true rendered size exactly — normally that equals 100vh, but on the rare
-     viewport where width is the binding constraint (see useCardGridScale), it's
-     intentionally a little less rather than letting the frame overflow and clip cards. */
+  /* One full viewport tall, full viewport wide — no scaled/letterboxed inner
+     frame. Card positions (cardData.ts) are percentages of .section's own box,
+     so they reflow to fill whatever space is actually available. */
   position: relative;
   width: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 
 .frame {
-  /* Centered via left:50% + translateX(-50%) in the transform (applied from the
-     component), not margin:auto — auto margins clamp to 0 instead of going negative
-     when a child is wider than its container, which left this pinned to the left
-     edge instead of centered on the rare viewport where width is the binding scale
-     constraint (see useCardGridScale). translateX(-50%) centers correctly either way. */
   position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1280px;
-  display: flow-root;
-  transform-origin: top center;
+  inset: 0;
 }
 
 .section {
-  position: relative;
-  width: 1280px;
-  aspect-ratio: 1280 / 832;
-  margin: 40px auto 48px;
+  /* Cards keep their fixed Figma pixel size (see *Card.module.css) — only their
+     position (percentage-based) adapts to the section's rendered size, so
+     nothing ever stretches or distorts. */
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 48px;
   overflow: hidden;
 }
 

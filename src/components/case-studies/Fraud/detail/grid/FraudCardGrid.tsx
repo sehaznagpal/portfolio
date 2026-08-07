@@ -4,12 +4,10 @@ import FraudCardFace from './FraudCardFace';
 import FraudPanel from './FraudPanel';
 import FraudClosingNav from '../FraudClosingNav';
 import { CARDS } from './cardData';
-import { CARD_GRID_REFERENCE_HEIGHT, useCardGridScale } from './useCardGridScale';
 import styles from './FraudCardGrid.module.css';
 
 export default function FraudCardGrid() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const scale = useCardGridScale();
 
   useEffect(() => {
     if (openIndex === null) return;
@@ -23,8 +21,8 @@ export default function FraudCardGrid() {
   }, [openIndex]);
 
   return (
-    <div className={`${styles.viewport} grid-background`} style={{ height: CARD_GRID_REFERENCE_HEIGHT * scale }}>
-      <div className={styles.frame} style={{ transform: `translateX(-50%) scale(${scale})` }}>
+    <div className={`${styles.viewport} grid-background`}>
+      <div className={styles.frame}>
         <div className={styles.section}>
           {CARDS.map((card, i) =>
             openIndex === i ? null : (

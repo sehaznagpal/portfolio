@@ -4,12 +4,10 @@ import MoolroopCardFace from './MoolroopCardFace';
 import MoolroopPanel from './MoolroopPanel';
 import MoolroopClosingNav from '../MoolroopClosingNav';
 import { CARDS } from './cardData';
-import { CARD_GRID_REFERENCE_HEIGHT, useCardGridScale } from './useCardGridScale';
 import styles from './MoolroopCardGrid.module.css';
 
 export default function MoolroopCardGrid() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const scale = useCardGridScale();
 
   useEffect(() => {
     if (openIndex === null) return;
@@ -23,8 +21,8 @@ export default function MoolroopCardGrid() {
   }, [openIndex]);
 
   return (
-    <div className={`${styles.viewport} grid-background`} style={{ height: CARD_GRID_REFERENCE_HEIGHT * scale }}>
-      <div className={styles.frame} style={{ transform: `translateX(-50%) scale(${scale})` }}>
+    <div className={`${styles.viewport} grid-background`}>
+      <div className={styles.frame}>
         <div className={styles.section}>
           {CARDS.map((card, i) =>
             openIndex === i ? null : (

@@ -1,3 +1,9 @@
+.scaleWrap {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+}
+
 .perspective {
   position: absolute;
   left: 50%;

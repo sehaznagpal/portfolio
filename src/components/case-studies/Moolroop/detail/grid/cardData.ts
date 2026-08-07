@@ -51,13 +51,15 @@ export const CARDS: CardDef[] = [
 ];
 
 /* Card positions — exact calc() formulas from the Figma reference (813:120),
-   expressed relative to the 1280x832 reference frame. */
+   expressed as pure percentages of the 1280x832 reference frame (the original
+   calc(% + px) nudges baked in as %) so positions reflow proportionally at any
+   section size instead of drifting from a fixed-px offset tuned to one screen. */
 export const CARD_POSITIONS = [
-  { left: '60px', top: 'calc(33.33% + 13.67px)' },
-  { left: 'calc(25% + 37px)', top: '60px' },
-  { left: 'calc(33.33% + 72.33px)', top: 'calc(50% - 3px)' },
-  { left: 'calc(58.33% + 48.33px)', top: 'calc(8.33% + 37.67px)' },
-  { left: 'calc(75% + 9px)', top: 'calc(50% + 35px)' },
+  { left: '4.688%', top: '34.976%' },
+  { left: '27.891%', top: '7.212%' },
+  { left: '38.984%', top: '49.639%' },
+  { left: '62.109%', top: '12.861%' },
+  { left: '75.703%', top: '54.207%' },
 ];
 
 /* Positions from Figma reference (813:156) — photos sit low enough that their

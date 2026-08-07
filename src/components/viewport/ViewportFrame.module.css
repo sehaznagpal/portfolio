@@ -31,8 +31,6 @@
 .stage {
   position: relative;
   z-index: 1;
-  width: var(--frame-w);
-  height: var(--frame-h);
-  flex-shrink: 0;
-  transform-origin: center center;
+  width: 100%;
+  height: 100%;
 }
