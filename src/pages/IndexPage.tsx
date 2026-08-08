@@ -5,7 +5,6 @@ import { usePageMeta } from '../lib/usePageMeta';
 import MobileIndexContent from './MobileIndexContent';
 import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
-import Wordmark from '../components/chrome/Wordmark';
 import AboutModalLink from '../components/chrome/AboutModalLink';
 import ExploreBeyondLink from '../components/chrome/ExploreBeyondLink';
 import AboutModal from '../components/chrome/AboutModal';
@@ -67,7 +66,6 @@ function IndexContent() {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           style={{ position: 'absolute', inset: 0 }}
         >
-          <Wordmark />
           <AboutModalLink onClick={() => setAboutOpen(true)} />
           <ExploreBeyondLink />
           <CardShell front={<Hero />} back={<CaseStudyShell studies={caseStudies} />} />

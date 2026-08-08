@@ -1,9 +1,6 @@
-/* top sits below .wordmark (MobileWordmark: top 24px, 32px font) rather than
-   Figma's raw 36px — that reference frame doesn't include the "Portfolio"
-   wordmark this page always shows, so 36px would overlap it. */
 .link {
   position: absolute;
-  top: 68px;
+  top: 36px;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;

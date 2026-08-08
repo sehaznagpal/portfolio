@@ -1,6 +1,5 @@
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
 import styles from './AboutModal.module.css';
 import aboutPhoto from '../../assets/images/chrome/about-photo.png';
 
@@ -74,7 +73,7 @@ export default function AboutModal({ open, onClose }: { open: boolean; onClose: 
         onClick={(event) => event.stopPropagation()}
       >
         <button className={styles.closeButton} aria-label="Close" onClick={onClose}>
-          <X size={20} strokeWidth={1.75} />
+          X
         </button>
 
         <div className={styles.scroll}>

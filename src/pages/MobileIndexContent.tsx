@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import MobileViewportFrame from '../components/viewport/MobileViewportFrame';
 import MobileLoader from '../components/loader/MobileLoader';
-import MobileWordmark from '../components/chrome/MobileWordmark';
 import MobileAboutModalLink from '../components/chrome/MobileAboutModalLink';
 import MobileExploreBeyondLink from '../components/chrome/MobileExploreBeyondLink';
 import AboutModal from '../components/chrome/AboutModal';
@@ -65,7 +64,6 @@ export default function MobileIndexContent() {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           style={{ position: 'absolute', inset: 0 }}
         >
-          <MobileWordmark />
           <MobileAboutModalLink onClick={() => setAboutOpen(true)} />
           <MobileExploreBeyondLink />
           <MobileCardShell front={<MobileHero />} back={<MobileCaseStudyShell studies={caseStudies} />} />

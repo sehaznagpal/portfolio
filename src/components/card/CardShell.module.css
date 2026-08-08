@@ -1,7 +1,7 @@
 /* Full-viewport so `transform-origin: center center` scales from the
    viewport's center, but that means its empty margin around the card was
-   silently eating clicks meant for whatever sits behind it (the Toolbar,
-   the Wordmark) — pointer-events is disabled here and re-enabled on
+   silently eating clicks meant for whatever sits behind it (the about/
+   explore-beyond links) — pointer-events is disabled here and re-enabled on
    .perspective, which is sized to the actual card, not the full viewport. */
 .scaleWrap {
   position: absolute;
