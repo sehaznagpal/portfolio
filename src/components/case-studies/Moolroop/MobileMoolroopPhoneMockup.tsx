@@ -17,7 +17,7 @@ export default function MobileMoolroopPhoneMockup({
   return (
     <div className={styles.wrapper} onClick={onTap}>
       <div className={styles.screen}>
-        <img src={screenImg} alt="Moolroop product detail screen" />
+        <img src={screenImg} alt="MoolRoop product detail screen" />
 
         <AnimatePresence>
           {phase === 'scanning' && (

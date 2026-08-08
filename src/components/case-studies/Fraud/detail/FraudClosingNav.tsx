@@ -5,7 +5,7 @@ export default function FraudClosingNav() {
   return (
     <div className={styles.nav}>
       <Link to="/case-study/moolroop" className={styles.link}>
-        Explore Moolroop Project (self-initiated) →
+        Explore MoolRoop Project (self-initiated) →
       </Link>
       <Link to="/case-study/dr-cuterus" className={styles.link}>
         Explore Dr Cuterus Website Story →

@@ -21,7 +21,7 @@ export default function MoolroopCard() {
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>
-        <span className={styles.titleItalic}>Moolroop</span>
+        <span className={styles.titleItalic}>MoolRoop</span>
         <span className={styles.titleBold}>App</span>
       </p>
 

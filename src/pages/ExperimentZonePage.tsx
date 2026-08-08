@@ -1,8 +1,17 @@
 import { useEffect } from 'react';
 import { ThemeProvider } from '../state/ThemeContext';
+import { usePageMeta } from '../lib/usePageMeta';
+import sezPhotoImage from '../assets/images/experiment/sez-photo.jpg';
 import ExperimentCanvas from '../components/experiment/ExperimentCanvas';
 
 export default function ExperimentZonePage() {
+  usePageMeta({
+    title: 'Experiment Zone | Sehaz Nagpal',
+    description:
+      'A playful, pannable corner of Sehaz Nagpal’s portfolio — extra experiments, a photobooth, and side projects to poke around in.',
+    image: sezPhotoImage,
+  });
+
   useEffect(() => {
     document.body.classList.add('no-scroll');
     return () => document.body.classList.remove('no-scroll');

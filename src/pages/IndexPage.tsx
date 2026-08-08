@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useIsMobile } from '../lib/useIsMobile';
+import { usePageMeta } from '../lib/usePageMeta';
 import MobileIndexContent from './MobileIndexContent';
 import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
@@ -74,6 +75,13 @@ function IndexContent() {
 
 export default function IndexPage() {
   const isMobile = useIsMobile();
+
+  usePageMeta({
+    title: 'Sehaz Nagpal — UI/UX Designer Portfolio',
+    description:
+      'Portfolio of Sehaz Nagpal, a UI-UX designer intrigued by why people do what they do — case studies on the MoolRoop app, the Dr Cuterus website, and a behavioural-economics dissertation on payment fraud.',
+    image: '/og-image.jpg',
+  });
 
   useEffect(() => {
     document.body.classList.add('no-scroll');

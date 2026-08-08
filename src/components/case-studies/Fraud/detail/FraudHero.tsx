@@ -48,7 +48,7 @@ export default function FraudHero() {
           </a>
         </div>
 
-        <p className={styles.caption}>Research Project. Randomised Controlled Trails. Study on Fraud.</p>
+        <p className={styles.caption}>Research Project. Randomised Controlled Trials. Study on Fraud.</p>
       </div>
     </section>
   );

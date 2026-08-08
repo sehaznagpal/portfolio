@@ -8,7 +8,7 @@ export default function DrCuterusClosingNav() {
         Explore My Dissertation Project →
       </Link>
       <Link to="/case-study/moolroop" className={styles.link}>
-        Explore Moolroop Project (self-initiated) →
+        Explore MoolRoop Project (self-initiated) →
       </Link>
     </div>
   );
