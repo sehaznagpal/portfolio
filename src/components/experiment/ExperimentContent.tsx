@@ -17,6 +17,7 @@ import PhotoboothModal from './PhotoboothModal';
 import chessCircle from '../../assets/images/experiment/chess-circle.svg';
 import chessPieces from '../../assets/images/experiment/chess-pieces.svg';
 import photoboothPhoto from '../../assets/images/experiment/photobooth-photo.png';
+import photoboothFlash from '../../assets/images/experiment/photobooth-flash.svg';
 import sipBadge from '../../assets/images/experiment/sip-badge-hover.svg';
 import sipCloud from '../../assets/images/experiment/sip-bg-hover.svg';
 import sezPhoto from '../../assets/images/experiment/sez-photo.jpg';
@@ -470,6 +471,11 @@ export default function ExperimentContent() {
           }}
         >
           <img src={photoboothPhoto} alt="Photobooth" className={styles.photoboothImg} />
+          <span className={styles.photoboothFlashPulse} aria-hidden="true" />
+          <img src={photoboothFlash} alt="" aria-hidden="true" className={styles.photoboothFlashStar} />
+          <p className={styles.photoboothFlashLabel} aria-hidden="true">
+            photobooth
+          </p>
         </div>
       </Positioned>
 

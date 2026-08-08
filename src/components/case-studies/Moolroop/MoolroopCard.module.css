@@ -6,7 +6,11 @@
 
 .title {
   position: absolute;
-  left: 381px;
+  /* Nudged 28px left of the Figma-raw 381px — at that value the heading's
+     right edge (its rendered width varies with "MoolRoop"/"App"'s actual
+     glyphs) bled ~28px past .body's right edge below it, measured directly
+     via getBoundingClientRect rather than eyeballed. */
+  left: 353px;
   top: 29px;
   margin: 0;
   display: flex;

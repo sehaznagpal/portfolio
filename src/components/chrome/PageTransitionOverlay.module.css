@@ -1,0 +1,15 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--bg-canvas);
+  opacity: 0;
+  pointer-events: none;
+  animation: fadeIn 180ms ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

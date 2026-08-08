@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 import styles from './AboutModal.module.css';
 import aboutPhoto from '../../assets/images/chrome/about-photo.png';
 
-const EXIT_MS = 220;
+/* Matches .panel's transform transition duration in AboutModal.module.css —
+   keeps this in sync any time that duration changes so the close animation
+   finishes before the component unmounts. */
+const EXIT_MS = 300;
 
 const CV_FILE_ID = '14b5dhUaxDMVNoWJ5dAXC9HyvFMgPKnYl';
 const CV_URL = `https://drive.google.com/uc?export=download&id=${CV_FILE_ID}`;

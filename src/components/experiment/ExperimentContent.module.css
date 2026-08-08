@@ -195,9 +195,10 @@
   opacity: 1;
 }
 
-/* ---------- Photobooth: quick pop on hover ---------- */
+/* ---------- Photobooth: quick pop + camera-flash burst on hover ---------- */
 
 .photobooth {
+  position: relative;
   width: 325px;
   height: 244px;
   display: flex;
@@ -234,6 +235,95 @@
   }
   100% {
     transform: rotate(-6.84deg) scale(1);
+  }
+}
+
+/* A soft white radial burst standing in for the camera's actual flash — a
+   one-shot animation (not a transition) so it re-plays its full burst-then-
+   fade sweep from the start on every hover-enter, the same way .photoPop
+   above does. */
+.photoboothFlashPulse {
+  position: absolute;
+  inset: -10% -20%;
+  z-index: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254, 254, 254, 0.95) 0%, rgba(254, 254, 254, 0) 68%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.photoboothFlashStar {
+  position: absolute;
+  z-index: 2;
+  top: 47%;
+  left: 59%;
+  width: 225px;
+  height: auto;
+  transform: translate(-50%, -50%) rotate(-26.06deg) scale(0.75);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease-out, transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photoboothFlashLabel {
+  position: absolute;
+  z-index: 3;
+  top: 45%;
+  left: 59%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  font-family: 'Gambetta Variable', serif;
+  font-style: italic;
+  font-weight: var(--gambetta-regular);
+  font-size: 25px;
+  letter-spacing: -0.06em;
+  color: #fefefe;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease-out;
+}
+
+@media (hover: hover) {
+  .photobooth:hover .photoboothFlashPulse,
+  .photobooth:focus-within .photoboothFlashPulse {
+    animation: flashBurst 420ms ease-out;
+  }
+
+  .photobooth:hover .photoboothFlashStar,
+  .photobooth:focus-within .photoboothFlashStar {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-26.06deg) scale(1);
+  }
+
+  .photobooth:hover .photoboothFlashLabel,
+  .photobooth:focus-within .photoboothFlashLabel {
+    opacity: 1;
+  }
+}
+
+.photobooth.autoHover .photoboothFlashPulse {
+  animation: flashBurst 420ms ease-out;
+}
+
+.photobooth.autoHover .photoboothFlashStar {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(-26.06deg) scale(1);
+}
+
+.photobooth.autoHover .photoboothFlashLabel {
+  opacity: 1;
+}
+
+@keyframes flashBurst {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

@@ -3,6 +3,7 @@ import { ThemeProvider } from '../state/ThemeContext';
 import { usePageMeta } from '../lib/usePageMeta';
 import sezPhotoImage from '../assets/images/experiment/sez-photo.jpg';
 import ExperimentCanvas from '../components/experiment/ExperimentCanvas';
+import PageRevealOverlay from '../components/chrome/PageRevealOverlay';
 
 export default function ExperimentZonePage() {
   usePageMeta({
@@ -20,6 +21,7 @@ export default function ExperimentZonePage() {
   return (
     <ThemeProvider>
       <ExperimentCanvas />
+      <PageRevealOverlay />
     </ThemeProvider>
   );
 }

@@ -1,11 +1,12 @@
 .link {
   position: absolute;
-  bottom: 36px;
+  /* ~5% further from the bottom edge than the previous 36px, a slight lift. */
+  bottom: 38px;
   left: 50%;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   text-decoration: none;
   cursor: pointer;
 }
@@ -14,7 +15,8 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-regular);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 24px;
+  /* ~15% down from the previous 24px. */
+  font-size: 20px;
   line-height: 1;
   letter-spacing: -0.64px;
   color: var(--chrome-bg);
