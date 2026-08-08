@@ -1,0 +1,28 @@
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px var(--case-study-gutter);
+  background: var(--drcuterus-purple);
+}
+
+.portfolio,
+.nextCaseStudy {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: -0.72px;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+  white-space: nowrap;
+}
+
+.nextCaseStudy {
+  background: rgba(254, 254, 254, 0.8);
+  color: #121212;
+  padding: 4px 6px;
+}

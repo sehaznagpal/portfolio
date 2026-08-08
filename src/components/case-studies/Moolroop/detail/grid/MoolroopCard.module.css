@@ -68,11 +68,18 @@
   color: var(--bg-canvas);
 }
 
-.subtitle {
+.captionStack {
   position: absolute;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.subtitle {
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
@@ -85,6 +92,19 @@
 
 .card:hover .subtitle {
   color: #fefefe;
+}
+
+/* Small highlighted label for cards whose panel contains screens, tables,
+   figures, or its own internal redirect/explore button. */
+.tag {
+  padding: 2px 8px;
+  background: var(--moolroop-yellow);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 13px;
+  letter-spacing: -0.1px;
+  color: #121212;
+  white-space: nowrap;
 }
 
 .panel {
@@ -104,9 +124,22 @@
   cursor: default;
 }
 
+/* The 1020/663 aspect-ratio collapses to an uncomfortably short box at phone
+   widths (e.g. ~214px tall at 375px wide) — too cramped for paragraph text
+   plus image galleries, so mobile trades the fixed aspect-ratio for a tall
+   percentage-of-viewport box instead. */
+@media (max-width: 767px) {
+  .panel {
+    width: min(560px, 92vw);
+    aspect-ratio: auto;
+    height: 82vh;
+  }
+}
+
 .panelInner {
   position: absolute;
   inset: 0;
+  overflow-y: auto;
 }
 
 .closeButton {

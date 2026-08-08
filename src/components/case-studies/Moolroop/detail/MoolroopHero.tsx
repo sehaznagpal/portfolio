@@ -4,9 +4,9 @@ import rajasthanScreen from '../../../../assets/images/moolroop/case-study/scree
 import pashminaProductScreen from '../../../../assets/images/moolroop/case-study/screens/pashmina-product.jpg';
 import styles from './MoolroopHero.module.css';
 
-const PROTOTYPE_URL = 'https://bit.ly/moolroop-casestudy-prototype-sehaz';
+export const PROTOTYPE_URL = 'https://bit.ly/moolroop-casestudy-prototype-sehaz';
 
-const HERO_SCREENS = [
+export const HERO_SCREENS = [
   { src: homeScreen, alt: 'MoolRoop home screen — Welcome, Sehaz' },
   { src: rajasthanScreen, alt: 'Explore Products — Rajasthan state page' },
   { src: pashminaProductScreen, alt: 'Pashmina Kurta product detail with verification panel' },

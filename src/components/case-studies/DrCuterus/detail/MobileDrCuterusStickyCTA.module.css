@@ -1,0 +1,17 @@
+.cta {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background: var(--brand-grey, #282828);
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: 20px;
+  letter-spacing: -0.8px;
+  color: rgba(254, 254, 254, 0.8);
+  font-feature-settings: 'salt' 1;
+  text-align: center;
+}

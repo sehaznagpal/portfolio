@@ -21,3 +21,19 @@
 .link:hover {
   opacity: 0.65;
 }
+
+.linkDark {
+  background: var(--brand-grey, #282828);
+  padding: 8px 16px;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: 26px;
+  letter-spacing: -1.04px;
+  color: var(--moolroop-cream-80);
+  font-feature-settings: 'salt' 1;
+  transition: opacity 150ms ease-out;
+}
+
+.linkDark:hover {
+  opacity: 0.65;
+}

@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import homepageScreenshot from '../../../../assets/images/dr-cuterus/homepage-screenshot.jpg';
 import styles from './DrCuterusHero.module.css';
 
-const LIVE_SITE_URL = 'https://drcuterus.com';
+export const LIVE_SITE_URL = 'https://drcuterus.com';
+export { homepageScreenshot };
 
 export default function DrCuterusHero() {
   return (

@@ -17,13 +17,13 @@ export default function DrCuterusCardFace({
   return (
     <motion.div
       layoutId={`card-${card.id}`}
-      layout
+      layout="position"
       className={styles.card}
       style={CARD_POSITIONS[index]}
       onClick={onOpen}
       transition={{ layout: LAYOUT_TRANSITION }}
       initial={false}
-      exit={{ transition: { duration: 0 } }}
+      exit={{ opacity: 0, transition: { duration: 0.15 } }}
     >
       <motion.div
         className={styles.cardFace}
@@ -36,7 +36,10 @@ export default function DrCuterusCardFace({
           ))}
         </p>
         <span className={styles.number}>{card.number}</span>
-        <p className={styles.subtitle}>{card.subtitle}</p>
+        <div className={styles.captionStack}>
+          <p className={styles.subtitle}>{card.subtitle}</p>
+          {card.tag && <span className={styles.tag}>{card.tag}</span>}
+        </div>
       </motion.div>
     </motion.div>
   );

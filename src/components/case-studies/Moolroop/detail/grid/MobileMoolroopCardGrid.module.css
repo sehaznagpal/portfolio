@@ -1,0 +1,85 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px var(--case-study-gutter) 110px;
+  background-color: var(--bg-canvas);
+}
+
+.card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  border: 1px solid rgba(18, 18, 18, 0.4);
+  box-shadow: 2px 0 12px 1px rgba(18, 18, 18, 0.2);
+  background: var(--bg-canvas);
+  text-align: left;
+  font: inherit;
+  appearance: none;
+  cursor: pointer;
+}
+
+.number {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 2px 10px;
+  background: #fefefe;
+  border: 1px solid #121212;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.8px;
+  color: #121212;
+}
+
+.title {
+  margin: 0 56px 6px 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-extrabold);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: -0.78px;
+  color: var(--moolroop-accent);
+}
+
+.captionStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.subtitle {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 15px;
+  letter-spacing: -0.15px;
+  color: #121212;
+}
+
+.tag {
+  padding: 2px 7px;
+  background: var(--moolroop-yellow);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 12px;
+  letter-spacing: -0.1px;
+  color: #121212;
+  white-space: nowrap;
+}
+
+.clickCatcher {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  cursor: default;
+}

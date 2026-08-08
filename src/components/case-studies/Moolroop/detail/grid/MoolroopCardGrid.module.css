@@ -14,15 +14,24 @@
 }
 
 .section {
-  /* Cards keep their fixed Figma pixel size (see *Card.module.css) — only their
-     position (percentage-based) adapts to the section's rendered size, so
-     nothing ever stretches or distorts. */
   position: absolute;
   top: 40px;
   left: 0;
   right: 0;
   bottom: 48px;
   overflow: hidden;
+}
+
+/* Cards are authored at a fixed 1280x832 reference (see cardData.ts's
+   CARD_POSITIONS) and this whole box is scaled uniformly to fit .section's
+   actual rendered size (useCaseStudyGridScale) — never distorted, and with
+   no min/max clamp so it genuinely shrinks to avoid overlap on short/narrow
+   screens and grows to fill space on large ones. */
+.scaleBox {
+  position: relative;
+  width: 1280px;
+  height: 832px;
+  transform-origin: top left;
 }
 
 .clickCatcher {
@@ -35,6 +44,6 @@
 .navWrap {
   position: absolute;
   bottom: 0;
-  left: 60px;
-  right: 60px;
+  left: var(--case-study-gutter);
+  right: var(--case-study-gutter);
 }

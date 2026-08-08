@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import MoolroopCardFace from './MoolroopCardFace';
 import MoolroopPanel from './MoolroopPanel';
 import MoolroopClosingNav from '../MoolroopClosingNav';
 import { CARDS } from './cardData';
+import { useCaseStudyGridScale } from '../../../../../lib/useCaseStudyGridScale';
 import styles from './MoolroopCardGrid.module.css';
 
 export default function MoolroopCardGrid() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const scale = useCaseStudyGridScale(sectionRef);
 
   useEffect(() => {
     if (openIndex === null) return;
@@ -23,12 +26,14 @@ export default function MoolroopCardGrid() {
   return (
     <div className={`${styles.viewport} grid-background`}>
       <div className={styles.frame}>
-        <div className={styles.section}>
-          {CARDS.map((card, i) =>
-            openIndex === i ? null : (
-              <MoolroopCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
-            ),
-          )}
+        <div className={styles.section} ref={sectionRef}>
+          <div className={styles.scaleBox} style={{ transform: `scale(${scale})` }}>
+            {CARDS.map((card, i) =>
+              openIndex === i ? null : (
+                <MoolroopCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
+              ),
+            )}
+          </div>
         </div>
 
         <div className={styles.navWrap}>
