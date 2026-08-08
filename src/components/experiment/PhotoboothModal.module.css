@@ -17,14 +17,21 @@
   opacity: 1;
 }
 
-/* 896x582.4 is the room scene's native (Figma) size — every child below is
-   positioned at its exact Figma px coordinate within that reference frame,
-   then the whole .stage is scaled as one unit to fit .frame's actual
-   rendered width (via container query units, so it works at any viewport
-   with no separate mobile layout needed). */
+/* 896x582.4 is the room scene's native (Figma, MacBook Air/desktop) size —
+   every child below is positioned at its exact Figma px coordinate within
+   that reference frame, then the whole .stage is scaled as one unit to fit
+   .frame's actual rendered width (via container query units, so sizing is
+   fluid at every width, not just the reference breakpoints). Below 700px the
+   Figma layout switches to a distinct portrait composition (see the mobile
+   media query at the bottom of this file), so .stage's reference size and
+   every child's position/size gets overridden there too, off the same
+   cqw-scaling mechanism.
+   .frame itself is sized as large as fits the viewport on both axes (min()
+   of a vw-based and a vh-based cap) so it scales up on big screens without
+   ever overflowing and forcing a scroll. */
 .frame {
   position: relative;
-  width: min(896px, 94vw);
+  width: min(86vw, calc(86vh * 896 / 582.4), 1400px);
   aspect-ratio: 896 / 582.4;
   background: #726273;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
@@ -53,6 +60,12 @@
   transform: scale(calc(100cqw / 896px));
 }
 
+/* .closeButton deliberately stays a fixed real-px size (not scaled with
+   .stage) so it's always an easy tap target — but that means its reserved
+   corner footprint doesn't shrink as the stage scales down, while .label's
+   `right` clearance (in stage units) does. Below ~780px of rendered stage
+   width the two would start to overlap, so the container query shrinks the
+   button's footprint to keep clear of the label at smaller sizes. */
 .closeButton {
   position: absolute;
   top: 16px;
@@ -69,6 +82,15 @@
   justify-content: center;
   cursor: pointer;
   transition: background 150ms ease;
+}
+
+@container (max-width: 780px) {
+  .closeButton {
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+  }
 }
 
 .closeButton:hover {
@@ -142,6 +164,26 @@
   object-fit: cover;
   display: block;
   transform: scaleX(-1);
+}
+
+.photoFrame0 {
+  left: 58px;
+  width: 130px;
+}
+
+.photoFrame1 {
+  left: 200px;
+  width: 131px;
+}
+
+.photoFrame2 {
+  left: 342px;
+  width: 131px;
+}
+
+.photoFrame3 {
+  left: 485px;
+  width: 130px;
 }
 
 /* ---------- Camera booth ---------- */
@@ -277,7 +319,7 @@
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   font-size: 72px;
   line-height: 0.76;
-  letter-spacing: -2.88px;
+  letter-spacing: -0.04em;
   color: #d9bb7f;
 }
 
@@ -361,4 +403,155 @@
 
 .tryAgainButton:hover {
   background: rgba(245, 245, 245, 0.12);
+}
+
+/* ---------- Mobile layout (portrait stack) ----------
+   Below 700px the Figma reference switches to a genuinely different
+   composition (text block + photo strip + booth stacked top-to-bottom in a
+   345x804 portrait reference, instead of MacBook Air/desktop's 896x582.4
+   landscape scene with a side-by-side split) — reshaping to use the tall
+   viewport, not just shrinking the landscape scene down. .frame's own margin
+   swaps from the desktop vw/vh percentages to a flat 24px inset (matching
+   the Figma mobile artboard's uniform margin) and every repositioned child
+   below rides the same 100cqw/345 stage-scale mechanism as desktop. */
+@media (max-width: 700px) {
+  .overlay {
+    padding: 24px;
+  }
+
+  .frame {
+    width: min(calc(100vw - 48px), calc((100vh - 48px) * 345 / 804), 480px);
+    aspect-ratio: 345 / 804;
+  }
+
+  .stage {
+    width: 345px;
+    height: 804px;
+    transform: scale(calc(100cqw / 345px));
+  }
+
+  .ground {
+    left: 0;
+    top: 686px;
+    width: 345px;
+    height: 118px;
+  }
+
+  .label {
+    top: 16.2px;
+    right: 124px;
+    font-size: 27.991px;
+  }
+
+  .sparkle1 {
+    left: 243.14px;
+    top: 5px;
+    width: 29.916px;
+    height: 29.916px;
+  }
+
+  .sparkle2 {
+    left: 227.75px;
+    top: 20.39px;
+    width: 25.14px;
+    height: 25.14px;
+  }
+
+  .photoFrame {
+    top: 410px;
+    height: 47.698px;
+    border-width: 2.327px;
+  }
+
+  .photoFrame0 {
+    left: 11px;
+    width: 75.619px;
+  }
+
+  .photoFrame1 {
+    left: 93.6px;
+    width: 76.201px;
+  }
+
+  .photoFrame2 {
+    left: 176.2px;
+    width: 76.201px;
+  }
+
+  .photoFrame3 {
+    left: 259.38px;
+    width: 75.619px;
+  }
+
+  .boothTrim {
+    left: 1px;
+    top: 462px;
+    width: 344px;
+    height: 224px;
+    border-color: #252225;
+  }
+
+  .cameraArea {
+    left: 11px;
+    top: 472px;
+    width: 324.094px;
+    height: 202.558px;
+  }
+
+  .curtainLeft,
+  .curtainRight {
+    top: 472.23px;
+    height: 207.944px;
+  }
+
+  .curtainLeft {
+    left: 11px;
+    width: 161.735px;
+  }
+
+  .curtainRight {
+    left: 172.73px;
+    width: 162.359px;
+  }
+
+  .curtainLeftOpen {
+    width: 26px;
+  }
+
+  .curtainRightOpen {
+    left: 311px;
+    width: 24px;
+  }
+
+  .headingTitle {
+    left: 50%;
+    top: 119px;
+    width: auto;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    font-size: 79.87px;
+  }
+
+  .subtitle {
+    left: 50%;
+    top: 255.6px;
+    width: auto;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    font-size: 22.186px;
+  }
+
+  .actions {
+    left: 50%;
+    top: 296.79px;
+    width: auto;
+    transform: translateX(-50%);
+  }
+
+  .takePhotosButton,
+  .downloadButton,
+  .tryAgainButton {
+    padding: 8.874px 13.312px;
+    font-size: 22.186px;
+  }
 }

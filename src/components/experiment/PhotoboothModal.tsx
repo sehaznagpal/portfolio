@@ -11,14 +11,11 @@ const EXIT_MS = 200;
 const SHOT_COUNT = 4;
 const CURTAIN_MS = 380;
 /* The 4 top photo frames aren't evenly spaced (each is a hand-placed Figma
-   rect, off by a px or two from a clean grid), so each needs its own
-   left/width rather than a repeatable formula. */
-const PHOTO_FRAME_RECTS = [
-  { left: 58, width: 130 },
-  { left: 200, width: 131 },
-  { left: 342, width: 131 },
-  { left: 485, width: 130 },
-];
+   rect, off by a px or two from a clean grid) and use different rects on the
+   mobile layout, so each gets its own CSS class (see PhotoboothModal.module.css)
+   rather than a shared inline-style formula — that also keeps the rects
+   overridable per breakpoint, which an inline style couldn't be. */
+const PHOTO_FRAME_CLASSES = ['photoFrame0', 'photoFrame1', 'photoFrame2', 'photoFrame3'];
 
 type Frame = HTMLCanvasElement;
 
@@ -285,11 +282,7 @@ export default function PhotoboothModal({ open, onClose }: { open: boolean; onCl
           <img src={sparkle2Img} alt="" className={styles.sparkle2} />
 
           {thumbs.map((src, i) => (
-            <div
-              className={styles.photoFrame}
-              key={i}
-              style={{ left: PHOTO_FRAME_RECTS[i].left, width: PHOTO_FRAME_RECTS[i].width }}
-            >
+            <div className={`${styles.photoFrame} ${styles[PHOTO_FRAME_CLASSES[i]]}`} key={i}>
               {src && <img src={src} alt={`Shot ${i + 1}`} />}
             </div>
           ))}
