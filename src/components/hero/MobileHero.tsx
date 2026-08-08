@@ -37,7 +37,7 @@ export default function MobileHero() {
         <span className={styles.highlight} onClick={() => setPhotoVisible((v) => !v)}>
           I am Sehaz
         </span>
-        , a UI-UX designer.
+        , a product designer.
       </p>
 
       <button

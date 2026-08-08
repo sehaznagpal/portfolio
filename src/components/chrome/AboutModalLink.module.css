@@ -1,0 +1,23 @@
+.link {
+  position: absolute;
+  top: 36px;
+  left: calc(4.17% + 25.67px);
+  margin: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.96px;
+  color: var(--chrome-bg);
+  font-feature-settings: 'salt' 1;
+  cursor: pointer;
+  transition: opacity 150ms ease-out;
+}
+
+.link:hover {
+  opacity: 0.7;
+}

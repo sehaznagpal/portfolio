@@ -3,7 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import MobileViewportFrame from '../components/viewport/MobileViewportFrame';
 import MobileLoader from '../components/loader/MobileLoader';
 import MobileWordmark from '../components/chrome/MobileWordmark';
-import MobileToolbar from '../components/chrome/MobileToolbar';
+import MobileAboutModalLink from '../components/chrome/MobileAboutModalLink';
+import MobileExploreBeyondLink from '../components/chrome/MobileExploreBeyondLink';
+import AboutModal from '../components/chrome/AboutModal';
 import MobileHero from '../components/hero/MobileHero';
 import MobileCardShell from '../components/card/MobileCardShell';
 import MobileCaseStudyShell, { type MobileCaseStudyDef } from '../components/card/MobileCaseStudyShell';
@@ -34,6 +36,7 @@ export default function MobileIndexContent() {
   const cameFromLoader = useRef(view === 'loading').current;
   const [backgroundVisible, setBackgroundVisible] = useState(!cameFromLoader);
   const [heroReady, setHeroReady] = useState(!cameFromLoader);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   function handleLoaderExitComplete() {
     setBackgroundVisible(true);
@@ -63,10 +66,13 @@ export default function MobileIndexContent() {
           style={{ position: 'absolute', inset: 0 }}
         >
           <MobileWordmark />
-          <MobileToolbar />
+          <MobileAboutModalLink onClick={() => setAboutOpen(true)} />
+          <MobileExploreBeyondLink />
           <MobileCardShell front={<MobileHero />} back={<MobileCaseStudyShell studies={caseStudies} />} />
         </motion.div>
       )}
+
+      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </MobileViewportFrame>
   );
 }

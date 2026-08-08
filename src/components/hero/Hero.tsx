@@ -38,7 +38,7 @@ export default function Hero() {
         >
           I am Sehaz
         </span>
-        , a UI-UX designer.
+        , a product designer.
       </p>
 
       <button

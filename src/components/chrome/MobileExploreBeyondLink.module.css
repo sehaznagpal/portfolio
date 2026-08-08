@@ -1,0 +1,28 @@
+.link {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.label {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.64px;
+  color: var(--chrome-bg);
+  font-feature-settings: 'salt' 1;
+  white-space: nowrap;
+}
+
+.icon {
+  color: var(--chrome-bg);
+  flex-shrink: 0;
+}

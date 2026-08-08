@@ -6,7 +6,9 @@ import MobileIndexContent from './MobileIndexContent';
 import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
 import Wordmark from '../components/chrome/Wordmark';
-import Toolbar from '../components/chrome/Toolbar';
+import AboutModalLink from '../components/chrome/AboutModalLink';
+import ExploreBeyondLink from '../components/chrome/ExploreBeyondLink';
+import AboutModal from '../components/chrome/AboutModal';
 import Hero from '../components/hero/Hero';
 import CardShell from '../components/card/CardShell';
 import CaseStudyShell, { type CaseStudyDef } from '../components/card/CaseStudyShell';
@@ -32,6 +34,7 @@ function IndexContent() {
   const cameFromLoader = useRef(view === 'loading').current;
   const [backgroundVisible, setBackgroundVisible] = useState(!cameFromLoader);
   const [heroReady, setHeroReady] = useState(!cameFromLoader);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   function handleLoaderExitComplete() {
     setBackgroundVisible(true);
@@ -65,10 +68,13 @@ function IndexContent() {
           style={{ position: 'absolute', inset: 0 }}
         >
           <Wordmark />
-          <Toolbar />
+          <AboutModalLink onClick={() => setAboutOpen(true)} />
+          <ExploreBeyondLink />
           <CardShell front={<Hero />} back={<CaseStudyShell studies={caseStudies} />} />
         </motion.div>
       )}
+
+      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </ViewportFrame>
   );
 }
