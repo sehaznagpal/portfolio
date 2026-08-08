@@ -92,7 +92,10 @@
   top: 470px;
   width: 163px;
   height: 164px;
-  transform: translate(-50%, -50%) rotate(55.66deg);
+  /* Unrotated, like the desktop card — the stamp asset's seam/cut is
+     already at the bottom in its native orientation; the old 55.66deg
+     rotated it away from there. */
+  transform: translate(-50%, -50%);
   transition: opacity 300ms ease-out;
 }
 

@@ -6,7 +6,7 @@ export default function MobileExploreBeyondLink() {
   return (
     <Link className={styles.link} to="/experiment-zone">
       <span className={styles.label}>Explore Beyond the Case Studies</span>
-      <ArrowUpRight className={styles.icon} size={14} strokeWidth={2} />
+      <ArrowUpRight className={styles.icon} size={20} strokeWidth={2} />
     </Link>
   );
 }

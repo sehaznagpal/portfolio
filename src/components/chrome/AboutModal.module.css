@@ -252,6 +252,43 @@
   pointer-events: none;
 }
 
+/* ---------- Desktop-only body sizing ----------
+   Bigger body copy/buttons and looser spacing than the base rules (which
+   are what mobile actually renders, since mobile has no override for these
+   properties) — each clamp below is the base one shifted by a flat amount
+   via calc(), so it keeps the same responsive curve rather than becoming a
+   fixed size. */
+@media (min-width: 768px) {
+  .paragraph,
+  .bullets {
+    font-size: clamp(22px, min(calc(1.6vw + 8px), calc(1.9vh + 8px)), 29px);
+  }
+
+  .bullets {
+    margin-top: clamp(18px, calc(2vh + 8px), 30px);
+    gap: 0.4em;
+  }
+
+  .actions {
+    margin-top: clamp(22px, calc(2.6vh + 8px), 36px);
+    gap: 0;
+  }
+
+  .button {
+    font-size: clamp(19px, min(calc(1.5vw + 4px), calc(1.8vh + 4px)), 24px);
+  }
+
+  /* Caption sits right under the Contact button it annotates; Download CV
+     then gets extra room below the caption rather than matching gap. */
+  .caption {
+    margin-top: 4px;
+  }
+
+  .caption + .button {
+    margin-top: 16px;
+  }
+}
+
 /* ---------- Mobile: full-screen sheet sliding up from the bottom ---------- */
 
 @media (max-width: 767px) {
@@ -275,6 +312,12 @@
   .body {
     padding-left: clamp(20px, 6vw, 32px);
     padding-right: clamp(20px, 6vw, 32px);
+  }
+
+  /* ~24px bigger than the base clamp renders at mobile widths (which was
+     bottoming out at its 40px floor). */
+  .heading {
+    font-size: clamp(64px, min(11vw, 9vh), 92px);
   }
 
   /* Decorative corner accent, not in the flow — the column above (heading,

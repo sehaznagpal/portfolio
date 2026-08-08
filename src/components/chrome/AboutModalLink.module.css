@@ -1,7 +1,11 @@
 .link {
   position: absolute;
   top: 36px;
-  left: calc(4.17% + 25.67px);
+  /* Matches ExploreBeyondLink's `right: 47.51px` exactly, rather than
+     Figma's raw hybrid %+px value, which grows faster than the explore
+     link's flat offset as the viewport widens — the two drifted visibly
+     out of symmetry on wide screens. */
+  left: 47.51px;
   margin: 0;
   border: none;
   background: none;
