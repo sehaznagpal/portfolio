@@ -88,6 +88,18 @@
   margin-bottom: 0;
 }
 
+/* Sized in em off .centerBody's own font-size (not a fixed px value) so it
+   stays proportional to the paragraph text above it rather than an
+   independently-tuned number that could drift out of sync. */
+.centerBodyHighlight {
+  background: #a4cf4a;
+  padding: 0.15em 0.35em;
+  margin: 0 -0.35em;
+  font-size: 1.06em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 /* ---------- Chess: pieces rise + label slides out on hover ---------- */
 
 .chess {

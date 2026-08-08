@@ -268,7 +268,7 @@ const THINGS: Thing[] = [
   { src: meThing2, x: 74.4, y: 377.05, w: 163.2, h: 113.9, delay: 40 },
   { src: meThing3, x: 173.1, y: 434.3, w: 105.4, h: 105.4, rot: 10.78, delay: 80 },
   { src: meThing4, x: 263.75, y: 371.9, w: 178.5, h: 180.2, delay: 20 },
-  { src: meThing5, x: 409.88, y: 296.88, w: 157.25, h: 157.25, rot: -21.55, delay: 60 },
+  { src: meThing5, x: 409.88, y: 312, w: 157.25, h: 157.25, rot: -21.55, delay: 60 },
   { src: meThing6, x: 88.65, y: 121.85, w: 154.7, h: 168.3, rot: -32.32, delay: 100 },
   { src: meThing7, x: 189.78, y: 48.65, w: 133.45, h: 120.7, delay: 30 },
 ];
@@ -432,7 +432,11 @@ export default function ExperimentContent() {
               as the tools are. I don't think you can fully understand any of that from the outside. So I like to
               keep making small things just to keep evolving, learning and growing.
             </p>
-            <p>This page is where a few of those attempts live of how I tried to learn.</p>
+            <p>
+              <span className={styles.centerBodyHighlight}>
+                This page is where a few of those attempts live of how I tried to learn.
+              </span>
+            </p>
           </div>
         </div>
       </Positioned>

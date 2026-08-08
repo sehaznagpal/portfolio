@@ -36,6 +36,11 @@ const MOBILE_ZOOM_BOOST = 1.9;
    rather than inside .zoomLayer like desktop's, so this is a plain screen-px
    value — no compensation against the live zoom needed. */
 const MOBILE_GRID_SPACING_PX = 40;
+/* Desktop's grid also renders in its own unscaled layer (.desktopGridLayer),
+   with the live zoom baked into its background-size instead of a CSS
+   transform — see the layer's own comment for why. Denser than mobile's,
+   matching this page's previous in-transform grid density. */
+const DESKTOP_GRID_SPACING_PX = 20;
 /* Map view's zoom is derived from the world size on every resize (see
    updateWorld below) rather than a flat constant, so "zoom out" always frames
    the full world with a consistent margin instead of sometimes leaving it
@@ -246,10 +251,15 @@ export default function ExperimentCanvas() {
       {/* Wheel/click handlers live on this surface only — not on .viewport
           itself — so interaction with the chrome pills below (siblings, not
           descendants of this element) is never intercepted. */}
-      {isMobile && (
+      {isMobile ? (
         <div
           className={`${styles.mobileGridLayer} grid-background`}
           style={{ ['--grid-line-spacing' as string]: `${MOBILE_GRID_SPACING_PX}px` }}
+        />
+      ) : (
+        <div
+          className={`${styles.desktopGridLayer} ${layerClass}`}
+          style={{ backgroundSize: `${DESKTOP_GRID_SPACING_PX * zoom}px ${DESKTOP_GRID_SPACING_PX * zoom}px` }}
         />
       )}
       <div
@@ -260,19 +270,6 @@ export default function ExperimentCanvas() {
       >
         <div className={`${styles.panLayer} ${layerClass}`} style={{ transform: `translate(${pan.x}px, ${pan.y}px)` }}>
           <div className={`${styles.zoomLayer} ${layerClass}`} style={{ transform: `scale(${zoom})` }}>
-            {!isMobile && (
-              <div
-                className={`${styles.gridLayer} grid-background`}
-                style={{
-                  /* Sized in world-space so the rendered (post-scale) grid
-                     always covers a constant 300vw/300vh of actual screen. */
-                  width: `calc(300vw / ${zoom})`,
-                  height: `calc(300vh / ${zoom})`,
-                  left: `calc(-100vw / ${zoom})`,
-                  top: `calc(-100vh / ${zoom})`,
-                }}
-              />
-            )}
             <div className={styles.anchor}>
               <ExperimentContent />
             </div>
