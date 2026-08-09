@@ -39,6 +39,11 @@
   --drcuterus-detail-card-bg: #1E1E1E;
   --dissertation-navy: #062D6E;
   --dissertation-detail-card-bg: #1E1E1E;
+  /* Reuses Dr Cuterus's exact yellow hue for the card-face highlight tag —
+     dissertation has no yellow of its own in the data-viz palette below, and
+     this keeps the tag visually part of the same "highlight" family used on
+     the other two case studies rather than introducing an unrelated hue. */
+  --dissertation-yellow: #F9D949;
 
   /* Dissertation's three-color system pulled directly from the actual data-viz figures
      (fig1/fig2 bar charts), sampled pixel-exact rather than reusing the FraudCard tokens,

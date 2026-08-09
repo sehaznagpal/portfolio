@@ -68,11 +68,18 @@
   color: var(--bg-canvas);
 }
 
-.subtitle {
+.captionStack {
   position: absolute;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.subtitle {
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
@@ -85,6 +92,19 @@
 
 .card:hover .subtitle {
   color: #fefefe;
+}
+
+/* Small highlighted label for cards whose panel contains screens, tables,
+   figures, or its own internal redirect/explore button. */
+.tag {
+  padding: 2px 8px;
+  background: var(--dissertation-yellow);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 13px;
+  letter-spacing: -0.1px;
+  color: #121212;
+  white-space: nowrap;
 }
 
 .panel {

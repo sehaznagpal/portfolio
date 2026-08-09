@@ -38,10 +38,10 @@ export default function FraudPanel({
   return (
     <motion.div
       layoutId={`card-${card.id}`}
-      layout
+      layout="position"
       className={styles.panel}
       transition={{ layout: LAYOUT_TRANSITION }}
-      exit={{ transition: { duration: 0 } }}
+      exit={{ opacity: 0, transition: { duration: 0.15 } }}
     >
       <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Close">
         X
