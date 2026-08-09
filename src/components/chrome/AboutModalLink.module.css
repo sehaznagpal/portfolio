@@ -8,7 +8,11 @@
   left: 47.51px;
   margin: 0;
   border: none;
-  background: none;
+  /* Same brand-light color the grid pattern itself is drawn on
+     (--bg-canvas === Figma's brand/light), sized to the text's own box
+     (button has zero padding via the global reset) so the chip hugs it
+     tightly instead of adding whitespace around it. */
+  background: var(--bg-canvas);
   padding: 0;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-regular);

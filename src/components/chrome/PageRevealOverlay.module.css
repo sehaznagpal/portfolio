@@ -1,13 +1,19 @@
+/* grid-background (global.css) supplies the fill + grid-line pattern;
+   this rule only handles the sweep itself. Starts covering the viewport
+   (translateY(0), matching where PageTransitionOverlay's sweep-in ends)
+   and slides down off-screen — see the "why" comment in
+   PageRevealOverlay.tsx. */
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: var(--bg-canvas);
-  opacity: 1;
   pointer-events: none;
-  transition: opacity 240ms ease-out;
+  transform: translateY(0);
+  /* Same signature cinematic ease-out as the sweep-in half, for one
+     continuous, consistent motion across the route swap. */
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .revealed {
-  opacity: 0;
+  transform: translateY(100%);
 }

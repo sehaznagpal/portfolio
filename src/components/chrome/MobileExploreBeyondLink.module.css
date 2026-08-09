@@ -7,6 +7,11 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  /* Same brand-light color the grid pattern itself is drawn on
+     (--bg-canvas === Figma's brand/light), sized to the label+icon's own
+     box (no padding set here) so the chip hugs them tightly instead of
+     adding whitespace around them. */
+  background: var(--bg-canvas);
   text-decoration: none;
   cursor: pointer;
 }

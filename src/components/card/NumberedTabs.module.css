@@ -10,6 +10,8 @@
 }
 
 .tab {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,6 +24,7 @@
 }
 
 .tabLabel {
+  position: relative;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-regular);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
@@ -42,10 +45,44 @@
   color: rgba(227, 220, 204, 0.5);
 }
 
-.inactive:hover {
-  border-color: rgba(227, 220, 204, 0.5);
-}
-
 .inactive:hover .tabLabel {
   color: var(--text-cream);
+}
+
+@media (hover: hover) {
+  .sweep {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent-green);
+    /* Matches whichever radius .tab currently has (square when inactive,
+       pill when active) instead of duplicating that logic here. */
+    border-radius: inherit;
+    clip-path: circle(0% at 100% 100%);
+    transition: clip-path 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .sweepLabel {
+    font-family: 'Bricolage Grotesque Variable', sans-serif;
+    font-weight: var(--bricolage-regular);
+    font-variation-settings: 'opsz' 14, 'wdth' 100;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -0.96px;
+    color: var(--accent-green);
+    font-feature-settings: 'salt' 1;
+  }
+
+  /* Same pure-green-on-hover fix as the buttons: without this the tab's own
+     border stays visible under the sweep's green border. */
+  .tab:hover {
+    border-color: var(--accent-green);
+  }
+
+  .tab:hover .sweep {
+    clip-path: circle(150% at 100% 100%);
+  }
 }

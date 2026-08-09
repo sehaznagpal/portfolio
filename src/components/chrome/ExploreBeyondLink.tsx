@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { usePageTransition } from '../../lib/usePageTransition';
@@ -8,6 +9,11 @@ const EXPERIMENT_ZONE_HREF = '/experiment-zone';
 
 export default function ExploreBeyondLink() {
   const { transitioning, navigateWithTransition } = usePageTransition();
+
+  useEffect(() => {
+    // Warms the lazy-loaded route's chunk so the grid sweep never stalls waiting on a fetch.
+    import('../../pages/ExperimentZonePage');
+  }, []);
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
     // Let modified clicks (open in new tab, etc.) behave like a normal link.
@@ -21,6 +27,7 @@ export default function ExploreBeyondLink() {
   return (
     <>
       <Link className={styles.link} to={EXPERIMENT_ZONE_HREF} onClick={handleClick}>
+        <span className={styles.chip} aria-hidden="true" />
         <span className={styles.fill} aria-hidden="true" />
         <span className={styles.label}>Explore Beyond the Case Studies</span>
         <ArrowUpRight className={styles.icon} size={18} strokeWidth={2} />

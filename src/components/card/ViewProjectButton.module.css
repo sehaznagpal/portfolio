@@ -54,6 +54,13 @@
     font-feature-settings: 'salt' 1;
   }
 
+  /* Without this, the button's own cream border stays visible as an outer
+     ring around the sweep's green border underneath it, reading as a
+     blended/mixed stroke instead of a clean, pure green one. */
+  .button:hover {
+    border-color: var(--accent-green);
+  }
+
   .button:hover .sweep {
     clip-path: circle(150% at 100% 100%);
   }

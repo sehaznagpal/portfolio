@@ -12,6 +12,19 @@
   cursor: pointer;
 }
 
+/* Same brand-light color the grid pattern itself is drawn on (--bg-canvas
+   === Figma's brand/light). Inset by exactly .link's own padding (not
+   inset: 0, which would match .fill's bigger hover-hit box instead) so the
+   chip hugs the label+icon content tightly with no extra whitespace. Sits
+   behind .fill/.label/.icon (first in DOM order, no z-index) so the hover
+   sweep still paints over it unchanged. */
+.chip {
+  position: absolute;
+  inset: 4px 8px;
+  background: var(--bg-canvas);
+  pointer-events: none;
+}
+
 /* Fast, eased fill sweeping in from the left on hover — a scaleX transform
    (not a flat opacity/color swap) so it reads as a wipe, not a blink. The
    codebase's signature "cinematic" ease-out curve (same one used for the
