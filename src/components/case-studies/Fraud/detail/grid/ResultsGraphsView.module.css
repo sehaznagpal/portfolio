@@ -67,3 +67,39 @@
   object-fit: cover;
   pointer-events: none;
 }
+
+@media (max-width: 767px) {
+  .heading {
+    position: static;
+    font-size: clamp(22px, 6vw, 28px);
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Desktop floats this at the heading's top-right corner, sharing its row
+     — on mobile the centered .heading's own text reaches into that corner,
+     so this drops into normal flow above the heading instead (matches the
+     JSX order — goBack already comes first) rather than overlapping it. */
+  .goBack {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  /* Figures already scroll horizontally on desktop (.pictures has its own
+     overflow-x: auto) — mobile just needs the outer box converted from a
+     panel-relative percentage position to flow, with a shorter fixed
+     height that fits mobile's narrower viewport. */
+  .pictures {
+    position: static;
+    left: auto;
+    right: auto;
+    height: 260px;
+    margin-top: 20px;
+  }
+
+  .picture {
+    height: 260px;
+  }
+}

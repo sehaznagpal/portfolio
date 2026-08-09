@@ -57,3 +57,26 @@
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
+
+@media (max-width: 767px) {
+  .intro {
+    position: static;
+    width: 100%;
+    transform: none;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+  }
+
+  .principles {
+    position: static;
+    width: 100%;
+    transform: none;
+    font-size: clamp(14px, 3.7vw, 17px);
+    line-height: 1.35;
+    margin-top: 20px;
+  }
+
+  .list {
+    padding-left: 24px;
+  }
+}

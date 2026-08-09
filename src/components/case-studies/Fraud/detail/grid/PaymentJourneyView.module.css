@@ -147,3 +147,54 @@
 .edgeRight {
   right: 0;
 }
+
+@media (max-width: 767px) {
+  .heading {
+    position: static;
+    transform: none;
+    font-size: clamp(20px, 5.5vw, 26px);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .goBack {
+    position: static;
+    margin-top: 8px;
+  }
+
+  .navDots {
+    position: static;
+    transform: none;
+    margin-top: 12px;
+  }
+
+  /* The 5-phone-plus-connectors row is authored as percentages of the whole
+     panel width — squeezed to mobile width it'd shrink each phone to
+     illegible, so instead it keeps its desktop proportions at a fixed,
+     legible pixel width and becomes horizontally pannable (.panelInner
+     gets overflow-x: auto for this specific case — see this file's own
+     FraudCard.module.css mobile media query comment) rather than being
+     squeezed or clipped.
+
+     position stays relative (not static): .phone/.connector children are
+     position: absolute and percentage-positioned against *this* box
+     specifically — without a positioned .phones, those percentages fall
+     through to resolve against .panelInner (the whole panel) instead and
+     every phone balloons across it. */
+  .phones {
+    position: relative;
+    inset: auto;
+    width: 900px;
+    height: 380px;
+    margin-top: 20px;
+  }
+
+  /* Edge-tap zones stay absolute (anchored to .panelInner, same as desktop)
+     but use a fixed top offset instead of a desktop-calibrated percentage,
+     so they clear the stacked heading/goBack/navDots header instead of
+     overlapping it. */
+  .edgeZone {
+    top: 180px;
+    bottom: 16px;
+  }
+}

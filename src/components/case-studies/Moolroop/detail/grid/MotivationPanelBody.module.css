@@ -42,3 +42,24 @@
 .photoStrip > * {
   pointer-events: auto;
 }
+
+@media (max-width: 767px) {
+  .body {
+    position: static;
+    width: 100%;
+    transform: none;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+  }
+
+  .photoStrip {
+    position: static;
+    inset: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 20px;
+  }
+}

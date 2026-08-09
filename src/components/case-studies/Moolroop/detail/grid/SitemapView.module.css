@@ -101,3 +101,30 @@
   color: var(--moolroop-yellow);
   font-weight: var(--author-medium);
 }
+
+@media (max-width: 767px) {
+  .heading {
+    position: static;
+    font-size: clamp(24px, 6.5vw, 30px);
+  }
+
+  .goBack {
+    position: static;
+    margin-top: 8px;
+  }
+
+  /* Fills whatever vertical space is left in .panelInner's flex column
+     instead of the desktop top:21%/bottom:0 split. The diagram itself
+     stays a horizontally scrollable, unscaled flowchart on mobile too —
+     shrinking a graph this dense to fit phone width would make the node
+     labels unreadable, so panning is the more usable trade-off, same
+     principle as desktop's own horizontal scroll for the same content. */
+  .scrollArea {
+    position: static;
+    flex: 1 1 auto;
+    min-height: 260px;
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px 20px 24px;
+  }
+}

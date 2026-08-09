@@ -131,9 +131,14 @@
   cursor: default;
 }
 
+/* Present on Moolroop/DrCuterus's equivalent panel but missing here — without
+   it, content taller than the panel is clipped by .panel's overflow:hidden
+   instead of scrolling into view (only matters once content can exceed the
+   box, which happens routinely at mobile's taller/narrower proportions). */
 .panelInner {
   position: absolute;
   inset: 0;
+  overflow-y: auto;
 }
 
 .closeButton {
@@ -202,4 +207,49 @@
   line-height: 1;
   letter-spacing: -1.68px;
   color: var(--bg-canvas);
+}
+
+/* Kept at the very end of the file — .panelHeading's own base rule is
+   defined further down than .panel, and a media-conditioned rule loses to
+   an unconditional rule appearing later in source order when both set the
+   same property, regardless of which one's condition is narrower. Only the
+   last occurrence of each selector actually wins, so this block has to
+   come after every other rule for the same class. */
+@media (max-width: 767px) {
+  .panel {
+    width: min(560px, 92vw);
+    aspect-ratio: auto;
+    height: 82vh;
+  }
+
+  /* Panel bodies are authored as percentage-positioned absolute layers tuned
+     to desktop's fixed 1020x663 aspect ratio — those percentages point
+     nowhere sensible against mobile's tall, narrow box. Below this
+     breakpoint .panelInner switches to a plain flex column instead, and
+     every PanelBody's own children fall back to normal flow (see each
+     body's own mobile media query) so they just stack: heading, body copy,
+     then images, each pushing the next one down.
+
+     overflow-x stays auto (rather than hidden) specifically for the one
+     piece of content that can't sensibly reflow to mobile width — the
+     Payment Journey's 5-phone filmstrip — so it stays reachable by
+     horizontal pan instead of being clipped. Every other panel is narrower
+     than the viewport and never triggers it. */
+  .panelInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: auto;
+    padding: 64px 24px 32px;
+  }
+
+  /* Unused in practice (all five Fraud cards render their own custom
+     heading — see CARDS_WITH_CUSTOM_HEADING in FraudPanel.tsx) but kept in
+     flow-friendly shape for consistency/safety. */
+  .panelHeading {
+    position: static;
+    width: 100%;
+    right: auto;
+    font-size: clamp(26px, 7.5vw, 34px);
+  }
 }

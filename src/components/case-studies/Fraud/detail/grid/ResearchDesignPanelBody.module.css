@@ -102,3 +102,38 @@
 .noteBody {
   margin: 0;
 }
+
+@media (max-width: 767px) {
+  .heading,
+  .subheading {
+    position: static;
+    font-size: clamp(22px, 6vw, 28px);
+    white-space: normal;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .heading {
+    margin-top: 0;
+  }
+
+  .intro,
+  .body {
+    position: static;
+    width: 100%;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+    margin-top: 12px;
+  }
+
+  .noteBox {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .noteText {
+    font-size: clamp(14px, 3.7vw, 17px);
+    line-height: 1.35;
+  }
+}

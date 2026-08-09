@@ -18,3 +18,13 @@
   object-fit: cover;
   display: block;
 }
+
+@media (max-width: 767px) {
+  .polaroid {
+    position: static;
+    translate: none;
+    width: clamp(78px, 24vw, 108px);
+    aspect-ratio: 3 / 4;
+    height: auto;
+  }
+}

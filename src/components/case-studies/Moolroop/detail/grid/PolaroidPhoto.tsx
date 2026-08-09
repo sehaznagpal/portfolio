@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useIsMobile } from '../../../../../lib/useIsMobile';
 import styles from './PolaroidPhoto.module.css';
 
 export interface PolaroidSpec {
@@ -36,16 +37,28 @@ const PHOTO_VARIANTS = {
 };
 
 export default function PolaroidPhoto({ src, alt, cx, cy, width, height, rotate }: PolaroidSpec) {
+  const isMobile = useIsMobile();
+
+  /* cx/cy/width/height/rotate are percentages of the desktop panel's fixed
+     1020x663 box (see cardData.ts) — art-directed scatter positions that
+     don't mean anything against mobile's flow layout. Below the mobile
+     breakpoint this component skips them entirely and falls back to the
+     plain-flow sizing in PolaroidPhoto.module.css's mobile rule instead of
+     translating the percentages into some other coordinate space. */
   return (
     <motion.div
       className={styles.polaroid}
-      style={{
-        left: `${cx}%`,
-        top: `${cy}%`,
-        width: `${width}%`,
-        height: `${height}%`,
-        rotate,
-      }}
+      style={
+        isMobile
+          ? undefined
+          : {
+              left: `${cx}%`,
+              top: `${cy}%`,
+              width: `${width}%`,
+              height: `${height}%`,
+              rotate,
+            }
+      }
       variants={PHOTO_VARIANTS}
       initial="rest"
       animate="rest"

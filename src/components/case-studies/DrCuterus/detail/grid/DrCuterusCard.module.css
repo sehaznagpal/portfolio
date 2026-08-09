@@ -131,18 +131,6 @@
   cursor: default;
 }
 
-/* The 1020/663 aspect-ratio collapses to an uncomfortably short box at phone
-   widths (e.g. ~214px tall at 375px wide) — too cramped for paragraph text
-   plus image galleries, so mobile trades the fixed aspect-ratio for a tall
-   percentage-of-viewport box instead. */
-@media (max-width: 767px) {
-  .panel {
-    width: min(560px, 92vw);
-    aspect-ratio: auto;
-    height: 82vh;
-  }
-}
-
 .panelInner {
   position: absolute;
   inset: 0;
@@ -215,4 +203,42 @@
   line-height: 1;
   letter-spacing: -1.68px;
   color: var(--drcuterus-lavender);
+}
+
+/* Kept at the very end of the file — .panelInner and .panelHeading's own
+   base rules are defined further down than .panel, and a media-conditioned
+   rule loses to an unconditional rule appearing later in source order when
+   both set the same property, regardless of which one's condition is
+   narrower. Only the last occurrence of each selector actually wins, so
+   this block has to come after every other rule for the same class. */
+@media (max-width: 767px) {
+  .panel {
+    width: min(560px, 92vw);
+    aspect-ratio: auto;
+    height: 82vh;
+  }
+
+  /* Panel bodies are authored as percentage-positioned absolute layers tuned
+     to desktop's fixed 1020x663 aspect ratio — those percentages point
+     nowhere sensible against mobile's tall, narrow box. Below this
+     breakpoint .panelInner switches to a plain flex column instead, and
+     every PanelBody's own children fall back to normal flow (see each
+     body's own mobile media query) so they just stack: heading, body copy,
+     then images, each pushing the next one down. */
+  .panelInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 24px 32px;
+  }
+
+  /* Unused in practice (all five DrCuterus cards render their own custom
+     heading — see CARDS_WITH_CUSTOM_HEADING in DrCuterusPanel.tsx) but kept
+     in flow-friendly shape for consistency/safety. */
+  .panelHeading {
+    position: static;
+    width: 100%;
+    right: auto;
+    font-size: clamp(26px, 7.5vw, 34px);
+  }
 }

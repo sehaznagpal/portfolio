@@ -111,3 +111,48 @@
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
+
+/* Desktop lays this out as two side-by-side columns (mockup+buttons on the
+   left, Solution/Reflection copy on the right) via absolute positioning
+   tuned to the 1020x663 panel. Mobile stacks everything into one column
+   instead, in the same reading order the JSX already returns them in:
+   mockup, option buttons, Solution heading + text, Reflection heading +
+   text. */
+@media (max-width: 767px) {
+  .mockup {
+    position: static;
+    transform: none;
+    width: min(180px, 55vw);
+    margin: 0 auto;
+  }
+
+  .optionButtons {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .optionButton {
+    font-size: clamp(14px, 3.6vw, 17px);
+  }
+
+  .solutionHeading,
+  .reflectionHeading {
+    position: static;
+    width: 100%;
+    margin-top: 28px;
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .solutionText,
+  .reflectionText {
+    position: static;
+    width: 100%;
+    text-align: left;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+  }
+}

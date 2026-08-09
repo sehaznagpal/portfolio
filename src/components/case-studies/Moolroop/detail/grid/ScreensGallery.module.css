@@ -102,3 +102,50 @@
   width: 21.87%;
   flex: 0 0 auto;
 }
+
+@media (max-width: 767px) {
+  .heading {
+    position: static;
+    transform: none;
+    font-size: clamp(24px, 6.5vw, 30px);
+  }
+
+  .goBack {
+    position: static;
+    margin-top: 8px;
+  }
+
+  .dots {
+    position: static;
+    transform: none;
+    margin-top: 12px;
+  }
+
+  /* Edge-tap zones stay absolute (anchored to .panelInner, the whole
+     scrollable panel, same as desktop) but use a fixed top offset instead
+     of a desktop-calibrated percentage, so they clear the stacked
+     heading/goBack/dots header instead of overlapping it — dots keep their
+     higher z-index so they stay tappable either way. */
+  .edgeZone {
+    top: 168px;
+    bottom: 16px;
+    width: 20%;
+  }
+
+  .row {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Desktop's 21.87% (of a 1020px panel) renders at a legible ~220px; the
+     same percentage against mobile's much narrower panel shrinks these to
+     illegible thumbnails. Wrapping two per row instead of cramming four
+     into one lets each mockup stay a sensible size. */
+  .mockup {
+    width: clamp(110px, 40vw, 160px);
+  }
+}

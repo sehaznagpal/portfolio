@@ -73,3 +73,37 @@
   max-width: none;
   pointer-events: none;
 }
+
+@media (max-width: 767px) {
+  .heading {
+    position: static;
+    font-size: clamp(24px, 6.5vw, 30px);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .intro {
+    position: static;
+    width: 100%;
+    transform: none;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+    margin-top: 16px;
+  }
+
+  /* .laptop's own children are position: absolute, percentage-positioned
+     against *this* box specifically — position stays relative (not
+     static) so it's still the containing block they resolve against, or
+     those percentages fall through to resolve against .panelInner (the
+     whole panel) instead and the laptop image balloons across the entire
+     panel. Also needs an explicit aspect-ratio since percentage-height
+     children don't resolve against an auto-height parent. */
+  .laptop {
+    position: relative;
+    inset: auto;
+    width: min(320px, 90vw);
+    height: auto;
+    aspect-ratio: 1.62;
+    margin-top: 24px;
+  }
+}

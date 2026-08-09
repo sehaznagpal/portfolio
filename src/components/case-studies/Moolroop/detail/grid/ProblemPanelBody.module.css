@@ -49,3 +49,22 @@
   object-position: top;
   display: block;
 }
+
+@media (max-width: 767px) {
+  .body {
+    position: static;
+    width: 100%;
+    transform: none;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+  }
+
+  .screenshotFrame {
+    position: static;
+    transform: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin-top: 20px;
+  }
+}

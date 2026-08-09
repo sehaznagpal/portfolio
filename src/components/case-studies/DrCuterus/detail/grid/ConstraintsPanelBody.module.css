@@ -56,3 +56,34 @@
   object-fit: contain;
   pointer-events: none;
 }
+
+@media (max-width: 767px) {
+  .heading {
+    position: static;
+    font-size: clamp(24px, 6.5vw, 30px);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .body {
+    position: static;
+    width: 100%;
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.35;
+    margin-top: 16px;
+  }
+
+  /* flex-shrink: 0 matters here specifically because .plush has its own
+     overflow: hidden — a flex item with non-visible overflow gets an
+     automatic min-height of 0 instead of one based on its content/
+     aspect-ratio, so panelInner's flex column was free to squash it down
+     to a few px to make everything fit instead of scrolling. */
+  .plush {
+    position: static;
+    flex-shrink: 0;
+    width: min(240px, 65vw);
+    height: auto;
+    aspect-ratio: 332 / 201;
+    margin-top: 20px;
+  }
+}

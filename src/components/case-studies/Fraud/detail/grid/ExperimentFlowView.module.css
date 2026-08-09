@@ -310,3 +310,36 @@
   font-size: 13px;
   color: rgba(254, 254, 254, 0.75);
 }
+
+/* Kept at the very end of the file — .goBack's own base rule is defined
+   further down than .wrap, and a media-conditioned rule loses to an
+   unconditional rule appearing later in source order when both set the
+   same property, regardless of which one's condition is narrower. Only the
+   last occurrence of each selector actually wins, so this block has to
+   come after every other rule for the same class.
+
+   .flow is a fixed 560px wide flowchart (plus a loop-back connector that
+   bleeds further right still) — already normal document flow, not
+   percentage-positioned against the panel, so unlike the other panels this
+   one doesn't need converting. It just doesn't fit mobile width, so it
+   becomes horizontally pannable instead of reflowing (redrawing this
+   diagram's connectors/branches for a narrow column isn't a layout tweak,
+   it's a different diagram) — same principle as the Sitemap and Payment
+   Journey views. */
+@media (max-width: 767px) {
+  .wrap {
+    overflow-x: auto;
+    padding: 76px 20px 32px;
+  }
+
+  /* Desktop floats this at the title's top-right corner, sharing its row —
+     on mobile the centered .title's own text reaches into that corner, so
+     this drops into normal flow above the title instead (matches the JSX
+     order — goBack already comes first) rather than overlapping it. */
+  .goBack {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+}
