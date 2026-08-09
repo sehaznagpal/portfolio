@@ -81,9 +81,9 @@ export default function IndexPage() {
   const isMobile = useIsMobile();
 
   usePageMeta({
-    title: 'Sehaz Nagpal | UI/UX Designer Portfolio',
+    title: 'Sehaz Nagpal | Product Designer Portfolio',
     description:
-      'Portfolio of Sehaz Nagpal, a UI-UX designer intrigued by why people do what they do. Case studies on the MoolRoop app, the Dr Cuterus website, and a behavioural-economics dissertation on payment fraud.',
+      'Portfolio of Sehaz Nagpal, a product designer intrigued by why people do what they do. Case studies on the MoolRoop app, the Dr Cuterus website, and a behavioural-economics dissertation on payment fraud.',
     image: '/og-image.jpg',
   });
 
