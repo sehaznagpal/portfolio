@@ -23,9 +23,9 @@
   color: var(--chrome-bg);
   font-feature-settings: 'salt' 1;
   cursor: pointer;
-  transition: opacity 150ms ease-out;
+  transition: color 150ms ease-out;
 }
 
 .link:hover {
-  opacity: 0.7;
+  color: var(--accent-green);
 }
