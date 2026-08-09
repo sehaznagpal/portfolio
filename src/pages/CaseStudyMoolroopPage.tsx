@@ -13,7 +13,7 @@ export default function CaseStudyMoolroopPage() {
   const isMobile = useIsMobile();
 
   usePageMeta({
-    title: 'MoolRoop App — Case Study | Sehaz Nagpal',
+    title: 'MoolRoop App: Case Study | Sehaz Nagpal',
     description:
       'A self-initiated buyer-side mobile app case study exploring whether GI-certified craft authenticity can be verified inside the shopping flow itself, instead of a database several clicks away.',
     image: productScreenImage,

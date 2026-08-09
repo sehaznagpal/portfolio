@@ -9,7 +9,7 @@ export default function ExperimentZonePage() {
   usePageMeta({
     title: 'Experiment Zone | Sehaz Nagpal',
     description:
-      'A playful, pannable corner of Sehaz Nagpal’s portfolio — extra experiments, a photobooth, and side projects to poke around in.',
+      'A playful, pannable corner of Sehaz Nagpal’s portfolio. Extra experiments, a photobooth, and side projects to poke around in.',
     image: sezPhotoImage,
   });
 

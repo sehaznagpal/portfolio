@@ -13,9 +13,9 @@ export default function CaseStudyDrCuterusPage() {
   const isMobile = useIsMobile();
 
   usePageMeta({
-    title: 'Dr Cuterus Website Design — Case Study | Sehaz Nagpal',
+    title: 'Dr Cuterus Website Design: Case Study | Sehaz Nagpal',
     description:
-      'Website design case study for Dr Cuterus, a sex educator with millions of followers — one site built to carry patient trust, corporate credibility, and her voice, in English and Hinglish.',
+      'Website design case study for Dr Cuterus, a sex educator with millions of followers. One site built to carry patient trust, corporate credibility, and her voice, in English and Hinglish.',
     image: homepageScreenshotImage,
   });
 

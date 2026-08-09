@@ -6,7 +6,7 @@ import styles from './CaseStudyFraudPage.module.css';
 
 export default function CaseStudyFraudPage() {
   usePageMeta({
-    title: 'Designing Against Fraud — Dissertation Case Study | Sehaz Nagpal',
+    title: 'Designing Against Fraud: Dissertation Case Study | Sehaz Nagpal',
     description:
       'A behavioural-economics dissertation and randomised controlled trial testing whether redesigned warnings and cancel buttons actually reduce payment fraud in India.',
     image: payingScreenImage,
