@@ -91,7 +91,7 @@
 
 .buttonLabel {
   font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-weight: var(--bricolage-regular);
+  font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   font-size: 20px;
   line-height: 1;

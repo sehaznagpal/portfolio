@@ -203,27 +203,64 @@
 }
 
 .button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(6px, 1vh, 8px) 12px;
-  background: var(--card-fill);
-  border: 1px solid var(--card-border);
+  padding: 8px 16px;
+  background: var(--chrome-bg);
+  border: 1px solid var(--text-cream);
+  border-radius: 4px;
+  overflow: hidden;
   color: var(--text-cream);
   text-decoration: none;
-  font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-weight: var(--bricolage-regular);
-  font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: clamp(15px, min(1.5vw, 1.8vh), 20px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-feature-settings: 'salt' 1;
   cursor: pointer;
-  transition: background 150ms ease-out;
 }
 
-.button:hover {
-  background: #383838;
+.buttonLabel {
+  position: relative;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-cream);
+  font-feature-settings: 'salt' 1;
+}
+
+.sweep {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-green);
+  border-radius: 4px;
+  clip-path: circle(0% at 100% 100%);
+  pointer-events: none;
+}
+
+.sweepLabel {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent-green);
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+}
+
+@media (hover: hover) {
+  .sweep {
+    transition: clip-path 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .button:hover .sweep {
+    clip-path: circle(150% at 100% 100%);
+  }
 }
 
 .caption {
@@ -242,13 +279,20 @@
 /* Bleeds off the panel's right edge only (clipped there by .panel's
    overflow: hidden) — the bottom stays fully visible, per the Figma
    reference where the photo's bottom edge lands exactly on the panel's
-   own bottom edge rather than bleeding past it. */
+   own bottom edge rather than bleeding past it.
+
+   width used to be a flat % of the panel (a horizontal-only metric), so on
+   a wide-but-short viewport (panel width — and so the photo — stays large
+   while the available height shrinks) the circle grew tall enough to cover
+   the actions column's button strokes and body text. Capping it with a vh
+   term as well means the diameter now answers to whichever dimension is
+   actually tight. */
 .photo {
   position: absolute;
   z-index: 1;
   right: clamp(-120px, -16%, -50px);
   bottom: 0;
-  width: clamp(260px, 58%, 540px);
+  width: clamp(200px, min(58%, 52vh), 540px);
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
@@ -277,8 +321,8 @@
     gap: 0;
   }
 
-  .button {
-    font-size: clamp(19px, min(calc(1.5vw + 4px), calc(1.8vh + 4px)), 24px);
+  .buttonLabel {
+    font-size: 24px;
   }
 
   /* Caption sits right under the Contact button it annotates; Download CV
@@ -289,6 +333,12 @@
 
   .caption + .button {
     margin-top: 16px;
+  }
+}
+
+@media (hover: hover) and (min-width: 768px) {
+  .sweepLabel {
+    font-size: 24px;
   }
 }
 

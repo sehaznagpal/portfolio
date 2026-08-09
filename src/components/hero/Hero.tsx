@@ -48,6 +48,9 @@ export default function Hero() {
         <span className={`${styles.buttonLabel} ${clicked ? styles.buttonLabelClicked : ''}`}>
           Explore Work
         </span>
+        <span className={styles.sweep} aria-hidden="true">
+          <span className={styles.sweepLabel}>Explore Work</span>
+        </span>
       </button>
 
       <AnimatePresence>{photoVisible && <HeroPolaroid />}</AnimatePresence>

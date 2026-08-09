@@ -112,11 +112,17 @@ export default function AboutModal({ open, onClose }: { open: boolean; onClose: 
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Contact Via Mail
+                <span className={styles.buttonLabel}>Contact Via Mail</span>
+                <span className={styles.sweep} aria-hidden="true">
+                  <span className={styles.sweepLabel}>Contact Via Mail</span>
+                </span>
               </a>
               <p className={styles.caption}>*for work, queries, feedback, discussion or just a hi!</p>
               <a className={styles.button} href={CV_URL} download target="_blank" rel="noopener noreferrer">
-                Download CV
+                <span className={styles.buttonLabel}>Download CV</span>
+                <span className={styles.sweep} aria-hidden="true">
+                  <span className={styles.sweepLabel}>Download CV</span>
+                </span>
               </a>
             </div>
           </div>

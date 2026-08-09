@@ -80,6 +80,7 @@
   background: var(--chrome-bg);
   border: 1px solid var(--text-cream);
   border-radius: 4px;
+  overflow: hidden;
   cursor: pointer;
   transition: background 150ms ease-out, border-color 150ms ease-out;
 }
@@ -90,8 +91,9 @@
 }
 
 .buttonLabel {
+  position: relative;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-weight: var(--bricolage-regular);
+  font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   font-size: 24px;
   line-height: 1;
@@ -103,4 +105,35 @@
 
 .buttonLabelClicked {
   color: var(--chrome-bg);
+}
+
+@media (hover: hover) {
+  .sweep {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--accent-green);
+    border-radius: 4px;
+    clip-path: circle(0% at 100% 100%);
+    transition: clip-path 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .sweepLabel {
+    font-family: 'Bricolage Grotesque Variable', sans-serif;
+    font-weight: var(--bricolage-medium);
+    font-variation-settings: 'opsz' 14, 'wdth' 100;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -0.96px;
+    color: var(--accent-green);
+    white-space: nowrap;
+    font-feature-settings: 'salt' 1;
+  }
+
+  .button:hover .sweep {
+    clip-path: circle(150% at 100% 100%);
+  }
 }
