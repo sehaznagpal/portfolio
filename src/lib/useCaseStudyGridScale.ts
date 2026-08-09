@@ -1,4 +1,4 @@
-import { useEffect, useState, type RefObject } from 'react';
+import { useLayoutEffect, useState, type RefObject } from 'react';
 
 /* The five-card grid is authored at a fixed 1280x832 reference (see
    cardData.ts's CARD_POSITIONS, dx/dy offsets from center in that reference).
@@ -52,7 +52,18 @@ const IDLE_SCALE: CaseStudyGridScale = { contentScale: 1, xScale: 1, yScale: 1 }
 export function useCaseStudyGridScale(sectionRef: RefObject<HTMLElement | null>): CaseStudyGridScale {
   const [scale, setScale] = useState<CaseStudyGridScale>(IDLE_SCALE);
 
-  useEffect(() => {
+  /* useLayoutEffect (not useEffect) so the real scale is measured and
+     committed before the browser paints. With useEffect, the first paint
+     briefly showed cards at IDLE_SCALE (1:1, i.e. the raw 1280x832
+     reference position) before snapping to the computed scale a frame
+     later — and because the cards are Framer Motion layout="position"
+     elements, that snap registered as a layout change to FLIP-animate
+     rather than a first-paint value, leaving each card permanently offset
+     by dx/dy * (1 - scale) once the animation settled. Measuring
+     synchronously pre-paint means there's only ever one committed
+     position, so Framer never sees a "from" position to correct away
+     from. */
+  useLayoutEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
 

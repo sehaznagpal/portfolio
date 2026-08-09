@@ -18,6 +18,12 @@ type Mode = 'normal' | 'map';
    (which is what made larger screens look increasingly sparse). */
 const REFERENCE_WIDTH = 1440;
 const REFERENCE_HEIGHT = 900;
+/* Floor for desktop's fit-to-viewport zoom — without it, a wide-but-short
+   window (height is the binding factor in the min() below) can shrink card
+   titles/body copy past a readable size. No matching cap: letting baseScale
+   grow freely on tall/large screens is the point of this fit (see comment
+   above) — only the "too small to read" direction needs a bound. */
+const MIN_BASE_SCALE = 0.65;
 /* World is sized relative to the viewport so there's room to pan around in
    Normal view. Kept modest (rather than a flat 2x) so Normal view doesn't
    read as mostly empty grid — but never smaller than the content's own
@@ -86,8 +92,10 @@ export default function ExperimentCanvas() {
 
   useEffect(() => {
     function updateWorld() {
-      const fitScale = Math.min(window.innerWidth / REFERENCE_WIDTH, window.innerHeight / REFERENCE_HEIGHT);
-      const scale = isMobileRef.current ? fitScale * MOBILE_ZOOM_BOOST : fitScale;
+      const rawFitScale = Math.min(window.innerWidth / REFERENCE_WIDTH, window.innerHeight / REFERENCE_HEIGHT);
+      const scale = isMobileRef.current
+        ? rawFitScale * MOBILE_ZOOM_BOOST
+        : Math.max(rawFitScale, MIN_BASE_SCALE);
       baseScaleRef.current = scale;
       setBaseScale(scale);
 
