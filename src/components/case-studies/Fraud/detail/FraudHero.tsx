@@ -4,10 +4,11 @@ import pinWarningScreen from '../../../../assets/images/fraud/case-study/screens
 import confirmationScreen from '../../../../assets/images/fraud/case-study/screens/confirmation-screen.jpg';
 import styles from './FraudHero.module.css';
 
-const PROTOTYPE_URL = 'https://bit.ly/dissertation-experiment-prototype';
-const DISSERTATION_URL = 'https://drive.google.com/file/d/1T56QgmpiWvsrGIZ_S_NUWQY2uyhiHzYm/view?usp=share_link';
+export const PROTOTYPE_URL = 'https://bit.ly/dissertation-experiment-prototype';
+export const DISSERTATION_URL =
+  'https://drive.google.com/file/d/1T56QgmpiWvsrGIZ_S_NUWQY2uyhiHzYm/view?usp=share_link';
 
-const HERO_SCREENS = [
+export const HERO_SCREENS = [
   { src: payingScreen, alt: 'Paying Delhi Traffic Police — payment screen' },
   { src: pinWarningScreen, alt: 'Enter PIN screen with fraud warning banner' },
   { src: confirmationScreen, alt: 'Payment confirmed screen' },
