@@ -14,33 +14,16 @@
 }
 
 .section {
+  /* Each card positions itself directly (left/top: calc(50% + dx*scale)px,
+     see DrCuterusCardFace.tsx) against this element's own box — .section
+     being position:absolute already makes it a valid containing block for
+     that, no extra centering wrapper needed. */
   position: absolute;
   top: 40px;
   left: 0;
   right: 0;
   bottom: 48px;
   overflow: hidden;
-  /* Centers .scaleBox as a flex child — its layout size never changes
-     (flex-shrink:0 below), only its visual transform:scale() does, so
-     centering here keeps the whole card cluster centered at any scale
-     instead of pinned to the section's top-left corner. */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Cards are authored at a fixed 1280x832 reference (see cardData.ts's
-   CARD_POSITIONS) and this whole box is scaled uniformly to fit .section's
-   actual rendered size (useCaseStudyGridScale) — never distorted, and with
-   no min/max clamp so it genuinely shrinks to avoid overlap on short/narrow
-   screens and grows to fill space on large ones. transform-origin defaults
-   to center, so scaling grows/shrinks the cluster symmetrically around the
-   centered position above rather than from a corner. */
-.scaleBox {
-  position: relative;
-  flex-shrink: 0;
-  width: 1280px;
-  height: 832px;
 }
 
 .clickCatcher {

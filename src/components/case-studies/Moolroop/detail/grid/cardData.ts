@@ -55,18 +55,22 @@ export const CARDS: CardDef[] = [
   },
 ];
 
-/* Card positions — percentages of the 1280x832 reference frame (see
-   useCaseStudyGridScale), derived from the Figma reference (890:13907):
-   cards 1/3/5 form the top row, cards 2/4 the bottom row. Card 1's left and
-   card 5's right edge are snapped to the shared 60px gutter (--case-study-gutter
-   at the 1280px reference width) so the card cluster's outer edges line up
-   exactly with the hero/CTA row. */
+/* Card positions — px offsets of each card's center from the 1280x832
+   reference frame's own center (640, 416), derived from the Figma reference
+   (890:13907): cards 1/3/5 form the top row, cards 2/4 the bottom row.
+   Card 1 and card 5 are snapped so the cluster's outer edges land exactly on
+   the shared 60px gutter (--case-study-gutter at the 1280px reference width),
+   matching the hero/CTA row.
+
+   Expressed as offsets (not percentages) so useCaseStudyGridScale can scale
+   horizontal and vertical spacing independently — dx by xScale, dy by
+   yScale — instead of both axes being tied to one uniform scale. */
 export const CARD_POSITIONS = [
-  { left: '4.688%', top: '8.774%' },
-  { left: '19.770%', top: '47.480%' },
-  { left: '42.035%', top: '18.988%' },
-  { left: '63.904%', top: '53.846%' },
-  { left: '75.625%', top: '10.697%' },
+  { dx: -454, dy: -213 },
+  { dx: -260.944, dy: 109.0336 },
+  { dx: 24.048, dy: -128.02 },
+  { dx: 303.9712, dy: 162 },
+  { dx: 454, dy: -197 },
 ];
 
 /* Positions from Figma reference (813:156) — photos sit low enough that their

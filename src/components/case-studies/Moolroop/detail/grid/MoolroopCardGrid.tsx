@@ -10,7 +10,7 @@ import styles from './MoolroopCardGrid.module.css';
 export default function MoolroopCardGrid() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const scale = useCaseStudyGridScale(sectionRef);
+  const { contentScale, xScale, yScale } = useCaseStudyGridScale(sectionRef);
 
   useEffect(() => {
     if (openIndex === null) return;
@@ -27,13 +27,19 @@ export default function MoolroopCardGrid() {
     <div className={`${styles.viewport} grid-background`}>
       <div className={styles.frame}>
         <div className={styles.section} ref={sectionRef}>
-          <div className={styles.scaleBox} style={{ transform: `scale(${scale})` }}>
-            {CARDS.map((card, i) =>
-              openIndex === i ? null : (
-                <MoolroopCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
-              ),
-            )}
-          </div>
+          {CARDS.map((card, i) =>
+            openIndex === i ? null : (
+              <MoolroopCardFace
+                key={card.id}
+                card={card}
+                index={i}
+                onOpen={() => setOpenIndex(i)}
+                contentScale={contentScale}
+                xScale={xScale}
+                yScale={yScale}
+              />
+            ),
+          )}
         </div>
 
         <div className={styles.navWrap}>

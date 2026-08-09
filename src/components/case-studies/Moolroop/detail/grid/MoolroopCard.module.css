@@ -1,5 +1,12 @@
-.card {
+/* Positions the card (via left/top, set inline from CARD_POSITIONS' dx/dy) —
+   kept as a plain, non-motion element so resize-driven repositioning is
+   instant, with no Framer layout animation. See MoolroopCardFace.tsx. */
+.cardPositioner {
   position: absolute;
+}
+
+.card {
+  position: relative;
   width: 252px;
   height: 260px;
   box-sizing: border-box;

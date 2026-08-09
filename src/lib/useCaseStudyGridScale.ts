@@ -1,19 +1,56 @@
 import { useEffect, useState, type RefObject } from 'react';
 
 /* The five-card grid is authored at a fixed 1280x832 reference (see
-   cardData.ts's CARD_POSITIONS, which are percentages of this same box) and
-   scaled uniformly to fit whatever space .section actually has — never
-   stretched non-uniformly, and unlike the homepage's useCardScale, never
-   clamped to a min/max, since this section should genuinely shrink on short
-   screens (avoiding overlap) and grow on large ones (avoiding dead space).
-   Scaling against .section's own rendered box (not window.innerWidth/Height)
-   matters because .section is inset from the viewport by its own top/bottom
-   padding. */
+   cardData.ts's CARD_POSITIONS, dx/dy offsets from center in that reference).
+   A single uniform scale (min(w/1280, h/832)) works well at typical desktop
+   aspect ratios, but breaks down on "wide but short" windows — a common real
+   windowed-browser shape (e.g. ~1440x700-800 once browser chrome is
+   subtracted) — where height is the binding factor and the whole cluster,
+   text included, shrinks to fit height while the extra width sits unused.
+
+   So sizing is split into three independent factors instead of one:
+   - contentScale: card size and text, floored at a readable minimum and
+     capped so it never balloons on very wide-short screens.
+   - yScale: vertical spacing between rows, always tied 1:1 to contentScale
+     — there's rarely extra height to spend on spacing, and tying it to
+     content size guarantees rows never overlap regardless of flooring.
+   - xScale: horizontal spacing between cards. Matches contentScale (i.e.
+     identical to the old single-scale behavior) UNLESS content size had to
+     be floored above the raw height-bound fit, in which case it spends the
+     leftover width spreading the cards out instead of leaving it empty. */
 const GRID_FRAME_W = 1280;
 const GRID_FRAME_H = 832;
 
-export function useCaseStudyGridScale(sectionRef: RefObject<HTMLElement | null>) {
-  const [scale, setScale] = useState(1);
+const MIN_CONTENT_SCALE = 0.8;
+const MAX_CONTENT_SCALE = 1.15;
+const MAX_SPACING_SCALE = 1.6;
+
+export interface CaseStudyGridScale {
+  contentScale: number;
+  xScale: number;
+  yScale: number;
+}
+
+function computeScale(width: number, height: number): CaseStudyGridScale {
+  const widthRatio = width / GRID_FRAME_W;
+  const heightRatio = height / GRID_FRAME_H;
+  const rawScale = Math.min(widthRatio, heightRatio);
+  const contentScale = Math.min(MAX_CONTENT_SCALE, Math.max(MIN_CONTENT_SCALE, rawScale));
+
+  const yScale = contentScale;
+
+  const wasFlooredOnWidth = widthRatio > rawScale && contentScale > rawScale;
+  const xScale = wasFlooredOnWidth
+    ? Math.min(MAX_SPACING_SCALE, Math.max(contentScale, widthRatio))
+    : contentScale;
+
+  return { contentScale, xScale, yScale };
+}
+
+const IDLE_SCALE: CaseStudyGridScale = { contentScale: 1, xScale: 1, yScale: 1 };
+
+export function useCaseStudyGridScale(sectionRef: RefObject<HTMLElement | null>): CaseStudyGridScale {
+  const [scale, setScale] = useState<CaseStudyGridScale>(IDLE_SCALE);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -21,7 +58,7 @@ export function useCaseStudyGridScale(sectionRef: RefObject<HTMLElement | null>)
 
     function compute() {
       if (!el) return;
-      setScale(Math.min(el.clientWidth / GRID_FRAME_W, el.clientHeight / GRID_FRAME_H));
+      setScale(computeScale(el.clientWidth, el.clientHeight));
     }
     compute();
 
