@@ -129,3 +129,16 @@
   color: #121212;
   font-feature-settings: 'salt' 1;
 }
+
+.summary {
+  margin: 0;
+  width: min(900px, 100%);
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-medium);
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1.4;
+  text-align: center;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+}

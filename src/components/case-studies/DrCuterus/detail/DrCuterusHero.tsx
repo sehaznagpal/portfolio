@@ -34,6 +34,12 @@ export default function DrCuterusHero() {
         </a>
 
         <p className={styles.caption}>Client Project. Design + Partial Frontend Development. Personal Website.</p>
+
+        <p className={styles.summary}>
+          Went from a scattered online presence to a single live site that books patients,
+          showcases content, and handles brand inquiries, without losing the playful,
+          science-first tone she&apos;s known for.
+        </p>
       </div>
     </section>
   );

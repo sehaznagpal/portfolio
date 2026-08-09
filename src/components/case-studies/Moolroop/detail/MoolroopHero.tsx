@@ -50,6 +50,13 @@ export default function MoolroopHero() {
         <p className={styles.caption}>
           Buyer-side mobile application. Self initiated project. Figma Prototype
         </p>
+
+        <p className={styles.summary}>
+          MoolRoop lets buyers verify a craft&apos;s authenticity without leaving the product page,
+          pulling straight from government GI registries instead of a separate database search.
+          It&apos;s scoped narrowly on purpose as a test of whether verification can live inside
+          browsing.
+        </p>
       </div>
     </section>
   );

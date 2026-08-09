@@ -50,6 +50,14 @@ export default function FraudHero() {
         </div>
 
         <p className={styles.caption}>Research Project. Randomised Controlled Trials. Study on Fraud.</p>
+
+        <p className={styles.summary}>
+          A year-long research project asking whether fraud-prevention designs that work
+          internationally actually hold up in India, tested through a structured case analysis and
+          a live experiment with 116 participants across three fraud scenarios. The experiment
+          itself is a working product, a simulated payment interface built to test how choice
+          architecture changes real decisions.
+        </p>
       </div>
     </section>
   );
