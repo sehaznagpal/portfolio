@@ -40,6 +40,8 @@ export default function FraudHero() {
           </div>
         </div>
 
+        <p className={styles.caption}>Research Project. Randomised Controlled Trials. Study on Fraud.</p>
+
         <div className={styles.buttons}>
           <a className={styles.exploreButton} href={PROTOTYPE_URL} target="_blank" rel="noreferrer">
             Explore Prototype →
@@ -48,8 +50,6 @@ export default function FraudHero() {
             Read Dissertation →
           </a>
         </div>
-
-        <p className={styles.caption}>Research Project. Randomised Controlled Trials. Study on Fraud.</p>
 
         <p className={styles.summary}>
           A year-long research project asking whether fraud-prevention designs that work

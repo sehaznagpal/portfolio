@@ -38,6 +38,10 @@ export default function MoolroopHero() {
           </div>
         </div>
 
+        <p className={styles.caption}>
+          Buyer-side mobile application. Self initiated project. Figma Prototype
+        </p>
+
         <a
           className={styles.exploreButton}
           href={PROTOTYPE_URL}
@@ -46,10 +50,6 @@ export default function MoolroopHero() {
         >
           Explore Prototype →
         </a>
-
-        <p className={styles.caption}>
-          Buyer-side mobile application. Self initiated project. Figma Prototype
-        </p>
 
         <p className={styles.summary}>
           MoolRoop lets buyers verify a craft&apos;s authenticity without leaving the product page,

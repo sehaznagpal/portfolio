@@ -29,11 +29,11 @@ export default function DrCuterusHero() {
           </div>
         </div>
 
+        <p className={styles.caption}>Client Project. Design + Partial Frontend Development. Personal Website.</p>
+
         <a className={styles.exploreButton} href={LIVE_SITE_URL} target="_blank" rel="noreferrer">
           Go to Live Website →
         </a>
-
-        <p className={styles.caption}>Client Project. Design + Partial Frontend Development. Personal Website.</p>
 
         <p className={styles.summary}>
           Went from a scattered online presence to a single live site that books patients,
