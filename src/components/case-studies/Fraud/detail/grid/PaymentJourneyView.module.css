@@ -169,12 +169,15 @@
   }
 
   /* The 5-phone-plus-connectors row is authored as percentages of the whole
-     panel width — squeezed to mobile width it'd shrink each phone to
-     illegible, so instead it keeps its desktop proportions at a fixed,
-     legible pixel width and becomes horizontally pannable (.panelInner
-     gets overflow-x: auto for this specific case — see this file's own
-     FraudCard.module.css mobile media query comment) rather than being
-     squeezed or clipped.
+     panel width/height — squeezed to mobile width it'd shrink each phone to
+     illegible, so instead .phones is sized to *exactly* desktop's own
+     1020x663 reference box (same box .phones fills via inset:0 there), so
+     every unchanged .phone/.connector width% resolves to the identical
+     pixel size as desktop (e.g. 18.13% -> 184.9px phone width, matching
+     screenshot quality/proportions 1:1) instead of a shrunk approximation.
+     The row becomes horizontally pannable (.panelInner gets overflow-x:
+     auto for this specific case — see this file's own FraudCard.module.css
+     mobile media query comment) rather than squeezed or clipped.
 
      position stays relative (not static): .phone/.connector children are
      position: absolute and percentage-positioned against *this* box
@@ -192,33 +195,35 @@
     position: relative;
     inset: auto;
     align-self: flex-start;
-    width: 900px;
-    height: 260px;
+    width: 1020px;
+    height: 446px;
     margin-top: 20px;
   }
 
   /* .phone/.connectorTop/.connectorBottom's desktop top/height percentages
-     are tuned against the *old* 380px .phones box, most of which was a
-     leading gap reserved for the heading/dots that used to share this same
-     coordinate space — on mobile those already live in normal flow above
-     .phones (see .heading/.goBack/.navDots above), so that gap is dead
-     space here. Re-expressed as percentages of the new 260px height with
-     the same math (old top/height % × 380 ÷ 260, minus the now-removed
-     leading gap): identical pixel sizes and connector-to-phone alignment,
-     just without ~90px of empty space stacked above the first phone. */
+     are tuned against the full 663px-tall panel, most of which is a leading
+     gap reserved for the heading/dots that share that same coordinate space
+     on desktop — on mobile those already live in normal flow above .phones
+     (see .heading/.goBack/.navDots above), so that gap would be dead space
+     here. Re-expressed as percentages of the new 446px height (tight around
+     the phone + its connectors, same top/height % × 663 minus the removed
+     leading gap): identical *pixel* phone size to desktop, just without the
+     empty space stacked above the first phone. Width percentages are left
+     untouched — .phones' width already matches desktop's 1020px exactly,
+     so those resolve to the same pixel widths with no re-tuning needed. */
   .phone {
-    top: 8.808%;
-    height: 83.137%;
+    top: 5.83%;
+    height: 84.552%;
   }
 
   .connectorTop {
-    top: 3.077%;
-    height: 5.427%;
+    top: 0%;
+    height: 5.516%;
   }
 
   .connectorBottom {
-    top: 91.369%;
-    height: 5.517%;
+    top: 89.798%;
+    height: 5.613%;
   }
 
   /* Edge-tap zones stay absolute (anchored to .panelInner, same as desktop)
