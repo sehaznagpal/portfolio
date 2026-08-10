@@ -193,8 +193,32 @@
     inset: auto;
     align-self: flex-start;
     width: 900px;
-    height: 380px;
+    height: 260px;
     margin-top: 20px;
+  }
+
+  /* .phone/.connectorTop/.connectorBottom's desktop top/height percentages
+     are tuned against the *old* 380px .phones box, most of which was a
+     leading gap reserved for the heading/dots that used to share this same
+     coordinate space — on mobile those already live in normal flow above
+     .phones (see .heading/.goBack/.navDots above), so that gap is dead
+     space here. Re-expressed as percentages of the new 260px height with
+     the same math (old top/height % × 380 ÷ 260, minus the now-removed
+     leading gap): identical pixel sizes and connector-to-phone alignment,
+     just without ~90px of empty space stacked above the first phone. */
+  .phone {
+    top: 8.808%;
+    height: 83.137%;
+  }
+
+  .connectorTop {
+    top: 3.077%;
+    height: 5.427%;
+  }
+
+  .connectorBottom {
+    top: 91.369%;
+    height: 5.517%;
   }
 
   /* Edge-tap zones stay absolute (anchored to .panelInner, same as desktop)
