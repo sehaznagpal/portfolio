@@ -1,13 +1,17 @@
+/* Position as % of the case-study face's 984x554 box; padding/font-size as
+   cqw (1cqw = 1% of that box's rendered width, via .face's container-type:
+   inline-size in CardShell.module.css). letter-spacing converts px->em so it
+   scales with font-size automatically. */
 .button {
   position: absolute;
-  left: 835.5px;
-  top: 480px;
+  left: 84.9085%;
+  top: 86.6426%;
   transform: translateX(-50%);
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 0.813cqw 1.626cqw;
   background: var(--chrome-bg);
   border: 1px solid var(--text-cream);
   border-radius: 4px;
@@ -20,9 +24,9 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 24px;
+  font-size: 2.439cqw;
   line-height: 1;
-  letter-spacing: -0.96px;
+  letter-spacing: -0.04em;
   color: var(--text-cream);
   white-space: nowrap;
   font-feature-settings: 'salt' 1;
@@ -46,9 +50,9 @@
     font-family: 'Bricolage Grotesque Variable', sans-serif;
     font-weight: var(--bricolage-medium);
     font-variation-settings: 'opsz' 14, 'wdth' 100;
-    font-size: 24px;
+    font-size: 2.439cqw;
     line-height: 1;
-    letter-spacing: -0.96px;
+    letter-spacing: -0.04em;
     color: var(--accent-green);
     white-space: nowrap;
     font-feature-settings: 'salt' 1;

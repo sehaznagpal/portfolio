@@ -1,3 +1,8 @@
+/* Position/size as % of the mobile hero face's own 336x527 box (native %,
+   resolves against the positioned ancestor — MobileCardShell's .face). Type/
+   padding/radius use cqw (1cqw = 1% of that same box's rendered width, via
+   .face's container-type: inline-size) since they have no native
+   %-of-container behavior. */
 .wrapper {
   position: relative;
   width: 100%;
@@ -7,13 +12,13 @@
 .title {
   position: absolute;
   left: 50%;
-  top: 54px;
+  top: 10.2467%;
   transform: translateX(-50%);
   margin: 0;
   display: flex;
   align-items: baseline;
-  gap: 6px;
-  font-size: 36px;
+  gap: 1.7857cqw;
+  font-size: 10.7143cqw;
   line-height: 1;
   letter-spacing: -0.08em;
   white-space: nowrap;
@@ -37,15 +42,15 @@
 .tag {
   position: absolute;
   left: 50%;
-  top: 99px;
+  top: 18.7856%;
   transform: translateX(-50%);
-  width: 293px;
+  width: 87.2024%;
   background: var(--accent-green);
   color: var(--chrome-bg);
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 14px;
+  font-size: 4.1667cqw;
   line-height: 1.1;
   text-align: center;
   font-feature-settings: 'salt' 1;
@@ -53,15 +58,15 @@
 
 .body {
   position: absolute;
-  left: 21px;
-  top: 133px;
-  width: 294px;
+  left: 6.25%;
+  top: 25.2372%;
+  width: 87.5%;
   margin: 0;
   text-align: justify;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 14px;
+  font-size: 4.1667cqw;
   line-height: 1.1;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
@@ -79,15 +84,15 @@
 
 .phone {
   position: absolute;
-  width: 168px;
-  height: 342px;
+  width: 50%;
+  height: 64.9004%;
   transform-origin: center center;
   transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backPhone {
-  left: 155px;
-  top: 455px;
+  left: 46.131%;
+  top: 86.3378%;
   transform: translate(-50%, -50%) rotate(-1.71deg);
   z-index: 1;
 }
@@ -97,8 +102,8 @@
 }
 
 .frontPhone {
-  left: 185px;
-  top: 525px;
+  left: 55.0595%;
+  top: 99.6205%;
   transform: translate(-50%, -50%) rotate(-1.71deg);
   z-index: 2;
 }
@@ -113,7 +118,7 @@
   top: 2.15%;
   width: 90.3%;
   height: 95.89%;
-  border-radius: 18px;
+  border-radius: 5.3571cqw;
   overflow: hidden;
   background: var(--fraud-screen-default);
 }
@@ -145,10 +150,10 @@
   width: 82.15%;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 1.4881cqw;
   background: var(--fraud-alert-bg);
-  border-radius: 2px;
-  padding: 4px;
+  border-radius: 0.5952cqw;
+  padding: 1.1905cqw;
 }
 
 .alertIcon {
@@ -158,7 +163,7 @@
 
 .alertText {
   font-family: Roboto, Arial, sans-serif;
-  font-size: 6.5px;
+  font-size: 1.9345cqw;
   line-height: 1.15;
   color: var(--fraud-alert-text);
 }
@@ -174,12 +179,12 @@
   width: 87.8%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 1.7857cqw;
 }
 
 .cancelButton {
-  padding: 5px;
-  border-radius: 30px;
+  padding: 1.4881cqw;
+  border-radius: 8.9286cqw;
   background: var(--fraud-cancel-bg);
   text-align: center;
   transition: box-shadow 280ms ease-out;
@@ -191,13 +196,13 @@
 
 .cancelButtonLabel {
   font-family: Roboto, Arial, sans-serif;
-  font-size: 6.7px;
+  font-size: 1.994cqw;
   color: #f5f5f5;
 }
 
 .continueButton {
-  padding: 5px;
-  border-radius: 30px;
+  padding: 1.4881cqw;
+  border-radius: 8.9286cqw;
   background: #f5f5f5;
   border: 1px solid var(--fraud-continue-border);
   text-align: center;
@@ -206,25 +211,25 @@
 .continueButtonLabel {
   font-family: Roboto, Arial, sans-serif;
   font-weight: 600;
-  font-size: 6.7px;
+  font-size: 1.994cqw;
   color: var(--fraud-continue-text);
 }
 
 .speechBubble {
   position: absolute;
-  left: 9px;
-  top: 420px;
+  left: 2.6786%;
+  top: 79.6963%;
   z-index: 3;
   background: var(--chrome-bg);
   border-radius: 999px;
-  padding: 7px;
+  padding: 2.0833cqw;
 }
 
 .speechBubbleLabel {
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
   font-style: italic;
-  font-size: 17px;
+  font-size: 5.0595cqw;
   line-height: 0.8;
   letter-spacing: -0.08em;
   color: var(--text-cream);

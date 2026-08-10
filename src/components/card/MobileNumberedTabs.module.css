@@ -1,18 +1,21 @@
+/* Position as % of the mobile case-study face's 336x527 box; padding/
+   font-size as cqw (1cqw = 1% of that box's rendered width, via .face's
+   container-type: inline-size in MobileCardShell.module.css). */
 .tabs {
   position: absolute;
-  left: 21px;
-  top: 11px;
+  left: 6.25%;
+  top: 2.0873%;
   z-index: 2;
   display: flex;
   align-items: flex-start;
-  gap: 5px;
+  gap: 1.4881cqw;
 }
 
 .tab {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 8px;
+  padding: 1.1905cqw 2.381cqw;
   background: var(--chrome-bg);
   border-radius: 999px;
   border: 0.635px solid transparent;
@@ -26,7 +29,7 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-regular);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 12px;
+  font-size: 3.5714cqw;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-cream);
@@ -35,7 +38,7 @@
 }
 
 .active {
-  padding: 4px 12px;
+  padding: 1.1905cqw 3.5714cqw;
   border-color: var(--text-cream);
 }
 

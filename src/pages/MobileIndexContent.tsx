@@ -14,13 +14,15 @@ import MobileFraudCard from '../components/case-studies/Fraud/MobileFraudCard';
 import { useViewState } from '../state/ViewStateContext';
 import type { CaseStudyTab } from '../types';
 
+/* viewProjectTop is a % of the mobile case-study face's 527px height (was raw px
+   222/225/235 against that same reference — see MobileViewProjectButton.tsx). */
 const caseStudies: Record<CaseStudyTab, MobileCaseStudyDef> = {
-  1: { content: <MobileMoolroopCard />, viewProjectHref: '/case-study/moolroop', viewProjectTop: 222 },
-  2: { content: <MobileDrCuterusCard />, viewProjectHref: '/case-study/dr-cuterus', viewProjectTop: 225 },
+  1: { content: <MobileMoolroopCard />, viewProjectHref: '/case-study/moolroop', viewProjectTop: 42.1252 },
+  2: { content: <MobileDrCuterusCard />, viewProjectHref: '/case-study/dr-cuterus', viewProjectTop: 42.6944 },
   3: {
     content: <MobileFraudCard />,
     viewProjectHref: '/case-study/designing-against-fraud',
-    viewProjectTop: 235,
+    viewProjectTop: 44.5919,
   },
 };
 

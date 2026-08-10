@@ -4,15 +4,21 @@
   height: 100%;
 }
 
+/* Position/size as % of the case-study face's own 984x554 box (native %,
+   resolves against the positioned ancestor — CardShell's .face; `right` is
+   just as native-%-aware as `left`). Type/padding/radius use cqw (1cqw = 1%
+   of that same box's rendered width, via .face's container-type:
+   inline-size) since they have no native %-of-container behavior.
+   letter-spacing converts px->em where the original used px. */
 .title {
   position: absolute;
-  right: 37px;
-  top: 53px;
+  right: 3.7602%;
+  top: 9.5668%;
   margin: 0;
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  font-size: 96px;
+  gap: 1.2195cqw;
+  font-size: 9.7561cqw;
   line-height: 0.8;
   white-space: nowrap;
 }
@@ -37,21 +43,21 @@
 
 .tagWrapper {
   position: absolute;
-  right: 42px;
-  top: 150px;
+  right: 4.2683%;
+  top: 27.0758%;
 }
 
 .body {
   position: absolute;
-  right: 42px;
-  top: 189px;
-  width: 445px;
+  right: 4.2683%;
+  top: 34.1155%;
+  width: 45.2236%;
   margin: 0;
   text-align: justify;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 19.5px;
+  font-size: 1.9817cqw;
   line-height: 1;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
@@ -67,17 +73,23 @@
   cursor: pointer;
 }
 
+/* .phone is deliberately taller than the 984x554 face (112% height) — the
+   Figma composition bleeds both phones past the card's bottom edge, cropped
+   by .face's own overflow: hidden, for a partial/peek effect. Converting the
+   original px to % preserves that exactly (% > 100% is valid CSS, same
+   proportional relationship as the px version had to the same 554px
+   reference height). */
 .phone {
   position: absolute;
-  width: 304.23px;
-  height: 620.405px;
+  width: 30.9177%;
+  height: 112.0064%;
   transform-origin: center center;
   transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backPhone {
-  left: 287.31px;
-  top: 537.61px;
+  left: 29.2043%;
+  top: 97.0524%;
   transform: translate(-50%, -50%) rotate(-1.71deg);
   z-index: 1;
 }
@@ -87,8 +99,8 @@
 }
 
 .frontPhone {
-  left: 333.31px;
-  top: 676.61px;
+  left: 33.873%;
+  top: 122.1318%;
   transform: translate(-50%, -50%) rotate(-1.71deg);
   z-index: 2;
 }
@@ -135,10 +147,10 @@
   width: 82.15%;
   display: flex;
   align-items: center;
-  gap: 8.234px;
+  gap: 0.8369cqw;
   background: var(--fraud-alert-bg);
-  border-radius: 2.745px;
-  padding: 2.745px;
+  border-radius: 0.279cqw;
+  padding: 0.279cqw;
 }
 
 .alertIcon {
@@ -148,7 +160,7 @@
 
 .alertText {
   font-family: Roboto, Arial, sans-serif;
-  font-size: 9.607px;
+  font-size: 0.9764cqw;
   line-height: 1;
   color: var(--fraud-alert-text);
 }
@@ -164,12 +176,12 @@
   width: 87.8%;
   display: flex;
   flex-direction: column;
-  gap: 8.242px;
+  gap: 0.8377cqw;
 }
 
 .cancelButton {
-  padding: 6.868px;
-  border-radius: 41.21px;
+  padding: 0.698cqw;
+  border-radius: 4.188cqw;
   background: var(--fraud-cancel-bg);
   text-align: center;
   transition: box-shadow 280ms ease-out;
@@ -181,42 +193,42 @@
 
 .cancelButtonLabel {
   font-family: Roboto, Arial, sans-serif;
-  font-size: 9.616px;
+  font-size: 0.9772cqw;
   color: #f5f5f5;
 }
 
 .continueButton {
-  padding: 6.868px;
-  border-radius: 41.21px;
+  padding: 0.698cqw;
+  border-radius: 4.188cqw;
   background: #f5f5f5;
-  border: 1.374px solid var(--fraud-continue-border);
+  border: 0.1396cqw solid var(--fraud-continue-border);
   text-align: center;
 }
 
 .continueButtonLabel {
   font-family: Roboto, Arial, sans-serif;
   font-weight: 600;
-  font-size: 9.616px;
+  font-size: 0.9772cqw;
   color: var(--fraud-continue-text);
 }
 
 .speechBubble {
   position: absolute;
-  left: 28px;
-  top: 363px;
+  left: 2.8455%;
+  top: 65.5235%;
   z-index: 3;
   background: var(--chrome-bg);
   border-radius: 999px;
-  padding: 10px;
+  padding: 1.0163cqw;
 }
 
 .speechBubbleLabel {
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
   font-style: italic;
-  font-size: 32px;
+  font-size: 3.252cqw;
   line-height: 0.8;
-  letter-spacing: -2.56px;
+  letter-spacing: -0.08em;
   color: var(--text-cream);
   white-space: nowrap;
   font-feature-settings: 'salt' 1;

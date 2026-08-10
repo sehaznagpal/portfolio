@@ -1,19 +1,30 @@
+/* Sized directly off the real viewport, capped at the case-study face's own
+   336x527 Figma-native size — same min(px, vw, calc(vh*ratio)) pattern as
+   CardShell.module.css, no JS, no transform: scale(). */
 .perspective {
   position: absolute;
   left: 50%;
   top: calc(50% - 8.5px);
   transform: translate(-50%, -50%);
+  width: min(336px, 86vw, calc(86vh * 336 / 527));
+  aspect-ratio: 336 / 527;
   perspective: 1600px;
 }
 
 .inner {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform-style: preserve-3d;
 }
 
+/* container-type: inline-size — see CardShell.module.css's .face for why.
+   Same deal here: 1cqw = 1% of this face's own rendered width, always exactly
+   336 (both mobile faces share that width). */
 .face {
   position: absolute;
   inset: 0;
+  container-type: inline-size;
   backface-visibility: hidden;
   background: var(--card-fill);
   border: var(--card-border-width) solid var(--card-border);

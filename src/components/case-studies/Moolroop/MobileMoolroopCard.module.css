@@ -1,3 +1,8 @@
+/* Position/size as % of the mobile hero face's own 336x527 box (native %,
+   resolves against the positioned ancestor — MobileCardShell's .face). Type
+   as cqw (1cqw = 1% of that same box's rendered width, via .face's
+   container-type: inline-size) since font-size has no native
+   %-of-container behavior. */
 .wrapper {
   position: relative;
   width: 100%;
@@ -7,12 +12,12 @@
 .title {
   position: absolute;
   left: 50%;
-  top: 43px;
+  top: 8.1595%;
   transform: translateX(-50%);
   margin: 0;
   display: flex;
   align-items: baseline;
-  font-size: 36px;
+  font-size: 10.7143cqw;
   line-height: 1;
   letter-spacing: -0.08em;
   white-space: nowrap;
@@ -37,15 +42,15 @@
 .tag {
   position: absolute;
   left: 50%;
-  top: 89px;
+  top: 16.888%;
   transform: translateX(-50%);
-  width: 293px;
+  width: 87.2024%;
   background: var(--accent-green);
   color: var(--chrome-bg);
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 16px;
+  font-size: 4.7619cqw;
   line-height: 0.8;
   text-align: center;
   font-feature-settings: 'salt' 1;
@@ -53,15 +58,15 @@
 
 .body {
   position: absolute;
-  left: 21px;
-  top: 125px;
-  width: 294px;
+  left: 6.25%;
+  top: 23.7192%;
+  width: 87.5%;
   margin: 0;
   text-align: justify;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 14px;
+  font-size: 4.1667cqw;
   line-height: 1;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
@@ -73,13 +78,13 @@
 
 .vs {
   position: absolute;
-  left: 164px;
-  top: 348px;
+  left: 48.8095%;
+  top: 66.0342%;
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
   font-style: italic;
-  font-size: 48px;
+  font-size: 14.2857cqw;
   line-height: 1;
   letter-spacing: -0.08em;
   color: var(--text-cream);
@@ -88,10 +93,10 @@
 
 .stamp {
   position: absolute;
-  left: 260px;
-  top: 470px;
-  width: 163px;
-  height: 164px;
+  left: 77.381%;
+  top: 89.1841%;
+  width: 48.5119%;
+  height: 31.1195%;
   /* Unrotated, like the desktop card — the stamp asset's seam/cut is
      already at the bottom in its native orientation; the old 55.66deg
      rotated it away from there. */

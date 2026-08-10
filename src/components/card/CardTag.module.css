@@ -1,3 +1,8 @@
+/* Desktop-only (mobile cards render their own inline tag, not this shared
+   component) — font-size as cqw (1cqw = 1% of the case-study face's own
+   rendered width, via .face's container-type: inline-size in
+   CardShell.module.css), since font-size has no native %-of-container
+   behavior. */
 .tag {
   margin: 0;
   display: inline-flex;
@@ -7,7 +12,7 @@
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 24px;
+  font-size: 2.439cqw;
   line-height: 0.8;
   white-space: nowrap;
   font-feature-settings: 'salt' 1;

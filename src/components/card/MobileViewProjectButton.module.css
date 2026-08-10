@@ -1,11 +1,15 @@
+/* left as % of the mobile case-study face's 336x527 box; `top` is passed in
+   per-card as a % string (see MobileViewProjectButton.tsx). padding/font-size
+   as cqw (1cqw = 1% of that box's rendered width, via .face's container-type:
+   inline-size in MobileCardShell.module.css). */
 .button {
   position: absolute;
-  left: 165px;
+  left: 49.1071%;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 2.381cqw 4.7619cqw;
   background: var(--chrome-bg);
   border: 1px solid var(--text-cream);
   border-radius: 4px;
@@ -16,7 +20,7 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 20px;
+  font-size: 5.9524cqw;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-cream);

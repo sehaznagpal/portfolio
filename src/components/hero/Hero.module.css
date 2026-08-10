@@ -4,15 +4,21 @@
   height: 100%;
 }
 
+/* Position as % of the hero face's own 806x468 box (native %, resolves
+   against the positioned ancestor — CardShell's .face). Type/spacing use cqw
+   (1cqw = 1% of that same box's rendered width, via .face's container-type:
+   inline-size in CardShell.module.css) since font-size/margin have no native
+   %-of-container behavior. letter-spacing converts px->em where the original
+   used px, so it scales with font-size automatically. */
 .title {
   position: absolute;
   left: 50%;
-  top: 64px;
+  top: 13.6752%;
   transform: translateX(-50%);
   margin: 0;
   display: flex;
   align-items: baseline;
-  font-size: 108px;
+  font-size: 13.399cqw;
   line-height: 1;
   white-space: nowrap;
 }
@@ -32,22 +38,22 @@
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   letter-spacing: -0.04em;
   color: var(--text-cream);
-  margin-left: 12px;
+  margin-left: 1.4888cqw;
   font-feature-settings: 'salt' 1;
 }
 
 .paragraph {
   position: absolute;
   left: 50%;
-  top: 200px;
+  top: 42.735%;
   transform: translateX(-50%);
-  width: 609px;
+  width: 75.5583%;
   margin: 0;
   text-align: center;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 24px;
+  font-size: 2.9777cqw;
   line-height: 1.215;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
@@ -71,12 +77,12 @@
 .button {
   position: absolute;
   left: 50%;
-  top: 364px;
+  top: 77.7778%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 0.9926cqw 1.9851cqw;
   background: var(--chrome-bg);
   border: 1px solid var(--text-cream);
   border-radius: 4px;
@@ -95,9 +101,9 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 24px;
+  font-size: 2.9777cqw;
   line-height: 1;
-  letter-spacing: -0.96px;
+  letter-spacing: -0.04em;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
   transition: color 150ms ease-out;
@@ -125,9 +131,9 @@
     font-family: 'Bricolage Grotesque Variable', sans-serif;
     font-weight: var(--bricolage-medium);
     font-variation-settings: 'opsz' 14, 'wdth' 100;
-    font-size: 24px;
+    font-size: 2.9777cqw;
     line-height: 1;
-    letter-spacing: -0.96px;
+    letter-spacing: -0.04em;
     color: var(--accent-green);
     white-space: nowrap;
     font-feature-settings: 'salt' 1;

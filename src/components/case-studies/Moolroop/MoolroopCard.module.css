@@ -4,18 +4,23 @@
   height: 100%;
 }
 
+/* Position as % of the case-study face's own 984x554 box (native %, resolves
+   against the positioned ancestor — CardShell's .face). Type as cqw (1cqw =
+   1% of that same box's rendered width, via .face's container-type:
+   inline-size) since font-size has no native %-of-container behavior. */
 .title {
   position: absolute;
-  /* Nudged 28px left of the Figma-raw 381px — at that value the heading's
-     right edge (its rendered width varies with "MoolRoop"/"App"'s actual
-     glyphs) bled ~28px past .body's right edge below it, measured directly
-     via getBoundingClientRect rather than eyeballed. */
-  left: 353px;
-  top: 29px;
+  /* Nudged left of the Figma-raw ~38.72% (381px) — at that value the
+     heading's right edge (its rendered width varies with "MoolRoop"/"App"'s
+     actual glyphs) bled past .body's right edge below it, measured directly
+     via getBoundingClientRect rather than eyeballed. Same 28px-at-984-wide
+     nudge as before, now expressed as %. */
+  left: 35.874%;
+  top: 5.2347%;
   margin: 0;
   display: flex;
   align-items: baseline;
-  font-size: 108px;
+  font-size: 10.9756cqw;
   line-height: 1;
   white-space: nowrap;
 }
@@ -35,27 +40,27 @@
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   letter-spacing: -0.04em;
   color: var(--text-cream);
-  margin-left: 12px;
+  margin-left: 1.2195cqw;
   font-feature-settings: 'salt' 1;
 }
 
 .tagWrapper {
   position: absolute;
-  left: 368px;
-  top: 153px;
+  left: 37.3984%;
+  top: 27.6173%;
 }
 
 .body {
   position: absolute;
-  left: 407px;
-  top: 188px;
-  width: 534px;
+  left: 41.3618%;
+  top: 33.935%;
+  width: 54.2683%;
   margin: 0;
   text-align: justify;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 19.5px;
+  font-size: 1.9817cqw;
   line-height: 1;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
@@ -67,13 +72,13 @@
 
 .vs {
   position: absolute;
-  left: 361px;
-  top: 340px;
+  left: 36.687%;
+  top: 61.3718%;
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
   font-style: italic;
-  font-size: 69.677px;
+  font-size: 7.081cqw;
   line-height: 1;
   letter-spacing: -0.08em;
   color: var(--text-cream);
@@ -82,10 +87,10 @@
 
 .stamp {
   position: absolute;
-  left: 384px;
-  top: 275px;
-  width: 297.6px;
-  height: 300px;
+  left: 39.0244%;
+  top: 49.639%;
+  width: 30.2439%;
+  height: 54.1516%;
   transform: rotate(0deg);
   transition: opacity 300ms ease-out;
 }

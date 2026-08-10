@@ -1,3 +1,10 @@
+/* Already a normal-flow flex column (genuinely reflowing, not absolute-
+   positioned against a reference canvas) — the one thing tying it to a fixed
+   size was flat-px font-size/padding/gap, which wouldn't shrink along with
+   the card on very small phones. Converted to cqw (1cqw = 1% of the hero
+   face's own rendered width, via .face's container-type: inline-size in
+   MobileCardShell.module.css, which is always exactly 336) so type/spacing
+   scale continuously with the card instead of just wrapping differently. */
 .card {
   position: relative;
   width: 100%;
@@ -7,8 +14,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
-  padding: 48px 32px;
+  gap: 7.1429cqw;
+  padding: 14.2857cqw 9.5238cqw;
 }
 
 .title {
@@ -16,7 +23,7 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
-  font-size: 48px;
+  font-size: 14.2857cqw;
   line-height: 1;
   white-space: nowrap;
 }
@@ -36,19 +43,19 @@
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   letter-spacing: -0.04em;
   color: var(--text-cream);
-  margin-left: 8px;
+  margin-left: 2.381cqw;
   font-feature-settings: 'salt' 1;
 }
 
 .paragraph {
   margin: 0;
-  width: 294px;
+  width: 87.5%;
   max-width: 100%;
   text-align: center;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: 16px;
+  font-size: 4.7619cqw;
   line-height: 1.215;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
@@ -74,7 +81,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 2.381cqw 4.7619cqw;
   background: var(--chrome-bg);
   border: 1px solid var(--text-cream);
   border-radius: 4px;
@@ -93,7 +100,7 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 20px;
+  font-size: 5.9524cqw;
   line-height: 1;
   letter-spacing: -0.04em;
   color: var(--text-cream);

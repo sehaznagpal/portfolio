@@ -12,7 +12,8 @@ export interface MobileCaseStudyDef {
   content: ReactNode;
   viewProjectHref: string;
   /** Figma positions this button slightly differently per card to clear that card's
-      own body copy (222 / 225 / 207), unlike desktop's single fixed position. */
+      own body copy, unlike desktop's single fixed position — a % of the mobile
+      case-study face's 527px height (see MobileIndexContent.tsx). */
   viewProjectTop: number;
 }
 

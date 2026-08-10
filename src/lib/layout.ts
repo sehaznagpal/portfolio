@@ -1,6 +1,3 @@
-export const FRAME_W = 1280;
-export const FRAME_H = 832;
-
 export const HERO_CARD_W = 806;
 export const HERO_CARD_H = 468;
 

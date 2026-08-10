@@ -1,8 +1,11 @@
+/* Position/width as % of the hero face's own 806x468 box (native %, resolves
+   against the positioned ancestor — CardShell's .face). `left` is the anchor
+   point Framer Motion's x:'-50%' centers around (see HeroPolaroid.tsx). */
 .wrapper {
   position: absolute;
-  left: 589.74px;
-  top: 5px;
-  width: 296px;
+  left: 73.1663%;
+  top: 1.0684%;
+  width: 36.7247%;
   pointer-events: none;
 }
 

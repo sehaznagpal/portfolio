@@ -1,32 +1,45 @@
-/* Full-viewport so `transform-origin: center center` scales from the
-   viewport's center, but that means its empty margin around the card was
-   silently eating clicks meant for whatever sits behind it (the about/
-   explore-beyond links) — pointer-events is disabled here and re-enabled on
-   .perspective, which is sized to the actual card, not the full viewport. */
-.scaleWrap {
-  position: absolute;
-  inset: 0;
-  transform-origin: center center;
-  pointer-events: none;
-}
-
+/* Sized directly off the real viewport — capped at the case-study face's own
+   984x554 Figma-native size (so nothing ever upscales past native image
+   resolution) and bounded by both axes (width AND a height-derived width, via
+   calc(...*984/554)) so the card keeps its aspect ratio and never overflows a
+   short-but-wide window. Same min(px, vw, calc(vh*ratio)) pattern already used
+   for the case-study detail panels elsewhere in this codebase. No JS, no
+   ResizeObserver, no transform: scale(). */
 .perspective {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: min(984px, 84vw, calc(84vh * 984 / 554));
+  aspect-ratio: 984 / 554;
   perspective: 1600px;
-  pointer-events: auto;
 }
 
+/* Absolute + percentage width/height (animated in CardShell.tsx) so the hero
+   face's 806x468 box and the case-study face's 984x554 box both resolve as
+   exact percentages of .perspective's fixed 984x554 aspect ratio — matching
+   the original Figma px positions with no drift, at any viewport size. */
 .inner {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform-style: preserve-3d;
 }
 
+/* container-type: inline-size turns this into a query container so every
+   descendant (Hero, CaseStudyShell + its chrome, the three preview cards) can
+   size type/spacing with cqw units — 1cqw = 1% of THIS box's own rendered
+   width, which is always exactly the current face's Figma reference width
+   (806 for the hero face, 984 for the case-study face) because .inner's
+   animated percentage sizing (see CardShell.tsx) keeps each face's rendered
+   aspect ratio locked to its own reference exactly. That gives every
+   descendant a genuine, container-relative unit for font-size/padding/gap
+   (properties with no native %-of-container behavior) without vw/vh math that
+   would have to duplicate .perspective's own dual-axis min() bounds. */
 .face {
   position: absolute;
   inset: 0;
+  container-type: inline-size;
   backface-visibility: hidden;
   background: var(--card-fill);
   border: var(--card-border-width) solid var(--card-border);
