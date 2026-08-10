@@ -180,10 +180,18 @@
      position: absolute and percentage-positioned against *this* box
      specifically — without a positioned .phones, those percentages fall
      through to resolve against .panelInner (the whole panel) instead and
-     every phone balloons across it. */
+     every phone balloons across it.
+
+     align-self: flex-start overrides .panelInner's align-items: center
+     (sensible for the narrower heading/body content, wrong here) — without
+     it this wider-than-viewport row gets horizontally centered inside
+     panelInner, so the initial scroll position (0) lands in the middle of
+     the filmstrip with phones clipped on both edges instead of opening on
+     step 1 with the rest reachable by scrolling right. */
   .phones {
     position: relative;
     inset: auto;
+    align-self: flex-start;
     width: 900px;
     height: 380px;
     margin-top: 20px;

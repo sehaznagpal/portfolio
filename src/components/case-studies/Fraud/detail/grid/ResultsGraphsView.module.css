@@ -90,11 +90,19 @@
   /* Figures already scroll horizontally on desktop (.pictures has its own
      overflow-x: auto) — mobile just needs the outer box converted from a
      panel-relative percentage position to flow, with a shorter fixed
-     height that fits mobile's narrower viewport. */
+     height that fits mobile's narrower viewport.
+
+     align-self: flex-start overrides panelInner's align-items: center
+     (sensible for the narrower heading/body content, wrong here) — without
+     it this wider-than-viewport row gets horizontally centered inside
+     panelInner, so the initial scroll position (0) lands in the middle of
+     the strip with figures clipped on both edges instead of opening on
+     figure 1 with the rest reachable by scrolling right. */
   .pictures {
     position: static;
     left: auto;
     right: auto;
+    align-self: flex-start;
     height: 260px;
     margin-top: 20px;
   }
