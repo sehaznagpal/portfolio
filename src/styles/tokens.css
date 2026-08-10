@@ -67,11 +67,10 @@
   --stage-width: min(1400px, 92vw);
   --measure-width: 680px;
 
-  /* Shared side gutter for the case-study hero's top row, the five-card
-     section's bottom CTA row, and the card cluster's own scaled reference
-     frame (see useCaseStudyGridScale) — one value so all three stay visually
-     aligned at any viewport width instead of three independent hardcoded
-     60px values that only agreed by coincidence. */
+  /* Shared side gutter for the case-study hero's top row and the five-card
+     section's bottom CTA row — one value so both stay visually aligned at
+     any viewport width instead of two independent hardcoded 60px values
+     that only agreed by coincidence. */
   --case-study-gutter: clamp(24px, 4vw, 60px);
 
   /* ScreenshotFrame theming — light-page defaults. Dissertation runs a dark page

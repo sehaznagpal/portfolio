@@ -14,16 +14,30 @@
 }
 
 .section {
-  /* Each card positions itself directly (left/top: calc(50% + dx*scale)px,
-     see MoolroopCardFace.tsx) against this element's own box — .section
-     being position:absolute already makes it a valid containing block for
-     that, no extra centering wrapper needed. */
   position: absolute;
   top: 40px;
   left: 0;
   right: 0;
   bottom: 48px;
   overflow: hidden;
+}
+
+/* The 5-card cluster's own reference canvas — always exactly 1280:832 (the
+   Figma reference frame cardData.ts's CARD_POSITIONS are authored against),
+   fluidly sized off the real viewport but never distorted, via the same
+   min(px, vw, calc(vh*ratio)) + aspect-ratio pattern already proven for
+   .panel below. Every card (MoolroopCardFace.tsx) is positioned as a plain %
+   of *this* box, not of .section directly — since .canvas's ratio never
+   changes, a uniform % scale can only ever grow/shrink the whole cluster
+   together, so two cards that don't overlap in the reference layout can't
+   newly overlap at any size. */
+.canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: min(1280px, 94vw, calc(90vh * 1280 / 832));
+  aspect-ratio: 1280 / 832;
 }
 
 .clickCatcher {

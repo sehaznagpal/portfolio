@@ -31,7 +31,7 @@
   border: 1px solid #121212;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 20px;
+  font-size: clamp(17px, 5vw, 20px);
   line-height: 1;
   letter-spacing: -0.8px;
   color: #121212;
@@ -44,7 +44,7 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-extrabold);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 26px;
+  font-size: clamp(22px, 6.5vw, 26px);
   line-height: 1.05;
   letter-spacing: -0.78px;
   color: var(--dissertation-navy);
@@ -61,7 +61,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 15px;
+  font-size: clamp(13px, 3.8vw, 15px);
   letter-spacing: -0.15px;
   color: #121212;
 }
@@ -71,7 +71,7 @@
   background: var(--dissertation-yellow);
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 12px;
+  font-size: clamp(11px, 3vw, 12px);
   letter-spacing: -0.1px;
   color: #121212;
   white-space: nowrap;

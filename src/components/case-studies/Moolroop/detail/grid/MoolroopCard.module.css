@@ -1,16 +1,28 @@
-/* Positions the card (via left/top, set inline from CARD_POSITIONS' dx/dy) —
+/* Positions the card (via left/top, set inline from CARD_POSITIONS' dx/dy as
+   a % of .canvas — see MoolroopCardGrid.module.css / MoolroopCardFace.tsx) —
    kept as a plain, non-motion element so resize-driven repositioning is
-   instant, with no Framer layout animation. See MoolroopCardFace.tsx. */
+   instant, with no Framer layout animation. Sized as a native % of .canvas
+   too (width/height, not just position), so the card scales exactly in step
+   with the spacing around it — a uniform scale of the whole cluster, never
+   independent of it. container-type: inline-size turns this into a query
+   container so descendant font-sizes below can use cqw (1cqw = 1% of the
+   card's own rendered width) — font-size has no native %-of-container
+   behavior, unlike position/size. */
 .cardPositioner {
   position: absolute;
+  transform: translate(-50%, -50%);
+  width: calc(252 / 1280 * 100%);
+  height: calc(260 / 832 * 100%);
+  container-type: inline-size;
 }
 
 .card {
   position: relative;
-  width: 252px;
-  height: 260px;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 252 / 260;
   box-sizing: border-box;
-  border-radius: 16px;
+  border-radius: 6.3492cqw;
   border: 1px solid rgba(18, 18, 18, 0.4);
   box-shadow: 2px 0 12px 1px rgba(18, 18, 18, 0.2);
   background: var(--bg-canvas);
@@ -41,9 +53,9 @@
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-extrabold);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
-  font-size: 48px;
+  font-size: 19.0476cqw;
   line-height: 1;
-  letter-spacing: -1.44px;
+  letter-spacing: -0.03em;
   color: var(--moolroop-accent);
   transition: color 300ms ease-out;
   white-space: nowrap;
@@ -55,16 +67,16 @@
 
 .number {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 4px 12px;
+  top: 4.6154%;
+  right: 4.7619%;
+  padding: 1.5873% 4.7619%;
   background: #fefefe;
   border: 1px solid #121212;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 32px;
+  font-size: 12.6984cqw;
   line-height: 1;
-  letter-spacing: -1.28px;
+  letter-spacing: -0.04em;
   color: #121212;
   transition: background 300ms ease-out, border-color 300ms ease-out, color 300ms ease-out;
 }
@@ -77,21 +89,21 @@
 
 .captionStack {
   position: absolute;
-  bottom: 18px;
+  bottom: 6.9231%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 1.5873cqw;
 }
 
 .subtitle {
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 20px;
-  letter-spacing: -0.2px;
+  font-size: 7.9365cqw;
+  letter-spacing: -0.01em;
   color: #121212;
   white-space: nowrap;
   transition: color 300ms ease-out;
@@ -104,12 +116,12 @@
 /* Small highlighted label for cards whose panel contains screens, tables,
    figures, or its own internal redirect/explore button. */
 .tag {
-  padding: 2px 8px;
+  padding: 0.7937% 3.1746%;
   background: var(--moolroop-yellow);
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 13px;
-  letter-spacing: -0.1px;
+  font-size: 5.1587cqw;
+  letter-spacing: -0.0077em;
   color: #121212;
   white-space: nowrap;
 }

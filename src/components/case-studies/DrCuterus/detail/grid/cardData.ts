@@ -48,16 +48,20 @@ export const CARDS: CardDef[] = [
   },
 ];
 
+/* Reference canvas the positions/sizes below are authored against — see
+   .canvas in DrCuterusCardGrid.module.css, which stays locked to this exact
+   1280:832 ratio at every viewport size, so re-expressing these as % of it
+   (DrCuterusCardFace.tsx) is a straight unit conversion with no drift. */
+export const GRID_FRAME_W = 1280;
+export const GRID_FRAME_H = 832;
+
 /* Card positions — px offsets of each card's center from the 1280x832
    reference frame's own center (640, 416), matching the MoolRoop reference
    (890:13907): cards 1/3/5 form the top row, cards 2/4 the bottom row.
    Card 1 and card 5 are snapped so the cluster's outer edges land exactly on
    the shared 60px gutter (--case-study-gutter at the 1280px reference width),
-   matching the hero/CTA row.
-
-   Expressed as offsets (not percentages) so useCaseStudyGridScale can scale
-   horizontal and vertical spacing independently — dx by xScale, dy by
-   yScale — instead of both axes being tied to one uniform scale. */
+   matching the hero/CTA row. Converted to a % of GRID_FRAME_W/H in
+   DrCuterusCardFace.tsx. */
 export const CARD_POSITIONS = [
   { dx: -454, dy: -213 },
   { dx: -260.944, dy: 109.0336 },

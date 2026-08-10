@@ -1,46 +1,38 @@
 import { motion } from 'framer-motion';
 import type { CardDef } from './cardData';
-import { CARD_POSITIONS } from './cardData';
-import type { CaseStudyGridScale } from '../../../../../lib/useCaseStudyGridScale';
+import { CARD_POSITIONS, GRID_FRAME_W, GRID_FRAME_H } from './cardData';
 import styles from './DrCuterusCard.module.css';
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
-
-// Matches .card's own width/height in DrCuterusCard.module.css.
-const CARD_W = 252;
-const CARD_H = 260;
 
 export default function DrCuterusCardFace({
   card,
   index,
   onOpen,
-  contentScale,
-  xScale,
-  yScale,
 }: {
   card: CardDef;
   index: number;
   onOpen: () => void;
-} & CaseStudyGridScale) {
+}) {
   const { dx, dy } = CARD_POSITIONS[index];
 
   return (
-    /* Plain (non-motion) positioner — resize-driven left/top changes apply
-       instantly, with no layout animation, exactly like the old ancestor-
-       transform approach. Only the inner motion.div (scale + the open/close
-       shared-element transition) is Framer-managed. */
+    /* Plain (non-motion) positioner, as a % of .canvas (see
+       DrCuterusCardGrid.module.css) — resize-driven left/top changes apply
+       instantly, with no layout animation, exactly like before. Only the
+       inner motion.div (the open/close shared-element transition) is
+       Framer-managed; there's no JS-computed scale left to apply to it. */
     <div
       className={styles.cardPositioner}
       style={{
-        left: `calc(50% + ${dx * xScale - CARD_W / 2}px)`,
-        top: `calc(50% + ${dy * yScale - CARD_H / 2}px)`,
+        left: `calc(50% + ${(dx / GRID_FRAME_W) * 100}%)`,
+        top: `calc(50% + ${(dy / GRID_FRAME_H) * 100}%)`,
       }}
     >
       <motion.div
         layoutId={`card-${card.id}`}
         layout="position"
         className={styles.card}
-        style={{ scale: contentScale }}
         onClick={onOpen}
         transition={{ layout: LAYOUT_TRANSITION }}
         initial={false}
