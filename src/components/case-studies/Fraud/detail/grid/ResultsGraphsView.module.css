@@ -52,12 +52,14 @@
 }
 
 .picture {
+  position: relative;
   box-sizing: border-box;
   flex: 0 0 auto;
   height: 400px;
   border: 2px solid #c6dbff;
   border-radius: 24px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .picture img {
@@ -66,6 +68,61 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 24px;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(18, 18, 18, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-out;
+}
+
+.overlayHeading {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-medium);
+  font-size: 20px;
+  line-height: 1.3;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.overlayText {
+  margin: 0;
+  max-width: 92%;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 15px;
+  line-height: 1.4;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+/* Hover-capable, precise-pointer devices only — touch devices get the same
+   reveal via the .revealed class instead (toggled on tap, see
+   ResultsGraphsView.tsx), so a tap doesn't leave a "stuck" CSS :hover state
+   on touchscreens that support it. */
+@media (hover: hover) and (pointer: fine) {
+  .picture:hover .overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.picture.revealed .overlay {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @media (max-width: 767px) {
