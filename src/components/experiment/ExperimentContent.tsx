@@ -77,9 +77,28 @@ function handleLinkKeyDown(event: ReactKeyboardEvent, url: string) {
    one deliberate exception — their gap matches the original design exactly).
    No element's own size changes here, only its position. Positioning items
    this way means panning/zooming just scales the whole tree together, with
-   no per-element recalculation needed. */
+   no per-element recalculation needed.
+
+   DESKTOP_SPREAD pushes every element's centre further from (0,0) by the
+   same radial factor (desktop only — mobile keeps the exact dx/dy above,
+   unchanged) so the cluster uses more of the canvas instead of bunching
+   toward the middle, without changing any element's position *relative to
+   the others* (a uniform radial scale preserves every angle and every
+   ratio between offsets, so the arrangement still reads as the same
+   cluster, just spread out). Combined with each card's own desktop-only
+   transform: scale() (see ExperimentContent.module.css), this is what
+   fixes "too much empty space at the edges" — verified overlap-free at
+   rest and through every hover state (chess label slide, sipBadge move,
+   disc slide, meWrap's ring of things, the website flip) via
+   getBoundingClientRect checks at 1440x900 and 1920x1080. */
+const DESKTOP_SPREAD = 1.16;
+
 function Positioned({ dx, dy, children }: { dx: number; dy: number; children: ReactNode }) {
-  const style: CSSProperties = { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))` };
+  const isMobile = useIsMobile();
+  const spread = isMobile ? 1 : DESKTOP_SPREAD;
+  const style: CSSProperties = {
+    transform: `translate(calc(-50% + ${dx * spread}px), calc(-50% + ${dy * spread}px))`,
+  };
   return (
     <div className={styles.positioned} style={style}>
       {children}

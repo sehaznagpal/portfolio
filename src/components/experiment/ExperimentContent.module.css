@@ -907,3 +907,70 @@
   width: 64%;
   height: 48.32%;
 }
+
+/* ---------- Desktop-only: modest size bump for every card ---------- */
+
+/* Paired with Positioned's DESKTOP_SPREAD in ExperimentContent.tsx to fix
+   "too much empty space at the edges, elements clustered too tight toward
+   the center" — mobile is completely untouched (gated to >=768px, same
+   breakpoint convention as the rest of the site).
+
+   transform: scale() rather than resizing each card's own width/height (and
+   every one of its internal absolutely-positioned children) — scale grows
+   the whole card, hover states included, uniformly around its own center
+   with zero risk of quietly breaking any card's internal layout math (chess
+   label slide, sipBadge move, disc slide, the meWrap ring, the website
+   flip): every one of those is still authored against the card's original,
+   unscaled coordinate space, then the finished result — base state and
+   hovered state alike — is scaled up as one unit. Each card is a plain
+   child of its own .positioned wrapper (itself sized to shrink-wrap the
+   card), so scaling the card also can't shift its own centre point.
+
+   1.12 was chosen together with DESKTOP_SPREAD (1.16) and verified
+   overlap-free — at rest and through every hover state above — via
+   getBoundingClientRect checks at 1440x900 and 1920x1080. .letter and
+   .extrasCard already carry their own static rotate(); scale is composed
+   into the same transform rather than added as a separate declaration,
+   since a later transform declaration replaces the earlier one instead of
+   combining with it. */
+@media (min-width: 768px) {
+  .centerCard {
+    transform: scale(1.12);
+  }
+
+  .chess {
+    transform: scale(1.12);
+  }
+
+  .photobooth {
+    transform: scale(1.12);
+  }
+
+  .sipStudio {
+    transform: scale(1.12);
+  }
+
+  .meWrap {
+    transform: scale(1.12);
+  }
+
+  .contactWrap {
+    transform: scale(1.12);
+  }
+
+  .website {
+    transform: scale(1.12);
+  }
+
+  .motionDemo {
+    transform: scale(1.12);
+  }
+
+  .letter {
+    transform: rotate(-1.76deg) scale(1.12);
+  }
+
+  .extrasCard {
+    transform: rotate(8.36deg) scale(1.12);
+  }
+}
