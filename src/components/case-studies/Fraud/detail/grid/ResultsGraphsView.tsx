@@ -84,7 +84,7 @@ export default function ResultsGraphsView({ onBack }: { onBack: () => void }) {
           <div
             className={`${styles.picture} ${isMobile && revealed === i ? styles.revealed : ''}`}
             key={fig.alt}
-            style={{ width: fig.width }}
+            style={{ width: isMobile ? undefined : fig.width }}
             data-figure-index={i}
             onClick={() => {
               if (!isMobile) return;
