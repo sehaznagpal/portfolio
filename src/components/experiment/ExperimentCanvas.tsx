@@ -22,13 +22,23 @@ const REFERENCE_HEIGHT = 900;
    window (height is the binding factor in the min() below) can shrink card
    titles/body copy past a readable size. No matching cap: letting baseScale
    grow freely on tall/large screens is the point of this fit (see comment
-   above) — only the "too small to read" direction needs a bound. */
+   above) — only the "too small to read" direction needs a bound.
+   0.65 is derived, not arbitrary: the smallest text anywhere on the canvas is
+   .centerBody at 17px ("More from my Drafts" body copy) — floored at 0.65,
+   that renders no smaller than ~11px, a commonly-cited minimum for legible
+   body copy. Verified via getBoundingClientRect at the floor (e.g. a
+   1440x400 window) that no two cards overlap at this scale either — every
+   card's position/size lives inside the same baseScale, so the floor can
+   only shrink the whole arrangement uniformly, never distort it. */
 const MIN_BASE_SCALE = 0.65;
 /* World is sized relative to the viewport so there's room to pan around in
    Normal view. Kept modest (rather than a flat 2x) so Normal view doesn't
    read as mostly empty grid — but never smaller than the content's own
    footprint, or the far corners (chess, sip studio) would become unreachable
-   by panning. */
+   by panning. Checked at both extremes (2560x1080 ultrawide, 320x568 small
+   phone via MOBILE_ZOOM_BOOST) — the CONTENT_WIDTH/HEIGHT floor keeps every
+   corner reachable on small viewports, and the viewport-relative multiplier
+   keeps Normal view from reading as mostly-empty grid on large ones. */
 const WORLD_MULTIPLIER = 1.65;
 const CONTENT_WIDTH = 1950;
 const CONTENT_HEIGHT = 1380;
@@ -36,16 +46,29 @@ const CONTENT_HEIGHT = 1380;
    the Figma mobile reference, which shows cards/icons at a deliberately
    larger, more zoomed-in size than an exact 1440x900 fit gives. This boosts
    mobile's baseline past that fit — desktop is untouched since it's only
-   ever applied when isMobile. */
+   ever applied when isMobile.
+   Checked against the full real mobile width range (~320-767px, portrait):
+   effective scale (rawFitScale * boost) runs from ~0.42 at 320px up to
+   ~1.01 at 767px, with no overlap or illegibility at either end (verified
+   via getBoundingClientRect at both) — width is almost always the binding
+   term for portrait phones, so this scales up smoothly with device size
+   rather than snapping between a few tuned breakpoints. */
 const MOBILE_ZOOM_BOOST = 1.9;
 /* Mobile's grid renders in its own fixed, unscaled layer (.mobileGridLayer)
    rather than inside .zoomLayer like desktop's, so this is a plain screen-px
-   value — no compensation against the live zoom needed. */
+   value — no compensation against the live zoom needed. Cells are square by
+   construction (one spacing value drives both axes, via the shared
+   grid-background utility's single --grid-line-spacing var), independent of
+   viewport size or aspect ratio. */
 const MOBILE_GRID_SPACING_PX = 40;
 /* Desktop's grid also renders in its own unscaled layer (.desktopGridLayer),
    with the live zoom baked into its background-size instead of a CSS
    transform — see the layer's own comment for why. Denser than mobile's,
-   matching this page's previous in-transform grid density. */
+   matching this page's previous in-transform grid density. Same square-by-
+   construction guarantee as mobile's: background-size is set to the same
+   `${spacing * zoom}px` value on both axes below, so it's mathematically
+   impossible for a cell to render non-square regardless of viewport
+   aspect ratio. */
 const DESKTOP_GRID_SPACING_PX = 20;
 /* Map view's zoom is derived from the world size on every resize (see
    updateWorld below) rather than a flat constant, so "zoom out" always frames
