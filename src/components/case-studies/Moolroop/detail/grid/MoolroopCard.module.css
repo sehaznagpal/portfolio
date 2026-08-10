@@ -226,6 +226,20 @@
     height: 82vh;
   }
 
+  /* 20% smaller close/nav controls on mobile — scaled as a unit (not by
+     recomputing font-size/padding individually) so icon, padding, and
+     border shrink together, anchored from the same corner they're
+     positioned from so they stay visually in place. */
+  .closeButton {
+    transform: scale(0.8);
+    transform-origin: top right;
+  }
+
+  .navButtons {
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+
   /* Panel bodies are authored as percentage-positioned absolute layers tuned
      to desktop's fixed 1020x663 aspect ratio — those percentages point
      nowhere sensible against mobile's tall, narrow box. Below this

@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import type { CardDef } from './cardData';
+import { useIsMobile } from '../../../../../lib/useIsMobile';
+import { usePanelSwipe } from '../../../../../lib/usePanelSwipe';
 import TopicPanelBody from './TopicPanelBody';
 import MethodologyPanelBody from './MethodologyPanelBody';
 import ProcessProgressPanelBody from './ProcessProgressPanelBody';
@@ -35,6 +37,9 @@ export default function FraudPanel({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const isMobile = useIsMobile();
+  const { onTouchStart, onTouchEnd } = usePanelSwipe(isMobile, onPrev, onNext);
+
   return (
     <motion.div
       layoutId={`card-${card.id}`}
@@ -42,6 +47,8 @@ export default function FraudPanel({
       className={styles.panel}
       transition={{ layout: LAYOUT_TRANSITION }}
       exit={{ opacity: 0, transition: { duration: 0.15 } }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Close">
         X

@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import type { CardDef } from './cardData';
+import { useIsMobile } from '../../../../../lib/useIsMobile';
+import { usePanelSwipe } from '../../../../../lib/usePanelSwipe';
 import MotivationPanelBody from './MotivationPanelBody';
 import ProblemPanelBody from './ProblemPanelBody';
 import ResearchPanelBody from './ResearchPanelBody';
@@ -34,6 +36,9 @@ export default function MoolroopPanel({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const isMobile = useIsMobile();
+  const { onTouchStart, onTouchEnd } = usePanelSwipe(isMobile, onPrev, onNext);
+
   return (
     <motion.div
       layoutId={`card-${card.id}`}
@@ -41,6 +46,8 @@ export default function MoolroopPanel({
       className={styles.panel}
       transition={{ layout: LAYOUT_TRANSITION }}
       exit={{ opacity: 0, transition: { duration: 0.15 } }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
     >
       <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Close">
         X
