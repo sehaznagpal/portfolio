@@ -1,10 +1,12 @@
-/* Desktop: no scroll — the flowchart is a fixed-size diagram cropped at the
-   panel edge like everything else in the panel. Mobile re-enables panning
-   explicitly below, independent of this rule. */
+/* Exception to the panel's general no-scroll rule: the flowchart is taller
+   than the panel by design (branches, loop-back, subgraph), so it needs its
+   own scroll to stay fully reachable — this is a self-contained scroll
+   region local to this sub-view, not the outer panel scrolling that was
+   removed elsewhere. */
 .wrap {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow-y: auto;
   padding: 76px 40px 40px;
   box-sizing: border-box;
 }
@@ -332,7 +334,6 @@
 @media (max-width: 767px) {
   .wrap {
     overflow-x: auto;
-    overflow-y: auto;
     padding: 76px 20px 32px;
   }
 

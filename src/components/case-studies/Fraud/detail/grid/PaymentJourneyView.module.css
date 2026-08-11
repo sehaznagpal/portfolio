@@ -43,6 +43,7 @@
   left: 50%;
   top: 18.703%;
   transform: translateX(-50%);
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -63,9 +64,18 @@
   background: var(--dissertation-navy);
 }
 
+/* overflow-x: auto is a self-contained safety net, not a visible scrollbar
+   in the common case — .phone/.connector positions are percentages of this
+   box and normally fit inside it exactly on desktop, so this only kicks in
+   if that ever stops being true (e.g. a rounding edge case), independent of
+   .panelInner's own overflow:hidden above it (that only clips content wider
+   than .panelInner itself, and .phones never exceeds .panelInner's box).
+   Mobile already gets its horizontal scroll from .panelInner directly (see
+   FraudCard.module.css's mobile media query) — untouched by this. */
 .phones {
   position: absolute;
   inset: 0;
+  overflow-x: auto;
 }
 
 .phone {
