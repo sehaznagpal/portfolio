@@ -38,6 +38,9 @@
   opacity: 0.7;
 }
 
+/* Desktop: no scroll — figures beyond the visible strip are simply cropped
+   at the panel edge, matching every other panel. Mobile stacks the figures
+   vertically instead (see below) and is unaffected by this. */
 .pictures {
   position: absolute;
   left: 7.843%;
@@ -47,7 +50,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
 }
 
@@ -68,6 +71,15 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  transition: transform 300ms ease-out;
+}
+
+/* Hover-capable, precise-pointer devices only — same guard as the caption
+   overlay below, so a tap doesn't leave a "stuck" zoomed state on touch. */
+@media (hover: hover) and (pointer: fine) {
+  .picture:hover img {
+    transform: scale(1.06);
+  }
 }
 
 .overlay {

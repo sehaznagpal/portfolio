@@ -48,6 +48,15 @@
   object-fit: cover;
   object-position: top;
   display: block;
+  transition: transform 300ms ease-out;
+}
+
+/* Hover-capable, precise-pointer devices only, so a tap doesn't leave a
+   "stuck" zoomed state on touch. */
+@media (hover: hover) and (pointer: fine) {
+  .screenshotFrame:hover .screenshot {
+    transform: scale(1.06);
+  }
 }
 
 @media (max-width: 767px) {

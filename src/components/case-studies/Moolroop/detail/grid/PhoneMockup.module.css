@@ -14,6 +14,11 @@
   border-radius: 13.5%;
   overflow: hidden;
   background: #fefefe;
+  /* .mockup sets pointer-events: none so it never blocks clicks meant for
+     things around it (edge-nav buttons, etc.) — re-enabled here just for
+     the screen crop so its hover-zoom below can actually trigger. .bezel
+     stays none, so it doesn't block hover from reaching this layer. */
+  pointer-events: auto;
 }
 
 .screenImage {
@@ -23,6 +28,15 @@
   object-position: top;
   display: block;
   pointer-events: none;
+  transition: transform 300ms ease-out;
+}
+
+/* Hover-capable, precise-pointer devices only, so a tap doesn't leave a
+   "stuck" zoomed state on touch. */
+@media (hover: hover) and (pointer: fine) {
+  .screen:hover .screenImage {
+    transform: scale(1.06);
+  }
 }
 
 .bezel {

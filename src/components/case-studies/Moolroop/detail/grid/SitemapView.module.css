@@ -36,13 +36,16 @@
   opacity: 0.7;
 }
 
+/* Desktop: no scroll — the sitemap is a fixed-size diagram cropped at the
+   panel edge like everything else in the panel. Mobile re-enables
+   horizontal panning explicitly below, independent of this rule. */
 .scrollArea {
   position: absolute;
   left: 0;
   right: 0;
   top: 21%;
   bottom: 0;
-  overflow: auto;
+  overflow: hidden;
   box-sizing: border-box;
   padding: 12px 40px 32px;
 }
@@ -124,6 +127,7 @@
     flex: 1 1 auto;
     min-height: 260px;
     width: 100%;
+    overflow: auto;
     margin-top: 16px;
     padding: 12px 20px 24px;
   }
