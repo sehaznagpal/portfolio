@@ -557,7 +557,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={-651} dy={45}>
+      <Positioned dx={-609} dy={45}>
         <AmoraLink autoHover={autoHover.has('amora')} />
       </Positioned>
 
