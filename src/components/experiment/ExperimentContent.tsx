@@ -21,6 +21,7 @@ import photoboothFlash from '../../assets/images/experiment/photobooth-flash.svg
 import sipBadge from '../../assets/images/experiment/sip-badge-hover.svg';
 import sipCloud from '../../assets/images/experiment/sip-bg-hover.svg';
 import sezPhoto from '../../assets/images/experiment/sez-photo.jpg';
+import amoraStamp from '../../assets/images/experiment/amora-stamp.svg';
 import meThing1 from '../../assets/images/experiment/me-thing-1.png';
 import meThing2 from '../../assets/images/experiment/me-thing-2.png';
 import meThing3 from '../../assets/images/experiment/me-thing-3.png';
@@ -45,6 +46,7 @@ import extrasLettersBr from '../../assets/images/experiment/extras-letters-br.sv
 
 const CHESS_URL = 'https://chess-portfolio-lime.vercel.app';
 const REWIRED_URL = 'https://www.re-wired.tech';
+const AMORA_URL = 'https://amora-j1u8.vercel.app';
 const LINKEDIN_URL = 'https://www.linkedin.com/in/sehaznagpal';
 
 const CONTACT_SUBJECT = 'Re-directed from your portfolio';
@@ -102,6 +104,55 @@ function Positioned({ dx, dy, children }: { dx: number; dy: number; children: Re
   return (
     <div className={styles.positioned} style={style}>
       {children}
+    </div>
+  );
+}
+
+/* Chess and the re-wired star navigate immediately on click/tap since their
+   existing hover choreography already gives desktop users a preview and
+   mobile users the auto-hover cycle. Amora's shake is the click feedback
+   itself, so on touch it plays in full (via the .amoraTapped class) before
+   the tab opens, rather than firing invisibly mid-navigation. Desktop mouse
+   clicks skip the delay — :hover already played the shake before the click
+   landed, so there's nothing left to wait for. */
+function AmoraLink({ autoHover }: { autoHover: boolean }) {
+  const isMobile = useIsMobile();
+  const [tapped, setTapped] = useState(false);
+
+  function handleActivate() {
+    if (isMobile) {
+      if (tapped) return;
+      setTapped(true);
+      window.setTimeout(() => {
+        setTapped(false);
+        openInNewTab(AMORA_URL);
+      }, AMORA_SHAKE_MS);
+      return;
+    }
+    openInNewTab(AMORA_URL);
+  }
+
+  return (
+    <div
+      className={`${styles.amora} ${autoHover ? styles.autoHover : ''} ${tapped ? styles.amoraTapped : ''}`}
+      tabIndex={0}
+      role="link"
+      aria-label="Amora — website for virtual try-on"
+      onClick={handleActivate}
+      onKeyDown={(event) => handleLinkKeyDown(event, AMORA_URL)}
+    >
+      <div className={styles.amoraInner}>
+        <img src={amoraStamp} alt="" className={styles.amoraStampImg} />
+        <p className={styles.amoraLabel}>
+          Website
+          <br />
+          for
+          <br />
+          Virtual
+          <br />
+          Try-on
+        </p>
+      </div>
     </div>
   );
 }
@@ -213,12 +264,16 @@ function useInViewOnce<T extends HTMLElement>(threshold = 0.35) {
    selectors in the CSS, never replacing them) — desktop keeps pure :hover,
    completely untouched. */
 const AUTO_HOVER_GROUPS: string[][] = [
-  ['chess', 'photobooth'],
+  ['chess', 'photobooth', 'amora'],
   ['sipStudio', 'website'],
   ['motionDemo', 'meWrap', 'contactCard'],
   ['extras'],
 ];
 const AUTO_HOVER_INTERVAL_MS = 5000;
+/* Matches the amoraShake keyframe's own duration (see .module.css) — the
+   tap-triggered shake plays in full before navigating away, same spirit as
+   giving a real click a moment to register visually before the tab changes. */
+const AMORA_SHAKE_MS = 480;
 
 function useAutoHoverCycle(enabled: boolean) {
   const [active, setActive] = useState<Set<string>>(new Set());
@@ -478,7 +533,7 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={-744} dy={-136.81}>
+      <Positioned dx={-744} dy={-226.81}>
         <div
           className={`${styles.photobooth} ${autoHoverClass('photobooth')}`}
           tabIndex={0}
@@ -502,7 +557,11 @@ export default function ExperimentContent() {
         </div>
       </Positioned>
 
-      <Positioned dx={-750} dy={270.69}>
+      <Positioned dx={-651} dy={45}>
+        <AmoraLink autoHover={autoHover.has('amora')} />
+      </Positioned>
+
+      <Positioned dx={-750} dy={340.69}>
         <div
           className={`${styles.sipStudio} ${autoHoverClass('sipStudio')}`}
           tabIndex={0}
