@@ -35,11 +35,18 @@ export default function DrCuterusHero() {
           Go to Live Website →
         </a>
 
-        <p className={styles.summary}>
-          Went from a scattered online presence to a single live site that books patients,
-          showcases content, and handles brand inquiries, without losing the playful,
-          science-first tone she&apos;s known for.
-        </p>
+        <div className={styles.summary}>
+          <p className={styles.summaryLine}>
+            <span className={styles.summaryLabel}>Problem:</span> No single, on-brand home for Dr.
+            Cuterus&apos;s patients, followers, and brand collaborators, just a scattered presence
+            spread across platforms.
+          </p>
+          <p className={styles.summaryLine}>
+            <span className={styles.summaryLabel}>Solution:</span> A custom website in her own
+            voice: purple and yellow, bilingual, built around to act as a single place for
+            audiences.
+          </p>
+        </div>
       </div>
     </section>
   );

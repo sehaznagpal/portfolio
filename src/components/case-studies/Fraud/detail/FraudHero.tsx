@@ -51,13 +51,17 @@ export default function FraudHero() {
           </a>
         </div>
 
-        <p className={styles.summary}>
-          A year-long research project asking whether fraud-prevention designs that work
-          internationally actually hold up in India, tested through a structured case analysis and
-          a live experiment with 116 participants across three fraud scenarios. The experiment
-          itself is a working product, a simulated payment interface built to test how choice
-          architecture changes real decisions.
-        </p>
+        <div className={styles.summary}>
+          <p className={styles.summaryLine}>
+            <span className={styles.summaryLabel}>Question:</span> Does redesigning a payment
+            screen&apos;s choice architecture actually influence whether people fall for fraud?
+          </p>
+          <p className={styles.summaryLine}>
+            <span className={styles.summaryLabel}>Answer:</span> A simulated UPI payment app
+            (experiment) testing three interventions across three scam types on 116 participants,
+            showing choice architecture works, but not evenly across every kind of fraud.
+          </p>
+        </div>
       </div>
     </section>
   );

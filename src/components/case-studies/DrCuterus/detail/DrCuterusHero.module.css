@@ -135,12 +135,24 @@
 .summary {
   margin: 0;
   width: min(964px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summaryLine {
+  margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-medium);
   font-style: normal;
   font-size: 20px;
   line-height: 1.4;
-  text-align: justify;
+  text-align: left;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
+}
+
+.summaryLabel {
+  font-weight: var(--author-semibold);
+  color: var(--drcuterus-yellow);
 }

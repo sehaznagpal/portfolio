@@ -51,12 +51,18 @@ export default function MoolroopHero() {
           Explore Prototype →
         </a>
 
-        <p className={styles.summary}>
-          MoolRoop lets buyers verify a craft&apos;s authenticity without leaving the product page,
-          pulling straight from government GI registries instead of a separate database search.
-          It&apos;s scoped narrowly on purpose as a test of whether verification can live inside
-          browsing.
-        </p>
+        <div className={styles.summary}>
+          <p className={styles.summaryLine}>
+            <span className={styles.summaryLabel}>Problem:</span> No easy way for buyers to verify
+            a handicraft&apos;s authenticity without leaving the product page to dig through a
+            separate government database.
+          </p>
+          <p className={styles.summaryLine}>
+            <span className={styles.summaryLabel}>Solution:</span> MoolRoop, a buyer-side app that
+            embeds GI verification directly into the shopping flow itself, cutting a five-step
+            check down to one tap.
+          </p>
+        </div>
       </div>
     </section>
   );
