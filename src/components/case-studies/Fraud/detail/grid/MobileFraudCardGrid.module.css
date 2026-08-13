@@ -66,9 +66,11 @@
   color: #121212;
 }
 
+/* Same light blue/lavender used for this case study's tab headings (e.g.
+   "What I concluded"), not the yellow used elsewhere on the site. */
 .tag {
   padding: 2px 7px;
-  background: var(--dissertation-yellow);
+  background: #c6dbff;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-size: clamp(11px, 3vw, 12px);

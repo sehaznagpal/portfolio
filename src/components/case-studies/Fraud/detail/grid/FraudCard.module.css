@@ -112,10 +112,12 @@
 }
 
 /* Small highlighted label for cards whose panel contains screens, tables,
-   figures, or its own internal redirect/explore button. */
+   figures, or its own internal redirect/explore button. Same light
+   blue/lavender used for this case study's tab headings (e.g. "What I
+   concluded"), not the yellow used elsewhere on the site. */
 .tag {
   padding: 0.7937% 3.1746%;
-  background: var(--dissertation-yellow);
+  background: #c6dbff;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-size: 5.1587cqw;

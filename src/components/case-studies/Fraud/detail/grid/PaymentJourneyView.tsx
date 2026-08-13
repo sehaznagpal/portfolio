@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import moneyTransferScreen from '../../../../../assets/images/fraud/case-study/payment-journey/money-transfer.jpg';
 import selectAccountScreen from '../../../../../assets/images/fraud/case-study/payment-journey/select-account.jpg';
 import selectAccountCtaScreen from '../../../../../assets/images/fraud/case-study/payment-journey/select-account-cta.jpg';
@@ -9,6 +9,7 @@ import successScreen from '../../../../../assets/images/fraud/case-study/payment
 import phoneBezel from '../../../../../assets/images/fraud/case-study/payment-journey/phone-bezel.png';
 import connectorTop from '../../../../../assets/images/fraud/case-study/payment-journey/connector-top.svg';
 import connectorBottom from '../../../../../assets/images/fraud/case-study/payment-journey/connector-bottom.svg';
+import { useIsMobile } from '../../../../../lib/useIsMobile';
 import styles from './PaymentJourneyView.module.css';
 
 const AUTO_ADVANCE_MS = 7000;
@@ -41,11 +42,29 @@ function screensForGroup(group: number) {
 export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
   const [group, setGroup] = useState(0);
   const screens = screensForGroup(group);
+  const isMobile = useIsMobile();
+  const phonesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const id = setTimeout(() => setGroup((i) => (i + 1) % GROUPS.length), AUTO_ADVANCE_MS);
     return () => clearTimeout(id);
   }, [group]);
+
+  /* Mobile only: the phone row scrolls horizontally on .panelInner (see
+     FraudCard.module.css's mobile media query), reachable end to end from
+     scrollLeft 0 (leftmost phone) to scrollWidth-clientWidth (rightmost
+     phone) — that range itself is untouched. This just moves the *initial*
+     scroll position from 0 (flush left, only reachable rightward) to the
+     middle of that same range, so the row opens horizontally centered and
+     the person can scroll either direction from there. useLayoutEffect (not
+     useEffect) so this is applied before the browser paints, avoiding a
+     visible jump from left-flush to centered on open. */
+  useLayoutEffect(() => {
+    if (!isMobile) return;
+    const scrollParent = phonesRef.current?.closest('[class*="panelInner"]') as HTMLElement | null;
+    if (!scrollParent) return;
+    scrollParent.scrollLeft = (scrollParent.scrollWidth - scrollParent.clientWidth) / 2;
+  }, [isMobile]);
 
   const goPrev = () => setGroup((i) => (i - 1 + GROUPS.length) % GROUPS.length);
   const goNext = () => setGroup((i) => (i + 1) % GROUPS.length);
@@ -70,7 +89,7 @@ export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
         ))}
       </div>
 
-      <div className={styles.phones}>
+      <div className={styles.phones} ref={phonesRef}>
         {screens.map((src, i) => (
           <div className={styles.phone} key={i} style={{ left: PHONE_LEFT[i] }}>
             <div className={styles.phoneScreen}>
