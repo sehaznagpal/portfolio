@@ -210,12 +210,13 @@
   justify-content: center;
   padding: 8px 16px;
   background: var(--chrome-bg);
-  border: 1px solid var(--accent-green);
+  border: 1px solid var(--text-cream);
   border-radius: 4px;
   overflow: hidden;
   color: var(--text-cream);
   text-decoration: none;
   cursor: pointer;
+  transition: border-color 150ms ease-out;
 }
 
 .buttonLabel {
@@ -257,6 +258,10 @@
 @media (hover: hover) {
   .sweep {
     transition: clip-path 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .button:hover {
+    border-color: var(--accent-green);
   }
 
   .button:hover .sweep {

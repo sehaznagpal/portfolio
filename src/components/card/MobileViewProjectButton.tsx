@@ -9,7 +9,7 @@ import styles from './MobileViewProjectButton.module.css';
 export default function MobileViewProjectButton({ to, top }: { to: string; top: number }) {
   return (
     <Link className={styles.button} to={to} style={{ top: `${top}%` }}>
-      <span className={styles.label}>View project →</span>
+      <span className={styles.label}>View Project →</span>
     </Link>
   );
 }

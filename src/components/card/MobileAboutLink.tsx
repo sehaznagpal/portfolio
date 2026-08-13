@@ -5,7 +5,7 @@ export default function MobileAboutLink() {
   const { goToHero } = useViewState();
   return (
     <button className={styles.link} onClick={goToHero}>
-      back
+      Back
     </button>
   );
 }
