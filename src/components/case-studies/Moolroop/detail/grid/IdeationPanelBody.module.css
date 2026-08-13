@@ -1,3 +1,8 @@
+/* font-size uses the same min(vw,vh) clamp as every other tab's body copy
+   (ceiling 21px, matching a ~1440x900 desktop) so text size stays
+   consistent across all five tabs at any given screen size, instead of
+   this tab's old fixed 24px drifting out of sync with the others as the
+   panel scales. */
 .intro {
   position: absolute;
   left: 50%;
@@ -7,7 +12,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
@@ -26,7 +31,7 @@
   width: 86.67%;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: left;
   color: #fefefe;

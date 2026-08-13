@@ -1,12 +1,15 @@
 /* Three Q&A blocks replace what used to be two flowing paragraphs — sized
-   with a min(vw,vh) clamp (same technique as the About modal's body copy)
-   so the extra content still fits the panel's fixed height with no scroll,
-   shrinking on both narrow AND short desktop windows instead of tracking
-   only one axis. */
+   with a min(vw,vh) clamp (same technique as the About modal's body copy,
+   and now shared by every tab's body copy — see the sibling PanelBody
+   files) so the extra content still fits the panel's fixed height with no
+   scroll, shrinking on both narrow AND short desktop windows instead of
+   tracking only one axis. top: 23% (up from 19%) clears .panelHeading's
+   fixed-size single line with the same breathing room tabs 2/4 already
+   have between their own heading and body copy. */
 .body {
   position: absolute;
   left: 50%;
-  top: 19%;
+  top: 23%;
   transform: translateX(-50%);
   width: 86.67%;
   margin: 0;
@@ -23,20 +26,27 @@
   gap: min(0.5vh, 0.35vw);
 }
 
+/* Label ceiling (24px) and floor (16px) keep the same ~1.14x ratio over
+   the shared body-copy size below, so the label reads as a heading a
+   notch above the answer text rather than a fixed, unrelated size. */
 .qLabel {
   margin: 0;
   font-weight: var(--author-semibold);
-  font-size: clamp(13px, min(1.35vw, 2vh), 19px);
-  line-height: 1.15;
+  font-size: clamp(16px, min(2.07vw, 3.19vh), 24px);
+  line-height: 1.1;
   text-align: center;
   color: var(--moolroop-accent);
 }
 
+/* Shared body-copy size/rhythm — same clamp ceiling (21px, matching tabs
+   2/4 on a ~1440x900 desktop) and the same line-height (0.9) as tabs 2/4's
+   own unchanged .body/.intro, so all five tabs read as one consistent
+   text size instead of the Q&A tabs looking smaller. */
 .qAnswer {
   margin: 0;
   font-weight: var(--author-light);
-  font-size: clamp(12px, min(1.15vw, 1.7vh), 16px);
-  line-height: 1.25;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
+  line-height: 0.9;
   text-align: center;
   color: #fefefe;
 }
