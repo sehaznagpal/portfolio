@@ -43,13 +43,23 @@
    keep all of them reachable — a self-contained scroll region local to
    this sub-view, not the outer panel scrolling that was removed elsewhere.
    Mobile stacks the figures vertically instead (see below), relying on
-   .panelInner's own scroll there, unaffected by this. */
+   .panelInner's own scroll there, unaffected by this.
+
+   height uses the same min(vw,vh) proportional-tracking clamp as the
+   panel's own width formula (ceiling 400px = this sub-view's unchanged
+   appearance at a ~1440x900 desktop and up) — matching .picture's own
+   height below exactly, so this container is always precisely as tall as
+   the figures inside it. The old fixed height: 60.332% only matched
+   .picture's old fixed 400px AT the reference size; at smaller panel
+   sizes the container shrank (percentage of a shrinking panel) while each
+   .picture stayed a rigid 400px, so overflow-y: hidden silently clipped
+   the top and bottom off every figure. */
 .pictures {
   position: absolute;
   left: 7.843%;
   top: 25.943%;
   right: 7.843%;
-  height: 60.332%;
+  height: clamp(200px, min(34.51vw, 53.09vh), 400px);
   display: flex;
   align-items: center;
   gap: 24px;
@@ -57,11 +67,17 @@
   overflow-y: hidden;
 }
 
+/* height matches .pictures above exactly (same clamp expression) so the
+   box can never be taller than its container. Width is no longer a fixed
+   per-figure px (see ResultsGraphsView.tsx) — each figure instead sets its
+   own aspect-ratio inline, matching its source image exactly, so width
+   scales in lockstep with this fluid height and every figure keeps its
+   correct proportions, uncropped, at any size. */
 .picture {
   position: relative;
   box-sizing: border-box;
   flex: 0 0 auto;
-  height: 400px;
+  height: clamp(200px, min(34.51vw, 53.09vh), 400px);
   border: 2px solid #c6dbff;
   border-radius: 24px;
   overflow: hidden;

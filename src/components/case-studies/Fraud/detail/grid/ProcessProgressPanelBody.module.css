@@ -1,13 +1,18 @@
-/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
-   panel's own width formula (ceiling 42px = the panel's unchanged
-   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
-   was overflowing the panel's right edge on wide-but-short desktop
-   windows, where the panel itself is narrower than its 1020px cap but the
-   heading's fixed 42px wasn't shrinking to match. */
+/* Shared layout constants across all five Fraud tabs (see TopicPanelBody's
+   own copy of this comment): heading top/width/centering and the content
+   column's top/gap are the SAME numbers in every tab, so the heading
+   starts at the same vertical position everywhere and the
+   heading-to-first-subheading gap reads identically tab to tab. Centering
+   via width + transform + text-align (not a hand-tuned left:X%) means it
+   stays correct regardless of the heading text's own length. font-size
+   itself is unchanged from before (still the min(vw,vh) proportional clamp
+   fixed for panel-edge overflow). */
 .heading {
   position: absolute;
-  left: 19.412%;
-  top: 9.653%;
+  left: 50%;
+  top: 9%;
+  transform: translateX(-50%);
+  width: 86.667%;
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
@@ -15,7 +20,34 @@
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
+  text-align: center;
   white-space: nowrap;
+}
+
+/* intro, subheading, methodIntro, list, and methodOutro now flow in one
+   column instead of five independent absolute-% blocks, so however tall
+   each piece actually renders, the next one just stacks after it instead
+   of a fixed % guessing its height — the same technique as TopicPanelBody
+   (see its own comment for why). top and gap are the same shared constants
+   used in every tab — one uniform rhythm for heading-to-subheading,
+   subheading-to-body, and body-to-next-subheading alike, all driven by
+   this single flex gap rather than independently guessed positions.
+   display: contents on mobile (see the media query below) unwraps this
+   back into flat children of .panelInner's own mobile flex column, so
+   every existing mobile rule for these elements keeps applying exactly as
+   it did before this wrapper existed — content, position, and functionality
+   on mobile are unchanged. */
+.content {
+  position: absolute;
+  left: 50%;
+  top: 21%;
+  transform: translateX(-50%);
+  width: 86.667%;
+  display: flex;
+  flex-direction: column;
+  gap: min(2.1vh, 1.5vw);
+  font-family: 'Author Variable', sans-serif;
+  font-feature-settings: 'salt' 1;
 }
 
 /* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
@@ -23,19 +55,12 @@
    (see the sibling PanelBody files), so all five read as one consistent
    text size instead of this tab's old fixed 24px drifting out of sync. */
 .intro {
-  position: absolute;
-  left: 50%;
-  top: 18.25%;
-  transform: translateX(-50%);
-  width: 86.667%;
   margin: 0;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
   font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
-  font-feature-settings: 'salt' 1;
 }
 
 .highlight {
@@ -46,53 +71,33 @@
 
 /* Demoted from a full 42px heading to the same subheading size/weight/
    color used across all five tabs (see TopicPanelBody's own comment) —
-   position, content, and every other element on this tab are untouched. */
+   content and every other element on this tab are untouched. */
 .subheading {
-  position: absolute;
-  left: 50%;
-  top: 32.126%;
-  transform: translateX(-50%);
-  width: 86.667%;
   margin: 0;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-semibold);
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;
-  color: var(--dissertation-yellow);
+  color: #fefefe;
 }
 
 .methodIntro {
-  position: absolute;
-  left: 50%;
-  top: 39.518%;
-  transform: translateX(-50%);
-  width: 86.667%;
   margin: 0;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
   font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
-  font-feature-settings: 'salt' 1;
 }
 
 .list {
-  position: absolute;
-  left: 50%;
-  top: 53.09%;
-  transform: translateX(-50%);
-  width: 86.667%;
   margin: 0;
   padding-left: 36px;
   list-style: disc;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
   font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   color: #fefefe;
-  font-feature-settings: 'salt' 1;
 }
 
 .list li {
@@ -104,19 +109,12 @@
 }
 
 .methodOutro {
-  position: absolute;
-  left: 50%;
-  top: 70.136%;
-  transform: translateX(-50%);
-  width: 86.667%;
   margin: 0;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
   font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
-  font-feature-settings: 'salt' 1;
 }
 
 .buttons {
@@ -155,10 +153,22 @@
 @media (max-width: 767px) {
   .heading {
     position: static;
+    transform: none;
+    width: auto;
     font-size: clamp(22px, 6vw, 28px);
     white-space: normal;
     text-align: center;
     margin-top: 0;
+  }
+
+  /* Unwraps the desktop-only .content flex column so intro, subheading,
+     methodIntro, list, and methodOutro become direct children of
+     .panelInner's own mobile flex column again — exactly the flat sibling
+     structure every rule below was already written for, so mobile's
+     layout, spacing, and stacking order are unchanged by this wrapper's
+     existence. */
+  .content {
+    display: contents;
   }
 
   .subheading {

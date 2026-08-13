@@ -1,13 +1,20 @@
-/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
-   panel's own width formula (ceiling 42px = the panel's unchanged
-   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
-   was overflowing the panel's right edge on wide-but-short desktop
-   windows, where the panel itself is narrower than its 1020px cap but the
-   heading's fixed 42px wasn't shrinking to match. */
+/* Shared layout constants across all five Fraud tabs (see each sibling
+   PanelBody's own copy of this comment): heading top/width/centering and
+   the content column's top/gap are the SAME numbers in every tab, so the
+   heading starts at the same vertical position everywhere and the
+   heading-to-first-subheading gap reads identically tab to tab. Centering
+   via width + transform + text-align (not a hand-tuned left:X%) means it
+   stays correct regardless of the heading text's own length — the old
+   per-tab left:X% was tuned for one specific string width and broke when
+   that string changed (e.g. tab 5's shorter "What I concluded"). font-size
+   itself is unchanged from before (still the min(vw,vh) proportional clamp
+   fixed for panel-edge overflow). */
 .heading {
   position: absolute;
-  left: 10.588%;
-  top: 17.194%;
+  left: 50%;
+  top: 9%;
+  transform: translateX(-50%);
+  width: 86.667%;
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
@@ -15,6 +22,7 @@
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -22,34 +30,37 @@
    what used to be three flowing paragraphs — a flex column instead of
    independent absolute-% blocks, so however tall the content actually
    renders (bullets can wrap differently at every width), each piece just
-   stacks after the last instead of a fixed % guessing its height. top:
-   27.5% clears .heading's fixed-size single line with a comfortable gap. */
+   stacks after the last instead of a fixed % guessing its height. top and
+   gap are the same shared constants used in every tab (see .heading's own
+   comment) — one uniform rhythm for heading-to-subheading,
+   subheading-to-body, and body-to-next-subheading alike, all driven by
+   this single flex gap rather than independently guessed positions. */
 .content {
   position: absolute;
   left: 50%;
-  top: 27.5%;
+  top: 21%;
   transform: translateX(-50%);
   width: 86.667%;
   display: flex;
   flex-direction: column;
-  gap: min(1.4vh, 1vw);
+  gap: min(2.1vh, 1.5vw);
   font-family: 'Author Variable', sans-serif;
   font-feature-settings: 'salt' 1;
 }
 
 /* Ceiling (26px) / floor (17px) shared by every demoted heading across all
    five Fraud tabs (see the sibling PanelBody files) — a size clearly
-   between the 42px main heading and the 21px body-copy ceiling, using
-   --dissertation-yellow (not the panel's own navy, which reads as
-   near-black text on this dark background) so it stays legible as a
-   colored label. */
+   between the 42px main heading and the 21px body-copy ceiling. Color is
+   the site's standard white (#fefefe, same as this tab's own body copy),
+   not a separate accent — only the main heading keeps its own light
+   blue/lavender. */
 .subheading {
   margin: 0;
   font-weight: var(--author-semibold);
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;
-  color: var(--dissertation-yellow);
+  color: #fefefe;
 }
 
 /* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
@@ -93,6 +104,8 @@
 @media (max-width: 767px) {
   .heading {
     position: static;
+    transform: none;
+    width: auto;
     font-size: clamp(24px, 6.5vw, 30px);
     white-space: normal;
     text-align: center;

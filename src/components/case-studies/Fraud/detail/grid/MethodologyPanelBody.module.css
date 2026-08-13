@@ -1,13 +1,18 @@
-/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
-   panel's own width formula (ceiling 42px = the panel's unchanged
-   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
-   was overflowing the panel's right edge on wide-but-short desktop
-   windows, where the panel itself is narrower than its 1020px cap but the
-   heading's fixed 42px wasn't shrinking to match. */
+/* Shared layout constants across all five Fraud tabs (see TopicPanelBody's
+   own copy of this comment): heading top/width/centering and the content
+   column's top/gap are the SAME numbers in every tab, so the heading
+   starts at the same vertical position everywhere and the
+   heading-to-first-subheading gap reads identically tab to tab. Centering
+   via width + transform + text-align (not a hand-tuned left:X%) means it
+   stays correct regardless of the heading text's own length. font-size
+   itself is unchanged from before (still the min(vw,vh) proportional clamp
+   fixed for panel-edge overflow). */
 .heading {
   position: absolute;
-  left: 10.98%;
-  top: 15.686%;
+  left: 50%;
+  top: 9%;
+  transform: translateX(-50%);
+  width: 86.667%;
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
@@ -15,26 +20,32 @@
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
+  text-align: center;
   white-space: nowrap;
 }
 
-/* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
-   desktop) and line-height (0.9) used across every tab in this case study
-   (see the sibling PanelBody files), so all five read as one consistent
-   text size instead of this tab's old fixed 24px drifting out of sync. */
-.intro {
+/* intro and the two-column row now flow in one column instead of
+   independent absolute-% blocks, so however tall the intro paragraph
+   actually renders, the row below it just stacks after it instead of a
+   fixed % guessing its height — the same technique as TopicPanelBody (see
+   its own comment for why). top and gap are the same shared constants
+   used in every tab — one uniform rhythm for heading-to-body and
+   body-to-next-subheading-row alike, all driven by this single flex gap
+   rather than independently guessed positions. display: contents on
+   mobile (see the media query below) unwraps this back into flat children
+   of .panelInner's own mobile flex column, so every existing mobile rule
+   for these elements keeps applying exactly as it did before this wrapper
+   existed. */
+.content {
   position: absolute;
   left: 50%;
-  top: 22.775%;
+  top: 21%;
   transform: translateX(-50%);
   width: 86.667%;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: min(2.1vh, 1.5vw);
   font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-light);
-  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
-  line-height: 0.9;
-  text-align: center;
-  color: #fefefe;
   font-feature-settings: 'salt' 1;
 }
 
@@ -44,38 +55,46 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* Desktop's two side-by-side columns (the four-dimension lens on the left,
+   the six cases on the right) — also display: contents on mobile (see
+   below) to unwrap back to the same flat, order-reordered sibling
+   structure the mobile rules further down were already written for. */
+.columns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6%;
+}
+
+.column {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: min(2.1vh, 1.5vw);
+}
+
 /* Demoted from a full 42px heading to the same subheading size/weight/
-   color used across all five tabs (see TopicPanelBody's own comment) —
-   still positioned per-column (see .lensHeading/.casesHeading below), just
-   no longer reading as a second main heading. Wrapping (no more
-   white-space: nowrap) is also part of the tab's overflow fix: at narrow
-   widths a nowrap heading could run past its own half-width column. */
+   color used across all five tabs (see TopicPanelBody's own comment) — now
+   simply the first flex child of its own .column, so no longer needs its
+   own position. .lensHeading/.casesHeading below carry no desktop styling
+   of their own any more; they're kept purely as mobile order markers (see
+   the media query). Wrapping (no more white-space: nowrap) is also part of
+   the tab's overflow fix: at narrow widths a nowrap heading could run past
+   its own half-width column. */
 .subheading {
-  position: absolute;
-  top: 45.249%;
-  width: 36%;
   margin: 0;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-semibold);
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;
-  color: var(--dissertation-yellow);
-}
-
-.lensHeading {
-  left: 9.216%;
-}
-
-.casesHeading {
-  left: 56.961%;
+  color: #fefefe;
 }
 
 .lensList {
-  position: absolute;
-  left: 9.216%;
-  top: 53.09%;
-  width: 38.431%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: min(1vh, 0.7vw);
@@ -109,16 +128,13 @@
   line-height: 1.1;
 }
 
-/* height: auto (not the old fixed 32.881%) is the core of this tab's
-   overflow fix — a fixed-height bordered box combined with variable-length
-   text is exactly what was spilling past its own border at some sizes.
-   Sizing to content instead means the box can only ever grow to fit
-   whatever the (now fluid, shrinking) text actually needs. */
+/* height: auto (not a fixed %) is the core of this tab's overflow fix — a
+   fixed-height bordered box combined with variable-length text is exactly
+   what was spilling past its own border at some sizes. Sizing to content
+   instead means the box can only ever grow to fit whatever the (fluid,
+   shrinking) text actually needs. */
 .casesBox {
-  position: absolute;
-  left: 56.961%;
-  top: 52.489%;
-  width: 33.725%;
+  width: 100%;
   box-sizing: border-box;
   border: 2px solid #fefefe;
   padding: min(1.8vh, 1.2vw) 14px;
@@ -147,10 +163,24 @@
 @media (max-width: 767px) {
   .heading {
     position: static;
+    transform: none;
+    width: auto;
     font-size: clamp(22px, 6vw, 28px);
     white-space: normal;
     text-align: center;
     order: 0;
+  }
+
+  /* Unwraps the desktop-only .content/.columns/.column wrappers so intro,
+     the two subheadings, and the two column bodies all become direct
+     children of .panelInner's own mobile flex column again — exactly the
+     flat, order-reordered sibling structure every rule in this block was
+     already written for, so mobile's layout, spacing, and stacking order
+     are unchanged by these wrappers' existence. */
+  .content,
+  .columns,
+  .column {
+    display: contents;
   }
 
   .intro {
