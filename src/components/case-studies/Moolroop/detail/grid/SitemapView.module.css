@@ -36,16 +36,18 @@
   opacity: 0.7;
 }
 
-/* Desktop: no scroll — the sitemap is a fixed-size diagram cropped at the
-   panel edge like everything else in the panel. Mobile re-enables
-   horizontal panning explicitly below, independent of this rule. */
+/* Exception to the panel's general no-scroll rule: the sitemap is a wide,
+   multi-column flowchart that doesn't fit the panel at once, so it needs
+   its own scroll to stay fully reachable — a self-contained scroll region
+   local to this sub-view, not the outer panel scrolling that was removed
+   elsewhere. Mobile keeps its own equivalent rule below, unaffected. */
 .scrollArea {
   position: absolute;
   left: 0;
   right: 0;
   top: 21%;
   bottom: 0;
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
   padding: 12px 40px 32px;
 }
