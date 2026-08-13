@@ -1,3 +1,10 @@
+/* font-size uses a min(vw,vh) proportional-tracking clamp tied to the
+   panel's own width formula (width: min(1020px, 88vw, calc(88vh*1020/663))
+   in DrCuterusCard.module.css) — ceiling 42px is this heading's unchanged
+   appearance at a ~1440x900 desktop and up. Without this, a fixed px size
+   stayed put while the panel itself (and the laptop mockup, positioned as
+   % of it) kept shrinking at smaller/odd desktop sizes, so the text could
+   overflow its box and run into the laptop instead of scaling with it. */
 .heading {
   position: absolute;
   left: 26.667%;
@@ -5,13 +12,15 @@
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
-  font-size: 42px;
+  font-size: clamp(24px, min(3.62vw, 5.58vh), 42px);
   line-height: 1;
   letter-spacing: -1.68px;
   color: var(--drcuterus-lavender);
   white-space: nowrap;
 }
 
+/* Same proportional-tracking technique as .heading above, ceiling 24px
+   matching this copy's unchanged appearance at a ~1440x900 desktop. */
 .intro {
   position: absolute;
   left: 50%;
@@ -21,15 +30,20 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
-  line-height: 0.9;
+  font-size: clamp(14px, min(2.07vw, 3.19vh), 24px);
+  line-height: 0.85;
   text-align: center;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
 }
 
+/* Same proportional-tracking technique as .intro's own font-size — a fixed
+   px margin doesn't shrink as the panel does, so at smaller sizes it ate an
+   increasingly large share of the (also shrinking) space between this text
+   and the laptop mockup below it, which is what let them collide even
+   though the text itself was already scaling down. */
 .intro p {
-  margin: 0 0 20px;
+  margin: 0 0 clamp(4px, min(1.04vw, 1.59vh), 12px);
 }
 
 .intro p:last-child {
@@ -98,6 +112,14 @@
     font-size: clamp(15px, 4vw, 18px);
     line-height: 1.35;
     margin-top: 16px;
+  }
+
+  /* Fixed px, not the desktop clamp — mobile's flow layout has no
+     competing image at the same position to collide with, so it doesn't
+     need the tighter desktop-only safety margin, and every other mobile
+     spacing value in this file is already a plain fixed px to match. */
+  .intro p {
+    margin-bottom: 12px;
   }
 
   /* .laptop's own children are position: absolute, percentage-positioned
