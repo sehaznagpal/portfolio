@@ -1,3 +1,9 @@
+/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
+   panel's own width formula (ceiling 42px = the panel's unchanged
+   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
+   was overflowing the panel's right edge on wide-but-short desktop
+   windows, where the panel itself is narrower than its 1020px cap but the
+   heading's fixed 42px wasn't shrinking to match. */
 .heading {
   position: absolute;
   left: 19.412%;
@@ -5,13 +11,17 @@
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
-  font-size: 42px;
+  font-size: clamp(24px, min(3.62vw, 5.58vh), 42px);
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
   white-space: nowrap;
 }
 
+/* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
+   desktop) and line-height (0.9) used across every tab in this case study
+   (see the sibling PanelBody files), so all five read as one consistent
+   text size instead of this tab's old fixed 24px drifting out of sync. */
 .intro {
   position: absolute;
   left: 50%;
@@ -21,7 +31,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
@@ -34,18 +44,22 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* Demoted from a full 42px heading to the same subheading size/weight/
+   color used across all five tabs (see TopicPanelBody's own comment) —
+   position, content, and every other element on this tab are untouched. */
 .subheading {
   position: absolute;
-  left: 14.804%;
+  left: 50%;
   top: 32.126%;
+  transform: translateX(-50%);
+  width: 86.667%;
   margin: 0;
-  font-family: 'Gambetta Variable', serif;
-  font-weight: var(--gambetta-light);
-  font-size: 42px;
-  line-height: 1;
-  letter-spacing: -1.68px;
-  color: #c6dbff;
-  white-space: nowrap;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-semibold);
+  font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
+  line-height: 1.15;
+  text-align: center;
+  color: var(--dissertation-yellow);
 }
 
 .methodIntro {
@@ -57,7 +71,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
@@ -75,7 +89,7 @@
   list-style: disc;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
@@ -98,7 +112,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
@@ -124,7 +138,7 @@
   border: 1px solid #fefefe;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(13px, min(1.55vw, 2.39vh), 18px);
   line-height: 0.9;
   letter-spacing: 0;
   color: #fefefe;
@@ -139,17 +153,21 @@
 }
 
 @media (max-width: 767px) {
-  .heading,
-  .subheading {
+  .heading {
     position: static;
     font-size: clamp(22px, 6vw, 28px);
     white-space: normal;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0;
   }
 
-  .heading {
-    margin-top: 0;
+  .subheading {
+    position: static;
+    transform: none;
+    width: 100%;
+    font-size: clamp(17px, 4.8vw, 21px);
+    line-height: 1.2;
+    margin-top: 20px;
   }
 
   .intro,

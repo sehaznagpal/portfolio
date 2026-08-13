@@ -32,8 +32,8 @@ export default function MethodologyPanelBody() {
         experiment gives it a controlled, if narrower, piece of evidence.
       </p>
 
-      <h3 className={`${styles.columnHeading} ${styles.lensHeading}`}>The four-dimension lens</h3>
-      <h3 className={`${styles.columnHeading} ${styles.casesHeading}`}>Choosing the six cases</h3>
+      <h3 className={`${styles.subheading} ${styles.lensHeading}`}>The four-dimension lens</h3>
+      <h3 className={`${styles.subheading} ${styles.casesHeading}`}>Choosing the six cases</h3>
 
       <div className={styles.lensList}>
         {LENS_ITEMS.map((item) => (

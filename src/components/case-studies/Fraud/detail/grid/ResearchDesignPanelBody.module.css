@@ -1,3 +1,9 @@
+/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
+   panel's own width formula (ceiling 42px = the panel's unchanged
+   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
+   was overflowing the panel's right edge on wide-but-short desktop
+   windows, where the panel itself is narrower than its 1020px cap but the
+   heading's fixed 42px wasn't shrinking to match. */
 .heading {
   position: absolute;
   left: 25.98%;
@@ -5,25 +11,30 @@
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
-  font-size: 42px;
+  font-size: clamp(24px, min(3.62vw, 5.58vh), 42px);
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
   white-space: nowrap;
 }
 
-.intro {
+/* Intro, "Collecting everything," and "Limitations" (the old bordered
+   noteBox, now removed — see .subheading/.paragraph below) all flow in one
+   column instead of three independent absolute-% blocks, so however tall
+   each piece actually renders, the next one just stacks after it instead
+   of a fixed % guessing its height — the same technique as TopicPanelBody
+   (see its own comment for why). top: 15.837% keeps the intro's original
+   position. */
+.content {
   position: absolute;
-  left: 8.725%;
+  left: 50%;
   top: 15.837%;
-  width: 83.725%;
-  margin: 0;
+  transform: translateX(-50%);
+  width: 86.667%;
+  display: flex;
+  flex-direction: column;
+  gap: min(1.4vh, 1vw);
   font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-light);
-  font-size: 24px;
-  line-height: 0.9;
-  text-align: center;
-  color: #fefefe;
   font-feature-settings: 'salt' 1;
 }
 
@@ -33,107 +44,79 @@
   -webkit-box-decoration-break: clone;
 }
 
+/* Demoted from a full 42px heading to the same subheading size/weight/
+   color used across all five tabs (see TopicPanelBody's own comment). */
 .subheading {
-  position: absolute;
-  left: 33.137%;
-  top: 41.478%;
   margin: 0;
-  font-family: 'Gambetta Variable', serif;
-  font-weight: var(--gambetta-light);
-  font-size: 42px;
-  line-height: 1;
-  letter-spacing: -1.68px;
-  color: #c6dbff;
-  white-space: nowrap;
+  font-weight: var(--author-semibold);
+  font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
+  line-height: 1.15;
+  text-align: center;
+  color: var(--dissertation-yellow);
 }
 
-.body {
-  position: absolute;
-  left: 8.039%;
-  top: 48.869%;
-  width: 84.02%;
+/* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
+   desktop) and line-height (0.9) used across every tab in this case study,
+   so all five read as one consistent text size instead of some being
+   fixed/larger than others. */
+.paragraph {
   margin: 0;
-  font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
-  font-feature-settings: 'salt' 1;
 }
 
-.body p {
-  margin: 0 0 20px;
+.list {
+  margin: 0;
+  padding-left: 1.4em;
+  list-style: disc;
+  text-align: left;
+  font-weight: var(--author-light);
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
+  line-height: 1.2;
+  color: #fefefe;
 }
 
-.body p:last-child {
+.list li {
+  margin: 0 0 0.35em;
+}
+
+.list li:last-child {
   margin-bottom: 0;
 }
 
-.noteBox {
-  position: absolute;
-  left: 6.569%;
-  top: 75.566%;
-  width: 86.863%;
-  box-sizing: border-box;
-  padding: 24px 18px;
-  border: 2px solid #fefefe;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.noteText {
-  width: 100%;
-  font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-light);
-  font-size: 20px;
-  line-height: 0.9;
-  text-align: center;
-  color: #fefefe;
-  font-feature-settings: 'salt' 1;
-}
-
-.noteTitle {
-  margin: 0 0 4px;
-  font-weight: var(--author-medium);
-}
-
-.noteBody {
-  margin: 0;
-}
-
 @media (max-width: 767px) {
-  .heading,
-  .subheading {
+  .heading {
     position: static;
     font-size: clamp(22px, 6vw, 28px);
     white-space: normal;
     text-align: center;
-    margin-top: 20px;
-  }
-
-  .heading {
     margin-top: 0;
   }
 
-  .intro,
-  .body {
+  .content {
     position: static;
     width: 100%;
-    font-size: clamp(15px, 4vw, 18px);
-    line-height: 1.35;
+    transform: none;
+    gap: 14px;
     margin-top: 12px;
   }
 
-  .noteBox {
-    position: static;
-    width: 100%;
-    margin-top: 20px;
+  .subheading {
+    font-size: clamp(17px, 4.8vw, 21px);
+    line-height: 1.2;
+    margin-top: 6px;
   }
 
-  .noteText {
-    font-size: clamp(14px, 3.7vw, 17px);
+  .paragraph,
+  .list {
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
+  }
+
+  .list {
+    padding-left: 1.2em;
   }
 }

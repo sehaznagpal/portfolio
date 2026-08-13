@@ -1,3 +1,9 @@
+/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
+   panel's own width formula (ceiling 42px = the panel's unchanged
+   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
+   was overflowing the panel's right edge on wide-but-short desktop
+   windows, where the panel itself is narrower than its 1020px cap but the
+   heading's fixed 42px wasn't shrinking to match. */
 .heading {
   position: absolute;
   left: 10.98%;
@@ -5,13 +11,17 @@
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
-  font-size: 42px;
+  font-size: clamp(24px, min(3.62vw, 5.58vh), 42px);
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
   white-space: nowrap;
 }
 
+/* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
+   desktop) and line-height (0.9) used across every tab in this case study
+   (see the sibling PanelBody files), so all five read as one consistent
+   text size instead of this tab's old fixed 24px drifting out of sync. */
 .intro {
   position: absolute;
   left: 50%;
@@ -21,7 +31,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
   text-align: center;
   color: #fefefe;
@@ -34,25 +44,31 @@
   -webkit-box-decoration-break: clone;
 }
 
-.columnHeading {
+/* Demoted from a full 42px heading to the same subheading size/weight/
+   color used across all five tabs (see TopicPanelBody's own comment) —
+   still positioned per-column (see .lensHeading/.casesHeading below), just
+   no longer reading as a second main heading. Wrapping (no more
+   white-space: nowrap) is also part of the tab's overflow fix: at narrow
+   widths a nowrap heading could run past its own half-width column. */
+.subheading {
   position: absolute;
   top: 45.249%;
+  width: 36%;
   margin: 0;
-  font-family: 'Gambetta Variable', serif;
-  font-weight: var(--gambetta-light);
-  font-size: 42px;
-  line-height: 1;
-  letter-spacing: -1.68px;
-  color: #c6dbff;
-  white-space: nowrap;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-semibold);
+  font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
+  line-height: 1.15;
+  text-align: center;
+  color: var(--dissertation-yellow);
 }
 
 .lensHeading {
-  left: 7.941%;
+  left: 9.216%;
 }
 
 .casesHeading {
-  left: 55.588%;
+  left: 56.961%;
 }
 
 .lensList {
@@ -62,7 +78,7 @@
   width: 38.431%;
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: min(1vh, 0.7vw);
 }
 
 .lensItem {
@@ -76,7 +92,7 @@
 
 .lensTitle {
   display: block;
-  font-size: 24px;
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 0.9;
 }
 
@@ -89,19 +105,23 @@
 .lensDescription {
   display: block;
   margin-top: 2px;
-  font-size: 16px;
-  line-height: 0.9;
+  font-size: clamp(10px, min(1.21vw, 1.86vh), 14px);
+  line-height: 1.1;
 }
 
+/* height: auto (not the old fixed 32.881%) is the core of this tab's
+   overflow fix — a fixed-height bordered box combined with variable-length
+   text is exactly what was spilling past its own border at some sizes.
+   Sizing to content instead means the box can only ever grow to fit
+   whatever the (now fluid, shrinking) text actually needs. */
 .casesBox {
   position: absolute;
   left: 56.961%;
   top: 52.489%;
   width: 33.725%;
-  height: 32.881%;
   box-sizing: border-box;
   border: 2px solid #fefefe;
-  padding: 10px 14px;
+  padding: min(1.8vh, 1.2vw) 14px;
   display: flex;
   align-items: center;
 }
@@ -110,8 +130,8 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 20px;
-  line-height: 0.9;
+  font-size: clamp(12px, min(1.51vw, 2.33vh), 18px);
+  line-height: 1.1;
   text-align: center;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
@@ -143,11 +163,12 @@
     order: 1;
   }
 
-  .columnHeading {
+  .subheading {
     position: static;
     left: auto;
-    font-size: clamp(20px, 5.5vw, 26px);
-    white-space: normal;
+    width: 100%;
+    font-size: clamp(17px, 4.8vw, 21px);
+    line-height: 1.2;
     text-align: center;
     margin-top: 24px;
   }

@@ -1,3 +1,9 @@
+/* font-size uses the same min(vw,vh) proportional-tracking clamp as the
+   panel's own width formula (ceiling 42px = the panel's unchanged
+   appearance at a ~1440x900 desktop and up) — a nowrap heading this long
+   was overflowing the panel's right edge on wide-but-short desktop
+   windows, where the panel itself is narrower than its 1020px cap but the
+   heading's fixed 42px wasn't shrinking to match. */
 .heading {
   position: absolute;
   left: 10.588%;
@@ -5,34 +11,76 @@
   margin: 0;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-light);
-  font-size: 42px;
+  font-size: clamp(24px, min(3.62vw, 5.58vh), 42px);
   line-height: 1;
   letter-spacing: -1.68px;
   color: #c6dbff;
   white-space: nowrap;
 }
 
-.body {
+/* Three labeled sections (a bullet list + two short paragraphs) replace
+   what used to be three flowing paragraphs — a flex column instead of
+   independent absolute-% blocks, so however tall the content actually
+   renders (bullets can wrap differently at every width), each piece just
+   stacks after the last instead of a fixed % guessing its height. top:
+   27.5% clears .heading's fixed-size single line with a comfortable gap. */
+.content {
   position: absolute;
   left: 50%;
-  top: 26.395%;
+  top: 27.5%;
   transform: translateX(-50%);
   width: 86.667%;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: min(1.4vh, 1vw);
   font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-light);
-  font-size: 24px;
-  line-height: 0.9;
-  text-align: center;
-  color: #fefefe;
   font-feature-settings: 'salt' 1;
 }
 
-.body p {
-  margin: 0 0 20px;
+/* Ceiling (26px) / floor (17px) shared by every demoted heading across all
+   five Fraud tabs (see the sibling PanelBody files) — a size clearly
+   between the 42px main heading and the 21px body-copy ceiling, using
+   --dissertation-yellow (not the panel's own navy, which reads as
+   near-black text on this dark background) so it stays legible as a
+   colored label. */
+.subheading {
+  margin: 0;
+  font-weight: var(--author-semibold);
+  font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
+  line-height: 1.15;
+  text-align: center;
+  color: var(--dissertation-yellow);
 }
 
-.body p:last-child {
+/* Shared body-copy size — same clamp ceiling (21px, matching a ~1440x900
+   desktop) and line-height (0.9) used across every tab in this case study,
+   so all five read as one consistent text size instead of some being
+   fixed/larger than others. */
+.paragraph {
+  margin: 0;
+  font-weight: var(--author-light);
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
+  line-height: 0.9;
+  text-align: center;
+  color: #fefefe;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.4em;
+  list-style: disc;
+  text-align: left;
+  font-weight: var(--author-light);
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
+  line-height: 1.2;
+  color: #fefefe;
+}
+
+.list li {
+  margin: 0 0 0.35em;
+}
+
+.list li:last-child {
   margin-bottom: 0;
 }
 
@@ -50,12 +98,26 @@
     text-align: center;
   }
 
-  .body {
+  .content {
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(15px, 4vw, 18px);
-    line-height: 1.35;
+    gap: 14px;
     margin-top: 16px;
+  }
+
+  .subheading {
+    font-size: clamp(17px, 4.8vw, 21px);
+    line-height: 1.2;
+  }
+
+  .paragraph,
+  .list {
+    font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.35;
+  }
+
+  .list {
+    padding-left: 1.2em;
   }
 }
