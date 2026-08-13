@@ -14,32 +14,40 @@ export default function SolutionPanelBody() {
 
   return (
     <>
-      <div className={styles.mockup}>
-        <PhoneMockup screenColor="var(--moolroop-accent)" />
-      </div>
+      <div className={styles.mockupWrap}>
+        <div className={styles.mockup}>
+          <PhoneMockup screenColor="var(--moolroop-accent)" />
+        </div>
 
-      <div className={styles.optionButtons}>
-        <button type="button" className={styles.optionButton} onClick={() => setView('sitemap')}>
-          See Sitemap &rarr;
-        </button>
-        <button type="button" className={styles.optionButton} onClick={() => setView('screens')}>
-          Explore Screens &rarr;
-        </button>
+        <div className={styles.optionButtons}>
+          <button type="button" className={styles.optionButton} onClick={() => setView('sitemap')}>
+            See Sitemap &rarr;
+          </button>
+          <button type="button" className={styles.optionButton} onClick={() => setView('screens')}>
+            Explore Screens &rarr;
+          </button>
+        </div>
       </div>
 
       <h3 className={styles.solutionHeading}>Solution</h3>
-      <p className={styles.solutionText}>
-        The build covers four areas, each demonstrating a different part of the idea in practice.
-        Discovering authentic crafts spans home, category browsing, and product listings, where
-        GI-certified crafts sit inside a familiar shopping layout instead of feeling like a detour
-        into paperwork. Every product tells two stories on its own page, carrying both the item
-        for sale and where it comes from, with the origin story living beside the price rather
-        than behind a separate link. Verification without overwhelming means every product carries
-        two information layers, letting the buyer choose how deep to go: a quick glance at specs,
-        or the full provenance trail. And supporting screens like menu, wishlist, and cart are kept
-        deliberately plain, so verification stays the thing that stands out, not the navigation
-        around it.
-      </p>
+      <div className={styles.solutionText}>
+        <p>
+          <span className={styles.qLabel}>Discovering authentic crafts</span> &mdash; GI-certified
+          crafts sit inside a familiar shopping layout, not a detour into paperwork.
+        </p>
+        <p>
+          <span className={styles.qLabel}>Two stories per product</span> &mdash; the item for sale
+          and where it comes from, side by side.
+        </p>
+        <p>
+          <span className={styles.qLabel}>Verification without overwhelm</span> &mdash; a quick
+          glance at specs, or the full provenance trail, buyer&apos;s choice.
+        </p>
+        <p>
+          <span className={styles.qLabel}>Plain supporting screens</span> &mdash; menu, wishlist,
+          and cart stay simple so verification is what stands out.
+        </p>
+      </div>
 
       <h3 className={styles.reflectionHeading}>Reflection</h3>
       <div className={styles.reflectionText}>

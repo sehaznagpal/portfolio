@@ -6,23 +6,32 @@ export default function MotivationPanelBody() {
   return (
     <>
       <div className={styles.body}>
-        <p>
-          India has over 400 Geographical Indication certified crafts.{' '}
-          <span className={styles.highlight}>
-            A GI tag is a government-issued legal certification that ties a product to a specific
-            place, a specific process, and a specific community
-          </span>{' '}
-          of makers, a Kashmiri Pashmina, a Sanganeri block print, a piece of Moradabad metalware.
-        </p>
-        <p>
-          I noticed this gap during a freelance gig writing product descriptions for craft
-          sellers. The content I wrote had to come from government-verified databases. Working
-          with these, I wondered what if the verified information was embedded into the shopping
-          experience itself? A buyer who wanted to check it NOW will have to leave the product
-          page, search for the right database, and dig through it separately.{' '}
-          <span className={styles.emphasis}>MoolRoop</span> was built to close that gap, bringing
-          verification from several clicks away down to one.
-        </p>
+        <div className={styles.qaBlock}>
+          <p className={styles.qLabel}>Why the need?</p>
+          <p className={styles.qAnswer}>
+            Buyers have no easy way to verify a craft is genuine without leaving the product page
+            to dig through a separate database.
+          </p>
+        </div>
+        <div className={styles.qaBlock}>
+          <p className={styles.qLabel}>What is a GI tag?</p>
+          <p className={styles.qAnswer}>
+            A <span className={styles.highlight}>government-issued</span> legal certification
+            that ties a product to a specific place, process, and community of makers, a
+            Kashmiri Pashmina, a Sanganeri block print, a piece of Moradabad metalware. India has
+            over 400 GI-certified crafts.
+          </p>
+        </div>
+        <div className={styles.qaBlock}>
+          <p className={styles.qLabel}>How I came across this</p>
+          <p className={styles.qAnswer}>
+            I noticed the gap during a freelance gig writing product descriptions for craft
+            sellers, sourced from government-verified databases. That&apos;s when I wondered:
+            what if this verified information lived inside the shopping experience itself?
+            MoolRoop was built to close that gap, bringing verification{' '}
+            <span className={styles.highlight}>from several clicks away down to one</span>.
+          </p>
+        </div>
       </div>
 
       <div className={styles.photoStrip}>

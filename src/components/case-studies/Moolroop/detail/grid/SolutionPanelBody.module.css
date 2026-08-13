@@ -1,3 +1,12 @@
+/* Desktop: a plain, unstyled wrapper — .mockup and .optionButtons keep
+   positioning themselves via absolute percentages against the panel,
+   exactly as before. Mobile turns this into the positioning context so the
+   buttons can center over the mockup instead of stacking below it (see the
+   mobile media query). */
+.mockupWrap {
+  position: static;
+}
+
 .mockup {
   position: absolute;
   left: 23.33%;
@@ -53,19 +62,37 @@
   color: var(--moolroop-yellow);
 }
 
+/* Four short labeled points replace what used to be one long paragraph —
+   sized with a min(vw,vh) clamp (same technique as the About modal's body
+   copy) so the extra structure (a label + line break per point) still fits
+   the same space with no scroll, shrinking on both narrow AND short
+   desktop windows instead of tracking only one axis. */
 .solutionText {
   position: absolute;
   left: 40.49%;
-  top: 18.25%;
+  top: 17.5%;
   width: 53.14%;
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 20px;
-  line-height: 1;
-  text-align: justify;
+  font-size: clamp(12px, min(1.05vw, 1.55vh), 16px);
+  line-height: 1.25;
+  text-align: left;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
+}
+
+.solutionText p {
+  margin: 0 0 min(1.3vh, 0.9vw);
+}
+
+.solutionText p:last-child {
+  margin-bottom: 0;
+}
+
+.qLabel {
+  font-weight: var(--author-semibold);
+  color: var(--moolroop-accent);
 }
 
 .reflectionHeading {
@@ -83,6 +110,11 @@
   color: var(--moolroop-yellow);
 }
 
+/* Fluid-sized with the same min(vw,vh) clamp as .solutionText above. Not
+   content this task changed, but a fixed 20px here can overflow the panel
+   on short desktop windows regardless (confirmed pre-existing, unrelated
+   to the edits above), and "never overflow, any desktop size" is this
+   task's own requirement for the whole tab. */
 .reflectionText {
   position: absolute;
   left: 40.98%;
@@ -90,15 +122,15 @@
   width: 53.14%;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: 20px;
-  line-height: 1;
+  font-size: clamp(12px, min(1.05vw, 1.1vh), 16px);
+  line-height: 1.15;
   text-align: justify;
   color: #fefefe;
   font-feature-settings: 'salt' 1;
 }
 
 .reflectionText p {
-  margin: 0 0 20px;
+  margin: 0 0 min(1.3vh, 0.9vw);
 }
 
 .reflectionText p:last-child {
@@ -119,6 +151,13 @@
    mockup, option buttons, Solution heading + text, Reflection heading +
    text. */
 @media (max-width: 767px) {
+  /* The positioning context for centering the buttons over the mockup
+     below — a plain block on desktop (see the base rule above), only
+     becomes relative here. */
+  .mockupWrap {
+    position: relative;
+  }
+
   .mockup {
     position: static;
     transform: none;
@@ -126,13 +165,16 @@
     margin: 0 auto;
   }
 
+  /* Overlaid centered on the mockup, matching desktop's own treatment,
+     instead of stacking below it in normal flow. */
   .optionButtons {
-    position: static;
-    transform: none;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
   }
 
   .optionButton {
@@ -154,5 +196,9 @@
     text-align: left;
     font-size: clamp(15px, 4vw, 18px);
     line-height: 1.35;
+  }
+
+  .solutionText p {
+    margin: 0 0 14px;
   }
 }

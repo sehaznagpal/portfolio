@@ -1,25 +1,44 @@
+/* Three Q&A blocks replace what used to be two flowing paragraphs — sized
+   with a min(vw,vh) clamp (same technique as the About modal's body copy)
+   so the extra content still fits the panel's fixed height with no scroll,
+   shrinking on both narrow AND short desktop windows instead of tracking
+   only one axis. */
 .body {
   position: absolute;
   left: 50%;
-  top: 21.87%;
+  top: 19%;
   transform: translateX(-50%);
   width: 86.67%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: min(1.6vh, 1.1vw);
   font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-light);
-  font-size: 24px;
-  line-height: 0.9;
-  text-align: center;
-  color: #fefefe;
   font-feature-settings: 'salt' 1;
 }
 
-.body p {
-  margin: 0 0 20px;
+.qaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: min(0.5vh, 0.35vw);
 }
 
-.body p:last-child {
-  margin-bottom: 0;
+.qLabel {
+  margin: 0;
+  font-weight: var(--author-semibold);
+  font-size: clamp(13px, min(1.35vw, 2vh), 19px);
+  line-height: 1.15;
+  text-align: center;
+  color: var(--moolroop-accent);
+}
+
+.qAnswer {
+  margin: 0;
+  font-weight: var(--author-light);
+  font-size: clamp(12px, min(1.15vw, 1.7vh), 16px);
+  line-height: 1.25;
+  text-align: center;
+  color: #fefefe;
 }
 
 .highlight {
@@ -27,10 +46,6 @@
   font-weight: var(--author-regular);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-}
-
-.emphasis {
-  font-weight: var(--author-medium);
 }
 
 .photoStrip {
@@ -48,7 +63,20 @@
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(15px, 4vw, 18px);
+    gap: 16px;
+  }
+
+  .qaBlock {
+    gap: 4px;
+  }
+
+  .qLabel {
+    font-size: clamp(15px, 4.2vw, 18px);
+    line-height: 1.2;
+  }
+
+  .qAnswer {
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
   }
 
