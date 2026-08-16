@@ -14,6 +14,13 @@ export const THEME_OPTIONS: { id: ThemeName; label: string; swatchFill: string; 
   { id: 'wakanda', label: 'Wakanda', swatchFill: '#121212', swatchStroke: '#1E1E1E' },
 ];
 
+/* Fixed rotation order for the toolbar's 4-dot theme-picker icon (top-left,
+   top-right, bottom-right, bottom-left, per the Figma reference) — a
+   separate sequence from THEME_OPTIONS' own (dropdown-list) ordering above.
+   'default' has no dot of its own; the icon falls back to treating this
+   array's first entry as top-left until a real theme is picked. */
+export const THEME_CYCLE: Exclude<ThemeName, 'default'>[] = ['wakanda', 'pina-colada', 'seaglass', 'blush'];
+
 function readStoredTheme(): ThemeName {
   try {
     const stored = localStorage.getItem(THEME_KEY);

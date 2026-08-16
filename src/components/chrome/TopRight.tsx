@@ -1,9 +1,12 @@
 import { memo, useEffect, useRef, useState } from 'react';
-import { useTheme, THEME_OPTIONS } from '../../state/ThemeContext';
+import { useTheme, THEME_OPTIONS, THEME_CYCLE } from '../../state/ThemeContext';
 import avatar from '../../assets/images/chrome/avatar.jpg';
+import ThemeDotCluster from './ThemeDotCluster';
 import styles from './TopRight.module.css';
 
 type ShareState = 'idle' | 'copied' | 'manual';
+
+const THEME_MENU_CLOSE_DELAY_MS = 120;
 
 /* Fixed viewport chrome — memoized so it never re-renders as
    ExperimentCanvas's pan/zoom state changes on every wheel tick; it takes
@@ -13,20 +16,50 @@ function TopRight() {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [shareState, setShareState] = useState<ShareState>('idle');
-  const [pulsing, setPulsing] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<number | null>(null);
 
-  /* Nudges attention toward the theme toggle every 5s by replaying its hover
-     spin on its own — a separate transient class rather than a permanently
-     running animation, so normal :hover behavior is untouched the rest of
-     the time. */
+  /* The theme dropdown is hover-revealed (the dot-cluster trigger is a click
+     target in its own right — see handleCycleTheme), so opening/closing it
+     needs to tolerate the mouse briefly leaving the trigger while crossing
+     the gap to the dropdown below (or vice versa) without flickering shut.
+     A short cancellable delay on close does that; opening is always instant. */
+  function openThemeMenu() {
+    if (closeTimeoutRef.current !== null) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setOpen(true);
+  }
+
+  function scheduleCloseThemeMenu() {
+    if (closeTimeoutRef.current !== null) {
+      window.clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setOpen(false);
+      closeTimeoutRef.current = null;
+    }, THEME_MENU_CLOSE_DELAY_MS);
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setPulsing(true);
-      setTimeout(() => setPulsing(false), 600);
-    }, 5000);
-    return () => clearInterval(interval);
+    return () => {
+      if (closeTimeoutRef.current !== null) window.clearTimeout(closeTimeoutRef.current);
+    };
   }, []);
+
+  /* Advances the dot cluster's fixed rotation by exactly one step from
+     whatever it's currently showing at top-left — including the very first
+     click while no theme is active yet, which just activates the theme
+     already being previewed there rather than skipping past it. */
+  function handleCycleTheme() {
+    const currentIndex = THEME_CYCLE.indexOf(theme as (typeof THEME_CYCLE)[number]);
+    if (currentIndex === -1) {
+      setTheme(THEME_CYCLE[0]);
+      return;
+    }
+    setTheme(THEME_CYCLE[(currentIndex + 1) % THEME_CYCLE.length]);
+  }
 
   useEffect(() => {
     if (!open && shareState !== 'manual') return;
@@ -106,23 +139,29 @@ function TopRight() {
         </button>
         <button
           type="button"
-          className={`${styles.themeToggle} ${pulsing ? styles.pulse : ''}`}
+          className={styles.themeToggle}
           aria-label="Change theme"
           aria-haspopup="true"
           aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
+          onClick={handleCycleTheme}
+          onMouseEnter={openThemeMenu}
+          onMouseLeave={scheduleCloseThemeMenu}
+          onFocus={openThemeMenu}
+          onBlur={scheduleCloseThemeMenu}
         >
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M18 11.1719L25.8994 3.27246L28.7275 6.10059L20.8281 14H32V18H20.7109L28.5527 26.1201L25.6758 28.8984L18 20.9492V32H14V20.8281L6.10059 28.7275L3.27246 25.8994L11.1719 18H0V14H11.2881L3.44629 5.87988L6.32324 3.10156L14 11.0508V0H18V11.1719Z"
-              fill="currentColor"
-            />
-          </svg>
+          <ThemeDotCluster activeTheme={theme} />
         </button>
       </div>
 
       {open && (
-        <div className={styles.dropdown} role="menu">
+        <div
+          className={styles.dropdown}
+          role="menu"
+          onMouseEnter={openThemeMenu}
+          onMouseLeave={scheduleCloseThemeMenu}
+          onFocus={openThemeMenu}
+          onBlur={scheduleCloseThemeMenu}
+        >
           <p className={styles.dropdownLabel}>Theme</p>
           <div className={styles.divider} />
           {THEME_OPTIONS.map((option) => (
@@ -133,7 +172,7 @@ function TopRight() {
               aria-checked={theme === option.id}
               className={styles.option}
               onClick={() => {
-                setTheme(theme === option.id ? 'default' : option.id);
+                setTheme(option.id);
                 setOpen(false);
               }}
             >
