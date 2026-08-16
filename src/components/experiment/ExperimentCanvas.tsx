@@ -5,6 +5,7 @@ import TopRight from '../chrome/TopRight';
 import ExperimentTopLeft from './ExperimentTopLeft';
 import ExperimentToolbar from './ExperimentToolbar';
 import ExperimentContent from './ExperimentContent';
+import ThemeTransitionCurtain from './ThemeTransitionCurtain';
 import styles from './ExperimentCanvas.module.css';
 
 type Mode = 'normal' | 'map';
@@ -293,6 +294,7 @@ export default function ExperimentCanvas() {
           style={{ backgroundSize: `${DESKTOP_GRID_SPACING_PX * zoom}px ${DESKTOP_GRID_SPACING_PX * zoom}px` }}
         />
       )}
+      <ThemeTransitionCurtain theme={theme} />
       <div
         ref={surfaceRef}
         className={styles.interactionSurface}
