@@ -16,6 +16,10 @@ function TopRight() {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [shareState, setShareState] = useState<ShareState>('idle');
+  /* Bumped only by handleCycleTheme (never by a direct list pick) — the dot
+     cluster's whole-cluster spin animation is keyed off this, not off
+     `theme` itself, so a hover-list selection never triggers it. */
+  const [spinSignal, setSpinSignal] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<number | null>(null);
 
@@ -54,11 +58,8 @@ function TopRight() {
      already being previewed there rather than skipping past it. */
   function handleCycleTheme() {
     const currentIndex = THEME_CYCLE.indexOf(theme as (typeof THEME_CYCLE)[number]);
-    if (currentIndex === -1) {
-      setTheme(THEME_CYCLE[0]);
-      return;
-    }
-    setTheme(THEME_CYCLE[(currentIndex + 1) % THEME_CYCLE.length]);
+    setTheme(currentIndex === -1 ? THEME_CYCLE[0] : THEME_CYCLE[(currentIndex + 1) % THEME_CYCLE.length]);
+    setSpinSignal((n) => n + 1);
   }
 
   useEffect(() => {
@@ -149,7 +150,7 @@ function TopRight() {
           onFocus={openThemeMenu}
           onBlur={scheduleCloseThemeMenu}
         >
-          <ThemeDotCluster activeTheme={theme} />
+          <ThemeDotCluster activeTheme={theme} spinSignal={spinSignal} />
         </button>
       </div>
 
