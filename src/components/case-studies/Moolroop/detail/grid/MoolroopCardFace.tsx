@@ -9,10 +9,12 @@ export default function MoolroopCardFace({
   card,
   index,
   onOpen,
+  morphEnabled = true,
 }: {
   card: CardDef;
   index: number;
   onOpen: () => void;
+  morphEnabled?: boolean;
 }) {
   const { dx, dy } = CARD_POSITIONS[index];
 
@@ -30,8 +32,19 @@ export default function MoolroopCardFace({
       }}
     >
       <motion.div
-        layoutId={`card-${card.id}`}
-        layout="position"
+        /* A live true->false flip of layoutId alone (no remount) leaves a stale
+           registration in Framer's shared-layout registry until this element
+           actually unmounts — and if that unmount happens to land in the same
+           commit as some other element claiming the same id (e.g. this exact
+           card reappearing while the panel is mid-navigation elsewhere), the
+           stale box gets reused as a crossfade "from" state, producing an
+           unwanted morph. Keying on morphEnabled forces a clean unmount/remount
+           right when it toggles, so the registry is never left stale. The
+           outer .cardPositioner wrapper stays untouched by this, so the
+           remount never perturbs this card's position in the grid. */
+        key={morphEnabled ? 'morph' : 'plain'}
+        layoutId={morphEnabled ? `card-${card.id}` : undefined}
+        layout
         className={styles.card}
         onClick={onOpen}
         transition={{ layout: LAYOUT_TRANSITION }}

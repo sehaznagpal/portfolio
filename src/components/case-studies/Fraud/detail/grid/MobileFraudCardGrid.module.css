@@ -6,6 +6,23 @@
   background-color: var(--bg-canvas);
 }
 
+/* Plain, unstyled — stays mounted continuously and never remounts, so it
+   never interrupts document flow/scroll. The card's real visual styling and
+   Framer layoutId both live on the motion.div inside it (see .card below),
+   which is free to remount independently without perturbing this button's
+   position in the flex list. */
+.cardButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  font: inherit;
+  appearance: none;
+  cursor: pointer;
+}
+
 .card {
   position: relative;
   display: block;

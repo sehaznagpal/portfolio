@@ -24,28 +24,48 @@ const PANEL_BODIES: Partial<Record<string, ComponentType>> = {
 const CARDS_WITH_CUSTOM_HEADING = new Set(['solution']);
 
 const LAYOUT_TRANSITION = { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const };
+const NAV_EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function MoolroopPanel({
   card,
+  direction = 0,
   onClose,
   onPrev,
   onNext,
 }: {
   card: CardDef;
+  direction?: number;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
 }) {
   const isMobile = useIsMobile();
   const { onTouchStart, onTouchEnd } = usePanelSwipe(isMobile, onPrev, onNext);
+  const isNavigating = direction !== 0;
 
   return (
     <motion.div
+      /* This instance always remounts fresh per card (see the CardGrid's
+         key={card.id} on this component), so reading isNavigating here is
+         always a fresh-mount read, never a live prop flip on an
+         already-mounted node — unlike MoolroopCardFace, there's no risk of
+         leaving a stale shared-layout registration behind. Suppressing
+         layoutId while navigating is what keeps this a plain directional
+         slide instead of a card<->panel morph; it's restored for the
+         open/close mount so those still get the shared-element transition. */
       layoutId={`card-${card.id}`}
-      layout="position"
+      layout
       className={styles.panel}
       transition={{ layout: LAYOUT_TRANSITION }}
-      exit={{ opacity: 0, transition: { duration: 0.15 } }}
+      initial={isNavigating ? { x: direction * 48, opacity: 0 } : false}
+      animate={
+        isNavigating ? { x: 0, opacity: 1, transition: { duration: 0.28, ease: NAV_EASE } } : undefined
+      }
+      exit={
+        isNavigating
+          ? { x: direction * -48, opacity: 0, transition: { duration: 0.22, ease: NAV_EASE } }
+          : { opacity: 0, transition: { duration: 0.15 } }
+      }
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
@@ -64,8 +84,8 @@ export default function MoolroopPanel({
       <motion.div
         key="panel"
         className={styles.panelInner}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.22 } }}
+        initial={isNavigating ? false : { opacity: 0 }}
+        animate={isNavigating ? { opacity: 1 } : { opacity: 1, transition: { duration: 0.3, delay: 0.22 } }}
       >
         {!CARDS_WITH_CUSTOM_HEADING.has(card.id) && <h2 className={styles.panelHeading}>{card.panelHeading}</h2>}
         {(() => {

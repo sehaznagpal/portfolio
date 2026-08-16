@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import FraudCardFace from './FraudCardFace';
 import FraudPanel from './FraudPanel';
@@ -8,17 +8,40 @@ import styles from './FraudCardGrid.module.css';
 
 export default function FraudCardGrid() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  /* ±1 while navigating to the next/previous card (drives FraudPanel's
+     directional slide); 0 while opening/closing (drives its card<->panel
+     morph instead). Cards only ever offer their layoutId for the morph while
+     no panel is open at all (see morphEnabled below), so a card can never be
+     mistaken for the panel's shared-element partner mid-nav. */
+  const [direction, setDirection] = useState(0);
+
+  const handleOpen = useCallback((i: number) => {
+    setDirection(0);
+    setOpenIndex(i);
+  }, []);
+  const handleClose = useCallback(() => {
+    setDirection(0);
+    setOpenIndex(null);
+  }, []);
+  const handleNext = useCallback(() => {
+    setDirection(1);
+    setOpenIndex((i) => (i === null ? i : (i + 1) % CARDS.length));
+  }, []);
+  const handlePrev = useCallback(() => {
+    setDirection(-1);
+    setOpenIndex((i) => (i === null ? i : (i - 1 + CARDS.length) % CARDS.length));
+  }, []);
 
   useEffect(() => {
     if (openIndex === null) return;
     function handleKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpenIndex(null);
-      if (e.key === 'ArrowRight') setOpenIndex((i) => (i === null ? i : (i + 1) % CARDS.length));
-      if (e.key === 'ArrowLeft') setOpenIndex((i) => (i === null ? i : (i - 1 + CARDS.length) % CARDS.length));
+      if (e.key === 'Escape') handleClose();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
     }
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [openIndex]);
+  }, [openIndex, handleClose, handleNext, handlePrev]);
 
   return (
     <div className={`${styles.viewport} grid-background`}>
@@ -27,7 +50,13 @@ export default function FraudCardGrid() {
           <div className={styles.canvas}>
             {CARDS.map((card, i) =>
               openIndex === i ? null : (
-                <FraudCardFace key={card.id} card={card} index={i} onOpen={() => setOpenIndex(i)} />
+                <FraudCardFace
+                  key={card.id}
+                  card={card}
+                  index={i}
+                  onOpen={() => handleOpen(i)}
+                  morphEnabled={openIndex === null}
+                />
               ),
             )}
           </div>
@@ -50,16 +79,17 @@ export default function FraudCardGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            onClick={() => setOpenIndex(null)}
+            onClick={handleClose}
           />
         )}
         {openIndex !== null && (
           <FraudPanel
             key={CARDS[openIndex].id}
             card={CARDS[openIndex]}
-            onClose={() => setOpenIndex(null)}
-            onPrev={() => setOpenIndex((openIndex - 1 + CARDS.length) % CARDS.length)}
-            onNext={() => setOpenIndex((openIndex + 1) % CARDS.length)}
+            direction={direction}
+            onClose={handleClose}
+            onPrev={handlePrev}
+            onNext={handleNext}
           />
         )}
       </AnimatePresence>
