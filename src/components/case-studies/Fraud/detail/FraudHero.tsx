@@ -22,8 +22,8 @@ export default function FraudHero() {
           <Link to="/" className={styles.portfolio}>
             Portfolio
           </Link>
-          <Link to="/case-study/moolroop" className={styles.nextCaseStudy}>
-            Next Case Study →
+          <Link to="/experiment-zone" className={styles.exploreZone}>
+            Explore Experiment Zone →
           </Link>
         </div>
 
@@ -31,12 +31,26 @@ export default function FraudHero() {
           <h1 className={styles.heading}>Dissertation</h1>
 
           <div className={styles.screens}>
+            <Link
+              to="/case-study/dr-cuterus"
+              className={`${styles.navArrow} ${styles.navArrowPrev}`}
+              aria-label="Previous case study"
+            >
+              &lt;
+            </Link>
             {HERO_SCREENS.map((screen) => (
               <div className={styles.phone} key={screen.alt}>
                 <img src={screen.src} alt={screen.alt} />
                 <div className={styles.notch} />
               </div>
             ))}
+            <Link
+              to="/case-study/moolroop"
+              className={`${styles.navArrow} ${styles.navArrowNext}`}
+              aria-label="Next case study"
+            >
+              &lt;
+            </Link>
           </div>
         </div>
 

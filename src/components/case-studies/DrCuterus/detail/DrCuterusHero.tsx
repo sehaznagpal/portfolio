@@ -13,8 +13,8 @@ export default function DrCuterusHero() {
           <Link to="/" className={styles.portfolio}>
             Portfolio
           </Link>
-          <Link to="/case-study/designing-against-fraud" className={styles.nextCaseStudy}>
-            Next Case Study →
+          <Link to="/experiment-zone" className={styles.exploreZone}>
+            Explore Experiment Zone →
           </Link>
         </div>
 
@@ -22,10 +22,24 @@ export default function DrCuterusHero() {
           <h1 className={styles.heading}>Website Design</h1>
 
           <div className={styles.screens}>
+            <Link
+              to="/case-study/moolroop"
+              className={`${styles.navArrow} ${styles.navArrowPrev}`}
+              aria-label="Previous case study"
+            >
+              &lt;
+            </Link>
             <div className={styles.screenshot}>
               <img src={homepageScreenshot} alt="Dr Cuterus homepage" />
               <div className={styles.notch} />
             </div>
+            <Link
+              to="/case-study/designing-against-fraud"
+              className={`${styles.navArrow} ${styles.navArrowNext}`}
+              aria-label="Next case study"
+            >
+              &lt;
+            </Link>
           </div>
         </div>
 

@@ -10,7 +10,7 @@
 }
 
 .portfolio,
-.nextCaseStudy {
+.exploreZone {
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
   font-size: 18px;
@@ -21,7 +21,7 @@
   white-space: nowrap;
 }
 
-.nextCaseStudy {
+.exploreZone {
   background: var(--moolroop-cream-80);
   padding: 4px 6px;
 }
