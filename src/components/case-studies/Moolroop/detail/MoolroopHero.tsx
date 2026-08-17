@@ -28,7 +28,7 @@ export default function MoolroopHero() {
         <div className={styles.main}>
           <h1 className={styles.heading}>MoolRoop App</h1>
 
-          <div className={styles.screens}>
+          <div className={styles.screensWrap}>
             <Link
               to="/case-study/designing-against-fraud"
               className={`${styles.navArrow} ${styles.navArrowPrev}`}
@@ -36,12 +36,14 @@ export default function MoolroopHero() {
             >
               &lt;
             </Link>
-            {HERO_SCREENS.map((screen) => (
-              <div className={styles.phone} key={screen.alt}>
-                <img src={screen.src} alt={screen.alt} />
-                <div className={styles.notch} />
-              </div>
-            ))}
+            <div className={styles.screens}>
+              {HERO_SCREENS.map((screen) => (
+                <div className={styles.phone} key={screen.alt}>
+                  <img src={screen.src} alt={screen.alt} />
+                  <div className={styles.notch} />
+                </div>
+              ))}
+            </div>
             <Link
               to="/case-study/dr-cuterus"
               className={`${styles.navArrow} ${styles.navArrowNext}`}

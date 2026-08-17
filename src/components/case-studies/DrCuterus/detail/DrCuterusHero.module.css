@@ -59,22 +59,29 @@
   white-space: nowrap;
 }
 
-.screens {
+.screensWrap {
   position: relative;
+  width: 100%;
+  max-width: 964px;
+}
+
+.screens {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 964px;
   height: 606px;
   background: rgba(18, 18, 18, 0.8);
   border: 1px solid #2c2c2c;
   overflow: hidden;
 }
 
+/* Sits outside .screens itself (which clips its own contents) so it reads
+   as flanking the graphic rather than perching on a corner of it. */
 .navArrow {
   position: absolute;
-  top: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 2;
   display: flex;
   align-items: center;
@@ -83,7 +90,6 @@
   height: 40px;
   background: #fefefe;
   border: 1px solid #121212;
-  border-radius: 50%;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-bold);
   font-size: 22px;
@@ -97,12 +103,26 @@
 }
 
 .navArrowPrev {
-  left: 16px;
+  left: -56px;
 }
 
 .navArrowNext {
-  right: 16px;
-  transform: scaleX(-1);
+  right: -56px;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+/* Below ~1100px, .screensWrap's own outer margin (it shrinks toward the
+   hero's own edge gutter as the viewport narrows) no longer clears the
+   -56px offset above without going off-screen — fall back to sitting just
+   inside the box instead of clipping past the viewport edge. */
+@media (max-width: 1100px) {
+  .navArrowPrev {
+    left: 16px;
+  }
+
+  .navArrowNext {
+    right: 16px;
+  }
 }
 
 .screenshot {

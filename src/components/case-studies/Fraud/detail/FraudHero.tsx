@@ -30,7 +30,7 @@ export default function FraudHero() {
         <div className={styles.main}>
           <h1 className={styles.heading}>Dissertation</h1>
 
-          <div className={styles.screens}>
+          <div className={styles.screensWrap}>
             <Link
               to="/case-study/dr-cuterus"
               className={`${styles.navArrow} ${styles.navArrowPrev}`}
@@ -38,12 +38,14 @@ export default function FraudHero() {
             >
               &lt;
             </Link>
-            {HERO_SCREENS.map((screen) => (
-              <div className={styles.phone} key={screen.alt}>
-                <img src={screen.src} alt={screen.alt} />
-                <div className={styles.notch} />
-              </div>
-            ))}
+            <div className={styles.screens}>
+              {HERO_SCREENS.map((screen) => (
+                <div className={styles.phone} key={screen.alt}>
+                  <img src={screen.src} alt={screen.alt} />
+                  <div className={styles.notch} />
+                </div>
+              ))}
+            </div>
             <Link
               to="/case-study/moolroop"
               className={`${styles.navArrow} ${styles.navArrowNext}`}

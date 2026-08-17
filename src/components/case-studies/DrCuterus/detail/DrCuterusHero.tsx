@@ -21,7 +21,7 @@ export default function DrCuterusHero() {
         <div className={styles.main}>
           <h1 className={styles.heading}>Website Design</h1>
 
-          <div className={styles.screens}>
+          <div className={styles.screensWrap}>
             <Link
               to="/case-study/moolroop"
               className={`${styles.navArrow} ${styles.navArrowPrev}`}
@@ -29,9 +29,11 @@ export default function DrCuterusHero() {
             >
               &lt;
             </Link>
-            <div className={styles.screenshot}>
-              <img src={homepageScreenshot} alt="Dr Cuterus homepage" />
-              <div className={styles.notch} />
+            <div className={styles.screens}>
+              <div className={styles.screenshot}>
+                <img src={homepageScreenshot} alt="Dr Cuterus homepage" />
+                <div className={styles.notch} />
+              </div>
             </div>
             <Link
               to="/case-study/designing-against-fraud"

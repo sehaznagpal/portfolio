@@ -20,6 +20,11 @@
   font-feature-settings: 'salt' 1;
 }
 
+.screensViewportWrap {
+  position: relative;
+  width: 100%;
+}
+
 /* Clipped to the screen width — only a partial slice of the wider strip
    inside is visible at once. useHeroCarousel auto-pans the strip through
    left/middle/right stops (and lets the user drag it directly), so which
@@ -32,6 +37,37 @@
   border-top: 1px solid #2c2c2c;
   border-bottom: 1px solid #2c2c2c;
   touch-action: none;
+}
+
+/* Sits on .screensViewportWrap (not .screensViewport, which clips its own
+   contents) so it stays visible regardless of the carousel's own scroll
+   position — pinned to the viewport's edge, vertically centered. */
+.navArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #fefefe;
+  border: 1px solid #121212;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-bold);
+  font-size: 18px;
+  line-height: 1;
+  color: #121212;
+}
+
+.navArrowPrev {
+  left: 12px;
+}
+
+.navArrowNext {
+  right: 12px;
+  transform: translateY(-50%) scaleX(-1);
 }
 
 .screensStrip {
