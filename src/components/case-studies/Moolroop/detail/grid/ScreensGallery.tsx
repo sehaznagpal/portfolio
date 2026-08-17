@@ -59,7 +59,13 @@ const GROUPS = [
   },
 ];
 
-export default function ScreensGallery({ onBack }: { onBack: () => void }) {
+export default function ScreensGallery({
+  onBack,
+  showBackButton = true,
+}: {
+  onBack: () => void;
+  showBackButton?: boolean;
+}) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -74,9 +80,11 @@ export default function ScreensGallery({ onBack }: { onBack: () => void }) {
   return (
     <>
       <h3 className={styles.heading}>{group.label}</h3>
-      <button type="button" className={styles.goBack} onClick={onBack}>
-        &larr;Go Back
-      </button>
+      {showBackButton && (
+        <button type="button" className={styles.goBack} onClick={onBack}>
+          &larr;Go Back
+        </button>
+      )}
 
       <div className={styles.dots}>
         {GROUPS.map((g, i) => (

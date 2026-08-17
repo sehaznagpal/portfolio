@@ -1,0 +1,30 @@
+.track {
+  position: fixed;
+  left: 50%;
+  bottom: var(--case-study-gutter);
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ghost {
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--chrome-bg);
+  background: #fefefe;
+}
+
+.marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--chrome-bg);
+  background: var(--moolroop-accent);
+}

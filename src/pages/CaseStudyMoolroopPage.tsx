@@ -1,8 +1,7 @@
 import { usePageMeta } from '../lib/usePageMeta';
 import { useIsMobile } from '../lib/useIsMobile';
 import productScreenImage from '../assets/images/moolroop/product-screen.jpg';
-import MoolroopHero from '../components/case-studies/Moolroop/detail/MoolroopHero';
-import MoolroopCardGrid from '../components/case-studies/Moolroop/detail/grid/MoolroopCardGrid';
+import MoolroopScrollytelling from '../components/case-studies/Moolroop/scrolly/MoolroopScrollytelling';
 import MobileMoolroopTopBar from '../components/case-studies/Moolroop/detail/MobileMoolroopTopBar';
 import MobileMoolroopHero from '../components/case-studies/Moolroop/detail/MobileMoolroopHero';
 import MobileMoolroopCardGrid from '../components/case-studies/Moolroop/detail/grid/MobileMoolroopCardGrid';
@@ -29,10 +28,7 @@ export default function CaseStudyMoolroopPage() {
           <MobileMoolroopStickyCTA />
         </>
       ) : (
-        <>
-          <MoolroopHero />
-          <MoolroopCardGrid />
-        </>
+        <MoolroopScrollytelling />
       )}
     </div>
   );

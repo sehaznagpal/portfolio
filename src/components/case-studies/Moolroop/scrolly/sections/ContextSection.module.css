@@ -1,0 +1,16 @@
+.section {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(88px, 11vh, 130px) var(--case-study-gutter) clamp(96px, 12vh, 140px);
+}
+
+.content {
+  width: min(900px, 68vw);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.8vh, 20px);
+}

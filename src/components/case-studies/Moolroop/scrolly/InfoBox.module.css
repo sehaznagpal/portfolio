@@ -1,0 +1,70 @@
+.box {
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(10px, 1vw, 16px);
+  border: 0.8px solid var(--chrome-bg);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2px, 0.4vw, 6px);
+}
+
+.white {
+  background: var(--moolroop-cream-80);
+}
+
+.yellow {
+  background: rgba(217, 206, 106, 0.8);
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: clamp(15px, 1.1vw, 20px);
+  line-height: 1.15;
+  color: var(--moolroop-accent);
+  font-feature-settings: 'salt' 1;
+}
+
+.body {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: clamp(13px, 0.95vw, 18px);
+  line-height: 1.35;
+  color: var(--chrome-bg);
+  font-feature-settings: 'salt' 1;
+}
+
+.body p {
+  margin: 0 0 clamp(6px, 0.6vw, 10px);
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.body ul {
+  margin: 0;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.body li {
+  margin-bottom: clamp(2px, 0.3vw, 4px);
+}
+
+.body li:last-child {
+  margin-bottom: 0;
+}
+
+.body strong {
+  font-weight: var(--bricolage-bold);
+}
+
+.body a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

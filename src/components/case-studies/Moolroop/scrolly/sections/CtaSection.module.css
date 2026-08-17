@@ -1,0 +1,50 @@
+.section {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(88px, 11vh, 130px) var(--case-study-gutter) clamp(96px, 12vh, 140px);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vh, 40px);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(6px, 0.9vw, 8px) clamp(12px, 1.6vw, 16px);
+  border: 1px solid var(--chrome-bg);
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: clamp(18px, 2vw, 32px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--chrome-bg);
+  text-decoration: none;
+  white-space: nowrap;
+  font-feature-settings: 'salt' 1;
+  transition: opacity 150ms ease-out;
+}
+
+.button:hover {
+  opacity: 0.75;
+}
+
+/* Figma-specified accents for the two sibling case studies — no shared
+   design token exists for either yet (only --drcuterus-lavender is close
+   to the Dr Cuterus one; the sky blue has no token at all), so both are
+   scoped locally here rather than added to the shared tokens file. */
+.drCuterus {
+  background: var(--drcuterus-lavender);
+}
+
+.dissertation {
+  background: #b2ceff;
+}

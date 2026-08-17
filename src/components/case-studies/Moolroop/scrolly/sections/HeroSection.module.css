@@ -1,0 +1,77 @@
+.hero {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1vw, 11px);
+  padding: clamp(88px, 11vh, 130px) var(--case-study-gutter) clamp(96px, 12vh, 140px);
+}
+
+.tag {
+  margin: 0;
+  padding: clamp(4px, 0.5vw, 6px) clamp(10px, 1.2vw, 16px);
+  background: var(--moolroop-yellow);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-regular);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-size: clamp(15px, 1.6vw, 28px);
+  color: var(--chrome-bg);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.screens {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.6vw, 36px);
+  width: min(747px, 58vw);
+  height: min(469px, 42vh);
+  background: var(--moolroop-cream-80);
+  border: 0.8px solid var(--chrome-bg);
+  margin-bottom: clamp(-40px, -3.4vw, -20px);
+  overflow: hidden;
+}
+
+.phone {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(180px, 13.5vw);
+  height: min(390px, 36vh);
+  border: 0.75px solid var(--chrome-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42%;
+  height: 9px;
+  background: var(--chrome-bg);
+  border-radius: 0 0 10px 10px;
+}
+
+.heading {
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-medium);
+  font-size: clamp(52px, 7.8vw, 114px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--card-fill);
+  white-space: nowrap;
+}

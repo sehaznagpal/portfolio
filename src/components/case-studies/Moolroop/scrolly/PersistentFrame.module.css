@@ -1,0 +1,41 @@
+.portfolio {
+  position: fixed;
+  top: var(--case-study-gutter);
+  left: var(--case-study-gutter);
+  z-index: 60;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: clamp(16px, 1.4vw, 24px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--chrome-bg);
+  font-feature-settings: 'salt' 1;
+  text-decoration: none;
+  transition: opacity 150ms ease-out;
+}
+
+.portfolio:hover {
+  opacity: 0.7;
+}
+
+/* Repositions the unmodified <ExploreBeyondLink/> (which bakes in its own
+   position:absolute; bottom:36px; right:47.51px, tuned for a full-viewport
+   ancestor on the home hero) to this page's top-right instead, without
+   touching the component's own files: this shim is the positioned ancestor,
+   72px tall from the true viewport top, so the link's own bottom:36px
+   offset lands it exactly 36px from the true top — the same inset the
+   Portfolio link above uses. Shim itself ignores pointer events so it can't
+   create a dead click zone; only the link's own anchor re-enables them. */
+.exploreBeyondShim {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 72px;
+  width: min(420px, 45vw);
+  z-index: 60;
+  pointer-events: none;
+}
+
+.exploreBeyondShim a {
+  pointer-events: auto;
+}

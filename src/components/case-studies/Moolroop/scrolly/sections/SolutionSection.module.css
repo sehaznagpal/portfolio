@@ -1,0 +1,54 @@
+.section {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(88px, 11vh, 130px) var(--case-study-gutter) clamp(96px, 12vh, 140px);
+}
+
+.content {
+  width: min(900px, 68vw);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 1.8vh, 20px);
+}
+
+.actionButton {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3px, 0.4vw, 4px) clamp(9px, 1vw, 12px);
+  background: #fefefe;
+  border: 1px solid var(--chrome-bg);
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: clamp(14px, 1.4vw, 24px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--card-fill);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 150ms ease-out;
+  font-feature-settings: 'salt' 1;
+}
+
+.actionButton:hover {
+  opacity: 0.7;
+}
+
+.decisionList {
+  margin: 0;
+  padding-left: 1.2em;
+  list-style: disc;
+}
+
+.decisionList li {
+  margin-bottom: clamp(2px, 0.3vw, 4px);
+}
+
+.decisionList li:last-child {
+  margin-bottom: 0;
+}

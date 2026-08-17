@@ -1,0 +1,31 @@
+.section {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2vh, 24px);
+  padding: clamp(88px, 11vh, 130px) var(--case-study-gutter) clamp(96px, 12vh, 140px);
+}
+
+.header {
+  width: min(900px, 68vw);
+}
+
+/* Reproduces MoolroopCard.module.css's exact .panel formula — ScreensGallery's
+   internal layout (heading/dots/edge-zones/mockup row) is calibrated in %
+   against this specific 1020:663 dark box and only renders correctly at
+   that shape. */
+.galleryFrame {
+  position: relative;
+  box-sizing: border-box;
+  width: min(1020px, 78vw, calc(60vh * 1020 / 663));
+  aspect-ratio: 1020 / 663;
+  border-radius: 28px;
+  border: 2px solid rgba(108, 108, 108, 0.8);
+  background: var(--chrome-bg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
