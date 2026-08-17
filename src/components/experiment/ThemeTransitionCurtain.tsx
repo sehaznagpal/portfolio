@@ -4,7 +4,7 @@ import { THEME_OPTIONS } from '../../state/ThemeContext';
 import type { ThemeName } from '../../types';
 import styles from './ThemeTransitionCurtain.module.css';
 
-const CURTAIN_TRANSITION = { duration: 0.32, ease: [0.22, 1, 0.36, 1] as const };
+const CURTAIN_TRANSITION = { duration: 0.64, ease: [0.32, 1, 0.46, 1] as const };
 
 function colorFor(theme: ThemeName): string {
   const option = THEME_OPTIONS.find((candidate) => candidate.id === theme);
