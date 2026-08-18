@@ -10,7 +10,7 @@
   transform: translateY(-100%);
   /* Site's signature cinematic ease-out (see AboutModal's .panel) —
      decelerating smoothly into place, no overshoot, fast and effortless. */
-  animation: sweepIn 924ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: sweepIn 462ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes sweepIn {

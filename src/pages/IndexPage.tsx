@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useIsMobile } from '../lib/useIsMobile';
 import { usePageMeta } from '../lib/usePageMeta';
+import aboutPhoto from '../assets/images/chrome/about-photo.png';
 import MobileIndexContent from './MobileIndexContent';
 import ViewportFrame from '../components/viewport/ViewportFrame';
 import Loader from '../components/loader/Loader';
@@ -84,7 +85,7 @@ export default function IndexPage() {
     title: 'Sehaz Nagpal | Product Designer Portfolio',
     description:
       'Portfolio of Sehaz Nagpal, a product designer intrigued by why people do what they do. Case studies on the MoolRoop app, the Dr Cuterus website, and a behavioural-economics dissertation on payment fraud.',
-    image: '/og-image.jpg',
+    image: aboutPhoto,
   });
 
   useEffect(() => {
