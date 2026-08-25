@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Star, Pencil, Mail, Download } from 'lucide-react';
 import styles from './ExperimentToolbar.module.css';
 
-const CV_FILE_ID = '1DG9Kz_JagqTd-FbDnnfkIHc9a2UfJ0HD';
+const CV_FILE_ID = '1Z8gec-K0UeJ7NIbiG6K-sQZn48nakXn0';
 const CV_URL = `https://drive.google.com/uc?export=download&id=${CV_FILE_ID}`;
 const MAIL_SUBJECT = 'Re-directed from your portfolio';
 const MAIL_BODY =

@@ -8,7 +8,7 @@ import aboutPhoto from '../../assets/images/chrome/about-photo.png';
    finishes before the component unmounts. */
 const EXIT_MS = 300;
 
-const CV_FILE_ID = '1DG9Kz_JagqTd-FbDnnfkIHc9a2UfJ0HD';
+const CV_FILE_ID = '1Z8gec-K0UeJ7NIbiG6K-sQZn48nakXn0';
 const CV_URL = `https://drive.google.com/uc?export=download&id=${CV_FILE_ID}`;
 const MAIL_SUBJECT = 'Re-directed from your portfolio';
 const MAIL_BODY =
