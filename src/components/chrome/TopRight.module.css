@@ -3,7 +3,7 @@
   top: 36px;
   right: 36px;
   z-index: 10;
-  background: #fefefe;
+  background: var(--accent-green);
   border-radius: 4px;
   box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.25);
   padding: 8px;
@@ -56,7 +56,7 @@
 
 .share {
   flex-shrink: 0;
-  background: var(--accent-green);
+  background: #fefefe;
   padding: 4px 6px;
   border-radius: 8px;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
@@ -72,7 +72,7 @@
 }
 
 .share:hover {
-  background: #b5dc5c;
+  background: #e8e8e8;
 }
 
 .themeToggle {
