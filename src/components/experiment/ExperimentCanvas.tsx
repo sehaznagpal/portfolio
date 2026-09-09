@@ -42,7 +42,15 @@ const MIN_BASE_SCALE = 0.65;
    keeps Normal view from reading as mostly-empty grid on large ones. */
 const WORLD_MULTIPLIER = 1.65;
 const CONTENT_WIDTH = 1950;
-const CONTENT_HEIGHT = 1380;
+/* Tall enough that the meWrap photo cluster (Positioned dy=437.6, desktop
+   DESKTOP_SPREAD 1.16, meWrap's own 583px height at the 1.12 desktop scale
+   bump) can always be panned fully into view. Its lowest point sits 834px
+   below world-center on desktop — the previous 1380 gave only ±690px of
+   pan-clamped reach, permanently clipping ~90-150px off its bottom on
+   common window heights (verified via getBoundingClientRect at max pan).
+   1700 clears that with margin on both desktop and mobile (mobile's own
+   unspread, unscaled cluster needs less, ~729px from center). */
+const CONTENT_HEIGHT = 1700;
 /* Mobile's raw fit-to-viewport scale renders everything much smaller than
    the Figma mobile reference, which shows cards/icons at a deliberately
    larger, more zoomed-in size than an exact 1440x900 fit gives. This boosts
