@@ -18,6 +18,12 @@ import wineGlass from '../../assets/images/experiment/extras-modal/wine-glass.pn
 import bedScene from '../../assets/images/experiment/extras-modal/bed-scene.png';
 
 const EXIT_MS = 200;
+const SCROLL_ANIMATION_MS = 420;
+/* Cubic ease-out — matches the feel of the native smooth-scroll this
+   replaces. */
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
 
 const CARDS = [
   { src: extrasCardImg, alt: 'Extras' },
@@ -39,10 +45,10 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
   const [rendered, setRendered] = useState(open);
   const [visible, setVisible] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  /* Remembers where the carousel was scrolled to across closes/reopens —
-     the track's own DOM node (and its scrollLeft) is torn down each time
-     the modal unmounts, so the position has to live outside it. */
-  const scrollPosRef = useRef(0);
+  /* Drives scrollByCard's own scroll animation (see below for why native
+     smooth-scroll isn't used) — held in a ref so a new arrow click can
+     cancel whichever animation is still in flight. */
+  const scrollAnimationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(null);
 
   useEffect(() => {
     if (open) {
@@ -60,20 +66,28 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
 
   useEffect(() => {
     if (!rendered) return;
-    /* Re-applied across several frames rather than once — the track's
-       scrollWidth isn't reliably final on the very first frame (images are
-       still decoding/laying out), so a single assignment can get silently
-       clamped back to 0 before the real width is known. Runs independently
-       of the fade/scale reveal so the open animation itself stays snappy. */
+    /* Always reopens on the first card, regardless of where it was left
+       last time — reapplied across several frames rather than once, since
+       the track's scrollWidth isn't reliably final on the very first frame
+       (images are still decoding/laying out), so a single assignment can
+       get silently clamped before layout settles. Runs independently of the
+       fade/scale reveal so the open animation itself stays snappy. */
+    if (scrollAnimationRef.current !== null) {
+      cancelAnimationFrame(scrollAnimationRef.current);
+      scrollAnimationRef.current = null;
+    }
     let frame: ReturnType<typeof requestAnimationFrame>;
     let attempts = 0;
-    function restoreScroll() {
-      if (trackRef.current) trackRef.current.scrollLeft = scrollPosRef.current;
+    function resetScroll() {
+      if (trackRef.current) trackRef.current.scrollLeft = 0;
       attempts += 1;
-      if (attempts < 10) frame = requestAnimationFrame(restoreScroll);
+      if (attempts < 10) frame = requestAnimationFrame(resetScroll);
     }
-    frame = requestAnimationFrame(restoreScroll);
-    return () => cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(resetScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      if (scrollAnimationRef.current !== null) cancelAnimationFrame(scrollAnimationRef.current);
+    };
   }, [rendered]);
 
   useEffect(() => {
@@ -87,14 +101,34 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
 
   if (!rendered) return null;
 
-  function handleScroll() {
-    if (trackRef.current) scrollPosRef.current = trackRef.current.scrollLeft;
-  }
-
   function scrollByCard(direction: 1 | -1) {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction * el.clientWidth * 0.7, behavior: 'smooth' });
+
+    /* Animated by hand rather than el.scrollBy({behavior: 'smooth'}) —
+       .track is overflow-x: hidden (arrows are its only means of movement;
+       see .track's own comment), and Chromium silently no-ops native
+       smooth-scroll on a hidden-overflow element instead of animating it,
+       so scrollBy left the arrows appearing to do nothing. Direct scrollLeft
+       assignment isn't subject to that, so the animation is driven that way
+       instead, at the same distance and easing feel as the native version
+       it replaces. */
+    if (scrollAnimationRef.current !== null) cancelAnimationFrame(scrollAnimationRef.current);
+
+    const start = el.scrollLeft;
+    const delta = direction * el.clientWidth * 0.7;
+    const startTime = performance.now();
+
+    function step(now: number) {
+      const t = Math.min(1, (now - startTime) / SCROLL_ANIMATION_MS);
+      el!.scrollLeft = start + delta * easeOutCubic(t);
+      if (t < 1) {
+        scrollAnimationRef.current = requestAnimationFrame(step);
+      } else {
+        scrollAnimationRef.current = null;
+      }
+    }
+    scrollAnimationRef.current = requestAnimationFrame(step);
   }
 
   return createPortal(
@@ -129,7 +163,7 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
           <ChevronRight size={20} strokeWidth={1.75} />
         </button>
 
-        <div className={styles.track} ref={trackRef} onScroll={handleScroll}>
+        <div className={styles.track} ref={trackRef}>
           {CARDS.map((card) => (
             <div key={card.alt} className={styles.card}>
               <img src={card.src} alt={card.alt} />
