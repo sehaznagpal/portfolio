@@ -33,7 +33,7 @@
 .screensViewport {
   width: 100%;
   overflow: hidden;
-  background: var(--dissertation-navy-15);
+  background: var(--dissertation-navy-80);
   border-top: 1px solid #2c2c2c;
   border-bottom: 1px solid #2c2c2c;
   touch-action: none;
@@ -128,19 +128,29 @@
    Experiment Zone — and, in turn, the home hero's mobile "About"/"Explore
    Beyond the Case Studies" links (20px) — so all four hero buttons read as
    one consistent size. */
+/* Rest state matches the MoolRoop hero's exploreButton exactly (dark grey
+   fill, off-white text). Hover fills with this case study's own secondary
+   accent — the same light blue (#c6dbff) used for every tab heading in
+   this case study — with dark text swapped in for legibility. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
-  background: #fefefe;
+  background: #121212;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
   font-size: 20px;
   line-height: 1;
   letter-spacing: -0.8px;
-  color: #121212;
+  color: rgba(254, 254, 254, 0.8);
   font-feature-settings: 'salt' 1;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+
+.exploreButton:hover {
+  background: #c6dbff;
+  color: #121212;
 }
 
 .caption {

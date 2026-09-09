@@ -33,7 +33,7 @@
 .screensViewport {
   width: 100%;
   overflow: hidden;
-  background: var(--moolroop-yellow-15);
+  background: var(--moolroop-yellow-80);
   border-top: 1px solid #2c2c2c;
   border-bottom: 1px solid #2c2c2c;
   touch-action: none;
@@ -119,6 +119,9 @@
    Experiment Zone — and, in turn, the home hero's mobile "About"/"Explore
    Beyond the Case Studies" links (20px) — so all four hero buttons read as
    one consistent size. */
+/* Hover fills with this case study's own secondary accent — the same red
+   used for every .highlight in this case study's tab content — with white
+   text swapped in for legibility against that fill. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
@@ -132,6 +135,12 @@
   letter-spacing: -0.8px;
   color: var(--moolroop-cream-80);
   font-feature-settings: 'salt' 1;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+
+.exploreButton:hover {
+  background: var(--moolroop-accent);
+  color: #fefefe;
 }
 
 .caption {

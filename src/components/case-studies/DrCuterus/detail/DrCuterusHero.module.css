@@ -92,7 +92,7 @@
   justify-content: center;
   width: 100%;
   height: 606px;
-  background: var(--drcuterus-purple-15);
+  background: var(--drcuterus-purple-80);
   border: 1px solid #2c2c2c;
   overflow: hidden;
 }
@@ -179,24 +179,30 @@
 /* font-size/letter-spacing match .portfolio/.exploreZone — and, in turn,
    the home hero's "About"/"Explore Beyond the Case Studies" links (24px,
    -0.96px) — so all four hero buttons read as one consistent size. */
+/* Rest state matches the MoolRoop hero's exploreButton exactly (dark grey
+   fill, off-white text) — the shared baseline across all three case
+   studies. Hover fills with this case study's own secondary accent — the
+   same light purple used for every tab heading in this case study — with
+   dark text swapped in for legibility against that lighter fill. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 12px 20px;
-  background: var(--drcuterus-lavender);
+  background: #121212;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
   font-size: 24px;
   line-height: 1;
   letter-spacing: -0.96px;
-  color: #121212;
+  color: rgba(254, 254, 254, 0.8);
   font-feature-settings: 'salt' 1;
-  transition: opacity 150ms ease-out;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
 }
 
 .exploreButton:hover {
-  opacity: 0.85;
+  background: var(--drcuterus-lavender);
+  color: #121212;
 }
 
 .caption {
