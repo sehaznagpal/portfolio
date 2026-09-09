@@ -84,9 +84,10 @@
    the media query). Wrapping (no more white-space: nowrap) is also part of
    the tab's overflow fix: at narrow widths a nowrap heading could run past
    its own half-width column. */
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .subheading {
   margin: 0;
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;
@@ -142,11 +143,15 @@
   align-items: center;
 }
 
+/* Matches the shared body-copy clamp used by .lensItem and every other tab
+   (was a smaller, one-off clamp) — standardized so this tab's own two
+   columns, and this tab against the other four, all read as one consistent
+   body-text size. */
 .casesText {
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-light);
-  font-size: clamp(12px, min(1.51vw, 2.33vh), 18px);
+  font-size: clamp(14px, min(1.81vw, 2.79vh), 21px);
   line-height: 1.1;
   text-align: center;
   color: #fefefe;
@@ -237,7 +242,7 @@
   }
 
   .casesText {
-    font-size: clamp(14px, 3.7vw, 17px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
   }
 }

@@ -55,9 +55,10 @@
 
 /* Demoted from a full 42px heading to the same subheading size/weight/
    color used across all five tabs (see TopicPanelBody's own comment). */
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .subheading {
   margin: 0;
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;

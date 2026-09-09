@@ -29,9 +29,10 @@
 /* Label ceiling (24px) and floor (16px) keep the same ~1.14x ratio over
    the shared body-copy size below, so the label reads as a heading a
    notch above the answer text rather than a fixed, unrelated size. */
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .qLabel {
   margin: 0;
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   font-size: clamp(16px, min(2.07vw, 3.19vh), 24px);
   line-height: 1.1;
   text-align: center;

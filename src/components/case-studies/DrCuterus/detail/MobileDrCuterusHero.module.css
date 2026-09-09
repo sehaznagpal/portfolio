@@ -1,5 +1,5 @@
 .hero {
-  background: var(--drcuterus-purple);
+  background: var(--bg-canvas);
   padding: 28px 0 32px;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   font-size: clamp(40px, 11vw, 56px);
   line-height: 1;
   letter-spacing: -0.04em;
-  color: #fefefe;
+  color: #2c2c2c;
   font-feature-settings: 'salt' 1;
 }
 
@@ -33,7 +33,7 @@
 .screensViewport {
   width: 100%;
   overflow: hidden;
-  background: rgba(18, 18, 18, 0.8);
+  background: var(--drcuterus-purple);
   border-top: 1px solid #2c2c2c;
   border-bottom: 1px solid #2c2c2c;
   touch-action: none;
@@ -115,6 +115,9 @@
   border-radius: 0 0 12px 12px;
 }
 
+/* font-size/letter-spacing match the mobile top bar's Portfolio/Explore
+   Experiment Zone (the only other hero clickables not being resized here)
+   so all four hero buttons read as one consistent size. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
@@ -123,9 +126,9 @@
   background: var(--drcuterus-lavender);
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1;
-  letter-spacing: -0.88px;
+  letter-spacing: -0.72px;
   color: #121212;
   font-feature-settings: 'salt' 1;
 }
@@ -139,6 +142,6 @@
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   font-size: 15px;
   line-height: 1.3;
-  color: #fefefe;
+  color: #121212;
   font-feature-settings: 'salt' 1;
 }

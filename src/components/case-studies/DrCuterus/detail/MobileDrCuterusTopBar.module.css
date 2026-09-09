@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px var(--case-study-gutter);
-  background: var(--drcuterus-purple);
+  background: var(--bg-canvas);
 }
 
 .portfolio,
@@ -16,7 +16,7 @@
   font-size: 18px;
   line-height: 1;
   letter-spacing: -0.72px;
-  color: #fefefe;
+  color: #121212;
   font-feature-settings: 'salt' 1;
   white-space: nowrap;
 }

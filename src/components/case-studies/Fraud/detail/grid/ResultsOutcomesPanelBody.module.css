@@ -57,9 +57,10 @@
    color used across all five tabs (see TopicPanelBody's own comment) — the
    two former headings now read as subsections under one consolidated main
    heading ("What I concluded") instead of two competing headings. */
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .subheading {
   margin: 0;
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;

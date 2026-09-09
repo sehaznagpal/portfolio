@@ -72,9 +72,10 @@
 /* Demoted from a full 42px heading to the same subheading size/weight/
    color used across all five tabs (see TopicPanelBody's own comment) —
    content and every other element on this tab are untouched. */
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .subheading {
   margin: 0;
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;
@@ -180,13 +181,15 @@
     margin-top: 20px;
   }
 
+  /* Matches the mobile body-text clamp used by the other four tabs (was a
+     one-off larger clamp) so this tab reads at the same size as the rest. */
   .intro,
   .methodIntro,
   .methodOutro {
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(15px, 4vw, 18px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
     margin-top: 12px;
   }
@@ -195,7 +198,7 @@
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(15px, 4vw, 18px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
     padding-left: 24px;
     margin-top: 12px;

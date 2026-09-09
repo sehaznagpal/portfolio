@@ -91,8 +91,9 @@
   margin-bottom: 0;
 }
 
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .qLabel {
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   color: var(--moolroop-accent);
 }
 
@@ -188,12 +189,14 @@
     font-size: clamp(24px, 7vw, 30px);
   }
 
+  /* Matches the mobile body-text clamp used by the other four tabs (was a
+     one-off larger clamp) so this tab reads at the same size as the rest. */
   .solutionText,
   .reflectionText {
     position: static;
     width: 100%;
     text-align: left;
-    font-size: clamp(15px, 4vw, 18px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
   }
 

@@ -64,11 +64,15 @@
 }
 
 @media (max-width: 767px) {
+  /* Matches the mobile body-text clamp used by the other four tabs (.intro
+     was a one-off larger clamp; .principles was a near-miss at 3.7vw) so
+     this tab's own two blocks, and this tab against the other four, all
+     read as one consistent size. */
   .intro {
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(15px, 4vw, 18px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
   }
 
@@ -76,7 +80,7 @@
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(14px, 3.7vw, 17px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
     margin-top: 20px;
   }

@@ -1,5 +1,5 @@
 .hero {
-  background: var(--dissertation-navy);
+  background: var(--bg-canvas);
   padding: 32px var(--case-study-gutter);
 }
 
@@ -25,7 +25,7 @@
   font-size: 32px;
   line-height: 1;
   letter-spacing: -1.28px;
-  color: #fefefe;
+  color: #121212;
   font-feature-settings: 'salt' 1;
 }
 
@@ -54,7 +54,7 @@
   font-size: clamp(88px, 11.5vw, 148px);
   line-height: 1;
   letter-spacing: -0.04em;
-  color: #fefefe;
+  color: #2c2c2c;
   font-feature-settings: 'salt' 1;
   white-space: nowrap;
 }
@@ -72,7 +72,7 @@
   gap: 46px;
   width: 100%;
   height: 606px;
-  background: rgba(18, 18, 18, 0.8);
+  background: var(--dissertation-navy);
   border: 1px solid #2c2c2c;
   overflow: hidden;
 }
@@ -160,6 +160,10 @@
   gap: 56px;
 }
 
+/* font-size/letter-spacing match .portfolio/.exploreZone's own 32px —
+   the only other hero clickables not being resized here — so all four hero
+   buttons (both .exploreButton links plus those two) read as one consistent
+   size instead of this one standing out larger. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
@@ -168,9 +172,9 @@
   background: #fefefe;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1;
-  letter-spacing: -1.44px;
+  letter-spacing: -1.28px;
   color: #121212;
   font-feature-settings: 'salt' 1;
   transition: opacity 150ms ease-out;
@@ -187,7 +191,7 @@
   font-variation-settings: 'opsz' 14, 'wdth' 100;
   font-size: 28px;
   line-height: 1;
-  color: #fefefe;
+  color: #121212;
   font-feature-settings: 'salt' 1;
 }
 
@@ -199,19 +203,22 @@
   gap: 4px;
 }
 
+/* font-weight is author-medium (495) minus 200 = 295 — .summaryLabel below
+   overrides its own span back to full author-semibold, so only the
+   surrounding content text (not the Question:/Answer: labels) gets lighter. */
 .summaryLine {
   margin: 0;
   font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-medium);
+  font-weight: 295;
   font-style: normal;
   font-size: 20px;
   line-height: 1.4;
   text-align: left;
-  color: #fefefe;
+  color: #121212;
   font-feature-settings: 'salt' 1;
 }
 
 .summaryLabel {
   font-weight: var(--author-semibold);
-  color: var(--dissertation-yellow);
+  color: var(--dissertation-navy);
 }

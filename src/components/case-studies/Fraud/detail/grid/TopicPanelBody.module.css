@@ -54,9 +54,10 @@
    the site's standard white (#fefefe, same as this tab's own body copy),
    not a separate accent — only the main heading keeps its own light
    blue/lavender. */
+/* font-weight is author-semibold (596) minus 200 = 396. */
 .subheading {
   margin: 0;
-  font-weight: var(--author-semibold);
+  font-weight: 396;
   font-size: clamp(17px, min(2.24vw, 3.45vh), 26px);
   line-height: 1.15;
   text-align: center;

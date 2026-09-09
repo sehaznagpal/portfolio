@@ -65,11 +65,13 @@
 }
 
 @media (max-width: 767px) {
+  /* Matches the mobile body-text clamp used by the other four tabs (was a
+     one-off larger clamp) so this tab reads at the same size as the rest. */
   .body {
     position: static;
     width: 100%;
     transform: none;
-    font-size: clamp(15px, 4vw, 18px);
+    font-size: clamp(14px, 3.8vw, 17px);
     line-height: 1.35;
   }
 
