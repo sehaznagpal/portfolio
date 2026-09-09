@@ -67,8 +67,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: none;
-  background: rgba(243, 241, 237, 0.15);
+  border: 1.5px solid #f3f1ed;
+  background: #2b2b2b;
   color: #f3f1ed;
   display: flex;
   align-items: center;
@@ -78,7 +78,7 @@
 }
 
 .navButton:hover {
-  background: rgba(243, 241, 237, 0.28);
+  background: #3d3d3d;
 }
 
 .navLeft {
@@ -95,7 +95,10 @@
   align-items: center;
   gap: 18px;
   padding: 40px 48px;
-  overflow-x: auto;
+  /* hidden (not auto) so the track can still be moved programmatically via
+     scrollBy (the nav arrows), but wheel/touch/drag gestures can't move it
+     directly — arrows are the sole way to navigate. */
+  overflow-x: hidden;
   scroll-snap-type: x proximity;
   scrollbar-width: none;
 }
@@ -117,18 +120,6 @@
   width: auto;
   max-width: none;
   display: block;
-}
-
-.scrollHint {
-  position: absolute;
-  bottom: 18px;
-  left: 28px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 12px;
-  color: #f3f1ed;
-  opacity: 0.55;
-  margin: 0;
-  pointer-events: none;
 }
 
 @media (max-width: 640px) {

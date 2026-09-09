@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useEffect, useRef, useState, type WheelEvent as ReactWheelEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './ExtrasModal.module.css';
 
@@ -87,12 +87,6 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
 
   if (!rendered) return null;
 
-  function handleWheel(event: ReactWheelEvent<HTMLDivElement>) {
-    const el = trackRef.current;
-    if (!el) return;
-    el.scrollLeft += Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-  }
-
   function handleScroll() {
     if (trackRef.current) scrollPosRef.current = trackRef.current.scrollLeft;
   }
@@ -135,15 +129,13 @@ export default function ExtrasModal({ open, onClose }: { open: boolean; onClose:
           <ChevronRight size={20} strokeWidth={1.75} />
         </button>
 
-        <div className={styles.track} ref={trackRef} onWheel={handleWheel} onScroll={handleScroll}>
+        <div className={styles.track} ref={trackRef} onScroll={handleScroll}>
           {CARDS.map((card) => (
             <div key={card.alt} className={styles.card}>
               <img src={card.src} alt={card.alt} />
             </div>
           ))}
         </div>
-
-        <p className={styles.scrollHint}>Scroll to explore →</p>
       </div>
     </div>,
     document.body,
