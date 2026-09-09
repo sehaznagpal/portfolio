@@ -9,20 +9,45 @@
   background: var(--bg-canvas);
 }
 
+/* font-size/letter-spacing match the home hero's mobile "About"/"Explore
+   Beyond the Case Studies" links exactly (20px, -0.8px). */
 .portfolio,
 .exploreZone {
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
-  letter-spacing: -0.72px;
+  letter-spacing: -0.8px;
   color: #121212;
   font-feature-settings: 'salt' 1;
   white-space: nowrap;
 }
 
 .exploreZone {
+  position: relative;
   background: rgba(254, 254, 254, 0.8);
   color: #121212;
   padding: 4px 6px;
+  overflow: hidden;
+}
+
+/* Same green fill-sweep hover as the home hero's ExploreBeyondLink/
+   AboutModalLink (.fill) — a scaleX transform, reusing that exact mechanic
+   instead of a new hover treatment. */
+.exploreZoneFill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-green);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.exploreZone:hover .exploreZoneFill {
+  transform: scaleX(1);
+}
+
+.exploreZoneLabel {
+  position: relative;
 }

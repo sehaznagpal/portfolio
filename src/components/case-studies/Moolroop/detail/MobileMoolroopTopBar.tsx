@@ -11,7 +11,8 @@ export default function MobileMoolroopTopBar() {
         Portfolio
       </Link>
       <Link to="/experiment-zone" className={styles.exploreZone}>
-        Explore Experiment Zone →
+        <span className={styles.exploreZoneFill} aria-hidden="true" />
+        <span className={styles.exploreZoneLabel}>Explore Experiment Zone →</span>
       </Link>
     </div>
   );

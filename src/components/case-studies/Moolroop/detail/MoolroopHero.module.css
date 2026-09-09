@@ -18,25 +18,46 @@
   width: 100%;
 }
 
+/* font-size/letter-spacing match the home hero's "About"/"Explore Beyond
+   the Case Studies" links exactly (24px, -0.96px = the same -0.04em
+   tracking convention used throughout). */
 .portfolio,
 .exploreZone {
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1;
-  letter-spacing: -1.28px;
+  letter-spacing: -0.96px;
   color: #121212;
   font-feature-settings: 'salt' 1;
 }
 
 .exploreZone {
+  position: relative;
   background: var(--moolroop-cream-80);
   padding: 4px;
-  transition: opacity 150ms ease-out;
+  overflow: hidden;
 }
 
-.exploreZone:hover {
-  opacity: 0.7;
+/* Same green fill-sweep hover as the home hero's ExploreBeyondLink/
+   AboutModalLink (.fill) — a scaleX transform, not a color/opacity swap,
+   reusing that exact mechanic instead of a new hover treatment. */
+.exploreZoneFill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-green);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.exploreZone:hover .exploreZoneFill {
+  transform: scaleX(1);
+}
+
+.exploreZoneLabel {
+  position: relative;
 }
 
 .main {
@@ -71,7 +92,7 @@
   gap: 46px;
   width: 100%;
   height: 606px;
-  background: var(--moolroop-yellow);
+  background: var(--moolroop-yellow-15);
   border: 1px solid #2c2c2c;
   overflow: hidden;
 }
@@ -153,10 +174,9 @@
   border-radius: 0 0 15px 15px;
 }
 
-/* font-size/letter-spacing match .portfolio/.exploreZone's own 32px —
-   the only other hero clickable not being resized here — so all four hero
-   buttons read as one consistent size instead of this one standing out
-   larger. */
+/* font-size/letter-spacing match .portfolio/.exploreZone — and, in turn,
+   the home hero's "About"/"Explore Beyond the Case Studies" links (24px,
+   -0.96px) — so all four hero buttons read as one consistent size. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
@@ -165,9 +185,9 @@
   background: #121212;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 32px;
+  font-size: 24px;
   line-height: 1;
-  letter-spacing: -1.28px;
+  letter-spacing: -0.96px;
   color: var(--moolroop-cream-80);
   font-feature-settings: 'salt' 1;
   transition: opacity 150ms ease-out;

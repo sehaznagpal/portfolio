@@ -33,7 +33,7 @@
 .screensViewport {
   width: 100%;
   overflow: hidden;
-  background: var(--dissertation-navy);
+  background: var(--dissertation-navy-15);
   border-top: 1px solid #2c2c2c;
   border-bottom: 1px solid #2c2c2c;
   touch-action: none;
@@ -125,8 +125,9 @@
 }
 
 /* font-size/letter-spacing match the mobile top bar's Portfolio/Explore
-   Experiment Zone (the only other hero clickables not being resized here)
-   so all four hero buttons read as one consistent size. */
+   Experiment Zone — and, in turn, the home hero's mobile "About"/"Explore
+   Beyond the Case Studies" links (20px) — so all four hero buttons read as
+   one consistent size. */
 .exploreButton {
   display: inline-flex;
   align-items: center;
@@ -135,9 +136,9 @@
   background: #fefefe;
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1;
-  letter-spacing: -0.72px;
+  letter-spacing: -0.8px;
   color: #121212;
   font-feature-settings: 'salt' 1;
 }
