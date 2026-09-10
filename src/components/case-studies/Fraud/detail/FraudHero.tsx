@@ -20,12 +20,17 @@ export default function FraudHero() {
       <div className={styles.inner}>
         <div className={styles.top}>
           <Link to="/" className={styles.portfolio}>
-            Portfolio
+            Sehaz Nagpal
           </Link>
-          <Link to="/experiment-zone" className={styles.exploreZone}>
-            <span className={styles.exploreZoneFill} aria-hidden="true" />
-            <span className={styles.exploreZoneLabel}>Explore Experiment Zone →</span>
-          </Link>
+          <div className={styles.exploreZoneWrap}>
+            <Link to="/experiment-zone" className={styles.exploreZone}>
+              <span className={styles.exploreZoneFill} aria-hidden="true" />
+              <span className={styles.exploreZoneLabel}>Explore Experiment Zone →</span>
+            </Link>
+            <div className={styles.tooltip} role="tooltip">
+              <p className={styles.tooltipText}>More websites, smaller projects &amp; experiments.</p>
+            </div>
+          </div>
         </div>
 
         <div className={styles.main}>

@@ -9,7 +9,7 @@ import styles from './ExperimentTopLeft.module.css';
 function ExperimentTopLeft() {
   return (
     <Link to="/" className={styles.pill} aria-label="Back to home">
-      <p className={styles.text}>Portfolio</p>
+      <p className={styles.text}>Sehaz Nagpal</p>
     </Link>
   );
 }

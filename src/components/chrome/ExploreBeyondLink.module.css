@@ -1,7 +1,14 @@
-.link {
+/* Carries the positioning .link used to hold directly — moved here so the
+   tooltip (a sibling of .link, not a child) isn't clipped by .link's own
+   overflow: hidden, needed for the fill sweep below. */
+.wrap {
   position: absolute;
   bottom: 36px;
   right: 47.51px;
+}
+
+.link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -60,4 +67,50 @@
   position: relative;
   color: var(--chrome-bg);
   flex-shrink: 0;
+}
+
+/* Dark rounded-pill tooltip, shown only on hover. Right-aligned to .link's
+   own right edge (rather than centered) since this link sits at the
+   bottom-right of the screen, so a centered tooltip would run off the
+   viewport's right edge. */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  z-index: 20;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: #121212;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+/* The pointer/tail beneath the pill, pointing down at the link. */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #121212;
+}
+
+.tooltipText {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 15px;
+  line-height: 1;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.wrap:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }

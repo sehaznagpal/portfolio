@@ -33,3 +33,53 @@
   color: var(--chrome-bg);
   flex-shrink: 0;
 }
+
+/* Dark rounded-pill tooltip, shown only on hover — centered over the link,
+   matching .link's own centering, with a viewport-capped max-width and
+   wrapping allowed (rather than the desktop version's nowrap) since this
+   can run as narrow as a 320px phone. */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: #121212;
+  max-width: min(260px, calc(100vw - 32px));
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+/* The pointer/tail beneath the pill, pointing down at the link. */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top-color: #121212;
+}
+
+.tooltipText {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 13px;
+  line-height: 1.3;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.link:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}

@@ -9,15 +9,18 @@
   background: var(--bg-canvas);
 }
 
-/* font-size/letter-spacing match the home hero's mobile "About"/"Explore
-   Beyond the Case Studies" links exactly (20px, -0.8px). */
+/* Sized down from the original 20px (still the home hero's mobile "About"/
+   "Explore Beyond the Case Studies" size) — "Sehaz" plus "Explore
+   Experiment Zone" together no longer fit that size with any breathing
+   room on a 320px phone; 17px (same -0.04em tracking ratio) gives them a
+   real gap again. */
 .portfolio,
 .exploreZone {
   font-family: 'Gambetta Variable', serif;
   font-weight: var(--gambetta-regular);
-  font-size: 20px;
+  font-size: 17px;
   line-height: 1;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.68px;
   color: #121212;
   font-feature-settings: 'salt' 1;
   white-space: nowrap;
@@ -49,4 +52,66 @@
 
 .exploreZoneLabel {
   position: relative;
+}
+
+/* Wraps .exploreZone (rather than adding the tooltip as its own child) so
+   the tooltip isn't clipped by .exploreZone's own overflow: hidden (needed
+   for the fill-sweep above) — this element carries none of that, and takes
+   over .exploreZone's old flex-item slot in .topBar unchanged. */
+.exploreZoneWrap {
+  position: relative;
+}
+
+/* Dark rounded-pill tooltip, shown only on hover — matches the same
+   treatment on the home hero's "Explore Beyond the Case Studies" link,
+   except positioned BELOW the link (tail pointing up) rather than above:
+   .topBar is position: sticky; top: 0, so there is never any room above it
+   in the viewport to place a tooltip without clipping, at any scroll
+   position. Right-aligned to .exploreZone's own right edge (rather than
+   centered) since this link sits at the right end of .topBar, so a
+   centered tooltip would run off the viewport's right edge. Allowed to
+   wrap with a viewport-capped max-width, since this bar can run as narrow
+   as a 320px phone. */
+.tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: #121212;
+  max-width: min(260px, calc(100vw - 32px));
+  white-space: normal;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 150ms ease-out;
+}
+
+/* The pointer/tail above the pill, pointing up at the link. */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  right: 16px;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-bottom-color: #121212;
+}
+
+.tooltipText {
+  margin: 0;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-size: 13px;
+  line-height: 1.3;
+  color: #fefefe;
+  font-feature-settings: 'salt' 1;
+}
+
+.exploreZoneWrap:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }

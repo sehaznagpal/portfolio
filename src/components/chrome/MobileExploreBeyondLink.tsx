@@ -28,6 +28,9 @@ export default function MobileExploreBeyondLink() {
       <Link className={styles.link} to={EXPERIMENT_ZONE_HREF} onClick={handleClick}>
         <span className={styles.label}>Explore Beyond the Case Studies</span>
         <ArrowUpRight className={styles.icon} size={17} strokeWidth={2} />
+        <div className={styles.tooltip} role="tooltip">
+          <p className={styles.tooltipText}>More websites, smaller projects &amp; experiments.</p>
+        </div>
       </Link>
       <PageTransitionOverlay active={transitioning} />
     </>

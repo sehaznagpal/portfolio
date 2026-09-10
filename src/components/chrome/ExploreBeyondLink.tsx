@@ -26,12 +26,17 @@ export default function ExploreBeyondLink() {
 
   return (
     <>
-      <Link className={styles.link} to={EXPERIMENT_ZONE_HREF} onClick={handleClick}>
-        <span className={styles.chip} aria-hidden="true" />
-        <span className={styles.fill} aria-hidden="true" />
-        <span className={styles.label}>Explore Beyond the Case Studies</span>
-        <ArrowUpRight className={styles.icon} size={18} strokeWidth={2} />
-      </Link>
+      <div className={styles.wrap}>
+        <Link className={styles.link} to={EXPERIMENT_ZONE_HREF} onClick={handleClick}>
+          <span className={styles.chip} aria-hidden="true" />
+          <span className={styles.fill} aria-hidden="true" />
+          <span className={styles.label}>Explore Beyond the Case Studies</span>
+          <ArrowUpRight className={styles.icon} size={18} strokeWidth={2} />
+        </Link>
+        <div className={styles.tooltip} role="tooltip">
+          <p className={styles.tooltipText}>More websites, smaller projects &amp; experiments.</p>
+        </div>
+      </div>
       <PageTransitionOverlay active={transitioning} />
     </>
   );
