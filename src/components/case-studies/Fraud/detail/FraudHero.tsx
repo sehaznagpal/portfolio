@@ -28,7 +28,7 @@ export default function FraudHero() {
               <span className={styles.exploreZoneLabel}>Explore Experiment Zone →</span>
             </Link>
             <div className={styles.tooltip} role="tooltip">
-              <p className={styles.tooltipText}>More websites, smaller projects &amp; experiments.</p>
+              <p className={styles.tooltipText}>More website designs, smaller projects &amp; experiments.</p>
             </div>
           </div>
         </div>
