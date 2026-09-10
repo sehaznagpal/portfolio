@@ -69,16 +69,18 @@
   flex-shrink: 0;
 }
 
-/* Dark rounded-pill tooltip, shown only on hover. Left-aligned to .link's
-   own left edge (rather than centered or right-aligned) so it starts
-   directly over the label's own first letter instead of hanging off to
-   one side of it. */
+/* Dark rounded-pill tooltip, shown only on hover. Right-aligned flush to
+   .wrap's own right edge — confirmed via getBoundingClientRect that .wrap
+   (sized to .link's margin-box, where the padding and negative margin
+   from .link's enlarged hover hit-box exactly cancel out) lands on
+   precisely the same box as the visible .chip, so right: 0 here is flush
+   with the visible button's own right edge, not offset from it. */
 .tooltip {
   position: absolute;
   bottom: calc(100% + 10px);
-  left: 0;
+  right: 0;
   z-index: 20;
-  padding: 10px 18px;
+  padding: 6px 14px;
   border-radius: 9999px;
   background: #2a2a2a;
   border: 1px solid rgba(254, 254, 254, 0.25);
@@ -94,10 +96,10 @@
   content: '';
   position: absolute;
   top: 100%;
-  left: 20px;
+  right: 20px;
   width: 0;
   height: 0;
-  border: 6px solid transparent;
+  border: 5px solid transparent;
   border-top-color: #2a2a2a;
 }
 
@@ -105,7 +107,7 @@
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1;
   color: #fefefe;
   font-feature-settings: 'salt' 1;

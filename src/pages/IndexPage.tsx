@@ -69,7 +69,10 @@ function IndexContent() {
         >
           <AboutModalLink onClick={() => setAboutOpen(true)} />
           <ExploreBeyondLink />
-          <CardShell front={<Hero />} back={<CaseStudyShell studies={caseStudies} />} />
+          <CardShell
+            front={<Hero onOpenAbout={() => setAboutOpen(true)} />}
+            back={<CaseStudyShell studies={caseStudies} />}
+          />
         </motion.div>
       )}
 

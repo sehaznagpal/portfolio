@@ -4,7 +4,7 @@ import { useViewState } from '../../state/ViewStateContext';
 import HeroPolaroid from './HeroPolaroid';
 import styles from './Hero.module.css';
 
-export default function Hero() {
+export default function Hero({ onOpenAbout }: { onOpenAbout: () => void }) {
   const { goToCaseStudy } = useViewState();
   const [photoVisible, setPhotoVisible] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -33,8 +33,18 @@ export default function Hero() {
         now, as I design.{' '}
         <span
           className={styles.highlight}
+          role="button"
+          tabIndex={0}
+          aria-label="Open about"
           onMouseEnter={() => setPhotoVisible(true)}
           onMouseLeave={() => setPhotoVisible(false)}
+          onClick={onOpenAbout}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              onOpenAbout();
+            }
+          }}
         >
           I am Sehaz
         </span>
