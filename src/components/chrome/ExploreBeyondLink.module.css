@@ -69,14 +69,14 @@
   flex-shrink: 0;
 }
 
-/* Dark rounded-pill tooltip, shown only on hover. Right-aligned to .link's
-   own right edge (rather than centered) since this link sits at the
-   bottom-right of the screen, so a centered tooltip would run off the
-   viewport's right edge. */
+/* Dark rounded-pill tooltip, shown only on hover. Left-aligned to .link's
+   own left edge (rather than centered or right-aligned) so it starts
+   directly over the label's own first letter instead of hanging off to
+   one side of it. */
 .tooltip {
   position: absolute;
   bottom: calc(100% + 10px);
-  right: 0;
+  left: 0;
   z-index: 20;
   padding: 10px 18px;
   border-radius: 9999px;
@@ -94,7 +94,7 @@
   content: '';
   position: absolute;
   top: 100%;
-  right: 20px;
+  left: 20px;
   width: 0;
   height: 0;
   border: 6px solid transparent;
