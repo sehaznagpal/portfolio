@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import { usePageTransition } from '../../lib/usePageTransition';
 import PageTransitionOverlay from './PageTransitionOverlay';
 import CursorTooltip from './CursorTooltip';
@@ -32,7 +33,14 @@ export default function ExploreBeyondLink() {
             <span className={styles.chip} aria-hidden="true" />
             <span className={styles.fill} aria-hidden="true" />
             <span className={styles.label}>
-              More designs &amp; smaller projects <span className={styles.arrow}>↗</span>
+              More designs &amp; smaller projects{' '}
+              <ArrowUpRight
+                className={styles.arrow}
+                size={18}
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </span>
           </Link>
         </CursorTooltip>

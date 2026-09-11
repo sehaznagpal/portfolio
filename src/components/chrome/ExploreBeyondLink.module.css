@@ -61,5 +61,7 @@
 }
 
 .arrow {
-  font-weight: var(--bricolage-bold);
+  position: relative;
+  vertical-align: -3px;
+  color: var(--chrome-bg);
 }
