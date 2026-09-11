@@ -61,63 +61,14 @@
   position: relative;
 }
 
-/* Wraps .exploreZone (rather than adding the tooltip as its own child) so
-   the tooltip isn't clipped by .exploreZone's own overflow: hidden (needed
-   for the fill-sweep above) — this element carries none of that, and takes
-   over .exploreZone's old flex-item slot in .top unchanged. */
+.arrow {
+  position: relative;
+  vertical-align: -3px;
+  color: var(--chrome-bg);
+}
+
 .exploreZoneWrap {
   position: relative;
-}
-
-/* Dark rounded-pill tooltip, shown only on hover — matches the same
-   treatment on the home hero's "Explore Beyond the Case Studies" link.
-   Right-aligned to .exploreZone's own right edge (rather than centered)
-   since this link sits at the right end of .top, so a centered tooltip
-   would run off the viewport's right edge. Kept compact (smaller padding/
-   gap/font than the home hero's version) since .hero has only 32px of
-   clearance above .top for it to fit within without clipping against the
-   viewport's top edge — verified via getBoundingClientRect. */
-.tooltip {
-  position: absolute;
-  bottom: calc(100% + 4px);
-  right: 0;
-  z-index: 20;
-  padding: 6px 16px;
-  border-radius: 9999px;
-  background: #2a2a2a;
-  border: 1px solid rgba(254, 254, 254, 0.25);
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 150ms ease-out;
-}
-
-/* The pointer/tail beneath the pill, pointing down at the link. */
-.tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  right: 20px;
-  width: 0;
-  height: 0;
-  border: 5px solid transparent;
-  border-top-color: #2a2a2a;
-}
-
-.tooltipText {
-  margin: 0;
-  font-family: 'Author Variable', sans-serif;
-  font-weight: var(--author-regular);
-  font-size: 14px;
-  line-height: 1;
-  color: #fefefe;
-  font-feature-settings: 'salt' 1;
-}
-
-.exploreZoneWrap:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
 }
 
 .main {

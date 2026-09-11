@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import CursorTooltip from '../../../chrome/CursorTooltip';
 import homeScreen from '../../../../assets/images/moolroop/case-study/screens/home.jpg';
 import rajasthanScreen from '../../../../assets/images/moolroop/case-study/screens/rajasthan.jpg';
 import pashminaProductScreen from '../../../../assets/images/moolroop/case-study/screens/pashmina-product.jpg';
@@ -21,13 +23,21 @@ export default function MoolroopHero() {
             Sehaz Nagpal
           </Link>
           <div className={styles.exploreZoneWrap}>
-            <Link to="/experiment-zone" className={styles.exploreZone}>
-              <span className={styles.exploreZoneFill} aria-hidden="true" />
-              <span className={styles.exploreZoneLabel}>Explore Experiment Zone →</span>
-            </Link>
-            <div className={styles.tooltip} role="tooltip">
-              <p className={styles.tooltipText}>More website designs, smaller projects &amp; experiments.</p>
-            </div>
+            <CursorTooltip text="Playground">
+              <Link to="/experiment-zone" className={styles.exploreZone}>
+                <span className={styles.exploreZoneFill} aria-hidden="true" />
+                <span className={styles.exploreZoneLabel}>
+                  More designs &amp; smaller projects{' '}
+                  <ArrowUpRight
+                    className={styles.arrow}
+                    size={18}
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </span>
+              </Link>
+            </CursorTooltip>
           </div>
         </div>
 
