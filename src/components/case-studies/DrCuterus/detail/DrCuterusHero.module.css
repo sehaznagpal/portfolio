@@ -31,6 +31,13 @@
   font-feature-settings: 'salt' 1;
 }
 
+/* Same brand-light chip the home hero's "About" link sits on (AboutModalLink
+   .link) — sized to the text's own box (no padding) so it hugs tightly
+   instead of reading as a wide bar. */
+.portfolio {
+  background: var(--bg-canvas);
+}
+
 .exploreZone {
   position: relative;
   background: rgba(254, 254, 254, 0.8);

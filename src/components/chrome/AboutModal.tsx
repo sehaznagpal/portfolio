@@ -10,6 +10,7 @@ const EXIT_MS = 300;
 
 const CV_FILE_ID = '1Z8gec-K0UeJ7NIbiG6K-sQZn48nakXn0';
 const CV_URL = `https://drive.google.com/uc?export=download&id=${CV_FILE_ID}`;
+const LINKEDIN_URL = 'https://www.linkedin.com/in/sehaznagpal';
 const MAIL_SUBJECT = 'Re-directed from your portfolio';
 const MAIL_BODY =
   "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
@@ -105,25 +106,35 @@ export default function AboutModal({ open, onClose }: { open: boolean; onClose: 
               ))}
             </ul>
 
-            <div className={styles.actions}>
-              <a
-                className={styles.button}
-                href={GMAIL_COMPOSE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className={styles.buttonLabel}>Contact Via Mail</span>
-                <span className={styles.sweep} aria-hidden="true">
-                  <span className={styles.sweepLabel}>Contact Via Mail</span>
-                </span>
-              </a>
-              <p className={styles.caption}>*for work, queries, feedback, discussion or just a hi!</p>
-              <a className={styles.button} href={CV_URL} download target="_blank" rel="noopener noreferrer">
-                <span className={styles.buttonLabel}>Download CV</span>
-                <span className={styles.sweep} aria-hidden="true">
-                  <span className={styles.sweepLabel}>Download CV</span>
-                </span>
-              </a>
+            <div className={styles.contactRow}>
+              <p className={styles.contactLine}>For work, queries, feedback or just a hi!</p>
+              <div className={styles.contactLinks}>
+                <a
+                  className={styles.contactLink}
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  (linkedin)
+                </a>
+                <a
+                  className={styles.contactLink}
+                  href={GMAIL_COMPOSE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  (mail)
+                </a>
+                <a
+                  className={styles.contactLink}
+                  href={CV_URL}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  (download CV)
+                </a>
+              </div>
             </div>
           </div>
 

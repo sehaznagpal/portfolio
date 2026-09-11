@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import styles from './DrCuterusClosingNav.module.css';
 
-const CONTACT_SUBJECT = 'Re: Dr Cuterus Case Study';
+/* Same subject/body everywhere a mail link exists on the site (About
+   section, experiment zone, every case study) — always reads as
+   redirected from the portfolio in general, never naming this specific
+   page. */
+const CONTACT_SUBJECT = 'Re-directed from your portfolio';
 const CONTACT_BODY =
-  "Hi Sehaz,\n\nI came across your Dr Cuterus case study and wanted to reach out, we'd love to connect.\n\nBest,\n";
+  "Hi Sehaz,\n\nI came across your portfolio and wanted to reach out, we'd love to connect.\n\nBest,\n";
 /* Gmail's web compose URL, not a mailto: link — mailto: hands off to whatever
    mail client is registered on the OS (often an empty native Mail app), while
    this always opens the pre-filled draft in Gmail on the web. Same pattern as
