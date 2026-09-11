@@ -105,36 +105,39 @@ export default function AboutModal({ open, onClose }: { open: boolean; onClose: 
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
+          </div>
 
-            <div className={styles.contactRow}>
-              <p className={styles.contactLine}>For work, queries, feedback or just a hi!</p>
-              <div className={styles.contactLinks}>
-                <a
-                  className={styles.contactLink}
-                  href={LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  (linkedin)
-                </a>
-                <a
-                  className={styles.contactLink}
-                  href={GMAIL_COMPOSE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  (mail)
-                </a>
-                <a
-                  className={styles.contactLink}
-                  href={CV_URL}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  (download CV)
-                </a>
-              </div>
+          {/* Pushed to the bottom of the flex column (see .contactRow's
+              margin-top: auto) so it reads as the section's own footer,
+              framed by the same top/bottom padding as .heading. */}
+          <div className={styles.contactRow}>
+            <p className={styles.contactLine}>For work, queries, feedback or just a hi!</p>
+            <div className={styles.contactLinks}>
+              <a
+                className={styles.contactLink}
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                (linkedin)
+              </a>
+              <a
+                className={styles.contactLink}
+                href={GMAIL_COMPOSE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                (mail)
+              </a>
+              <a
+                className={styles.contactLink}
+                href={CV_URL}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                (download CV)
+              </a>
             </div>
           </div>
 

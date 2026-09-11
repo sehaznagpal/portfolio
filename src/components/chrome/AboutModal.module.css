@@ -33,9 +33,9 @@
   opacity: 1;
 }
 
-/* Bordered box with a literal "X", matching the Figma reference — same
-   treatment as .button (border + transparent-over-panel fill) rather than
-   the filled circular icon button used elsewhere in the app. */
+/* Bordered box with a literal "X", matching the Figma reference — a
+   border + transparent-over-panel fill rather than the filled circular
+   icon button used elsewhere in the app. */
 .closeButton {
   position: absolute;
   top: clamp(16px, 3vh, 32px);
@@ -75,8 +75,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  /* Top and bottom padding matched exactly so the heading and the
+     contactRow "footer" (pushed down via its own margin-top: auto) frame
+     the panel symmetrically. */
   padding-top: clamp(48px, 7.5vh, 88px);
-  padding-bottom: clamp(36px, 6.5vh, 88px);
+  padding-bottom: clamp(48px, 7.5vh, 88px);
 }
 
 .heading {
@@ -195,20 +198,35 @@
   font-feature-settings: 'salt' 1;
 }
 
+/* Pushed to the bottom of .scroll's flex column — the section's own footer,
+   not just trailing content after the bullets — via margin-top: auto rather
+   than a fixed gap, so it lands flush against .scroll's padding-bottom the
+   same way .heading sits flush against padding-top. Same z-index as .body
+   (and for the same reason): that bottom edge is exactly where .photo
+   bleeds in from the corner, so this needs to stay stacked above it too or
+   the circle covers the link text. */
 .contactRow {
-  margin-top: clamp(14px, 2.6vh, 28px);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding: 0 clamp(24px, 6vw, 60px);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: clamp(4px, 0.8vh, 8px);
 }
 
+/* Same font-size as the body copy (.paragraph/.bullets) — both the base
+   clamp here and the desktop override below — so this footer line reads as
+   the same "copy" size, not a smaller caption. */
 .contactLine {
   margin: 0;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: clamp(15px, min(1.6vw, 1.9vh), 20px);
-  line-height: 1.2;
+  font-size: clamp(14px, min(1.6vw, 1.9vh), 21px);
+  line-height: 1.1;
   color: var(--text-cream);
   font-feature-settings: 'salt' 1;
 }
@@ -228,8 +246,8 @@
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
   font-style: normal;
-  font-size: clamp(15px, min(1.6vw, 1.9vh), 20px);
-  line-height: 1.2;
+  font-size: clamp(14px, min(1.6vw, 1.9vh), 21px);
+  line-height: 1.1;
   color: var(--accent-green);
   text-decoration: none;
   font-feature-settings: 'salt' 1;
@@ -262,9 +280,9 @@
    width used to be a flat % of the panel (a horizontal-only metric), so on
    a wide-but-short viewport (panel width — and so the photo — stays large
    while the available height shrinks) the circle grew tall enough to cover
-   the actions column's button strokes and body text. Capping it with a vh
-   term as well means the diameter now answers to whichever dimension is
-   actually tight. */
+   the contactRow footer and body text. Capping it with a vh term as well
+   means the diameter now answers to whichever dimension is actually
+   tight. */
 .photo {
   position: absolute;
   z-index: 1;
@@ -285,38 +303,15 @@
    fixed size. */
 @media (min-width: 768px) {
   .paragraph,
-  .bullets {
+  .bullets,
+  .contactLine,
+  .contactLink {
     font-size: clamp(22px, min(calc(1.6vw + 8px), calc(1.9vh + 8px)), 29px);
   }
 
   .bullets {
     margin-top: clamp(18px, calc(2vh + 8px), 30px);
     gap: 0.4em;
-  }
-
-  .actions {
-    margin-top: clamp(22px, calc(2.6vh + 8px), 36px);
-    gap: 0;
-  }
-
-  .buttonLabel {
-    font-size: clamp(19px, min(calc(1.6vw + 8px), calc(1.9vh + 8px)), 24px);
-  }
-
-  /* Caption sits right under the Contact button it annotates; Download CV
-     then gets extra room below the caption rather than matching gap. */
-  .caption {
-    margin-top: 4px;
-  }
-
-  .caption + .button {
-    margin-top: 16px;
-  }
-}
-
-@media (hover: hover) and (min-width: 768px) {
-  .sweepLabel {
-    font-size: clamp(19px, min(calc(1.6vw + 8px), calc(1.9vh + 8px)), 24px);
   }
 }
 
@@ -336,11 +331,12 @@
 
   .scroll {
     padding-top: clamp(40px, 7vh, 60px);
-    padding-bottom: clamp(28px, 5vh, 56px);
+    padding-bottom: clamp(40px, 7vh, 60px);
   }
 
   .heading,
-  .body {
+  .body,
+  .contactRow {
     padding-left: clamp(20px, 6vw, 32px);
     padding-right: clamp(20px, 6vw, 32px);
   }
@@ -352,7 +348,7 @@
   }
 
   /* Decorative corner accent, not in the flow — the column above (heading,
-     ticker, body, actions) no longer has to make room for it, which is
+     ticker, body, contactRow) no longer has to make room for it, which is
      what keeps the whole sheet fitting without a scrollbar on short
      phones. */
   .photo {
