@@ -18,7 +18,7 @@ export const HERO_SCREENS = [
 
 export default function FraudHero() {
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} grid-background`}>
       <div className={styles.inner}>
         <div className={styles.top}>
           <Link to="/" className={styles.portfolio}>
@@ -72,8 +72,6 @@ export default function FraudHero() {
           </div>
         </div>
 
-        <p className={styles.caption}>Research Project. Randomised Controlled Trials. Study on Fraud.</p>
-
         <div className={styles.buttons}>
           <a className={styles.exploreButton} href={PROTOTYPE_URL} target="_blank" rel="noreferrer">
             Explore Prototype →
@@ -81,18 +79,6 @@ export default function FraudHero() {
           <a className={styles.exploreButton} href={DISSERTATION_URL} target="_blank" rel="noreferrer">
             Read Dissertation →
           </a>
-        </div>
-
-        <div className={styles.summary}>
-          <p className={styles.summaryLine}>
-            <span className={styles.summaryLabel}>Question:</span> Does redesigning a payment
-            screen&apos;s choice architecture actually influence whether people fall for fraud?
-          </p>
-          <p className={styles.summaryLine}>
-            <span className={styles.summaryLabel}>Answer:</span> A simulated UPI payment app
-            (experiment) testing three interventions across three scam types on 116 participants,
-            showing choice architecture works, but not evenly across every kind of fraud.
-          </p>
         </div>
       </div>
     </section>

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import CaseStudySecondSection from '../../../CaseStudySecondSection';
 import DrCuterusCardFace from './DrCuterusCardFace';
 import DrCuterusPanel from './DrCuterusPanel';
-import DrCuterusClosingNav from '../DrCuterusClosingNav';
 import { CARDS } from './cardData';
 import styles from './DrCuterusCardGrid.module.css';
 
@@ -44,7 +44,7 @@ export default function DrCuterusCardGrid() {
   }, [openIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <div className={`${styles.viewport} grid-background`}>
+    <CaseStudySecondSection>
       <div className={styles.frame}>
         <div className={styles.section}>
           <div className={styles.canvas}>
@@ -60,10 +60,6 @@ export default function DrCuterusCardGrid() {
               ),
             )}
           </div>
-        </div>
-
-        <div className={styles.navWrap}>
-          <DrCuterusClosingNav />
         </div>
       </div>
 
@@ -93,6 +89,6 @@ export default function DrCuterusCardGrid() {
           />
         )}
       </AnimatePresence>
-    </div>
+    </CaseStudySecondSection>
   );
 }

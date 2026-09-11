@@ -3,6 +3,8 @@ import { useIsMobile } from '../lib/useIsMobile';
 import payingScreenImage from '../assets/images/fraud/case-study/screens/paying-screen.jpg';
 import FraudHero from '../components/case-studies/Fraud/detail/FraudHero';
 import FraudCardGrid from '../components/case-studies/Fraud/detail/grid/FraudCardGrid';
+import { GMAIL_COMPOSE_URL } from '../components/case-studies/Fraud/detail/FraudClosingNav';
+import Footer from '../components/case-studies/Footer';
 import MobileFraudTopBar from '../components/case-studies/Fraud/detail/MobileFraudTopBar';
 import MobileFraudHero from '../components/case-studies/Fraud/detail/MobileFraudHero';
 import MobileFraudCardGrid from '../components/case-studies/Fraud/detail/grid/MobileFraudCardGrid';
@@ -30,8 +32,11 @@ export default function CaseStudyFraudPage() {
         </>
       ) : (
         <>
-          <FraudHero />
-          <FraudCardGrid />
+          <div className={styles.mainContent}>
+            <FraudHero />
+            <FraudCardGrid />
+          </div>
+          <Footer nextCaseStudyHref="/case-study/moolroop" mailtoHref={GMAIL_COMPOSE_URL} />
         </>
       )}
     </div>

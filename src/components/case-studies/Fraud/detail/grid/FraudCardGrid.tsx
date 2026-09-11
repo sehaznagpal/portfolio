@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import CaseStudySecondSection from '../../../CaseStudySecondSection';
 import FraudCardFace from './FraudCardFace';
 import FraudPanel from './FraudPanel';
-import FraudClosingNav from '../FraudClosingNav';
 import { CARDS } from './cardData';
 import styles from './FraudCardGrid.module.css';
 
@@ -44,7 +44,7 @@ export default function FraudCardGrid() {
   }, [openIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <div className={`${styles.viewport} grid-background`}>
+    <CaseStudySecondSection>
       <div className={styles.frame}>
         <div className={styles.section}>
           <div className={styles.canvas}>
@@ -60,10 +60,6 @@ export default function FraudCardGrid() {
               ),
             )}
           </div>
-        </div>
-
-        <div className={styles.navWrap}>
-          <FraudClosingNav />
         </div>
       </div>
 
@@ -93,6 +89,6 @@ export default function FraudCardGrid() {
           />
         )}
       </AnimatePresence>
-    </div>
+    </CaseStudySecondSection>
   );
 }

@@ -9,7 +9,7 @@ export { homepageScreenshot };
 
 export default function DrCuterusHero() {
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} grid-background`}>
       <div className={styles.inner}>
         <div className={styles.top}>
           <Link to="/" className={styles.portfolio}>
@@ -61,24 +61,9 @@ export default function DrCuterusHero() {
           </div>
         </div>
 
-        <p className={styles.caption}>Client Project. Design + Partial Frontend Development. Personal Website.</p>
-
         <a className={styles.exploreButton} href={LIVE_SITE_URL} target="_blank" rel="noreferrer">
           Go to Live Website →
         </a>
-
-        <div className={styles.summary}>
-          <p className={styles.summaryLine}>
-            <span className={styles.summaryLabel}>Problem:</span> No single, on-brand home for Dr.
-            Cuterus&apos;s patients, followers, and brand collaborators, just a scattered presence
-            spread across platforms.
-          </p>
-          <p className={styles.summaryLine}>
-            <span className={styles.summaryLabel}>Solution:</span> A custom website in her own
-            voice: purple and yellow, bilingual, built around to act as a single place for
-            audiences.
-          </p>
-        </div>
       </div>
     </section>
   );

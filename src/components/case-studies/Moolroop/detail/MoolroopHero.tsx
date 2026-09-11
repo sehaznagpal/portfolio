@@ -16,7 +16,7 @@ export const HERO_SCREENS = [
 
 export default function MoolroopHero() {
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} grid-background`}>
       <div className={styles.inner}>
         <div className={styles.top}>
           <Link to="/" className={styles.portfolio}>
@@ -70,10 +70,6 @@ export default function MoolroopHero() {
           </div>
         </div>
 
-        <p className={styles.caption}>
-          Buyer-side mobile application. Self initiated project. Figma Prototype
-        </p>
-
         <a
           className={styles.exploreButton}
           href={PROTOTYPE_URL}
@@ -82,19 +78,6 @@ export default function MoolroopHero() {
         >
           Explore Prototype →
         </a>
-
-        <div className={styles.summary}>
-          <p className={styles.summaryLine}>
-            <span className={styles.summaryLabel}>Problem:</span> No easy way for buyers to verify
-            a handicraft&apos;s authenticity without leaving the product page to dig through a
-            separate government database.
-          </p>
-          <p className={styles.summaryLine}>
-            <span className={styles.summaryLabel}>Solution:</span> MoolRoop, a buyer-side app that
-            embeds GI verification directly into the shopping flow itself, cutting a five-step
-            check down to one tap.
-          </p>
-        </div>
       </div>
     </section>
   );

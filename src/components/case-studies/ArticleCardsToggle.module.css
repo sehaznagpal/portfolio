@@ -1,0 +1,43 @@
+.toggle {
+  position: absolute;
+  left: 50%;
+  top: 38px;
+  translate: -50% 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.option {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-regular);
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: -0.96px;
+  color: #121212;
+  font-feature-settings: 'salt' 1;
+  font-style: normal;
+  transition: opacity 150ms ease-out;
+}
+
+.active {
+  font-style: italic;
+  opacity: 1;
+}
+
+.inactive {
+  opacity: 0.3;
+}
+
+.inactive:hover {
+  opacity: 0.55;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #121212;
+  flex-shrink: 0;
+}

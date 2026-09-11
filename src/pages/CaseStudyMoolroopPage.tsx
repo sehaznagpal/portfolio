@@ -3,6 +3,8 @@ import { useIsMobile } from '../lib/useIsMobile';
 import productScreenImage from '../assets/images/moolroop/product-screen.jpg';
 import MoolroopHero from '../components/case-studies/Moolroop/detail/MoolroopHero';
 import MoolroopCardGrid from '../components/case-studies/Moolroop/detail/grid/MoolroopCardGrid';
+import { GMAIL_COMPOSE_URL } from '../components/case-studies/Moolroop/detail/MoolroopClosingNav';
+import Footer from '../components/case-studies/Footer';
 import MobileMoolroopTopBar from '../components/case-studies/Moolroop/detail/MobileMoolroopTopBar';
 import MobileMoolroopHero from '../components/case-studies/Moolroop/detail/MobileMoolroopHero';
 import MobileMoolroopCardGrid from '../components/case-studies/Moolroop/detail/grid/MobileMoolroopCardGrid';
@@ -30,8 +32,11 @@ export default function CaseStudyMoolroopPage() {
         </>
       ) : (
         <>
-          <MoolroopHero />
-          <MoolroopCardGrid />
+          <div className={styles.mainContent}>
+            <MoolroopHero />
+            <MoolroopCardGrid />
+          </div>
+          <Footer nextCaseStudyHref="/case-study/dr-cuterus" mailtoHref={GMAIL_COMPOSE_URL} />
         </>
       )}
     </div>

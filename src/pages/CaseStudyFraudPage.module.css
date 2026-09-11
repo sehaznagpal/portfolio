@@ -6,3 +6,13 @@
 .pageDesktop {
   min-width: 1024px;
 }
+
+/* Wraps the hero + second section so the Footer (sticky-positioned, see
+   Footer.module.css) can sit beneath them in normal flow and be revealed by
+   this opaque, higher-stacked block scrolling up and off it — the standard
+   sticky-footer-under-content reveal technique, no scroll-snap or JS
+   involved. */
+.mainContent {
+  position: relative;
+  z-index: 1;
+}
