@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { usePageTransition } from '../../lib/usePageTransition';
 import PageTransitionOverlay from './PageTransitionOverlay';
+import CursorTooltip from './CursorTooltip';
 import styles from './ExploreBeyondLink.module.css';
 
 const EXPERIMENT_ZONE_HREF = '/experiment-zone';
@@ -27,15 +28,14 @@ export default function ExploreBeyondLink() {
   return (
     <>
       <div className={styles.wrap}>
-        <Link className={styles.link} to={EXPERIMENT_ZONE_HREF} onClick={handleClick}>
-          <span className={styles.chip} aria-hidden="true" />
-          <span className={styles.fill} aria-hidden="true" />
-          <span className={styles.label}>Explore Beyond the Case Studies</span>
-          <ArrowUpRight className={styles.icon} size={18} strokeWidth={2} />
-        </Link>
-        <div className={styles.tooltip} role="tooltip">
-          <p className={styles.tooltipText}>More website designs, smaller projects &amp; experiments.</p>
-        </div>
+        <CursorTooltip text="Playground">
+          <Link className={styles.link} to={EXPERIMENT_ZONE_HREF} onClick={handleClick}>
+            <span className={styles.chip} aria-hidden="true" />
+            <span className={styles.fill} aria-hidden="true" />
+            <span className={styles.label}>More designs &amp; smaller projects ↗</span>
+            <ArrowUpRight className={styles.icon} size={18} strokeWidth={2} />
+          </Link>
+        </CursorTooltip>
       </div>
       <PageTransitionOverlay active={transitioning} />
     </>
