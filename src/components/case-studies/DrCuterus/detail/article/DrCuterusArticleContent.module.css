@@ -1,0 +1,346 @@
+/* Article view for the Dr Cuterus case study — the only content rendered
+   when the Article/Cards toggle is set to Article. Extends the same panel/
+   header/tags/content-width system built for the Dissertation and MoolRoop
+   Article views, swapping only the accent colors for Dr Cuterus's own
+   purple/lavender brand tokens. */
+
+.panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--stage-width);
+  height: clamp(520px, 77vh, 900px);
+  box-sizing: border-box;
+  background: #fefefe;
+  border-radius: clamp(18px, 2.2vw, 32px);
+  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+}
+
+.scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: clamp(24px, 3.2vw, 48px) clamp(20px, 3.6vw, 56px) clamp(40px, 5vw, 72px);
+  box-sizing: border-box;
+}
+
+/* ---------- header ---------- */
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--brand-grey);
+}
+
+.titleLight {
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  font-feature-settings: 'salt' 1;
+}
+
+.titleAccent {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-feature-settings: 'salt' 1;
+}
+
+.readTime {
+  margin: 0 0 clamp(2px, 0.6vw, 8px);
+  font-family: 'Author Variable', sans-serif;
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(14px, 1.6vw, 22px);
+  letter-spacing: -0.02em;
+  color: var(--brand-black);
+  white-space: nowrap;
+}
+
+.readTimeLight {
+  font-weight: var(--author-light);
+}
+
+.readTimeMedium {
+  font-weight: var(--author-medium);
+}
+
+/* ---------- divider ---------- */
+
+.divider {
+  height: 1px;
+  margin: clamp(16px, 2.4vw, 28px) 0;
+  border: none;
+  background: var(--frame-border);
+}
+
+/* Header → divider gap only: 4px tighter than the default top margin above,
+   bottom margin (divider → tags) left at the default. */
+.dividerHeader {
+  margin-top: calc(clamp(16px, 2.4vw, 28px) - 4px);
+}
+
+/* Tags → first section-heading gap: noticeably tighter than the default on
+   both sides. */
+.dividerTags {
+  margin: clamp(8px, 1.2vw, 14px) 0;
+}
+
+/* ---------- tags ---------- */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+/* flex: 0 0 auto (not 1 1 …) so each column keeps its own natural width
+   instead of growing to fill the row — justify-content: space-between on
+   .tags above does the equal-gap distribution instead. */
+.tagProse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.tagPill {
+  background: var(--drcuterus-lavender);
+  padding: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(15px, 1.7vw, 22px);
+  letter-spacing: -0.02em;
+  color: var(--brand-grey);
+  white-space: nowrap;
+}
+
+.tagPillSmall {
+  display: inline-block;
+  background: var(--drcuterus-lavender);
+  padding: 0;
+  margin-right: 8px;
+  vertical-align: baseline;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: var(--bricolage-medium);
+  font-variation-settings: 'opsz' 14, 'wdth' 100;
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(13px, 1.4vw, 19px);
+  letter-spacing: -0.02em;
+  color: var(--brand-grey);
+  white-space: nowrap;
+}
+
+.tagText {
+  margin: 0;
+  max-width: 34ch;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(13px, 1.35vw, 18px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--brand-black);
+}
+
+/* Reduced from --author-semibold (596) by 300, matching the sibling Article
+   views. */
+.tagStrong {
+  font-weight: 296;
+}
+
+.tagFacts {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vw, 16px);
+  flex: 0 0 auto;
+}
+
+/* A plain paragraph (not flex) so the pill and value flow as normal inline
+   content — the value shares the first line with the pill and only real
+   overflow wraps to the next, rather than the whole value jumping to a new
+   line as one flex-wrapped unit. */
+.factRow {
+  margin: 0;
+}
+
+.factValue {
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(13px, 1.4vw, 19px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--brand-black);
+}
+
+/* ---------- body ---------- */
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 22px);
+}
+
+/* No max-width measure cap — the body (headings, paragraphs, visuals) spans
+   the same full width as the header/tags area above it, so every element
+   shares one consistent left/right margin throughout. */
+.sectionHeading {
+  width: 100%;
+  margin: 0 0 clamp(4px, 0.8vw, 10px);
+  text-align: center;
+  white-space: nowrap;
+  font-family: 'Gambetta Variable', serif;
+  font-style: italic;
+  font-weight: var(--gambetta-regular);
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(18px, 2.3vw, 30px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--drcuterus-purple);
+}
+
+.paragraph {
+  width: 100%;
+  margin: 0;
+  text-align: justify;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-regular);
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(14.5px, 1.15vw, 17px);
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--brand-black);
+}
+
+/* ---------- figures ---------- */
+
+/* width: 100% so a caption can use the full section width to stay on one
+   line even when the visual itself (figureFrame/imageFrame, sized
+   independently below) is much narrower — it stays centered inside this
+   same full-width box, keeping left/right margins identical to every other
+   body element. */
+.figure {
+  width: 100%;
+  margin: clamp(4px, 0.8vw, 10px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.figureFrame {
+  width: clamp(150px, 20vw, 230px);
+  border-radius: 18px;
+  border: 1px solid var(--frame-border);
+  box-shadow: 0 2px 10px var(--frame-shadow);
+  overflow: hidden;
+  background: #fefefe;
+}
+
+.figureFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.imageFrame {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--frame-border);
+  box-shadow: 0 2px 10px var(--frame-shadow);
+  overflow: hidden;
+  background: #fefefe;
+}
+
+.imageFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* The short, one-line label under a visual — always a single line, never
+   wraps. */
+.figureLabel {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Author Variable', sans-serif;
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.2;
+  color: var(--brand-black);
+  /* Reduced from --author-semibold (596) by 300, matching .tagStrong. */
+  font-weight: 296;
+}
+
+/* ---------- breakpoints ---------- */
+/* Article never mounts below 768px (the page swaps to a cards-only mobile
+   layout with no toggle at all — see useIsMobile/CaseStudyDrCuterusPage), so
+   these only need to cover large desktop down through tablet. */
+
+@media (max-width: 1024px) {
+  .panel {
+    height: clamp(480px, 78vh, 820px);
+  }
+
+  .tagText {
+    max-width: 30ch;
+  }
+}
+
+@media (max-width: 900px) {
+  .tags {
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(16px, 3vw, 24px);
+  }
+
+  /* flex: 1 1 … was tuned for the row layout, where a fixed basis is a
+     sensible min *width*. In a column-direction flex container that same
+     shorthand sets a flex-basis on the *height* instead — forcing each
+     block to reserve far more vertical space than its actual content. */
+  .tagProse,
+  .tagFacts {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tagProse {
+    align-items: center;
+    text-align: center;
+  }
+
+  .tagFacts {
+    align-items: flex-start;
+  }
+}

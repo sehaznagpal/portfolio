@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CaseStudySecondSection from '../../../CaseStudySecondSection';
 import DrCuterusCardFace from './DrCuterusCardFace';
 import DrCuterusPanel from './DrCuterusPanel';
+import DrCuterusArticleContent from '../article/DrCuterusArticleContent';
 import { CARDS } from './cardData';
 import styles from './DrCuterusCardGrid.module.css';
 
@@ -44,7 +45,7 @@ export default function DrCuterusCardGrid() {
   }, [openIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <CaseStudySecondSection>
+    <CaseStudySecondSection articleContent={<DrCuterusArticleContent />}>
       <div className={styles.frame}>
         <div className={styles.section}>
           <div className={styles.canvas}>

@@ -5,9 +5,9 @@ import styles from './CaseStudySecondSection.module.css';
 interface CaseStudySecondSectionProps {
   children: ReactNode;
   /* Optional per-case-study Article view. Defaults to the "Coming soon"
-     placeholder when omitted, so case studies that haven't built their
-     Article content yet (Dr Cuterus, Moolroop) keep rendering exactly as
-     before this prop existed. */
+     placeholder when omitted, so a case study that hasn't built its own
+     Article content yet keeps rendering exactly as before this prop
+     existed. */
   articleContent?: ReactNode;
 }
 
