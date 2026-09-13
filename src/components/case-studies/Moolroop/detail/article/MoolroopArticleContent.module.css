@@ -99,12 +99,16 @@
 
 /* ---------- tags ---------- */
 
+/* justify-content: center (not space-between) — the three columns sit
+   together as one compact group with a fixed gap between them, and any
+   leftover row width becomes left/right margin around that group instead
+   of being distributed into the gaps themselves. */
 .tags {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: clamp(20px, 3vw, 40px);
+  justify-content: center;
+  gap: 32px;
 }
 
 /* flex: 0 0 auto (not 1 1 …) so each column keeps its own natural width
@@ -293,25 +297,26 @@
   font-weight: 296;
 }
 
+/* justify-content: center + a fixed gap (not a fill/growing layout) — two,
+   three, or four screens sit together as one tight group regardless of how
+   many there are, with any leftover row width pushed to the outer margins
+   instead of spread out between the screens. */
 .figureRow {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: clamp(20px, 3vw, 40px);
+  gap: 20px;
 }
 
-/* Splits the row's width evenly between however many screens it holds,
-   rather than each fighting to be 100% of the row (the default .figure
-   width, which would make every screen stack one per line instead of
-   sitting side by side). The phone mockup itself stays visually compact
-   (screenFrame's own clamp width, centered) — growing the figure box just
-   gives its one-line label enough room to actually fit on one line. */
+/* A fixed width (matching .screenFrame's own) instead of flex-grow — grow
+   would let each screen's box balloon to fill the row's leftover width,
+   pulling adjacent screens apart even though the mockup inside stays
+   visually compact, which is exactly the "spaced out" look this avoids. */
 .figureRow .figure {
-  width: auto;
-  flex: 1 1 0;
-  min-width: 0;
+  width: clamp(110px, 14vw, 190px);
+  flex: 0 0 auto;
 }
 
 /* ---------- embedded interactive/diagram components ---------- */
