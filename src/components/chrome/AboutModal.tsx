@@ -95,9 +95,10 @@ export default function AboutModal({ open, onClose }: { open: boolean; onClose: 
 
           <div className={styles.body}>
             <p className={styles.paragraph}>
-              I'm a self-taught product designer who learns by building. Right now I'm looking for
-              my first full-time role, though I'm open to good collaborations and work along the
-              way too. Here's what I bring to that:
+              Good design, to me, is just good thinking made visible. I'm a product designer who
+              cares about the reasoning behind a screen as much as the screen itself. Right now I'm
+              looking for my first full-time role, though I'm open to good collaborations and work
+              along the way too. Here's what I bring to that:
             </p>
 
             <ul className={styles.bullets}>
