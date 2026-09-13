@@ -39,7 +39,7 @@ function screensForGroup(group: number) {
   ];
 }
 
-export default function PaymentJourneyView({ onBack }: { onBack?: () => void }) {
+export default function PaymentJourneyView({ onBack }: { onBack: () => void }) {
   const [group, setGroup] = useState(0);
   const screens = screensForGroup(group);
   const isMobile = useIsMobile();
@@ -72,11 +72,9 @@ export default function PaymentJourneyView({ onBack }: { onBack?: () => void }) 
   return (
     <>
       <h2 className={styles.heading}>Flow of a {GROUPS[group]} Group Participant</h2>
-      {onBack && (
-        <button type="button" className={styles.goBack} onClick={onBack}>
-          ←Go Back
-        </button>
-      )}
+      <button type="button" className={styles.goBack} onClick={onBack}>
+        ←Go Back
+      </button>
 
       <div className={styles.navDots}>
         {GROUPS.map((label, i) => (

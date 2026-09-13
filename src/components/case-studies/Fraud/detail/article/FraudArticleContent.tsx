@@ -8,8 +8,17 @@ import fig3 from '../../../../../assets/images/fraud/case-study/results/fig3-pre
 import fig4 from '../../../../../assets/images/fraud/case-study/results/fig4-response-time.png';
 import fig5 from '../../../../../assets/images/fraud/case-study/results/fig5-confidence.png';
 import fig6 from '../../../../../assets/images/fraud/case-study/results/fig6-online-offline.png';
+import moneyTransferScreen from '../../../../../assets/images/fraud/case-study/payment-journey/money-transfer.jpg';
+import selectAccountScreen from '../../../../../assets/images/fraud/case-study/payment-journey/select-account.jpg';
+import selectAccountCtaScreen from '../../../../../assets/images/fraud/case-study/payment-journey/select-account-cta.jpg';
+import pinScreen from '../../../../../assets/images/fraud/case-study/payment-journey/pin.jpg';
+import pinWarningJourneyScreen from '../../../../../assets/images/fraud/case-study/payment-journey/pin-warning.jpg';
+import transferringScreen from '../../../../../assets/images/fraud/case-study/payment-journey/transferring.jpg';
+import successScreen from '../../../../../assets/images/fraud/case-study/payment-journey/success.jpg';
+import phoneBezel from '../../../../../assets/images/fraud/case-study/payment-journey/phone-bezel.png';
+import connectorTop from '../../../../../assets/images/fraud/case-study/payment-journey/connector-top.svg';
+import connectorBottom from '../../../../../assets/images/fraud/case-study/payment-journey/connector-bottom.svg';
 import ExperimentFlowView from '../grid/ExperimentFlowView';
-import PaymentJourneyView from '../grid/PaymentJourneyView';
 import styles from './FraudArticleContent.module.css';
 
 const WORDS_PER_MINUTE = 210;
@@ -30,69 +39,141 @@ const CASES = [
 const FIGURES = [
   {
     src: fig1,
-    title: 'Figure 1 — Cancellation rate by treatment group',
+    title: 'Figure 1: Cancellation rate by treatment group',
     interpretation:
       'People who saw the cancel button (CTA) stopped the fraudulent payment far more often than people who got a warning or nothing at all. The warning barely did better than doing nothing.',
   },
   {
     src: fig2,
-    title: 'Figure 2 — Cancellation rate by treatment and bias type',
+    title: 'Figure 2: Cancellation rate by treatment and bias type',
     interpretation:
       'The cancel button worked really well against authority and urgency scams, nearly doubling how often people stopped the payment. But against social proof scams, like fake reviews and countdown offers, it barely helped.',
   },
   {
     src: fig3,
-    title: 'Figure 3 — Predicted probabilities',
+    title: 'Figure 3: Predicted probabilities',
     interpretation:
       'This confirms the same pattern using a statistical model instead of raw numbers. Both the warning and the cancel button dip sharply for social proof scams, showing this gap is real and not just noise in the data.',
   },
   {
     src: fig4,
-    title: 'Figure 4 — Response time',
+    title: 'Figure 4: Response time',
     interpretation:
       'People did not take longer to decide just because they saw a warning or a cancel button. This means the cancel button worked by making the safe choice easier, not by making people stop and think harder.',
   },
   {
     src: fig5,
-    title: 'Figure 5 — Self-rated confidence',
+    title: 'Figure 5: Self-rated confidence',
     interpretation:
       "People who saw the cancel button felt almost equally confident whether they made the safe choice or the risky one. This suggests some people who still paid weren't confused, they made that choice knowingly.",
   },
   {
     src: fig6,
-    title: 'Figure 6 — Online vs offline recruitment',
+    title: 'Figure 6: Online vs offline recruitment',
     interpretation:
       'Whether someone took the experiment online or in person barely changed the results. The cancel button worked about the same either way, so the findings hold up across both settings.',
   },
 ];
 
-function Divider() {
-  return <hr className={styles.divider} />;
+function Divider({ variant }: { variant?: 'header' | 'tags' }) {
+  const variantClass = variant === 'header' ? styles.dividerHeader : variant === 'tags' ? styles.dividerTags : '';
+  return <hr className={`${styles.divider} ${variantClass}`} />;
 }
 
 function Figure({
   src,
   alt,
-  caption,
-  title,
+  label,
+  interpretation,
 }: {
   src: string;
   alt: string;
-  caption?: string;
-  title?: string;
+  label?: string;
+  interpretation?: string;
 }) {
   return (
     <figure className={styles.figure}>
       <div className={styles.figureFrame}>
         <img src={src} alt={alt} />
       </div>
-      {(title || caption) && (
-        <figcaption className={styles.figureCaption}>
-          {title && <span className={styles.figureCaptionTitle}>{title}. </span>}
-          {caption}
-        </figcaption>
-      )}
+      {label && <figcaption className={styles.figureLabel}>{label}</figcaption>}
+      {interpretation && <p className={styles.figureInterpretation}>{interpretation}</p>}
     </figure>
+  );
+}
+
+/* The "Explore Payment Decision Journey" replay, rebuilt locally for the
+   Article rather than reusing PaymentJourneyView.tsx directly: that
+   component is shared with the Cards variant (ProcessProgressPanelBody), and
+   this visual needs a different header, explicit group-picker pills instead
+   of auto-advancing dots, and no "Go Back" affordance — changing any of that
+   in the shared file would change Cards' own behaviour too. Same underlying
+   assets and phone-filmstrip layout, just a different control surface. */
+const GROUPS = ['Control', 'Warning', 'CTA'] as const;
+const GROUP_BUTTON_ORDER = [0, 2, 1] as const; // Control, CTA, Warning
+
+const PHONE_LEFT = ['3.922%', '22.444%', '40.966%', '59.488%', '78.011%'];
+
+const CONNECTORS: { left: string; variant: 'top' | 'bottom' }[] = [
+  { left: '13.116%', variant: 'top' },
+  { left: '32.165%', variant: 'bottom' },
+  { left: '50.665%', variant: 'top' },
+  { left: '70.204%', variant: 'bottom' },
+];
+
+function screensForGroup(group: number) {
+  return [
+    moneyTransferScreen,
+    group === 2 ? selectAccountCtaScreen : selectAccountScreen,
+    group === 1 ? pinWarningJourneyScreen : pinScreen,
+    transferringScreen,
+    successScreen,
+  ];
+}
+
+function PaymentFlowExplorer() {
+  const [group, setGroup] = useState(0);
+  const screens = screensForGroup(group);
+
+  return (
+    <div className={styles.pjWrap}>
+      <p className={styles.pjHeading}>Explore payment flows as a participant of:</p>
+
+      <div className={styles.pjButtons}>
+        {GROUP_BUTTON_ORDER.map((i) => (
+          <button
+            key={GROUPS[i]}
+            type="button"
+            className={`${styles.pjButton} ${i === group ? styles.pjButtonActive : ''}`}
+            onClick={() => setGroup(i)}
+            aria-pressed={i === group}
+          >
+            {GROUPS[i]}
+          </button>
+        ))}
+      </div>
+
+      <div className={styles.pjPhones}>
+        {screens.map((src, i) => (
+          <div className={styles.pjPhone} key={i} style={{ left: PHONE_LEFT[i] }}>
+            <div className={styles.pjPhoneScreen}>
+              <img src={src} alt={`Step ${i + 1} of the ${GROUPS[group]} group payment flow`} />
+            </div>
+            <img className={styles.pjBezel} src={phoneBezel} alt="" />
+          </div>
+        ))}
+
+        {CONNECTORS.map((c, i) => (
+          <div
+            key={i}
+            className={`${styles.pjConnector} ${c.variant === 'top' ? styles.pjConnectorTop : styles.pjConnectorBottom}`}
+            style={{ left: c.left }}
+          >
+            <img src={c.variant === 'top' ? connectorTop : connectorBottom} alt="" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -128,7 +209,7 @@ export default function FraudArticleContent() {
           </p>
         </div>
 
-        <Divider />
+        <Divider variant="header" />
 
         <div className={styles.tags}>
           <div className={styles.tagProse}>
@@ -165,7 +246,7 @@ export default function FraudArticleContent() {
           </div>
         </div>
 
-        <Divider />
+        <Divider variant="tags" />
 
         <div className={styles.body} ref={bodyRef}>
           <section className={styles.section}>
@@ -184,8 +265,8 @@ export default function FraudArticleContent() {
 
             <Figure
               src={payingScreen}
-              alt="Paying Delhi Traffic Police — payment screen"
-              caption='"Paying Delhi Traffic Police" — the payment flow used throughout the experiment'
+              alt="Paying Delhi Traffic Police: payment screen"
+              label='"Paying Delhi Traffic Police": the payment flow used throughout the experiment'
             />
 
             <p className={styles.paragraph}>
@@ -285,9 +366,9 @@ export default function FraudArticleContent() {
               <Figure
                 src={pinWarningScreen}
                 alt="Enter PIN screen with fraud warning banner"
-                caption="Enter PIN screen with fraud warning banner"
+                label="Enter PIN screen with fraud warning banner"
               />
-              <Figure src={confirmationScreen} alt="Payment confirmed screen" caption="Payment confirmed" />
+              <Figure src={confirmationScreen} alt="Payment confirmed screen" label="Payment confirmed" />
             </div>
 
             <p className={styles.paragraph}>
@@ -320,17 +401,15 @@ export default function FraudArticleContent() {
             </p>
 
             <div className={styles.componentFrame}>
-              <PaymentJourneyView />
+              <PaymentFlowExplorer />
             </div>
-            <p className={styles.figureCaption}>
-              Interactive — explore what each group actually saw
-            </p>
+            <p className={styles.figureLabel}>Interactive: explore what each group actually saw</p>
 
             <div className={`${styles.componentFrame} ${styles.componentFrameTall}`}>
               <ExperimentFlowView />
             </div>
-            <p className={styles.figureCaption}>
-              Diagram — the full experiment flow, from landing to final dataset
+            <p className={styles.figureLabel}>
+              Diagram: the full experiment flow, from landing to final dataset
             </p>
           </section>
 
@@ -413,8 +492,8 @@ export default function FraudArticleContent() {
                   key={fig.title}
                   src={fig.src}
                   alt={fig.title}
-                  title={fig.title}
-                  caption={fig.interpretation}
+                  label={fig.title}
+                  interpretation={fig.interpretation}
                 />
               ))}
             </div>
@@ -425,12 +504,6 @@ export default function FraudArticleContent() {
               finding than &quot;context matters.&quot;
             </p>
           </section>
-
-          <p className={styles.aside}>
-            (Cards variant stays as-is for anyone who wants the five-tile skim version: Topic
-            Selection, Methodology, Process &amp; Progress, Research Design, Results &amp;
-            Outcomes.)
-          </p>
         </div>
       </div>
     </div>

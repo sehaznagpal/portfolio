@@ -21,7 +21,7 @@
   position: absolute;
   inset: 0;
   overflow-y: auto;
-  padding: clamp(24px, 3.2vw, 48px) clamp(20px, 3.6vw, 56px) clamp(32px, 4vw, 64px);
+  padding: clamp(24px, 3.2vw, 48px) clamp(20px, 3.6vw, 56px) clamp(40px, 5vw, 72px);
   box-sizing: border-box;
 }
 
@@ -84,27 +84,44 @@
   background: var(--frame-border);
 }
 
+/* Header → divider gap only: 4px tighter than the default top margin above,
+   bottom margin (divider → tags) left at the default. */
+.dividerHeader {
+  margin-top: calc(clamp(16px, 2.4vw, 28px) - 4px);
+}
+
+/* Tags → first section-heading gap: noticeably tighter than the default on
+   both sides — the default read as too loose specifically here. */
+.dividerTags {
+  margin: clamp(8px, 1.2vw, 14px) 0;
+}
+
 /* ---------- tags ---------- */
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  justify-content: space-between;
   gap: clamp(20px, 3vw, 40px);
 }
 
+/* flex: 0 0 auto (not 1 1 …) so each column keeps its own natural width
+   instead of growing to fill the row — growth is what made the visible gaps
+   between columns read as uneven (a column's own leftover grown space isn't
+   the same as the gap between columns). justify-content: space-between on
+   .tags above does the equal-gap distribution instead. */
 .tagProse {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  flex: 1 1 240px;
-  min-width: 220px;
+  flex: 0 0 auto;
 }
 
 .tagPill {
   background: var(--dissertation-brand-sky);
-  padding: 0.15em 0.5em;
+  padding: 0;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
@@ -116,8 +133,11 @@
 }
 
 .tagPillSmall {
+  display: inline-block;
   background: var(--dissertation-brand-sky);
-  padding: 0.15em 0.5em;
+  padding: 0;
+  margin-right: 8px;
+  vertical-align: baseline;
   font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-weight: var(--bricolage-medium);
   font-variation-settings: 'opsz' 14, 'wdth' 100;
@@ -136,28 +156,31 @@
   font-weight: var(--author-regular);
   font-feature-settings: 'salt' 1;
   font-size: clamp(13px, 1.35vw, 18px);
-  line-height: 1.35;
+  line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--brand-black);
 }
 
+/* Reduced from --author-semibold (596) by 300, per design feedback — applies
+   to every bold/emphasis span in the article body. */
 .tagStrong {
-  font-weight: var(--author-semibold);
+  font-weight: 296;
 }
 
 .tagFacts {
   display: flex;
   flex-direction: column;
   gap: clamp(8px, 1.2vw, 16px);
-  flex: 1 1 260px;
-  min-width: 240px;
+  flex: 0 0 auto;
 }
 
+/* A plain paragraph (not flex) so the pill and value flow as normal inline
+   content: "Affiliation" + "Hansraj College," share the first line and only
+   the overflow ("Department of Economics") wraps to the next — a flex
+   container would instead move the whole value to a new line as one unit
+   once it stops fitting. */
 .factRow {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  flex-wrap: wrap;
+  margin: 0;
 }
 
 .factValue {
@@ -165,6 +188,7 @@
   font-weight: var(--author-regular);
   font-feature-settings: 'salt' 1;
   font-size: clamp(13px, 1.4vw, 19px);
+  line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--brand-black);
 }
@@ -183,16 +207,19 @@
   gap: clamp(14px, 1.8vw, 22px);
 }
 
+/* No max-width measure cap — the body (headings, paragraphs, lists, visuals)
+   spans the same full width as the header/tags area above it, so every
+   element shares one consistent left/right margin throughout. */
 .sectionHeading {
   width: 100%;
-  max-width: var(--measure-width);
   margin: 0 0 clamp(4px, 0.8vw, 10px);
   text-align: center;
+  white-space: nowrap;
   font-family: 'Gambetta Variable', serif;
   font-style: italic;
   font-weight: var(--gambetta-regular);
   font-feature-settings: 'salt' 1;
-  font-size: clamp(22px, 3.1vw, 38px);
+  font-size: clamp(18px, 2.3vw, 30px);
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--dissertation-navy);
@@ -200,7 +227,6 @@
 
 .paragraph {
   width: 100%;
-  max-width: var(--measure-width);
   margin: 0;
   text-align: justify;
   font-family: 'Author Variable', sans-serif;
@@ -214,7 +240,6 @@
 
 .list {
   width: 100%;
-  max-width: var(--measure-width);
   margin: 0;
   padding-left: 1.2em;
   display: flex;
@@ -235,7 +260,12 @@
 
 /* ---------- figures ---------- */
 
+/* width: 100% so a caption can use the full section width to stay on one
+   line even when the image itself (figureFrame, sized independently below)
+   is much narrower — the frame stays centered inside this same full-width
+   box, keeping left/right margins identical to every other body element. */
 .figure {
+  width: 100%;
   margin: clamp(4px, 0.8vw, 10px) 0;
   display: flex;
   flex-direction: column;
@@ -260,9 +290,29 @@
   display: block;
 }
 
-.figureCaption {
+/* The short, one-line label under a visual (a screen's own caption, or a
+   figure's "Figure N: …" lead-in) — always a single line, never wraps. */
+.figureLabel {
+  width: 100%;
   margin: 0;
-  max-width: 40ch;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Author Variable', sans-serif;
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.2;
+  color: var(--brand-black);
+  /* Reduced from --author-semibold (596) by 300, matching .tagStrong. */
+  font-weight: 296;
+}
+
+/* The longer interpretive sentence under a result figure — ordinary
+   wrapping prose, unlike .figureLabel above. */
+.figureInterpretation {
+  width: 100%;
+  margin: 0;
   text-align: center;
   font-family: 'Author Variable', sans-serif;
   font-weight: var(--author-regular);
@@ -270,11 +320,6 @@
   font-size: clamp(12px, 1vw, 14px);
   line-height: 1.35;
   color: var(--frame-caption);
-}
-
-.figureCaptionTitle {
-  font-weight: var(--author-semibold);
-  color: var(--brand-black);
 }
 
 .figureRow {
@@ -286,9 +331,17 @@
   gap: clamp(20px, 3vw, 40px);
 }
 
+/* Splits the row's width evenly between the two screens, rather than each
+   fighting to be 100% of the row — every child still keeps identical
+   left/right margins since the row itself is full-width. */
+.figureRow .figure {
+  width: auto;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
 .figureGrid {
   width: 100%;
-  max-width: 980px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: clamp(20px, 2.6vw, 32px);
@@ -305,8 +358,7 @@
   border-radius: 14px;
 }
 
-.figureGrid .figureCaption {
-  max-width: 100%;
+.figureGrid .figureInterpretation {
   text-align: justify;
 }
 
@@ -315,13 +367,16 @@
 .componentFrame {
   position: relative;
   width: 100%;
-  max-width: 820px;
   aspect-ratio: 1020 / 663;
   margin: clamp(4px, 0.8vw, 10px) auto 0;
   background: var(--chrome-bg);
   border-radius: 20px;
   box-shadow: 0 2px 10px var(--frame-shadow);
   overflow: hidden;
+  /* Now full-width (no fixed max-width), so the payment-flow explorer inside
+     sizes off the frame's own rendered width (cqw) rather than the viewport
+     — it scales correctly whether the panel is 900px or 1400px wide. */
+  container-type: inline-size;
 }
 
 .componentFrameTall {
@@ -329,11 +384,134 @@
   height: clamp(480px, 58vh, 640px);
 }
 
+/* ---------- payment flow explorer (Article-only) ---------- */
+
+.pjWrap {
+  position: absolute;
+  inset: 0;
+}
+
+.pjHeading {
+  position: absolute;
+  left: 50%;
+  top: 9%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Gambetta Variable', serif;
+  font-weight: var(--gambetta-light);
+  font-style: italic;
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(13px, 2.2cqw, 22px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #c6dbff;
+  white-space: nowrap;
+}
+
+.pjButtons {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(6px, 1cqw, 10px);
+}
+
+.pjButton {
+  border: 1px solid rgba(198, 219, 255, 0.5);
+  border-radius: 999px;
+  background: transparent;
+  padding: 0.35em 0.9em;
+  font-family: 'Author Variable', sans-serif;
+  font-weight: var(--author-medium);
+  font-feature-settings: 'salt' 1;
+  font-size: clamp(11px, 1.35cqw, 15px);
+  color: rgba(198, 219, 255, 0.85);
+  cursor: pointer;
+  transition: background 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+}
+
+.pjButton:hover {
+  border-color: rgba(198, 219, 255, 0.85);
+}
+
+.pjButtonActive {
+  background: var(--dissertation-navy);
+  border-color: var(--dissertation-navy);
+  color: #fefefe;
+}
+
+.pjButtonActive:hover {
+  border-color: var(--dissertation-navy);
+}
+
+.pjPhones {
+  position: absolute;
+  inset: 0;
+  overflow-x: auto;
+}
+
+.pjPhone {
+  position: absolute;
+  top: 30.618%;
+  width: 18.13%;
+  height: 56.883%;
+}
+
+.pjPhoneScreen {
+  position: absolute;
+  left: 50%;
+  top: 2.15%;
+  transform: translateX(-50%);
+  width: 90.312%;
+  height: 95.89%;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.pjPhoneScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.pjBezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pjConnector {
+  position: absolute;
+  pointer-events: none;
+}
+
+.pjConnectorTop {
+  top: 26.697%;
+  width: 17.788%;
+  height: 3.713%;
+}
+
+.pjConnectorBottom {
+  top: 87.107%;
+  width: 17.779%;
+  height: 3.775%;
+  transform: scaleY(-1);
+}
+
+.pjConnector img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* ---------- six-cases / four-dimensions diagram ---------- */
 
 .diagram {
   width: 100%;
-  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -393,32 +571,10 @@
   color: var(--frame-caption);
 }
 
-/* ---------- closing aside ---------- */
-
-.aside {
-  width: 100%;
-  max-width: var(--measure-width);
-  margin: clamp(20px, 2.8vw, 32px) auto 0;
-  text-align: center;
-  font-family: 'Author Variable', sans-serif;
-  font-style: italic;
-  font-weight: var(--author-light);
-  font-feature-settings: 'salt' 1;
-  font-size: clamp(12.5px, 1vw, 14px);
-  line-height: 1.4;
-  color: var(--frame-caption);
-}
-
 /* ---------- breakpoints ---------- */
 /* Article never mounts below 768px (the page swaps to a cards-only mobile
    layout with no toggle at all — see useIsMobile/CaseStudyFraudPage), so
    these only need to cover large desktop down through tablet. */
-
-@media (max-width: 1280px) {
-  .figureGrid {
-    max-width: 720px;
-  }
-}
 
 @media (max-width: 1024px) {
   .panel {
@@ -427,14 +583,6 @@
 
   .tagText {
     max-width: 30ch;
-  }
-
-  .figureGrid {
-    max-width: 560px;
-  }
-
-  .componentFrame {
-    max-width: 640px;
   }
 }
 
@@ -468,6 +616,5 @@
 
   .figureGrid {
     grid-template-columns: 1fr;
-    max-width: 420px;
   }
 }
