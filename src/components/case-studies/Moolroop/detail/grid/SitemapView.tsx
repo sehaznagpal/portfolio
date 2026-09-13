@@ -71,7 +71,7 @@ const EDGES: SitemapEdge[] = [
   { from: 'M', to: 'M3' },
 ];
 
-export default function SitemapView({ onBack }: { onBack: () => void }) {
+export default function SitemapView({ onBack }: { onBack?: () => void }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef(new Map<string, HTMLDivElement>());
@@ -106,9 +106,11 @@ export default function SitemapView({ onBack }: { onBack: () => void }) {
   return (
     <>
       <h3 className={styles.heading}>Sitemap</h3>
-      <button type="button" className={styles.goBack} onClick={onBack}>
-        &larr;Go Back
-      </button>
+      {onBack && (
+        <button type="button" className={styles.goBack} onClick={onBack}>
+          &larr;Go Back
+        </button>
+      )}
 
       <div className={styles.scrollArea} ref={scrollRef}>
         <div className={styles.content} ref={contentRef}>

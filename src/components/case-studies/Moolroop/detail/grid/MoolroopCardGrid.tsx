@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CaseStudySecondSection from '../../../CaseStudySecondSection';
 import MoolroopCardFace from './MoolroopCardFace';
 import MoolroopPanel from './MoolroopPanel';
+import MoolroopArticleContent from '../article/MoolroopArticleContent';
 import { CARDS } from './cardData';
 import styles from './MoolroopCardGrid.module.css';
 
@@ -44,7 +45,7 @@ export default function MoolroopCardGrid() {
   }, [openIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <CaseStudySecondSection>
+    <CaseStudySecondSection articleContent={<MoolroopArticleContent />}>
       <div className={styles.frame}>
         <div className={styles.section}>
           <div className={styles.canvas}>
