@@ -263,11 +263,19 @@ export default function FraudArticleContent() {
               that happens, no security architecture can step in.
             </p>
 
-            <Figure
-              src={payingScreen}
-              alt="Paying Delhi Traffic Police: payment screen"
-              label='"Paying Delhi Traffic Police": the payment flow used throughout the experiment'
-            />
+            <div className={styles.figureRow}>
+              <Figure
+                src={payingScreen}
+                alt="Paying Delhi Traffic Police: payment screen"
+                label='"Paying Delhi Traffic Police": the payment flow used throughout the experiment'
+              />
+              <Figure
+                src={pinWarningScreen}
+                alt="Enter PIN screen with fraud warning banner"
+                label="Enter PIN screen with fraud warning banner"
+              />
+              <Figure src={confirmationScreen} alt="Payment confirmed screen" label="Payment confirmed" />
+            </div>
 
             <p className={styles.paragraph}>
               So this isn&apos;t really a security problem. It&apos;s a behavioural one.
@@ -361,15 +369,6 @@ export default function FraudArticleContent() {
               JavaScript, with a Google Apps Script backend logging decisions in real time. Light
               mode, mobile-only, an exit icon exactly where a real payment app puts one.
             </p>
-
-            <div className={styles.figureRow}>
-              <Figure
-                src={pinWarningScreen}
-                alt="Enter PIN screen with fraud warning banner"
-                label="Enter PIN screen with fraud warning banner"
-              />
-              <Figure src={confirmationScreen} alt="Payment confirmed screen" label="Payment confirmed" />
-            </div>
 
             <p className={styles.paragraph}>
               <span className={styles.tagStrong}>The design: 3 groups, 3 scenarios, 116 people.</span>{' '}

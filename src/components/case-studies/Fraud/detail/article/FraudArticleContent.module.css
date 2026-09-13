@@ -394,7 +394,7 @@
 .pjHeading {
   position: absolute;
   left: 50%;
-  top: 9%;
+  top: 8%;
   transform: translateX(-50%);
   margin: 0;
   font-family: 'Gambetta Variable', serif;
@@ -408,13 +408,20 @@
   white-space: nowrap;
 }
 
+/* z-index above .pjPhones — .pjPhones is inset:0 (i.e. covers the whole
+   frame, including this row's own area, even though its visible phone
+   images sit lower) and comes later in DOM/source order, so at equal auto
+   z-index it painted (and hit-tested) on top of these buttons, silently
+   swallowing every click meant for CTA/Warning — only Control ever
+   appeared to "work" because it's the already-selected initial state. */
 .pjButtons {
   position: absolute;
   left: 50%;
-  top: 18%;
+  top: 14%;
   transform: translateX(-50%);
   display: flex;
   gap: clamp(6px, 1cqw, 10px);
+  z-index: 2;
 }
 
 .pjButton {
@@ -451,9 +458,14 @@
   overflow-x: auto;
 }
 
+/* Shifted up from the original 30.618% (matching .pjConnectorTop/Bottom's
+   own shift below by the same delta, so the arrows stay correctly aligned
+   to the phones' top/bottom edges) — frees up room to give the heading and
+   buttons row a comfortable, consistent gap above without also leaving a
+   large empty gap between the buttons and the phones themselves. */
 .pjPhone {
   position: absolute;
-  top: 30.618%;
+  top: 24%;
   width: 18.13%;
   height: 56.883%;
 }
@@ -489,14 +501,16 @@
   pointer-events: none;
 }
 
+/* top shifted by the same -6.618% delta as .pjPhone above, preserving the
+   original offset from the phone's own top edge. */
 .pjConnectorTop {
-  top: 26.697%;
+  top: 20.079%;
   width: 17.788%;
   height: 3.713%;
 }
 
 .pjConnectorBottom {
-  top: 87.107%;
+  top: 80.489%;
   width: 17.779%;
   height: 3.775%;
   transform: scaleY(-1);
