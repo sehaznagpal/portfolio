@@ -1,11 +1,13 @@
 import styles from './ExperimentFlowView.module.css';
 
-export default function ExperimentFlowView({ onBack }: { onBack: () => void }) {
+export default function ExperimentFlowView({ onBack }: { onBack?: () => void }) {
   return (
     <div className={styles.wrap}>
-      <button type="button" className={styles.goBack} onClick={onBack}>
-        ←Go Back
-      </button>
+      {onBack && (
+        <button type="button" className={styles.goBack} onClick={onBack}>
+          ←Go Back
+        </button>
+      )}
 
       <h2 className={styles.title}>Experiment Flow</h2>
 

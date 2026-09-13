@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CaseStudySecondSection from '../../../CaseStudySecondSection';
 import FraudCardFace from './FraudCardFace';
 import FraudPanel from './FraudPanel';
+import FraudArticleContent from '../article/FraudArticleContent';
 import { CARDS } from './cardData';
 import styles from './FraudCardGrid.module.css';
 
@@ -44,7 +45,7 @@ export default function FraudCardGrid() {
   }, [openIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <CaseStudySecondSection>
+    <CaseStudySecondSection articleContent={<FraudArticleContent />}>
       <div className={styles.frame}>
         <div className={styles.section}>
           <div className={styles.canvas}>

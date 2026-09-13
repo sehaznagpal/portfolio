@@ -51,6 +51,18 @@
      this keeps the tag visually part of the same "highlight" family used on
      the other two case studies rather than introducing an unrelated hue. */
   --dissertation-yellow: #F9D949;
+  /* Dissertation Article view (Figma node 1104:1620): the tag-pill fill,
+     named to match the Figma variable directly rather than reusing an
+     unrelated token. */
+  --dissertation-brand-sky: #B2CEFF;
+
+  /* Site-wide grey/black referenced by name in a few component comments and
+     Figma variables, but never previously declared — every prior usage just
+     inlined the same literal as a var() fallback (e.g. var(--brand-grey,
+     #282828)). Declared here once so those fallbacks resolve to a real token
+     instead of only ever hitting the literal. */
+  --brand-grey: #282828;
+  --brand-black: #121212;
 
   /* Dissertation's three-color system pulled directly from the actual data-viz figures
      (fig1/fig2 bar charts), sampled pixel-exact rather than reusing the FraudCard tokens,
