@@ -193,7 +193,11 @@
   left: 66px;
   top: 148px;
   width: 543px;
-  height: 350px;
+  /* 339px (not the Figma-authored 350px) makes this land at exactly 487px —
+     flush with .ground's top edge, matching .cameraArea's own already-flush
+     bottom (162.625 + 324.375 = 487px) — instead of dipping 11px past it
+     and visibly crossing the tile floor's top edge. */
+  height: 339px;
   border: 1px solid #121212;
 }
 
