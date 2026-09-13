@@ -284,6 +284,26 @@
   display: block;
 }
 
+/* justify-content: center + a fixed gap (not a fill/growing layout) — a
+   group of images sits together as one tight, centered unit, with any
+   leftover row width pushed to the outer margins instead of spread out
+   between them. */
+.figureRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* A fixed width (not flex-grow) so grouped images keep their own compact
+   size instead of each ballooning to fill the row's leftover width. */
+.figureRow .figure {
+  width: clamp(200px, 26vw, 320px);
+  flex: 0 0 auto;
+}
+
 /* The short, one-line label under a visual — always a single line, never
    wraps. */
 .figureLabel {

@@ -1,6 +1,14 @@
 import { useLayoutEffect, useRef, useState } from 'react';
+import homepageHero from '../../../../../assets/images/dr-cuterus/homepage-hero.png';
+import colours from '../../../../../assets/images/dr-cuterus/colours.png';
+import typography1 from '../../../../../assets/images/dr-cuterus/typography-1.png';
+import typography2 from '../../../../../assets/images/dr-cuterus/typography-2.png';
+import languageToggle from '../../../../../assets/images/dr-cuterus/language-toggle.png';
+import bra from '../../../../../assets/images/dr-cuterus/bra.png';
+import brandsTicker from '../../../../../assets/images/dr-cuterus/brands-ticker.png';
+import appointments from '../../../../../assets/images/dr-cuterus/appointments.png';
+import social from '../../../../../assets/images/dr-cuterus/social.png';
 import homeScreen from '../../../../../assets/images/dr-cuterus/about-home-screen.jpg';
-import plushToys from '../../../../../assets/images/dr-cuterus/plush-toys.png';
 import blogScreen from '../../../../../assets/images/dr-cuterus/decisions-laptop-screen.jpg';
 import homepageDesktopScreen from '../../../../../assets/images/dr-cuterus/outcome-laptop-screen.jpg';
 import footerScreen from '../../../../../assets/images/dr-cuterus/outcome-phone-screen.jpg';
@@ -32,7 +40,9 @@ function ScreenFigure({ src, alt, label, ratio }: { src: string; alt: string; la
   );
 }
 
-/* A landscape reference image (laptop screenshot or photo). */
+/* A landscape reference image (laptop screenshot, photo, or UI detail). No
+   maxWidth cap by default, so a full-bleed asset (the ticker strip) can span
+   the same full width as everything else in the article. */
 function ImageFigure({
   src,
   alt,
@@ -44,7 +54,7 @@ function ImageFigure({
   alt: string;
   label?: string;
   ratio: number;
-  maxWidth: number;
+  maxWidth?: number;
 }) {
   return (
     <figure className={styles.figure}>
@@ -125,81 +135,222 @@ export default function DrCuterusArticleContent() {
 
         <div className={styles.body} ref={bodyRef}>
           <section className={styles.section}>
-            <h3 className={styles.sectionHeading}>India&apos;s favourite sexpert</h3>
+            <h3 className={styles.sectionHeading}>100% Science. 0% Sharam.</h3>
             <p className={styles.paragraph}>
               Dr. Tanaya Narendra, known online as Dr Cuterus, is an Oxford-trained doctor, author,
               and sex educator with 1.9 million followers on Instagram and 834K on YouTube.
-              She&apos;s been featured in Vogue, The Economist, CNN, and Forbes India, writes a
-              nationally syndicated sex advice column, and has published a book on sexual health.
-              Her whole brand runs on one line: 100% science, 0% sharam.
+              She&apos;s carried forward Dr. Mahindra Watsa&apos;s legendary sex advice column in
+              Mumbai Mirror, published a book on sexual health, and been featured everywhere from
+              Vogue to The Economist to CNN. Her whole brand runs on one line, said in both English
+              and Hinglish: 100% science, 0% sharam, plus a lot of love.
             </p>
             <p className={styles.paragraph}>
-              She came to me needing a personal website that could hold all of that, patients
-              booking appointments, followers looking for her content, brands wanting to
-              collaborate, organisations booking her for workshops, in one place that felt as
-              credible as it did like her. Not a generic doctor&apos;s site, and not just a
-              link-in-bio either.
+              The homepage leads with that, not a headshot and a designation. A scattered polaroid
+              mosaic shows her across every mode she actually shows up in, in a saree, mid scuba
+              dive, on a public health billboard, recording her podcast, in her white coat, before
+              either &quot;Book an Appointment&quot; or &quot;Work with Me&quot; ever gets a click.
             </p>
 
-            <ScreenFigure
-              src={homeScreen}
-              alt="Dr Cuterus homepage: India's Favourite Sex Educator"
-              label="Homepage, phone view: India's Favourite Sex Educator"
-              ratio={674 / 1432}
+            <ImageFigure
+              src={homepageHero}
+              alt="Homepage hero: polaroid mosaic across her different modes"
+              label='Homepage hero: polaroid mosaic, paired with "100% Science. 0% Sharam."'
+              ratio={2940 / 1670}
+              maxWidth={700}
             />
+
+            <p className={styles.paragraph}>
+              The brief was a personal website that could hold all of that, patients booking
+              appointments, followers looking for her content, brands wanting to collaborate,
+              organisations booking her for workshops, in one place that felt as credible as it did
+              like her. Not a generic doctor&apos;s site, and not just a link-in-bio either.
+            </p>
           </section>
 
           <Divider />
 
           <section className={styles.section}>
-            <h3 className={styles.sectionHeading}>Four audiences, one voice, no pink</h3>
+            <h3 className={styles.sectionHeading}>What I was working within</h3>
             <p className={styles.paragraph}>
               Patients, followers, brands, and organisations each needed a clear path in, without
               the site turning into five disconnected pages pretending to be one.
             </p>
             <p className={styles.paragraph}>
-              She was firm on one thing early: no default &quot;women&apos;s health&quot; pink.
-              She wanted purple and yellow, bright, not muted, which meant building a palette that
-              felt playful without tipping into looking unserious for a practising doctor.
-              She&apos;s quirky and disarming online, but she&apos;s also treating actual patients,
-              and the site had to hold both without either one undercutting the other. On top of
-              that, most of her content runs in Hinglish, but a chunk of her audience is fully
-              global or from parts of India where Hindi isn&apos;t the default, so the site needed
-              to speak both without feeling like a translation of itself.
+              Nowhere on the site defaults to pink. She wanted purple and yellow instead, bright,
+              not muted, playful without tipping into unserious for a practising doctor. And the
+              bilingual requirement went deeper than a toggle switch: nearly every headline needed
+              to exist as two real sentences, an English one and a Hinglish one, &quot;Hi, main
+              hoon Dr Tanaya Narendra&quot; sitting next to &quot;Hey, I&apos;m Dr Tanaya
+              Narendra,&quot; not one translated from the other after the fact.
+            </p>
+          </section>
+
+          <Divider />
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>Setting the system: colour, type, language</h3>
+            <p className={styles.paragraph}>
+              Purple showed up far more often than yellow across her existing content, so purple
+              became the base and yellow stayed reserved for accents, loud where it counts, not
+              everywhere.
             </p>
 
             <ImageFigure
-              src={plushToys}
-              alt="Uterus and organ-shaped plush toys"
-              label="Uterus and organ-shaped plush toys: playful, gender-neutral brand accessory"
-              ratio={620 / 387}
-              maxWidth={440}
+              src={colours}
+              alt="Primary colour system: purple and yellow, with accessibility ratios"
+              label="Colour system: purple and yellow, with accessibility ratios"
+              ratio={2310 / 952}
+              maxWidth={700}
+            />
+
+            <p className={styles.paragraph}>
+              Headings run in Sentient, a serif with enough personality to feel human rather than
+              clinical. Body text sits in Cabinet Grotesque, a clean sans that stays readable
+              across long blog answers and dense appointment details.
+            </p>
+
+            <div className={styles.figureRow}>
+              <ImageFigure
+                src={typography1}
+                alt="Sentient display typeface specimen"
+                label="Sentient: the display typeface"
+                ratio={1821 / 1484}
+              />
+              <ImageFigure
+                src={typography2}
+                alt="Cabinet Grotesque text typeface specimen"
+                label="Cabinet Grotesque: the text typeface"
+                ratio={1877 / 1549}
+              />
+            </div>
+
+            <p className={styles.paragraph}>
+              A language toggle sits right in the header, switching the whole site between English
+              and Hinglish, so neither audience reads as the afterthought to the other.
+            </p>
+
+            <ImageFigure
+              src={languageToggle}
+              alt="English / Hinglish language toggle"
+              label="Language toggle: English / Hinglish"
+              ratio={170 / 29}
+              maxWidth={220}
             />
           </section>
 
           <Divider />
 
           <section className={styles.section}>
-            <h3 className={styles.sectionHeading}>Building the voice before the screens</h3>
+            <h3 className={styles.sectionHeading}>A homepage that doesn&apos;t act like a doctor&apos;s website</h3>
             <p className={styles.paragraph}>
-              Before designing anything, I went through her Instagram, YouTube, and podcast to
+              Her book, &quot;Everything Nobody Tells You About Your Body,&quot; sits right on the
+              homepage, GoodReads-rated, available to read in English, Hindi, Punjabi, or
+              Marathi, with a direct link to buy. A few sections down, a merch collaboration for a
+              bra, FURSAT, sits comfortably next to her podcast, Breast Friends, nine episodes deep
+              and still going. All three, book, merch, podcast, carry the same confident, slightly
+              cheeky tone she uses everywhere else. Nothing here reads like a hospital website
+              pretending to be fun. It reads like her feed, just organised.
+            </p>
+
+            <ImageFigure
+              src={bra}
+              alt='"Made a bra for you" merch section, paired with the Breast Friends podcast carousel'
+              label='"Made a bra for you": merch section paired with the Breast Friends podcast'
+              ratio={2940 / 1666}
+              maxWidth={700}
+            />
+          </section>
+
+          <Divider />
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>Credibility that doesn&apos;t need its own page</h3>
+            <p className={styles.paragraph}>
+              An early version of the site had a full page cataloguing her achievements and press
+              mentions, newsletter-style. It got cut. In its place, a continuous scrolling ticker
+              runs beneath the hero, nearly thirty names deep, Forbes India, Vogue, CNN, The
+              Economist, the World Health Organization, India&apos;s Ministry of Health, moving
+              past rather than sitting still as a wall of text anyone would have to read top to
+              bottom to feel the weight of it.
+            </p>
+
+            <ImageFigure
+              src={brandsTicker}
+              alt="Continuous scrolling press and partner ticker"
+              label="Press and partner ticker: continuous scrolling strip"
+              ratio={2940 / 122}
+            />
+          </section>
+
+          <Divider />
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>Meeting people where their fear actually is</h3>
+            <p className={styles.paragraph}>
+              Booking a sexual health appointment is rarely a simple decision, so the appointments
+              page opens by naming the exact worries people usually sit with quietly: pain during
+              sex, irregular periods, PCOD, discharge, not being able to orgasm. Seeing the
+              question written down plainly, instead of hidden behind clinical language, does most
+              of the persuading before the booking button ever needs to.
+            </p>
+
+            <ImageFigure
+              src={appointments}
+              alt='"Does Any of These Sound Like You?" problem callouts, leading into Book via WhatsApp'
+              label='"Does Any of These Sound Like You?": leading into Book via WhatsApp'
+              ratio={2940 / 1666}
+              maxWidth={700}
+            />
+          </section>
+
+          <Divider />
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>Showing up everywhere she already does</h3>
+            <p className={styles.paragraph}>
+              Before designing anything, I went through her Instagram, YouTube, and Spotify to
               actually absorb her voice, not guess at it. She simplifies without dumbing down,
-              she&apos;s cute and quirky but never loses the science, and Hinglish is native to how
-              she talks, not a stylistic add-on.
+              stays quirky without losing the science, and Hinglish is native to how she talks,
+              not a stylistic add-on. The homepage reflects that directly: 1.9 million followers
+              and 900-plus posts on Instagram, 834K subscribers and 350-plus videos on YouTube, a
+              podcast rated 4.8 on Spotify, all pulled into one place instead of asking visitors to
+              go find it themselves.
             </p>
+
+            <ImageFigure
+              src={social}
+              alt="Instagram, Spotify, and YouTube presence, shown as phone mockups"
+              label="Instagram, Spotify, and YouTube presence, shown as phone mockups"
+              ratio={2940 / 1664}
+              maxWidth={700}
+            />
+          </section>
+
+          <Divider />
+
+          <section className={styles.section}>
+            <h3 className={styles.sectionHeading}>Built for the phone first</h3>
             <p className={styles.paragraph}>
-              Colour came straight from her existing content. Purple showed up far more often than
-              yellow across her posts, so purple became the base, yellow stayed reserved for
-              accents and highlights, loud where it counts, not everywhere, with a neutral sitting
-              between them so the two brights never fought on the same screen. Language got a
-              toggle, English and Hinglish, sitting right at the top, so neither audience felt like
-              an afterthought. Photos were chosen deliberately across the site to show her in
-              different modes, on stage, at the clinic, mid-shoot, casual, and small hand-drawn
-              doodles show up throughout, since they&apos;re a running motif in her own content and
-              she genuinely loves them. Every call to action was designed around intent too, each
-              section pointing toward whatever made sense there: booking an appointment,
-              collaborating, sending an enquiry, or buying her book.
+              Her own homepage copy admits it outright: &quot;How you will find me while scrolling
+              on your phone.&quot; Most of her audience meets her on a screen the size of their
+              palm, mid-scroll, between reels, so the site needed to hold up there just as well as
+              it does on a desktop pitch deck.
             </p>
+
+            <div className={styles.figureRow}>
+              <ScreenFigure
+                src={homeScreen}
+                alt="Dr Cuterus homepage, mobile view"
+                label="Homepage, mobile view"
+                ratio={674 / 1432}
+              />
+              <ScreenFigure
+                src={footerScreen}
+                alt="Dr Cuterus site footer: Found something you liked? Let's talk."
+                label="Site footer, phone view: Found something you liked? Let's talk."
+                ratio={676 / 1424}
+              />
+            </div>
           </section>
 
           <Divider />
@@ -215,12 +366,10 @@ export default function DrCuterusArticleContent() {
               for them, live, and still growing.
             </p>
             <p className={styles.paragraph}>
-              Not every idea survived contact with her actual needs. An early version had a full
-              page cataloguing her achievements and press mentions, newsletter-style. She looked at
-              it and pointed out it wasn&apos;t doing anything a visitor actually needed. It got
-              replaced with the corporate workshops page instead, more useful, more relevant to the
-              people actually landing on the site. Press mentions still show up, just as a compact
-              logo strip instead of a page of their own.
+              Not every idea survived contact with her actual needs. That original achievements
+              page didn&apos;t make the cut, she looked at it and pointed out it wasn&apos;t doing
+              anything a visitor actually needed. It got replaced with the corporate workshops page
+              instead, more useful, more relevant to the people actually landing on the site.
             </p>
 
             <ImageFigure
@@ -241,7 +390,9 @@ export default function DrCuterusArticleContent() {
               tablet, and desktop, holds her tone in both English and Hinglish, and still does the
               job it was built for: patients can book appointments, followers land on content that
               actually looks like her, and brands or organisations have a clear page to reach out
-              from. The blog is live and growing, one question at a time.
+              from. Even the footer keeps her voice intact, her dog Samosa gets a cameo,
+              &quot;found something you liked? Let&apos;s talk.&quot; The blog is live and growing,
+              one question at a time.
             </p>
 
             <ImageFigure
@@ -250,13 +401,6 @@ export default function DrCuterusArticleContent() {
               label="Homepage, desktop: Your Next Door Sexpert"
               ratio={2146 / 1426}
               maxWidth={700}
-            />
-
-            <ScreenFigure
-              src={footerScreen}
-              alt="Dr Cuterus site footer: Found something you liked? Let's talk."
-              label="Site footer, phone view: Found something you liked? Let's talk."
-              ratio={676 / 1424}
             />
           </section>
         </div>
